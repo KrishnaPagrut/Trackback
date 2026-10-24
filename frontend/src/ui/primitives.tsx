@@ -53,10 +53,10 @@ export function Rail({ lane, live, badge }: { lane: Lane; live?: string; badge?:
   )
 }
 
-export function RecallNotice({ id, lot, headline, reason, issuer, ts, onDrop, busy, dropLabel = 'Drop on the source' }: { id: string; lot: string; headline: string; reason: string; issuer: string; ts: string; onDrop?: () => void; busy?: boolean; dropLabel?: string }) {
+export function RecallNotice({ id, lot, headline, reason, issuer, ts, onDrop, busy, dropLabel = 'Send the trackback' }: { id: string; lot: string; headline: string; reason: string; issuer: string; ts: string; onDrop?: () => void; busy?: boolean; dropLabel?: string }) {
   return (
     <div className="recall-notice drop-in" role="dialog" aria-label="Recall notice">
-      <div className="band"><span>RECALL NOTICE</span><span>{id}</span></div>
+      <div className="band"><span>TRACKBACK NOTICE</span><span>{id}</span></div>
       <div className="body">
         <h3>{headline}</h3>
         <dl>

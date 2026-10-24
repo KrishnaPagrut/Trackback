@@ -47,6 +47,7 @@ eval-v2:
 
 build-frontend:
 	cd frontend && $(NPM) run build --silent
+	rm -rf web && cp -R frontend/dist web
 
 demo: build-frontend
 	$(PY) backend/scripts/snapshot.py restore

@@ -127,10 +127,12 @@ textarea.field { height: auto; padding: 8px 10px; }
 /* React Flow, styled to the tokens */
 .react-flow { background: var(--paper); }
 .react-flow__attribution { display: none; }
-.react-flow__edge-path { stroke: var(--ink-muted); stroke-opacity: 0.35; stroke-width: 1.5px; }
+.react-flow__edge-path { stroke: var(--ink-muted); stroke-opacity: 0.28; stroke-width: 1.25px; transition: stroke-opacity 0.15s; }
+.react-flow__edge.faded .react-flow__edge-path { stroke-opacity: 0.06; }
 .react-flow__edge.active .react-flow__edge-path { stroke: var(--ink); stroke-opacity: 1; stroke-width: 2.5px; }
 .react-flow__edge.recall .react-flow__edge-path { stroke: var(--recall); stroke-opacity: 0.85; stroke-width: 2.5px; }
-.react-flow__edge.trace .react-flow__edge-path { stroke: var(--ping); stroke-opacity: 1; stroke-width: 2.5px; }
+.react-flow__edge.trace .react-flow__edge-path { stroke: var(--ping); stroke-opacity: 1; stroke-width: 3px; }
+.react-flow__edge.trace { z-index: 5; }
 .react-flow__edge-interaction { pointer-events: none !important; }
 .react-flow__controls { box-shadow: none; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
 .react-flow__controls-button { background: var(--surface); border-bottom: 1px solid var(--rule); }

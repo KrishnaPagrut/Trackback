@@ -24,7 +24,7 @@ export default function Proof() {
   return (
     <div className="scroll" style={{ height: '100%', padding: '32px 40px' }}>
       <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-        <div className="smallcaps muted t16">Proof</div>
+        <div className="smallcaps muted t16">Scorecard</div>
         <h1 className="serif" style={{ fontSize: 56, fontWeight: 500, lineHeight: 1.02, margin: '4px 0 12px', maxWidth: 900 }}>Two answer keys, written before the engine was tuned. A reviewer that is itself scored.</h1>
         <p className="t18 muted" style={{ maxWidth: 760, margin: 0 }}>{e.n_corrections} planted corrections scored artifact by artifact, and {ma.n_events ?? '…'} events scored on who should have been pinged. Every figure below is read from <span className="mono">data/eval/latest.json</span> ({e.generated_at}, {e.llm_mode} mode).</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16, marginTop: 28 }}>

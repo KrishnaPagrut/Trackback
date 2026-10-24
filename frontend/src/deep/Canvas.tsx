@@ -202,9 +202,9 @@ export default function Canvas({ company, correction, data, pings, selected, onS
     const touched = (id: string) => { const n: any = rf.find(x => x.id === id)?.data; return n && ['invalidated', 'caution', 'reworked'].includes(n.state) }
     const es: Edge[] = red.filter(e => e.source !== e.target).map(e => {
       const fwd = colOf[e.target] > colOf[e.source]; const down = laneIdx[e.target] > laneIdx[e.source]
-      return { id: `${e.source}>${e.target}`, source: e.source, target: e.target, type: 'default',
+      return { id: `${e.source}>${e.target}`, source: e.source, target: e.target, type: 'smoothstep', pathOptions: { borderRadius: 10, offset: 14 },
         sourceHandle: fwd ? 'r' : down ? 'b' : 'bt', targetHandle: fwd ? 'l' : down ? 't' : 'tb',
-        className: trace && trace.has(e.source) && (trace.has(e.target) || e.target === selected) ? 'trace' : correction && touched(e.target) && (touched(e.source) || e.source.startsWith('billing') || e.source.startsWith('lyft_q4')) ? 'active' : '' }
+        className: trace ? (trace.has(e.source) && (trace.has(e.target) || e.target === selected) ? 'trace' : 'faded') : correction && touched(e.target) && (touched(e.source) || e.source.startsWith('billing') || e.source.startsWith('lyft_q4')) ? 'active' : '' }
     })
     if (env) {
       const li = lanes.findIndex(l => l.id === env.lane); const ti = lanes.findIndex(l => l.id === 'trackback')

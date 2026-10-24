@@ -1,0 +1,8 @@
+# Vercel function runtime (replay mode only: no model calls, no MCP server). The dev venv uses backend/requirements.txt.
+fastapi==0.156.4
+pydantic==2.14.1
+python-dotenv==1.2.4
+PyYAML==6.0.3
+httpx==0.28.1
+anthropic==1.17.0
+tzdata

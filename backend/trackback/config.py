@@ -31,7 +31,7 @@ ANSWER_KEY_PATH = DATA_DIR / "answer_key" / "answer_key.yaml"
 SNAPSHOT_PATH = Path(os.environ.get("TRACKBACK_SNAPSHOT", str(DATA_DIR / "snapshots" / "canonical.sqlite")))
 EVAL_PATH = DATA_DIR / "eval" / "latest.json"
 LLM_CACHE_EXPORT = DATA_DIR / "llm_cache" / "cache.jsonl"
-FRONTEND_DIST = ROOT / "frontend" / "dist"
+FRONTEND_DIST = Path(os.environ.get("TRACKBACK_WEB", str(ROOT / "frontend" / "dist")))   # the committed build lives in web/ for hosts without Node
 
 # Materiality memo defaults (Section 5.2). The live values come from the memo claim.
 MATERIALITY_DEFAULTS = {

@@ -19,3 +19,6 @@ brag-output
 .claude
 NEW_SPEC.md
 TIMELINE.md
+api
+vercel.json
+.vercel

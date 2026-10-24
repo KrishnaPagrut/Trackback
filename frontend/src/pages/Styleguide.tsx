@@ -4,7 +4,7 @@ import { LANES, STATE_WORD, type State } from '../model'
 /* /styleguide: tokens, type scale, the ledger card in every state, the lane rail and the three hero moments. */
 const TOKENS: [string, string, string][] = [
   ['paper', '#F7F4EE', 'App background'], ['surface', '#FFFFFF', 'Cards, drawers'], ['ink', '#1C1B19', 'Primary text, the active path'], ['ink-muted', '#6B675F', 'Secondary text, idle edges'],
-  ['rule', '#E3DED4', 'Hairlines, lane dividers'], ['recall', '#C62828', 'Invalidated, refusals, the recall notice'], ['cleared', '#2E7D32', 'Still valid'], ['caution', '#B26A00', 'Needs a human'], ['ping', '#1F5FBF', 'Pings, reworked'],
+  ['rule', '#E3DED4', 'Hairlines, lane dividers'], ['recall', '#C62828', 'Invalidated, refusals, the trackback notice'], ['cleared', '#2E7D32', 'Still valid'], ['caution', '#B26A00', 'Needs a human'], ['ping', '#1F5FBF', 'Pings, reworked'],
 ]
 const sample = (state: State, extra: any = {}) => ({ id: 'leverage_2026_q1', type: 'artifact', kind: 'number', lot: '02F3', value: 2.946, line_item: 'leverage', verdict: state === 'idle' ? null : state === 'cleared' || state === 'skipped' ? 'unaffected' : state === 'caution' ? 'needs_review' : 'invalidated', reason: state === 'cleared' ? 'conclusion_unchanged' : state === 'skipped' ? 'claim_unchanged' : state === 'reworked' ? 'rerendered' : 'conclusion_flipped', old_value: 2.946, new_value: state === 'invalidated' ? 3.03 : 2.946, ...extra })
 
@@ -14,7 +14,7 @@ export default function Styleguide() {
     <div className="scroll" style={{ height: '100%', padding: '32px 40px' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="smallcaps muted t16">Styleguide</div>
-        <h1 className="serif" style={{ fontSize: 56, fontWeight: 500, margin: '4px 0 24px' }}>The ledger and the recall notice</h1>
+        <h1 className="serif" style={{ fontSize: 56, fontWeight: 500, margin: '4px 0 24px' }}>The ledger and the trackback notice</h1>
 
         <h2 className="serif t32" style={{ fontWeight: 500 }}>Tokens</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, margin: '12px 0 32px' }}>

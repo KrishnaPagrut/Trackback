@@ -360,7 +360,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
             <div className="col agent"><div className="who">Agent · playbook {ev.playbook_version}</div>{h.agent}</div>
             <div className="col jade-says"><div className="who">Jade · overruled</div>{h.jade}</div>
           </div>
-          <div className="foot"><span>{4 - over} of 4 claims approved · {over} overruled{over > 1 ? `: ${ev.jade.summary.overruled_claims.join(', ')}` : ''}</span><span>{ev.recalled?.length ? `recalled ${ev.recalled.map((r: any) => r.lesson_id).join(', ')} from memory` : 'nothing like it in memory yet'}</span></div>
+          <div className="foot"><span>{4 - over} of 4 claims approved · {over} overruled{over > 1 ? `: ${ev.jade.summary.overruled_claims.join(', ')}` : ''}</span><span>{ev.recalled?.length ? `remembered ${ev.recalled.map((r: any) => r.lesson_id).join(', ')} from past cases` : 'nothing like it in memory yet'}</span></div>
           <div className="stampwrap"><span className="stamp stamp-in">OVERRULED</span></div>
         </div></div> })()}
 
@@ -402,7 +402,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
       {/* kiosk: visitor card */}
       {kiosk === 'visitor' && offer && paste === null && <div className="payoff" style={{ background: 'rgba(247,244,238,0.9)' }}>
         <div className="card" style={{ padding: '2.4vw 3vw', textAlign: 'left', boxShadow: 'var(--shadow)', maxWidth: 820 }}>
-          <div className="serif" style={{ fontSize: 'clamp(32px, 2.8vw, 52px)', lineHeight: 1.1 }}>Try it: drop a recall notice</div>
+          <div className="serif" style={{ fontSize: 'clamp(32px, 2.8vw, 52px)', lineHeight: 1.1 }}>Try it: send a correction</div>
           <div className="muted" style={{ fontSize: 'clamp(18px, 1.2vw, 24px)', margin: '1vh 0 2.4vh' }}>Pick a correction. Watch who gets asked, and who doesn't.</div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {PRESETS.map(p => <button key={p.key} className="btn primary" style={{ height: 48, fontSize: 18, padding: '0 22px' }} onClick={() => choosePreset(p)} disabled={busy}>{p.label}</button>)}
@@ -415,7 +415,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
           <div className="serif" style={{ fontSize: 32 }}>Paste your own correction</div>
           <textarea autoFocus className="field" rows={3} style={{ width: '100%', marginTop: 12, fontSize: 18 }} value={paste} onChange={e => setPaste(e.target.value)} placeholder="The March utilities invoice at Fresno is $40,000, and it was in the inbox before close." />
           {pasteMsg && <div style={{ color: 'var(--recall)', marginTop: 8, fontSize: 16 }}>{pasteMsg}</div>}
-          <div style={{ display: 'flex', gap: 10, marginTop: 12 }}><button className="btn primary" style={{ height: 44, fontSize: 16 }} onClick={pasteOwn}>Make it a recall notice</button><button className="btn" style={{ height: 44, fontSize: 16 }} onClick={() => { setPaste(null); setOffer(true) }}>Back</button></div>
+          <div style={{ display: 'flex', gap: 10, marginTop: 12 }}><button className="btn primary" style={{ height: 44, fontSize: 16 }} onClick={pasteOwn}>Make it a trackback notice</button><button className="btn" style={{ height: 44, fontSize: 16 }} onClick={() => { setPaste(null); setOffer(true) }}>Back</button></div>
         </div>
       </div>}
 

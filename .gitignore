@@ -16,3 +16,4 @@ data/*.sqlite-shm
 *.log
 data/eval/*.sqlite*
 data/snapshots/undo/
+.vercel/

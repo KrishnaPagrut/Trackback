@@ -113,13 +113,12 @@ export default function App() {
     <header style={{ height: 56, flex: 'none', display: 'flex', alignItems: 'center', gap: 16, padding: '0 16px', borderBottom: '1px solid var(--rule)', background: 'var(--paper)', position: 'relative', zIndex: 20 }}>
       <div className="serif" style={{ fontSize: 28, fontWeight: 600, letterSpacing: '-0.01em' }}>Trackback</div>
       <Seg value={world} onChange={(w: any) => { setWorld(w); setCorrection(null); setSelected(null); setAttempt(null); setDoc(w === 'lyft' ? 'lyft_q4_2023_release' : 'billing_export_2026_03'); setView(w === 'lyft' ? 'story' : 'graph') }}
-        options={[{ v: 'tidewall', label: 'Tidewall' }, { v: 'lyft', label: 'Real world' }, { v: 'research' as World, label: 'Research', disabled: true, title: 'A second domain pack is not built in this version' }]} />
+        options={[{ v: 'tidewall', label: 'Tidewall' }, { v: 'lyft', label: 'Real world' }]} />
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
         {mode === 'deep' && view !== 'proof' && !(world === 'lyft' && view === 'story') && <Seg value={view === 'ledger' ? 'ledger' : 'graph'} onChange={(v: any) => setView(v)} options={[{ v: 'graph', label: 'Graph' }, { v: 'ledger', label: 'Ledger' }]} />}
       </div>
       <span className="mono t14">Today · {dayLabel(now)}</span>
-      <span className="chip" style={{ borderColor: 'var(--ink)' }}>{(state?.mode || 'replay') === 'replay' ? 'Replay' : state?.mode === 'record' ? 'Record' : 'Scripted'}</span>
-      {mode === 'deep' && <button className="btn ghost" onClick={() => setView(v => v === 'proof' ? 'graph' : 'proof')}>{view === 'proof' ? 'Back to graph' : 'Proof'}</button>}
+      {mode === 'deep' && <button className="btn ghost" onClick={() => setView(v => v === 'proof' ? 'graph' : 'proof')}>{view === 'proof' ? 'Back to graph' : 'Scorecard'}</button>}
       <button className="btn primary" onClick={() => setMode(m => m === 'stage' ? 'deep' : 'stage')} title="D">{mode === 'stage' ? 'Deep mode' : 'Stage mode'}</button>
     </header>
   )
@@ -154,7 +153,7 @@ export default function App() {
               }} />}
               {help && <div className="drawer" style={{ width: 380 }}><div style={{ padding: 20 }}><div className="serif t32" style={{ marginBottom: 12 }}>Keys</div>
                 <div className="t14 muted" style={{ marginBottom: 10 }}>Rows are agents, cards are their work, lines mean "rests on". Hover for what happened; click for who built it.</div>
-                {[['D', 'Stage mode or Deep mode'], ['Space', 'drop the recall notice'], ['⌘K', 'search anything'], ['T', 'time travel to April 10'], ['A', 'approvals'], ['S', 'ping log'], ['B', 'who built this'], ['J', "Jade's review"], ['E', 'lessons learned'], ['G / L', 'graph or ledger'], ['P', 'proof'], ['M', `sound ${sound ? 'on' : 'off'}`], ['K', `kiosk loop ${kioskOn ? 'on' : 'off'}`], ['R', 'reset'], ['Esc', 'close']].map(([k, v]) => <div key={k} style={{ display: 'flex', gap: 12, padding: '6px 0' }}><span className="kbd" style={{ minWidth: 56, textAlign: 'center' }}>{k}</span><span>{v}</span></div>)}
+                {[['D', 'Stage mode or Deep mode'], ['Space', 'send the trackback notice'], ['⌘K', 'search anything'], ['T', 'time travel to April 10'], ['A', 'approvals'], ['S', 'ping log'], ['B', 'who built this'], ['J', "Jade's review"], ['E', 'lessons learned'], ['G / L', 'graph or ledger'], ['P', 'scorecard'], ['M', `sound ${sound ? 'on' : 'off'}`], ['K', `kiosk loop ${kioskOn ? 'on' : 'off'}`], ['R', 'reset'], ['Esc', 'close']].map(([k, v]) => <div key={k} style={{ display: 'flex', gap: 12, padding: '6px 0' }}><span className="kbd" style={{ minWidth: 56, textAlign: 'center' }}>{k}</span><span>{v}</span></div>)}
                 <button className="btn" style={{ marginTop: 12 }} onClick={() => setKioskOn(k => !k)}>Kiosk loop in Stage mode: {kioskOn ? 'on' : 'off'}</button></div></div>}
             </main>
           </div>

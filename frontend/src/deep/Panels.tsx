@@ -15,8 +15,8 @@ export function CounterStrip({ company, correction, graph, pings, waves, approva
   return (
     <div style={{ height: 52, flex: 'none', display: 'flex', alignItems: 'center', gap: 32, padding: '0 20px', borderBottom: '1px solid var(--rule)', background: 'var(--paper)' }}>
       {correction ? <div className="serif" style={{ fontSize: 30, lineHeight: 1 }}><span className="num" style={{ fontFamily: 'var(--serif)' }}>{pinged} of {agents}</span> agents pinged</div>
-        : <div className="serif" style={{ fontSize: 24, fontStyle: 'italic', color: 'var(--ink-muted)' }}>Nothing's been recalled. Yet.</div>}
-      {!correction && onRecall && <button className="btn primary" style={{ marginLeft: 'auto' }} onClick={onRecall}>A recall notice arrived</button>}
+        : <div className="serif" style={{ fontSize: 24, fontStyle: 'italic', color: 'var(--ink-muted)' }}>Nothing's been corrected. Yet.</div>}
+      {!correction && onRecall && <button className="btn primary" style={{ marginLeft: 'auto' }} onClick={onRecall}>A correction arrived</button>}
       {correction && <div className="mono t14" style={{ display: 'flex', gap: 24, color: 'var(--ink)' }}>
         <span title="How many pieces of work Trackback had to look at; the rest were cleared structurally (different period, different line, never read the changed rows)"><span className="muted">looked at</span> {inspected} of {total} pieces of work</span>
         <span title="Model calls spent on this correction, against what rerunning every agent from scratch would cost"><span className="muted">LLM calls</span> {st?.llm_calls ?? 0} <span className="muted">(rerunning every agent: {headline?.llm_calls_rerun_all ?? '…'})</span></span>
@@ -58,7 +58,7 @@ export function Sidebar({ company, correction, graph, pings, selected, onSelect,
         <div className="t14 muted" style={{ marginTop: 8 }}>{correction ? `${c('invalidated')} invalidated · ${c('cleared') + c('skipped')} cleared · ${c('caution')} need a human · ${c('reworked')} reworked · sorted by impact` : 'No correction selected'}</div>
       </div>
       <div className="scroll" style={{ flex: 1, minHeight: 0 }}>
-        {!correction && <Empty>Nothing's been recalled. Yet.</Empty>}
+        {!correction && <Empty>Nothing's been corrected. Yet.</Empty>}
         {rows.map(({ n, s }: any) => <button key={n.id} className={`row ${selected === n.id ? 'on' : ''}`} onClick={() => onSelect(n.id)}>
           <StatusIcon state={s} />
           <div style={{ minWidth: 0, flex: 1 }}>
@@ -193,7 +193,7 @@ export function Approvals({ refreshKey, onChanged, people, company }: { refreshK
 function PingLog({ pings, waves, challenges, company }: { pings: any[]; waves: any[]; challenges: any[]; company: string }) {
   const [comps, setComps] = useState<Record<string, any>>({})
   useEffect(() => { api.approvals().then(d => { const m: Record<string, any> = {}; d.actions.forEach((a: any) => { if (a.params?.compensates) { const art = a.params.compensates.replace(/^ACT-/, ''); m[art] = a } }); setComps(m) }) }, [pings])
-  if (!pings.length) return <Empty>No pings yet. Nothing's been recalled.</Empty>
+  if (!pings.length) return <Empty>No pings yet. Nothing's been corrected.</Empty>
   const st = waves[0]?.stats_json ? JSON.parse(waves[0].stats_json) : null
   return <div>
     {st && <div className="mono t14 muted" style={{ marginBottom: 12 }}>wave 1 · {st.pings} pings · {st.suspects} items · {st.llm_calls || 0} LLM calls</div>}
@@ -228,14 +228,14 @@ const val = (k: string, v: any) => k === 'materiality' ? (v ? 'material' : 'not 
 export function Review({ correction, refreshKey }: { correction: string | null; refreshKey: number }) {
   const [ev, setEv] = useState<any>(null); const [missing, setMissing] = useState(false)
   useEffect(() => { setMissing(false); if (!correction) { setEv(null); return } api.evaluation(correction).then(setEv).catch(() => { setEv(null); setMissing(true) }) }, [correction, refreshKey])
-  if (!correction) return <Empty>Drop a recall notice first. Jade reviews the agent's call on every correction.</Empty>
+  if (!correction) return <Empty>Send a correction first. Jade reviews the agent's call on every correction.</Empty>
   if (missing) return <Empty>No review for this correction.</Empty>
   if (!ev) return <div className="muted">Reading Jade's notes…</div>
   const j = ev.jade; const over = j.summary?.overruled || 0
   return <div>
-    <div className="t14 muted">Jade is a second AI that checks the agent's judgment against the engines: Memento for timing, the materiality memo and the graph, the period locks, the approval matrix. She never writes a number.</div>
+    <div className="t14 muted">Jade is a second AI that checks the agent's judgment against the engines: the time pins for timing, the materiality memo and the graph, the period locks, the approval matrix. She never writes a number.</div>
     <div style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '12px 0 4px' }}><span className={`chip ${over ? 'recall' : 'cleared'}`}>{over ? `${over} of 4 overruled` : '4 of 4 approved'}</span><span className="chip">playbook {ev.playbook_version}</span><span className="mono t14 muted">{dateLabel(ev.ts)}</span></div>
-    {ev.recalled?.length > 0 && <div className="memo" style={{ marginTop: 10, background: 'var(--ping-wash)' }}><b className="t14">Recalled from memory</b>
+    {ev.recalled?.length > 0 && <div className="memo" style={{ marginTop: 10, background: 'var(--ping-wash)' }}><b className="t14">Remembered from past cases</b>
       {ev.recalled.map((r: any) => <div key={r.lesson_id} className="t14" style={{ marginTop: 4 }}><span className="mono">{r.lesson_id}</span> · {Math.round(r.score * 100)}% like {r.from_case} · {r.applied ? <span style={{ color: 'var(--cleared)' }}>applied</span> : <span style={{ color: 'var(--caution-ink)' }}>{r.status}, not yet active</span>}<div className="muted">{r.rule}</div></div>)}</div>}
     {['classification', 'materiality', 'posting', 'routing'].map(k => { const c = ev.claims[k]; const v = j[k]; const o = v.verdict === 'overrule'
       return <div key={k} className={`claimrow ${o ? 'over' : ''}`}>
@@ -337,7 +337,7 @@ export function Legend({ company, onClose }: { company: string; onClose: () => v
     <div style={{ display: 'grid', gridTemplateColumns: '24px 1fr', gap: '4px 6px', marginTop: 8, alignItems: 'center' }} className="t14">
       {states.map(([st, w]) => <><StatusIcon key={st + 'i'} state={st} size={16} /><span key={st + 't'}>{w}</span></>)}
     </div>
-    <div className="t14 muted" style={{ marginTop: 8 }}><span className="kbd">Space</span> drops the recall notice · <span className="kbd">J</span> Jade's review · <span className="kbd">E</span> lessons · <span className="kbd">T</span> time travel · <span className="kbd">?</span> all keys</div>
+    <div className="t14 muted" style={{ marginTop: 8 }}><span className="kbd">Space</span> sends the trackback notice · <span className="kbd">J</span> Jade's review · <span className="kbd">E</span> lessons · <span className="kbd">T</span> time travel · <span className="kbd">?</span> all keys</div>
   </div>
 }
 

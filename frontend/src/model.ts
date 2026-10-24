@@ -165,7 +165,7 @@ export function explain(n: any, st: State, comp?: any): Explain {
   const who = n.type === 'source' ? (n.system || 'source').replace(/_/g, ' ') : n.agent_id ? (agentLane('tidewall', n.agent_id) || agentLane('lyft', n.agent_id))?.name || n.agent_id : 'Trackback'
   const lines: string[] = []
   if (n.type === 'source') {
-    if (n.corrected) return { head: 'Source corrected', tone: 'invalidated', lines: [`${t}: the recall notice replaced the version the agents read with a corrected one.`, `${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'} · ${who}`] }
+    if (n.corrected) return { head: 'Source corrected', tone: 'invalidated', lines: [`${t}: the trackback notice replaced the version the agents read with a corrected one.`, `${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'} · ${who}`] }
     return { head: t, tone: 'idle', lines: [`A ${who} document the agents read. ${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'}, each pinned to the moment it was captured.`] }
   }
   const moved = n.old_value != null && n.new_value != null && n.old_value !== n.new_value
