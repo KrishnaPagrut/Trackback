@@ -36,6 +36,7 @@ export default function App() {
   const [sources, setSources] = useState<{ source_id: string; title: string }[]>([])
   const [artifacts, setArtifacts] = useState<any[]>([])
   const [headline, setHeadline] = useState<any>(null)
+  const [evaluation, setEvaluation] = useState<any>(null)
   const [pending, setPending] = useState(0)
   const [laneFilter, setLaneFilter] = useState<string | null>(null)
   const [sound, setSound] = useState(false)
@@ -56,6 +57,7 @@ export default function App() {
     setGraph((g: any) => (g && g.correction?.correction_id === correction ? g : null))   // never lay out a correction on the idle graph
     api.graph(world, correction).then(setGraph); api.pings(correction).then(d => { setPings(d.pings); setWaves(d.waves) })
   }, [world, correction, refreshKey, worldGraph])
+  useEffect(() => { if (!correction) { setEvaluation(null); return } api.evaluation(correction).then(setEvaluation).catch(() => setEvaluation(null)) }, [correction, refreshKey])
   useEffect(() => { api.challenges().then(d => setChallenges(d.challenges)).catch(() => null); api.approvals().then(d => setPending(d.actions.filter((a: any) => a.state === 'proposed' && correction && a.run_id === `correction:${correction}`).length)) }, [refreshKey, world, correction])
 
   const resetWorld = useCallback(async () => { await api.reset(); setCorrection(null); setSelected(null); setDrawer(null); setAttempt(null); setPin(now); setNotice(false); refresh() }, [now, refresh])
@@ -93,6 +95,8 @@ export default function App() {
       else if (k === 'a') setDrawer('approvals')
       else if (k === 's') setDrawer('pings')
       else if (k === 'b') setDrawer('who')
+      else if (k === 'j') setDrawer('review')
+      else if (k === 'e') setDrawer('lessons')
       else if (k === 'p') setView(v => v === 'proof' ? 'graph' : 'proof')
       else if (k === 'g') setView('graph')
       else if (k === 'l') setView('ledger')
@@ -127,7 +131,7 @@ export default function App() {
       {mode === 'deep' && (view === 'proof' ? <div style={{ flex: 1, minHeight: 0 }}><ProofPage /></div>
         : world === 'lyft' && view === 'story' ? <div style={{ flex: 1, minHeight: 0 }}><RealWorld onShowLanes={() => { setView('graph'); setCorrection('LYFT_TYPO'); setRippleKey(k => k + 1) }} /></div>
         : <>
-          <CounterStrip company={world} correction={correction} graph={graph} pings={pings} waves={waves} approvalsPending={pending} headline={headline} onRecall={world === 'tidewall' ? () => setNotice(true) : undefined} />
+          <CounterStrip company={world} correction={correction} graph={graph} pings={pings} waves={waves} approvalsPending={pending} headline={headline} onRecall={world === 'tidewall' ? () => setNotice(true) : undefined} evaluation={evaluation} onJade={() => setDrawer('review')} />
           <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
             <Sidebar company={world} correction={correction} graph={graph} pings={pings} selected={selected} onSelect={id => { setSelected(id); setDrawer(d => d || 'who') }} traceMode={traceMode} setTraceMode={setTraceMode} traceIds={traceIds} />
             <main style={{ flex: 1, minWidth: 0, position: 'relative' }}>
@@ -135,7 +139,7 @@ export default function App() {
                 : <Canvas company={world} correction={correction} data={graph} pings={pings} selected={selected} onSelect={id => { setSelected(id); if (id) setDrawer(d => d || 'who') }} trace={selected ? traceSet : null} rippleKey={rippleKey} sound={sound}
                   onLaneMore={l => { setLaneFilter(l); setView('ledger') }} />}
               {notice && <div style={{ position: 'absolute', left: 24, top: 16, zIndex: 25 }}><RecallNotice id="E11" lot="7F3A" headline="March billing export: annual-plan revenue was released twice" reason="$118,000 counted twice across five gyms" issuer="Membership billing vendor" ts="Jul 8, 2026 · 9:05 AM" onDrop={dropE11} busy={busy} /></div>}
-              {drawer && <Drawer tab={drawer} setTab={setDrawer} onClose={() => setDrawer(null)} selected={selected} company={world} refreshKey={refreshKey} onChanged={refresh} people={state?.people || {}} pings={pings} waves={waves} challenges={challenges} />}
+              {drawer && <Drawer tab={drawer} setTab={setDrawer} onClose={() => setDrawer(null)} selected={selected} company={world} refreshKey={refreshKey} onChanged={refresh} people={state?.people || {}} pings={pings} waves={waves} challenges={challenges} correction={correction} />}
               {palette && <Palette company={world} artifacts={artifacts} corrections={state?.corrections || []} onClose={() => setPalette(false)} onPick={p => {
                 setPalette(false)
                 if (p.kind === 'artifact') { setSelected(p.id); setDrawer('who'); setView('graph') }
@@ -144,7 +148,7 @@ export default function App() {
                 else if (p.kind === 'agent') { setLaneFilter(p.id); setView('ledger') }
               }} />}
               {help && <div className="drawer" style={{ width: 380 }}><div style={{ padding: 20 }}><div className="serif t32" style={{ marginBottom: 12 }}>Keys</div>
-                {[['D', 'Stage mode or Deep mode'], ['Space', 'drop the recall notice'], ['⌘K', 'search anything'], ['T', 'time travel to April 10'], ['A', 'approvals'], ['S', 'ping log'], ['B', 'who built this'], ['G / L', 'graph or ledger'], ['P', 'proof'], ['M', `sound ${sound ? 'on' : 'off'}`], ['R', 'reset'], ['Esc', 'close']].map(([k, v]) => <div key={k} style={{ display: 'flex', gap: 12, padding: '6px 0' }}><span className="kbd" style={{ minWidth: 56, textAlign: 'center' }}>{k}</span><span>{v}</span></div>)}
+                {[['D', 'Stage mode or Deep mode'], ['Space', 'drop the recall notice'], ['⌘K', 'search anything'], ['T', 'time travel to April 10'], ['A', 'approvals'], ['S', 'ping log'], ['B', 'who built this'], ['J', "Jade's review"], ['E', 'lessons learned'], ['G / L', 'graph or ledger'], ['P', 'proof'], ['M', `sound ${sound ? 'on' : 'off'}`], ['R', 'reset'], ['Esc', 'close']].map(([k, v]) => <div key={k} style={{ display: 'flex', gap: 12, padding: '6px 0' }}><span className="kbd" style={{ minWidth: 56, textAlign: 'center' }}>{k}</span><span>{v}</span></div>)}
                 <button className="btn" style={{ marginTop: 12 }} onClick={() => setKioskOn(k => !k)}>Kiosk loop in Stage mode: {kioskOn ? 'on' : 'off'}</button></div></div>}
             </main>
           </div>

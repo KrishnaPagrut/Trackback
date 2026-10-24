@@ -112,6 +112,26 @@ def main() -> int:
     check(bool(v2 and (v2.get("params") or {}).get("posting_period") == "2026-06"), "E22: re-drafted into June with an out-of-period tag",
           f"posting {(v2.get('params') or {}).get('posting_period')}, orig {(v2.get('params') or {}).get('orig_period')}" if v2 else "no re-draft")
 
+    # ---------------- Jade and the lessons memory (V3)
+    ev = c.get("/api/evaluations/E11")
+    check(ev.status_code == 200, "Jade reviewed E11", f"HTTP {ev.status_code}")
+    evj = ev.json() if ev.status_code == 200 else {}
+    over = (evj.get("jade") or {}).get("summary", {}).get("overruled_claims", [])
+    check("materiality" in over, "Jade overrules the agent's 'immaterial' call on E11", f"agent: {evj.get('headline', {}).get('agent')} | Jade: {evj.get('headline', {}).get('jade')}")
+    ls = c.get("/api/lessons").json()
+    byid = {l["lesson_id"]: l for l in ls["lessons"]}
+    check(byid.get("L-materiality", {}).get("status") == "proposed", "materiality lesson proposed from Jade's overrule", byid.get("L-materiality", {}).get("status"))
+    check("E11" in byid.get("L-posting", {}).get("cases", []) and byid.get("L-locked-means-estimate", {}).get("status") == "proposed", "the Controller's rejection adds evidence to the posting lesson and proposes the broad one",
+          f"posting cases {byid.get('L-posting', {}).get('cases')}")
+    check({byid.get(x, {}).get("status") for x in ("L-classification", "L-routing")} == {"active"}, "two lessons learned in history are active (classification, routing)", ls["playbook"]["version"])
+    ap2 = c.post("/api/lessons/approve-pending", json={"approver": config.PEOPLE["controller"]}).json()
+    st = {l["lesson_id"]: l["status"] for l in ap2["lessons"]}
+    check(st.get("L-materiality") == "active" and st.get("L-posting") == "active", "the gate passes the narrow lessons and the Controller activates them", str(st))
+    check(st.get("L-locked-means-estimate") == "rejected_by_gate", "the regression gate rejects the broad lesson (E10/E02 would flip)", str(st.get("L-locked-means-estimate")))
+    check(ap2["playbook"]["version"] == "v2", "playbook is v2 with all four checks active", ap2["playbook"]["version"])
+    bad = c.post("/api/lessons/L-materiality/approve", json={"approver": "agent:close_accountant"})
+    check(bad.status_code == 403, "an agent cannot approve a lesson (403)", f"HTTP {bad.status_code}")
+
     # ---------------- Memento: April 10 replay and the future refusal
     m = c.get("/api/memento/billing_export_2026_03", params={"at": "2026-04-10T17:00:00-07:00"}).json()
     ver = (m.get("memento") or {}).get("version_id")

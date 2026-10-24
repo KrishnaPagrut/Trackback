@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-23T21:59:55",
+ "generated_at": "2026-10-24T11:14:35",
  "llm_mode": "replay",
  "answer_key_v2": {
   "sha256": "cfc67c46fc6d09b28415303813b4b41ede2b9363f6d6953aaca4d77540d36d2b",
   "frozen": null,
-  "git": ""
+  "git": "06bbbc9da88391ed08760740619c7e002bcd5682 2026-10-23T22:57:55-07:00"
  },
  "n_events": 23,
  "ping_precision_recall": {
@@ -1120,7 +1120,7 @@
   },
   {
    "key": "X1",
-   "correction_id": "REV-q2_utilities_accrual_est_G3-32b1",
+   "correction_id": "REV-q2_utilities_accrual_est_G3-3feb",
    "title": "Agent self-revision: the Close Accountant revises its Q2 accrual estimate after the norm approval",
    "category": "agent_revision",
    "pinged_agents": [
@@ -1434,5 +1434,5 @@
    }
   }
  ],
- "seconds": 2.2108829021453857
+ "seconds": 2.091912269592285
 }

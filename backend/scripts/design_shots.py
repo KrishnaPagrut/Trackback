@@ -1,4 +1,4 @@
-"""DESIGN.md's nine states at 1280x720 and 1920x1080, saved under docs/screenshots/round-N/, plus 25%-width copies of the
+"""DESIGN.md's nine states, plus the V3 states (Jade's overrule, the lesson, a hover card, the Jade and Lessons tabs), at 1280x720 and 1920x1080, saved under docs/screenshots/round-N/, plus 25%-width copies of the
 Stage shots for the legibility check. Needs the server on :8000 (make demo). Usage: design_shots.py N"""
 import subprocess
 import sys
@@ -47,19 +47,42 @@ with sync_playwright() as p:
         press(page, "Space", 1400)                        # ping: Reporting Analyst
         page.screenshot(path=OUT / f"3-stage-mid-ripple-{tag}.png")
         for _ in range(8):
-            if page.locator(".payoff .big").count():
+            if page.locator(".stage .jade").count() or page.locator(".payoff .big").count():
                 break
+            press(page, "Space", 900)
+        if page.locator(".stage .jade").count():
+            page.wait_for_timeout(500); page.screenshot(path=OUT / f"3b-stage-jade-overrules-{tag}.png")
+            press(page, "Space", 2500); page.screenshot(path=OUT / f"3c-stage-lesson-learned-{tag}.png")
             press(page, "Space", 900)
         page.wait_for_timeout(600)
         page.screenshot(path=OUT / f"4-stage-payoff-{tag}.png")
+        # hover on a Stage card: the error in words
+        for _ in range(10):
+            press(page, "Backspace", 500)
+            if not page.locator(".stage .bubble").count() and not page.locator(".stage .jade").count() and not page.locator(".payoff .big").count():
+                break
+        hb = page.locator(".stage .snode.invalidated, .stage .snode.caution").first.bounding_box()
+        if hb:
+            page.mouse.move(hb["x"] + 40, hb["y"] + 20); page.wait_for_timeout(500)
+            page.screenshot(path=OUT / f"4b-stage-hover-{tag}.png")
         # ---- Deep mode
         reset(); page.goto(f"{BASE}/?mode=deep&kiosk=off"); page.wait_for_timeout(2500)
         page.screenshot(path=OUT / f"5-deep-idle-{tag}.png")
         press(page, "Space", 900); press(page, "Space", 7000)    # the recall notice, dropped; the ripple runs
-        click_node(page, "Lender certificate, sent"); page.wait_for_timeout(2500)
+        click_node(page, "Lender certificate, sent"); page.mouse.move(5, 5); page.wait_for_timeout(2500)
         page.screenshot(path=OUT / f"6-deep-ripple-who-built-{tag}.png")
         press(page, "a", 1200)
         page.screenshot(path=OUT / f"7-deep-approvals-e22-{tag}.png")
+        press(page, "j", 1200)
+        page.screenshot(path=OUT / f"7b-deep-jade-{tag}.png")
+        press(page, "e", 1200)
+        page.screenshot(path=OUT / f"7c-deep-lessons-{tag}.png")
+        press(page, "Escape", 300)
+        db_ = page.locator(".react-flow__node-card .dcard.invalidated, .react-flow__node-card .dcard.caution").first.bounding_box()
+        if db_:
+            page.mouse.move(db_["x"] + 30, db_["y"] + 20); page.wait_for_timeout(500)
+            page.screenshot(path=OUT / f"7d-deep-hover-{tag}.png")
+            page.mouse.move(5, 5)
         press(page, "Escape", 300); press(page, "t", 1500)
         page.screenshot(path=OUT / f"8-deep-memento-april-10-{tag}.png")
         press(page, "p", 1500)

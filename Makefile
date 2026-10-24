@@ -40,6 +40,7 @@ test:
 eval:
 	TRACKBACK_LLM_MODE=replay $(PY) backend/scripts/eval.py
 	TRACKBACK_LLM_MODE=replay $(PY) backend/scripts/eval_v2.py
+	TRACKBACK_LLM_MODE=replay $(PY) backend/scripts/eval_learning.py
 
 eval-v2:
 	$(PY) backend/scripts/eval_v2.py

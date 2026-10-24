@@ -125,3 +125,11 @@ CREATE TRIGGER IF NOT EXISTS no_del_pings BEFORE DELETE ON pings BEGIN SELECT RA
 CREATE TRIGGER IF NOT EXISTS no_del_ping_responses BEFORE DELETE ON ping_responses BEGIN SELECT RAISE(ABORT,'append-only'); END;
 CREATE TRIGGER IF NOT EXISTS upd_receipts BEFORE UPDATE ON consumption_receipts BEGIN SELECT RAISE(ABORT,'append-only'); END;
 CREATE TRIGGER IF NOT EXISTS upd_ping_responses BEFORE UPDATE ON ping_responses BEGIN SELECT RAISE(ABORT,'append-only'); END;
+
+-- ---------------------------------------------------------------- V3: the reviewer (Jade) and the lessons memory
+CREATE TABLE IF NOT EXISTS evaluations(correction_id TEXT PRIMARY KEY, ts TEXT, playbook_version TEXT, active_checks_json TEXT, claims_json TEXT,
+  jade_json TEXT, recalled_json TEXT, summary_json TEXT, facts_json TEXT);
+CREATE TABLE IF NOT EXISTS lessons(lesson_id TEXT PRIMARY KEY, created_at TEXT, mistake_kind TEXT, check_name TEXT, rule TEXT, guidance TEXT,
+  evidence_json TEXT, status TEXT, proposed_by TEXT, approved_by TEXT, approved_at TEXT, valid_from TEXT, gate_json TEXT);
+CREATE TABLE IF NOT EXISTS lesson_events(seq INTEGER PRIMARY KEY AUTOINCREMENT, lesson_id TEXT, ts TEXT, kind TEXT, actor TEXT, detail_json TEXT);
+CREATE TRIGGER IF NOT EXISTS no_del_lesson_events BEFORE DELETE ON lesson_events BEGIN SELECT RAISE(ABORT,'append-only'); END;

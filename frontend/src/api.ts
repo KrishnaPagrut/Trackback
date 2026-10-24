@@ -59,6 +59,13 @@ export const api = {
   challenges: () => j<Any>('/challenges'),
   wellKnown: () => j<Any>('/.well-known/trackback'),
   misstatements: () => j<Any>('/api/misstatement-log'),
+  evaluation: (c: string) => j<Any>(`/api/evaluations/${encodeURIComponent(c)}`),
+  evaluations: () => j<Any>('/api/evaluations'),
+  lessons: () => j<Any>('/api/lessons'),
+  playbook: () => j<Any>('/api/playbook'),
+  gateLesson: (id: string) => j<Any>(`/api/lessons/${encodeURIComponent(id)}/gate`, { method: 'POST' }),
+  approveLesson: (id: string, approver: string) => j<Any>(`/api/lessons/${encodeURIComponent(id)}/approve`, { method: 'POST', body: JSON.stringify({ approver }) }),
+  approvePendingLessons: (approver: string) => j<Any>('/api/lessons/approve-pending', { method: 'POST', body: JSON.stringify({ approver }) }),
 }
 export const fmt = (v: number | null | undefined, line?: string | null): string => {
   if (v === null || v === undefined) return '—'

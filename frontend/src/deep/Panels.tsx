@@ -6,7 +6,7 @@ import { LANES, laneOf, stateOf, reasonText, STATE_WORD, compText, agentLane, pi
 import { StatusIcon, Lot, Seg, Envelope, RefusalStamp, Empty } from '../ui/primitives'
 
 /* ---------------------------------------------------------------- counter strip */
-export function CounterStrip({ company, correction, graph, pings, waves, approvalsPending, headline, onRecall }: { company: string; correction: string | null; graph: any; pings: any[]; waves: any[]; approvalsPending: number; headline: any; onRecall?: () => void }) {
+export function CounterStrip({ company, correction, graph, pings, waves, approvalsPending, headline, onRecall, evaluation, onJade }: { company: string; correction: string | null; graph: any; pings: any[]; waves: any[]; approvalsPending: number; headline: any; onRecall?: () => void; evaluation?: any; onJade?: () => void }) {
   const agents = LANES[company].filter(l => !['sources', 'trackback', 'humans'].includes(l.id)).length
   const pinged = new Set(pings.map(p => p.target_agent_id)).size
   const inspected = graph ? graph.nodes.filter((n: any) => n.verdict && !['different_period', 'different_line_item', 'claim_unchanged'].includes(n.reason || '')).length : 0
@@ -22,6 +22,8 @@ export function CounterStrip({ company, correction, graph, pings, waves, approva
         <span><span className="muted">LLM calls</span> {st?.llm_calls ?? 0} vs {headline?.llm_calls_rerun_all ?? '…'} rerun-all</span>
         <span><span className="muted">compensations pending</span> {approvalsPending}</span>
       </div>}
+      {correction && evaluation && <button className={`chip ${evaluation.jade?.summary?.overruled ? 'recall' : 'cleared'}`} style={{ marginLeft: 'auto', height: 28, cursor: 'pointer', fontSize: 14 }} onClick={onJade} title="J">
+        Jade · {evaluation.jade?.summary?.overruled ? `overruled ${evaluation.jade.summary.overruled_claims.join(', ')}` : 'every claim approved'} · playbook {evaluation.playbook_version}</button>}
     </div>
   )
 }
@@ -71,10 +73,10 @@ export function Sidebar({ company, correction, graph, pings, selected, onSelect,
 }
 
 /* ---------------------------------------------------------------- right drawer */
-export type DrawerTab = 'who' | 'history' | 'approvals' | 'pings' | 'norms'
-export function Drawer({ tab, setTab, onClose, selected, company, refreshKey, onChanged, people, pings, waves, challenges }: { tab: DrawerTab; setTab: (t: DrawerTab) => void; onClose: () => void; selected: string | null; company: string
-  refreshKey: number; onChanged: () => void; people: Record<string, string>; pings: any[]; waves: any[]; challenges: any[] }) {
-  const tabs: [DrawerTab, string][] = [['who', 'Who built this'], ['history', 'Claim history'], ['approvals', 'Approvals'], ['pings', 'Ping log'], ['norms', 'Norms']]
+export type DrawerTab = 'who' | 'history' | 'approvals' | 'pings' | 'review' | 'lessons' | 'norms'
+export function Drawer({ tab, setTab, onClose, selected, company, refreshKey, onChanged, people, pings, waves, challenges, correction }: { tab: DrawerTab; setTab: (t: DrawerTab) => void; onClose: () => void; selected: string | null; company: string
+  refreshKey: number; onChanged: () => void; people: Record<string, string>; pings: any[]; waves: any[]; challenges: any[]; correction?: string | null }) {
+  const tabs: [DrawerTab, string][] = [['who', 'Who built it'], ['history', 'History'], ['approvals', 'Approvals'], ['pings', 'Pings'], ['review', 'Jade'], ['lessons', 'Lessons'], ['norms', 'Norms']]
   return (
     <div className="drawer" role="complementary" aria-label="Details">
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -86,6 +88,8 @@ export function Drawer({ tab, setTab, onClose, selected, company, refreshKey, on
         {tab === 'history' && <ClaimHistory id={selected} refreshKey={refreshKey} />}
         {tab === 'approvals' && <Approvals refreshKey={refreshKey} onChanged={onChanged} people={people} company={company} />}
         {tab === 'pings' && <PingLog pings={pings} waves={waves} challenges={challenges} company={company} />}
+        {tab === 'review' && <Review correction={correction || null} refreshKey={refreshKey} />}
+        {tab === 'lessons' && <Lessons refreshKey={refreshKey} onChanged={onChanged} people={people} />}
         {tab === 'norms' && <Norms refreshKey={refreshKey} onChanged={onChanged} people={people} />}
       </div>
     </div>
@@ -218,6 +222,67 @@ function Norms({ refreshKey, onChanged, people }: { refreshKey: number; onChange
   </div>)}</div>
 }
 
+/* ---------------------------------------------------------------- Jade: the agent's four judgment calls, checked claim by claim */
+const CLAIM_WORD: Record<string, string> = { classification: 'What is it?', materiality: 'Does it matter?', posting: 'Where to book it?', routing: 'Who approves?' }
+const val = (k: string, v: any) => k === 'materiality' ? (v ? 'material' : 'not material') : Array.isArray(v) ? v.map(r => r.replace(/_/g, ' ')).join(' + ') : String(v)
+export function Review({ correction, refreshKey }: { correction: string | null; refreshKey: number }) {
+  const [ev, setEv] = useState<any>(null); const [missing, setMissing] = useState(false)
+  useEffect(() => { setMissing(false); if (!correction) { setEv(null); return } api.evaluation(correction).then(setEv).catch(() => { setEv(null); setMissing(true) }) }, [correction, refreshKey])
+  if (!correction) return <Empty>Drop a recall notice first. Jade reviews the agent's call on every correction.</Empty>
+  if (missing) return <Empty>No review for this correction.</Empty>
+  if (!ev) return <div className="muted">Reading Jade's notes…</div>
+  const j = ev.jade; const over = j.summary?.overruled || 0
+  return <div>
+    <div className="t14 muted">Jade is a second AI that checks the agent's judgment against the engines: Memento for timing, the materiality memo and the graph, the period locks, the approval matrix. She never writes a number.</div>
+    <div style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '12px 0 4px' }}><span className={`chip ${over ? 'recall' : 'cleared'}`}>{over ? `${over} of 4 overruled` : '4 of 4 approved'}</span><span className="chip">playbook {ev.playbook_version}</span><span className="mono t14 muted">{dateLabel(ev.ts)}</span></div>
+    {ev.recalled?.length > 0 && <div className="memo" style={{ marginTop: 10, background: 'var(--ping-wash)' }}><b className="t14">Recalled from memory</b>
+      {ev.recalled.map((r: any) => <div key={r.lesson_id} className="t14" style={{ marginTop: 4 }}><span className="mono">{r.lesson_id}</span> · {Math.round(r.score * 100)}% like {r.from_case} · {r.applied ? <span style={{ color: 'var(--cleared)' }}>applied</span> : <span style={{ color: 'var(--caution-ink)' }}>{r.status}, not yet active</span>}<div className="muted">{r.rule}</div></div>)}</div>}
+    {['classification', 'materiality', 'posting', 'routing'].map(k => { const c = ev.claims[k]; const v = j[k]; const o = v.verdict === 'overrule'
+      return <div key={k} className={`claimrow ${o ? 'over' : ''}`}>
+        <div className="k">{CLAIM_WORD[k]}</div>
+        <div>
+          <div className="said"><b>Agent:</b> {val(k, c.value)} <span className="muted">· {c.basis}</span></div>
+          <div className="jd" style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}><StatusIcon state={o ? 'invalidated' : 'cleared'} size={16} /><span><b>Jade:</b> {o ? `${val(k, v.jade)}. ` : ''}{v.why}</span></div>
+          <div className="ev">{(v.evidence || []).slice(0, 3).join(' · ')}</div>
+        </div>
+      </div> })}
+    <div className="claimrow"><div className="k">How big?</div><div><div><b>Agent and Jade agree:</b> {fmt(j.size?.agent)}</div><div className="ev">{j.size?.why}</div></div></div>
+  </div>
+}
+
+/* ---------------------------------------------------------------- the lessons memory: proposed → gate → approved → active */
+export function Lessons({ refreshKey, onChanged, people }: { refreshKey: number; onChanged: () => void; people: Record<string, string> }) {
+  const [d, setD] = useState<any>(null); const [msg, setMsg] = useState<string | null>(null); const [busy, setBusy] = useState(false)
+  const load = () => api.lessons().then(setD)
+  useEffect(() => { load() }, [refreshKey])
+  if (!d) return <div className="muted">Reading the memory…</div>
+  const pb = d.playbook; const controller = people.controller || 'Dana Ortiz'
+  const act = async (fn: () => Promise<any>, done: string) => { setBusy(true); setMsg(null); try { await fn(); setMsg(done); await load(); onChanged() } catch (e) { setMsg(String(e).replace(/^Error: /, '')) } finally { setBusy(false) } }
+  const order = (l: any) => l.status === 'proposed' ? 0 : l.status === 'active' ? 1 : 2
+  return <div>
+    <div className="t14 muted">A mistake becomes a lesson only when Jade or a person catches it. A lesson is a named check; before it turns on, every past case is re-run with it (the gate), then the Controller approves it, prospectively.</div>
+    <div className="memo" style={{ marginTop: 12 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><b>Playbook {pb.version}</b><span className="mono t14 muted">{pb.lessons.active} active · {pb.lessons.proposed} proposed · {pb.lessons.rejected_by_gate} rejected</span></div>
+      {pb.weaknesses.map((w: any) => <div key={w.check} className="t14" style={{ display: 'flex', gap: 6, marginTop: 6 }}><StatusIcon state={w.lifted ? 'cleared' : 'invalidated'} size={16} /><span>{w.lifted ? 'Learned: ' : 'Still a weakness: '}{w.rule}</span></div>)}
+    </div>
+    {pb.lessons.proposed > 0 && <button className="btn primary" disabled={busy} style={{ marginBottom: 12 }} onClick={() => act(() => api.approvePendingLessons(controller), `Reviewed as ${controller}: the gate decided.`)}>Review all pending as {controller}</button>}
+    {msg && <div className="memo" style={{ background: 'var(--caution-wash)' }}>{msg}</div>}
+    {[...d.lessons].sort((a: any, b: any) => order(a) - order(b)).map((l: any) => { const g = l.gate
+      return <div key={l.lesson_id} className={`memo ${l.status === 'proposed' ? 'waiting' : l.status === 'rejected_by_gate' ? 'locked' : ''}`}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}><span className="mono t14 muted">{l.lesson_id} · {l.mistake_kind}</span><span className={`chip ${l.status === 'active' ? 'cleared' : l.status === 'proposed' ? 'caution' : 'recall'}`}>{l.status.replace(/_/g, ' ')}</span></div>
+        <div className="t16" style={{ fontWeight: 600, margin: '6px 0' }}>{l.rule}</div>
+        <div className="t14 muted">{l.guidance}</div>
+        <div className="t14" style={{ marginTop: 6 }}>From {l.cases.length} case{l.cases.length === 1 ? '' : 's'}: <span className="mono">{l.cases.join(', ')}</span> · proposed by {String(l.proposed_by).replace('human:', '')}{l.approved_by ? ` · approved by ${l.approved_by} ${dateLabel(l.approved_at)}` : ''}</div>
+        {g && <div className="t14" style={{ marginTop: 6, color: g.passed ? 'var(--cleared)' : 'var(--recall)' }}>Gate: {g.pass_after} of {g.claims} past claims pass ({g.pass_before} before) · {g.newly_failing.length} newly failing{g.newly_failing.length ? `: ${g.newly_failing.map((x: any) => `${x.case_id} ${x.claim}`).join(', ')}` : ''} · {g.newly_passing.length} newly passing</div>}
+        {l.status === 'proposed' && <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+          <button className="btn" disabled={busy} onClick={() => act(() => api.gateLesson(l.lesson_id), 'Gate run.')}>Run the gate</button>
+          <button className="btn primary" disabled={busy} onClick={() => act(() => api.approveLesson(l.lesson_id, controller), `Decided as ${controller}.`)}>Approve as {controller}</button>
+          <button className="btn ghost" disabled={busy} title="Only the Controller approves a lesson" onClick={() => act(() => api.approveLesson(l.lesson_id, 'agent:close_accountant'), 'Approved.')}>Try as the agent</button>
+        </div>}
+      </div> })}
+  </div>
+}
+
 /* ---------------------------------------------------------------- the time scrubber, a slim film strip */
 const START = Date.parse('2026-01-01T00:00:00-08:00')
 export function Scrubber({ doc, setDoc, pin, setPin, now, sources, refreshKey, attempt, setAttempt }: { doc: string; setDoc: (d: string) => void; pin: string; setPin: (p: string) => void; now: string; sources: { source_id: string; title: string }[]
@@ -249,7 +314,7 @@ export function Scrubber({ doc, setDoc, pin, setPin, now, sources, refreshKey, a
 export function Footer({ state, pings }: { state: any; pings: any[] }) {
   return <footer style={{ height: 30, flex: 'none', borderTop: '1px solid var(--rule)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', fontSize: 13, background: 'var(--paper)' }}>
     <span className="mono">{state?.artifacts ?? '…'} artifacts · {state?.receipts ?? '…'} receipts · {pings.length} pings this wave</span>
-    <span className="muted" style={{ display: 'flex', gap: 14 }}><span><span className="kbd">Space</span> next</span><span><span className="kbd">D</span> deep mode</span><span><span className="kbd">⌘K</span> search</span><span><span className="kbd">T</span> time travel</span><span><span className="kbd">R</span> reset</span><span><span className="kbd">?</span> help</span></span>
+    <span className="muted" style={{ display: 'flex', gap: 14 }}><span><span className="kbd">Space</span> next</span><span><span className="kbd">D</span> deep mode</span><span><span className="kbd">⌘K</span> search</span><span><span className="kbd">T</span> time travel</span><span><span className="kbd">J</span> Jade</span><span><span className="kbd">E</span> lessons</span><span><span className="kbd">R</span> reset</span><span><span className="kbd">?</span> help</span></span>
   </footer>
 }
 

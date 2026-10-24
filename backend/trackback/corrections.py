@@ -32,6 +32,7 @@ def apply_correction(correction_id: str, *, body: dict | None = None, tx_time: s
                  actor="source", ts=tx_time, correction_id=correction_id, detail={"kind": kind, "knowable_at": knowable_at, "note": note})
     result = waves.run_wave(correction_id, tx_time)
     result["diff"] = {k: (v if not isinstance(v, list) else len(v)) for k, v in summary.items()}
+    result["evaluation"] = _review(correction_id, tx_time)
     return result
 
 
@@ -52,7 +53,22 @@ def apply_corrections(correction_ids: list[str], tx_time: str | None = None) -> 
         db.log_event("correction_received", f"RECALL NOTICE {cid}: {meta['source_id']} {summary['old_version']} -> {gen['version_id']}: {len(summary['changed'])} claims changed (coalesced with {', '.join(x for x in correction_ids if x != cid)})",
                      actor="source", ts=tx, correction_id=cid, detail={"coalesced": correction_ids})
     result = waves.run_wave(primary, tx, extra_ids=extras)
+    result["evaluations"] = {cid: _review(cid, tx) for cid in correction_ids}
     return result
+
+
+def _review(correction_id: str, ts: str) -> dict | None:
+    """The agent's Error Evaluation and Jade's review, after the wave. Never allowed to break the pipeline."""
+    from . import review
+    if correction_id.startswith(("LYFT", "REV-")):   # the real-world reconstruction and agents' own revisions carry no playbook claims
+        return None
+    try:
+        ev = review.evaluate(correction_id, ts)
+        return {"playbook_version": ev["playbook_version"], "overruled": ev["jade"]["summary"]["overruled_claims"], "headline": ev["headline"]} if ev else None
+    except Exception as e:  # noqa: BLE001
+        db.log_event("jade_error", f"Jade could not review {correction_id}: {e}", actor="jade", ts=ts, correction_id=correction_id)
+        db.commit()
+        return None
 
 
 def _dry_run(correction_id, source_id, version_id, body, tx_time, kind, knowable_at, booking_period, note) -> dict:

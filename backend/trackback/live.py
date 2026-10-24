@@ -24,6 +24,8 @@ def drop_e11() -> dict:
     r12 = _run(wo.r12_e11_first_draft())
     draft = next((x["result"] for x in r12["results"] if x["tool"] == "propose_journal_entry"), {})
     approvals.decide("JE-je_e11_dedupe_v1", CONTROLLER, "rejected", E22_REASON, "2026-07-08T09:12:00-07:00")
+    from . import lessons
+    lessons.signal_rejection("E11", "JE-je_e11_dedupe_v1", CONTROLLER, E22_REASON, "2026-07-08T09:12:00-07:00")
     r13 = _run(wo.r13_e11_redraft())
     from .core import waves as WV
     challenge = WV.file_challenge("reporting_analyst", "q1_membership_revenue_G4",
@@ -40,6 +42,8 @@ def scenario_b() -> dict:
     result = corrections.apply_correction("E20")
     r1 = _run(wo.fu_e20_trap())
     approvals.decide("JE-je_e20_oop_q2", CONTROLLER, "rejected", E20_REASON, "2026-07-08T09:34:00-07:00")
+    from . import lessons
+    lessons.signal_rejection("E20", "JE-je_e20_oop_q2", CONTROLLER, E20_REASON, "2026-07-08T09:34:00-07:00")
     r2 = _run(wo.fu_e20_redraft())
     return {"correction": result, "draft1": {"run": r1["run_id"]}, "rejection": {"by": CONTROLLER, "reason": E20_REASON, "at": "2026-07-08T09:34:00-07:00"}, "redraft": {"run": r2["run_id"], "produced": r2["produced"]}}
 

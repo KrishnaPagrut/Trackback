@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-23T21:59:52",
+ "generated_at": "2026-10-24T11:14:32",
  "llm_mode": "replay",
  "answer_key": {
   "sha256": "d74a5cd3fe0569873b25a81e33d439393edaca427fc52b9e7ffb2bf245d8b274",
   "frozen": null,
-  "git": "",
+  "git": "06bbbc9da88391ed08760740619c7e002bcd5682 2026-10-23T22:57:55-07:00",
   "tag": null
  },
  "n_corrections": 21,
@@ -10540,13 +10540,13 @@
    "Lyft finance-team documents and outside dependents (reconstructed from the public numbers)"
   ]
  },
- "seconds": 4.254438877105713,
+ "seconds": 2.367515802383423,
  "multi_agent": {
-  "generated_at": "2026-10-23T21:59:55",
+  "generated_at": "2026-10-24T11:14:35",
   "answer_key_v2": {
    "sha256": "cfc67c46fc6d09b28415303813b4b41ede2b9363f6d6953aaca4d77540d36d2b",
    "frozen": null,
-   "git": ""
+   "git": "06bbbc9da88391ed08760740619c7e002bcd5682 2026-10-23T22:57:55-07:00"
   },
   "n_events": 23,
   "ping_precision_recall": {
@@ -10776,6 +10776,386 @@
   "replay_identical": 162,
   "replay_artifacts": 162,
   "multi_agent_replay_fidelity": 1.0,
-  "sources": "copied from computed fields of this file and latest_v2.json by backend/scripts/eval_v2.py"
+  "sources": "copied from computed fields of this file and latest_v2.json by backend/scripts/eval_v2.py",
+  "jade_catch_rate": 1.0,
+  "jade_planted_mistakes": 13,
+  "jade_caught": 13,
+  "jade_false_overrule_rate": 0.0,
+  "jade_correct_claims": 63,
+  "learning_v1_held_out": 0.8055555555555556,
+  "learning_v2_held_out": 1.0,
+  "learning_held_out_claims": 36,
+  "lessons_approved": 4,
+  "lessons_rejected_by_gate": 1
+ },
+ "learning": {
+  "jade": {
+   "cases": 19,
+   "claims": 76,
+   "planted_mistakes": 13,
+   "caught": 13,
+   "correct_claims": 63,
+   "false_overrules": 0,
+   "by_claim": {
+    "classification": {
+     "mistakes": 2,
+     "caught": 2
+    },
+    "posting": {
+     "mistakes": 6,
+     "caught": 6
+    },
+    "routing": {
+     "mistakes": 3,
+     "caught": 3
+    },
+    "materiality": {
+     "mistakes": 2,
+     "caught": 2
+    }
+   },
+   "detail": [
+    {
+     "case": "E01",
+     "claim": "classification",
+     "agent": "error",
+     "jade": "new information",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E01",
+     "claim": "posting",
+     "agent": "2026-03",
+     "jade": "2026-04",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E10",
+     "claim": "posting",
+     "agent": "2026-03",
+     "jade": "2026-05",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E02",
+     "claim": "posting",
+     "agent": "2026-03",
+     "jade": "2026-05",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E16",
+     "claim": "routing",
+     "agent": [
+      "controller"
+     ],
+     "jade": [
+      "ap",
+      "controller"
+     ],
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E13",
+     "claim": "routing",
+     "agent": [
+      "controller"
+     ],
+     "jade": [
+      "controller",
+      "vp_sales"
+     ],
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E09",
+     "claim": "posting",
+     "agent": "2026-03",
+     "jade": "2026-07",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E24",
+     "claim": "classification",
+     "agent": "error",
+     "jade": "new information",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E24",
+     "claim": "posting",
+     "agent": "2026-03",
+     "jade": "2026-07",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E11",
+     "claim": "materiality",
+     "agent": false,
+     "jade": "material",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E11",
+     "claim": "posting",
+     "agent": "2026-03",
+     "jade": "2026-06",
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E11",
+     "claim": "routing",
+     "agent": [
+      "controller"
+     ],
+     "jade": [
+      "cfo",
+      "controller",
+      "hr"
+     ],
+     "agent_right": false,
+     "jade_overruled": true
+    },
+    {
+     "case": "E20",
+     "claim": "materiality",
+     "agent": false,
+     "jade": "material",
+     "agent_right": false,
+     "jade_overruled": true
+    }
+   ],
+   "catch_rate": 1.0,
+   "false_overrule_rate": 0.0
+  },
+  "learning": {
+   "split": {
+    "train": [
+     "E10",
+     "E08",
+     "E09",
+     "E20",
+     "E01",
+     "E18",
+     "E03",
+     "E14",
+     "E16",
+     "E25"
+    ],
+    "held_out": [
+     "E02",
+     "E13",
+     "E11",
+     "E07",
+     "E06",
+     "E17",
+     "E05",
+     "E24",
+     "E04"
+    ],
+    "rule": "by kind, even/odd in time order"
+   },
+   "v1_held_out": {
+    "by_claim": {
+     "classification": {
+      "right": 8,
+      "n": 9
+     },
+     "materiality": {
+      "right": 8,
+      "n": 9
+     },
+     "posting": {
+      "right": 6,
+      "n": 9
+     },
+     "routing": {
+      "right": 7,
+      "n": 9
+     }
+    },
+    "right": 29,
+    "n": 36,
+    "accuracy": 0.8055555555555556
+   },
+   "v2_held_out": {
+    "by_claim": {
+     "classification": {
+      "right": 9,
+      "n": 9
+     },
+     "materiality": {
+      "right": 9,
+      "n": 9
+     },
+     "posting": {
+      "right": 9,
+      "n": 9
+     },
+     "routing": {
+      "right": 9,
+      "n": 9
+     }
+    },
+    "right": 36,
+    "n": 36,
+    "accuracy": 1.0
+   },
+   "v1_train": {
+    "by_claim": {
+     "classification": {
+      "right": 9,
+      "n": 10
+     },
+     "materiality": {
+      "right": 9,
+      "n": 10
+     },
+     "posting": {
+      "right": 7,
+      "n": 10
+     },
+     "routing": {
+      "right": 9,
+      "n": 10
+     }
+    },
+    "right": 34,
+    "n": 40,
+    "accuracy": 0.85
+   },
+   "v2_train": {
+    "by_claim": {
+     "classification": {
+      "right": 10,
+      "n": 10
+     },
+     "materiality": {
+      "right": 10,
+      "n": 10
+     },
+     "posting": {
+      "right": 10,
+      "n": 10
+     },
+     "routing": {
+      "right": 10,
+      "n": 10
+     }
+    },
+    "right": 40,
+    "n": 40,
+    "accuracy": 1.0
+   },
+   "lessons_approved": [
+    "L-classification",
+    "L-posting",
+    "L-routing",
+    "L-materiality"
+   ],
+   "lessons_rejected_by_gate": [
+    "L-locked-means-estimate"
+   ],
+   "gate": {
+    "L-classification": {
+     "cases": 10,
+     "pass_before": 34,
+     "pass_after": 35,
+     "newly_failing": [],
+     "newly_passing": [
+      {
+       "case_id": "E01",
+       "claim": "classification"
+      }
+     ],
+     "passed": true
+    },
+    "L-posting": {
+     "cases": 10,
+     "pass_before": 35,
+     "pass_after": 38,
+     "newly_failing": [],
+     "newly_passing": [
+      {
+       "case_id": "E10",
+       "claim": "posting"
+      },
+      {
+       "case_id": "E09",
+       "claim": "posting"
+      },
+      {
+       "case_id": "E01",
+       "claim": "posting"
+      }
+     ],
+     "passed": true
+    },
+    "L-routing": {
+     "cases": 10,
+     "pass_before": 38,
+     "pass_after": 39,
+     "newly_failing": [],
+     "newly_passing": [
+      {
+       "case_id": "E16",
+       "claim": "routing"
+      }
+     ],
+     "passed": true
+    },
+    "L-locked-means-estimate": {
+     "cases": 10,
+     "pass_before": 39,
+     "pass_after": 37,
+     "newly_failing": [
+      {
+       "case_id": "E10",
+       "claim": "classification"
+      },
+      {
+       "case_id": "E09",
+       "claim": "classification"
+      }
+     ],
+     "newly_passing": [],
+     "passed": false
+    },
+    "L-materiality": {
+     "cases": 10,
+     "pass_before": 39,
+     "pass_after": 40,
+     "newly_failing": [],
+     "newly_passing": [
+      {
+       "case_id": "E20",
+       "claim": "materiality"
+      }
+     ],
+     "passed": true
+    }
+   },
+   "active_checks": [
+    "classify_by_knowable_at",
+    "materiality_full_framework",
+    "post_in_open_period",
+    "route_by_authority"
+   ],
+   "playbook_version": "v2"
+  },
+  "n_cases": 19,
+  "generated_at": "2026-10-24T11:14:37",
+  "seconds": 0.4
  }
 }

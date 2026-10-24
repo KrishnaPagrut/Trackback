@@ -379,6 +379,12 @@ def decide(action_id: str, d: Decision):
     except KeyError:
         raise HTTPException(404, "no such action")
     out: dict[str, Any] = {"approval_id": apr, "decision": d.decision}
+    if d.decision == "rejected":
+        a = db.q1("SELECT params_json FROM actions WHERE action_id=?", (action_id,))
+        cid = (json.loads(a["params_json"]).get("correction_id") if a and a["params_json"] else None)
+        if cid:
+            from . import lessons
+            out["lessons"] = [l["lesson_id"] for l in lessons.signal_rejection(cid, action_id, d.approver, d.reason, config.DEMO_NOW)]
     if d.decision == "approved":
         try:
             out["execution"] = corrections.execute_action(action_id, config.DEMO_NOW)
@@ -393,6 +399,75 @@ def fence_check(action_id: str):
     if a is None:
         raise HTTPException(404, "no such action")
     return {"action_id": action_id, "stale": fence.check(a["artifact_id"])}
+
+
+# ------------------------------------------------------------------ Jade and the lessons memory
+@router.get("/evaluations")
+def list_evaluations():
+    from . import review
+    return {"evaluations": [{k: e[k] for k in ("correction_id", "ts", "playbook_version", "headline", "recalled")} | {"summary": e["jade"].get("summary")} for e in review.load_all()]}
+
+
+@router.get("/evaluations/{correction_id}")
+def get_evaluation(correction_id: str):
+    from . import review
+    ev = review.load(correction_id)
+    if ev is None:
+        raise HTTPException(404, "no evaluation for that correction")
+    return ev
+
+
+@router.get("/lessons")
+def get_lessons():
+    from . import lessons
+    return {"lessons": lessons.all_lessons(), "playbook": lessons.playbook(), "events": [dict(r) for r in db.q("SELECT * FROM lesson_events ORDER BY seq")]}
+
+
+@router.get("/playbook")
+def get_playbook():
+    from . import lessons
+    return lessons.playbook()
+
+
+class LessonDecision(BaseModel):
+    approver: str
+
+
+@router.post("/lessons/{lesson_id}/gate")
+def run_gate(lesson_id: str):
+    from . import lessons
+    try:
+        return lessons.gate(lesson_id)
+    except KeyError:
+        raise HTTPException(404, "no such lesson")
+
+
+@router.post("/lessons/approve-pending")
+def approve_pending_lessons(d: LessonDecision):
+    from . import lessons
+    try:
+        out = lessons.approve_pending(d.approver, _live_ts())
+    except PermissionError as e:
+        raise HTTPException(403, str(e)) from e
+    return {"lessons": out, "playbook": lessons.playbook()}
+
+
+@router.post("/lessons/{lesson_id}/approve")
+def approve_lesson(lesson_id: str, d: LessonDecision):
+    from . import lessons
+    try:
+        return lessons.approve(lesson_id, d.approver, _live_ts())
+    except KeyError:
+        raise HTTPException(404, "no such lesson")
+    except PermissionError as e:
+        raise HTTPException(403, str(e)) from e
+
+
+def _live_ts() -> str:
+    """Live decisions happen after the newest event on the clock, so a lesson never applies backwards to the case it came from."""
+    last = db.q1("SELECT MAX(ts) t FROM events")
+    t = (last["t"] if last and last["t"] else db.norm_ts(config.DEMO_NOW))
+    return max(t, db.norm_ts(config.DEMO_NOW))
 
 
 # ------------------------------------------------------------------ norms

@@ -65,6 +65,22 @@ All nine states at both sizes render with content and zero console errors. `type
 | 8-deep-memento-april-10 | The scrubber at April 10 with the hatched "Not knowable" region and the stamp "REFUSED · published July 8 · decision time April 10". |
 | 9-proof | Six tiles from latest.json: ping precision and recall, false still_valid, over-invalidation vs B1, LLM calls vs rerun-all, Memento leaks, replay fidelity. |
 
+## Round 5 (V3 reconcile): Jade, lessons, hover
+
+Shots in `docs/screenshots/round-5` at both sizes: the nine DESIGN.md states plus `3b-stage-jade-overrules`, `3c-stage-lesson-learned`, `4b-stage-hover`, `7b-deep-jade`, `7c-deep-lessons`, `7d-deep-hover`.
+
+Critique and fixes:
+- Jade's card and the lesson card first rendered off-centre and cut at the right edge at 1280x720: the `drop-in` animation animates `transform`, which overrode the centring translate. Fixed by centring with a flex wrapper and leaving the card's transform to the animation. The OVERRULED stamp overlapped the headline at 1920; the headline now keeps 15% clear on the right.
+- The drawer grew to seven tabs and the last three scrolled out of a 420 px drawer. Labels shortened (Who built it, History, Approvals, Pings, Jade, Lessons, Norms) and tab padding trimmed by 1 px; all seven fit at 420 px.
+- Hover cards: one component for both modes (`HoverCard`), 320 px in Deep mode and up to 42% of the stage width in Stage mode, flipping above the pointer in the lower 40% of the screen, clamped to the container. Each reads: state and title, what happened in words (the reason vocabulary expanded to full sentences in `explain()`), the old and new value, the fix waiting and for whom, the owner and the hop count. Stage hover is suppressed while a ping bubble or Jade's card is up, so one thing moves at a time still holds.
+- First-time visitors: the title card now says what Space, hover and D do; the caption carries step dots so a judge knows how far through the story they are.
+- Stage stays headlines-only: Jade's card is two sentences and a stamp; the lesson card is the rule and three short cells (proposed from, gate, approved), plus one line for the lesson the gate rejected.
+
+Checklist additions:
+- [x] Jade's card and the lesson card fit at 1280x720 and 1920x1080 with no clipping; every number on them is read from `/api/evaluations/E11` and `/api/lessons`.
+- [x] Hover cards never leave the viewport and never cover the card they explain.
+- [x] The seven drawer tabs fit in 420 px.
+
 ## DESIGN.md quality checklist, final build
 
 - [x] Nothing looks like a default component library: every control is styled from the tokens (no shadcn or MUI).

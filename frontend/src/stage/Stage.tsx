@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { api, fmt, dayLabel } from '../api'
 import { title } from '../labels'
-import { LANES, stateOf, pingStory, reduceEdges, STATE_WORD, type State } from '../model'
-import { StatusIcon, RecallNotice, RefusalStamp, Envelope } from '../ui/primitives'
+import { LANES, stateOf, pingStory, reduceEdges, explain, STATE_WORD, type State } from '../model'
+import { StatusIcon, RecallNotice, RefusalStamp, Envelope, HoverCard } from '../ui/primitives'
 
 /* Stage mode: four lanes, about ten cards, one thing moves at a time, every step on a keypress.
    Space advances, Backspace goes back, R resets, T shows the Memento frame, K turns the kiosk loop off and on. */
@@ -30,7 +30,7 @@ const PRESETS: Preset[] = [
     apply: async () => { const id = await findClaim('utilities', c => c.source_id === 'utilities_invoices_2026_q1' && c.entity === 'G4' && (c.period_start || '').startsWith('2026-03'), 'c_1e06a73f530f'); const r = await api.postCorrection({ claim_id: id, new_value: 40000, correction_type: 'revised_invoice', knowable: 'before', note: 'kiosk: utilities invoice' }); return r.correction_id } },
 ]
 
-type Data = { graph: any; pings: any[]; comps: Record<string, any>; counts: any; total: number; stale: number; compsWaiting: number; calc: { label: string; old: number; new: number; line: string; crosses?: number } | null }
+type Data = { graph: any; pings: any[]; comps: Record<string, any>; counts: any; total: number; stale: number; compsWaiting: number; calc: { label: string; old: number; new: number; line: string; crosses?: number } | null; evaluation: any | null; pendingLessons: number }
 
 export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initialStep, onCorrection, active = true, correction }: { world: any; onReset: () => Promise<void>; kioskEnabled: boolean; idleSeconds: number; initialStep?: number; onCorrection?: (c: string) => void; active?: boolean; correction?: string | null }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -48,6 +48,10 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   const [paste, setPaste] = useState<string | null>(null)
   const [pasteMsg, setPasteMsg] = useState<string | null>(null)
   const [fly, setFly] = useState<{ x: number; y: number; to: string } | null>(null)
+  const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null)
+  const [learned, setLearned] = useState<any>(null)        // the Controller's review of the pending lessons, once per correction
+  const [people, setPeople] = useState<Record<string, string>>({})
+  useEffect(() => { api.state().then(st => setPeople(st.people || {})).catch(() => null) }, [])
   const idle = useRef<number | undefined>(undefined)
   const auto = useRef<number | undefined>(undefined)
   const [jumpEnd, setJumpEnd] = useState(false)
@@ -60,7 +64,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
 
   // ------------------------------------------------ data for a correction
   const load = useCallback(async (c: string) => {
-    const [g, p, ap, arts] = await Promise.all([api.graph('tidewall', c), api.pings(c), api.approvals(), api.artifacts('tidewall')])
+    const [g, p, ap, arts, evaluation, ls] = await Promise.all([api.graph('tidewall', c), api.pings(c), api.approvals(), api.artifacts('tidewall'), api.evaluation(c).catch(() => null), api.lessons().catch(() => null)])
     const comps: Record<string, any> = {}; let waiting = 0
     ap.actions.forEach((a: any) => { if (a.params?.compensates && a.run_id === `correction:${c}`) { comps[a.params.compensates.replace(/^ACT-/, '')] = a; if (a.state === 'proposed') waiting++ } })
     const inv = g.nodes.filter((n: any) => n.verdict === 'invalidated' && (n.kind === 'number') && n.old_value != null && n.new_value != null)
@@ -70,7 +74,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
     else if (inv.length) { const m: any = [...inv].sort((a: any, b: any) => Math.abs(b.new_value - b.old_value) / (Math.abs(b.old_value) || 1) - Math.abs(a.new_value - a.old_value) / (Math.abs(a.old_value) || 1))[0]; calc = { label: `${title(m)} recomputed`, old: m.old_value, new: m.new_value, line: m.line_item } }
     const findingIds = new Set(g.nodes.filter((n: any) => n.verdict === 'invalidated').map((n: any) => n.id))
     const stale = arts.artifacts.filter((a: any) => findingIds.has(a.artifact_id) && String(a.badge).startsWith('STALE')).length
-    setData({ graph: g, pings: p.pings, comps, counts: g.counts, total: g.nodes.filter((n: any) => n.type === 'artifact').length, stale, compsWaiting: waiting, calc })
+    setData({ graph: g, pings: p.pings, comps, counts: g.counts, total: g.nodes.filter((n: any) => n.type === 'artifact').length, stale, compsWaiting: waiting, calc, evaluation, pendingLessons: ls ? ls.lessons.filter((l: any) => l.status === 'proposed').length : 0 })
   }, [])
 
   useEffect(() => {
@@ -83,9 +87,11 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   const steps: string[] = useMemo(() => {
     const head = ['title', 'reveal', 'recall']
     if (!corr || !data) return head
-    return [...head, 'calc', ...pingAgents.map(a => `ping:${a}`), ...pingAgents.map(a => `reply:${a}`), 'payoff']
+    const over = data.evaluation?.jade?.summary?.overruled > 0
+    const tail = [...(over ? ['review'] : []), ...(over || data.pendingLessons > 0 ? ['learn'] : []), 'payoff']
+    return [...head, 'calc', ...pingAgents.map(a => `ping:${a}`), ...pingAgents.map(a => `reply:${a}`), ...tail]
   }, [corr, data, pingAgents])
-  useEffect(() => { if (jumpEnd && steps.length > 4) { setStep(steps.length - 2); setLayers(4); setJumpEnd(false) } }, [jumpEnd, steps.length])
+  useEffect(() => { if (jumpEnd && steps.length > 4) { setStep(Math.max(3, steps.indexOf(`reply:${pingAgents[pingAgents.length - 1]}`))); setLayers(4); setJumpEnd(false) } }, [jumpEnd, steps.length])  // eslint-disable-line react-hooks/exhaustive-deps
   const cur = steps[Math.min(step, steps.length - 1)]
   const idx = (s: string) => steps.indexOf(s)
   const after = (s: string) => idx(s) >= 0 && step >= idx(s)
@@ -110,9 +116,15 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   }, [cur, layers, corr, drop, steps.length])
   const back = useCallback(() => setStep(s => Math.max(0, s - 1)), [])
   const reset = useCallback(async () => {
-    window.clearTimeout(auto.current); setMemento(null); setCorr(null); setData(null); setStep(0); setLayers(0); setPreset(PRESETS[0])
+    window.clearTimeout(auto.current); setMemento(null); setCorr(null); setData(null); setStep(0); setLayers(0); setPreset(PRESETS[0]); setLearned(null); setHover(null)
     await onReset()
   }, [onReset])
+
+  // the lesson beat: the Controller's one-click review of everything proposed (gate, then approve), once per correction
+  useEffect(() => {
+    if (cur !== 'learn' || !corr || learned?.for === corr) return
+    api.approvePendingLessons(people.controller || 'Dana Ortiz').then(r => setLearned({ for: corr, ...r })).catch(e => setLearned({ for: corr, error: String(e) }))
+  }, [cur, corr])  // eslint-disable-line react-hooks/exhaustive-deps
 
   // the envelope flies from the calc line to the agent's identity card on each ping step
   useEffect(() => {
@@ -166,7 +178,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   // autoplay while attracting: a readable pace, then loop
   useEffect(() => {
     if (kiosk !== 'attract') return
-    const dwell: Record<string, number> = { title: 4500, reveal: 10500, recall: 3500, calc: 3500, payoff: 8000 }
+    const dwell: Record<string, number> = { title: 4500, reveal: 10500, recall: 3500, calc: 3500, review: 8000, learn: 8000, payoff: 8000 }
     const ms = cur.startsWith('ping:') ? 4500 : cur.startsWith('reply:') ? 5000 : dwell[cur] ?? 4000
     auto.current = window.setTimeout(async () => {
       if (cur === 'payoff') { await reset(); setKiosk('attract'); return }
@@ -238,7 +250,8 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   const caption = (() => {
     if (kiosk === 'attract') return { left: 'Three AI agents built on one number. Watch what happens when it is corrected.', right: 'Press any key to try it' }
     const hint = 'Space next · Backspace back · T time travel · R reset · D deep mode'
-    const m: Record<string, string> = { title: 'Press Space to begin.', reveal: 'Each agent builds on what the one before it made.', recall: 'The source admits it was wrong.', calc: 'Trackback recomputes every number itself. No agent is asked about arithmetic.', payoff: '' }
+    const m: Record<string, string> = { title: 'Press Space to begin.', reveal: 'Each agent builds on what the one before it made.', recall: 'The source admits it was wrong.', calc: 'Trackback recomputes every number itself. No agent is asked about arithmetic.',
+      review: 'A second AI reviews the first. Jade recomputes every judgment call from the engines, and overrules.', learn: 'The mistake becomes a lesson: re-run against every past case, approved by the Controller, applied from now on.', payoff: '' }
     if (cur.startsWith('ping:')) return { left: `Trackback pings the ${LANES.tidewall.find(x => x.id === cur.slice(5))?.name}, once, about only what it used.`, right: hint }
     if (cur.startsWith('reply:')) return { left: `The ${LANES.tidewall.find(x => x.id === cur.slice(6))?.name} answers in its own words.`, right: hint }
     return { left: m[cur] ?? '', right: hint }
@@ -251,13 +264,14 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
       {cur === 'title' && <div className="title-card">
         <h1>May 15: Tidewall's CFO told its lender leverage was {cert ? fmt(cert.old_value ?? cert.value, 'leverage') : '2.95x'}.</h1>
         <p>Three AI agents built on that number.</p>
+        <p style={{ fontSize: 'clamp(16px, 1.2vw, 24px)', marginTop: '2vh' }}><span className="kbd" style={{ fontSize: '0.9em' }}>Space</span> steps through the story · hover any card to see what happened to it · <span className="kbd" style={{ fontSize: '0.9em' }}>D</span> for the full ledger</p>
       </div>}
 
       {/* lanes */}
       {cur !== 'title' && STAGE_LANES.map((l, i) => {
         const lane = LANES.tidewall.find(x => x.id === l)!
         const vis = laneVisible(l)
-        const dim = (!!focusLane && focusLane !== l && l !== 'sources') || cur === 'payoff'
+        const dim = (!!focusLane && focusLane !== l && l !== 'sources') || cur === 'payoff' || cur === 'review' || cur === 'learn'
         return <div key={l} className={`lane ${dim ? 'dim' : ''}`} style={{ top: g.laneTop(i), height: g.laneH, opacity: vis ? undefined : 0.08 }}>
           <div className="id-card" style={{ opacity: vis ? 1 : 0, transition: 'opacity 300ms ease-out' }}>
             <div className="av">{lane.mono}</div>
@@ -285,7 +299,8 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
         const comp = data?.comps[id]
         const vis = laneVisible(l)
         const dim = (!!focusLane && focusLane !== l && l !== 'sources') && !(cur.startsWith('ping:') && false)
-        return <div key={id} className={`snode ${st === 'idle' || st === 'pending' ? '' : st} ${vis ? '' : 'hidden'}`} style={{ left: g.colX(k), top: g.laneTop(li) + g.laneH / 2 + (cur === 'reveal' ? 10 : 0), transform: 'translateY(-50%)', width: g.nodeW, zIndex: 2, opacity: dim ? 0.35 : undefined, transitionDelay: cur === 'reveal' ? `${k * 250}ms` : undefined }}>
+        return <div key={id} className={`snode ${st === 'idle' || st === 'pending' ? '' : st} ${vis ? '' : 'hidden'}`} style={{ left: g.colX(k), top: g.laneTop(li) + g.laneH / 2 + (cur === 'reveal' ? 10 : 0), transform: 'translateY(-50%)', width: g.nodeW, zIndex: 2, opacity: dim ? 0.35 : undefined, transitionDelay: cur === 'reveal' ? `${k * 250}ms` : undefined }}
+          onMouseEnter={e => { const r = ref.current?.getBoundingClientRect(); setHover({ id, x: e.clientX - (r?.left || 0), y: e.clientY - (r?.top || 0) }) }} onMouseLeave={() => setHover(null)}>
           <span className="ic"><StatusIcon state={st} size={Math.round(g.icon)} /></span>
           <div className={`tt ${n.kind === 'sentence' ? 'prose' : ''}`}>{n.type === 'source' && n.id === 'billing_export_2026_03' ? 'Billing export, March' : n.kind === 'sentence' ? `“${title(n, 72)}”` : title(n, 40)}</div>
           {n.type === 'source' ? <div className="vv" style={{ fontSize: 'clamp(16px, 1.15vw, 24px)' }}>{st === 'invalidated' ? <span style={{ color: 'var(--recall)' }}>{n.id === 'billing_export_2026_03' ? 'v2: corrected' : 'Source corrected'}</span> : n.id === 'billing_export_2026_03' ? 'v1 · captured Apr 9' : `${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'}`}</div>
@@ -332,11 +347,43 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
         </div>
       })()}
 
+      {/* hover: what happened to this card, in words */}
+      {hover && node(hover.id) && cur !== 'title' && !focusLane && <HoverCard big e={explain(node(hover.id), nodeState(hover.id), data?.comps[hover.id])} x={hover.x} y={hover.y} box={{ w: size.w, h: size.h }} />}
+
+      {/* Jade overrules */}
+      {cur === 'review' && data?.evaluation && (() => { const ev = data.evaluation; const h = ev.headline || {}; const over = ev.jade?.summary?.overruled || 0
+        return <div className="jade-wrap"><div className="jade" role="dialog" aria-label="Jade's review">
+          <div className="kicker">Second opinion · Jade reviews the agent's call</div>
+          <h2>{h.claim === 'materiality' ? 'The agent said it was immaterial. Jade read the whole graph.' : h.claim === 'classification' ? 'The agent called it an error. Jade checked when the fact existed.' : h.claim === 'routing' ? 'The agent sent it to the Controller. Jade read the approval matrix.' : 'The agent dated it into a locked period. Jade checked the locks.'}</h2>
+          <div className="cols">
+            <div className="col agent"><div className="who">Agent · playbook {ev.playbook_version}</div>{h.agent}</div>
+            <div className="col jade-says"><div className="who">Jade · overruled</div>{h.jade}</div>
+          </div>
+          <div className="foot"><span>{4 - over} of 4 claims approved · {over} overruled{over > 1 ? `: ${ev.jade.summary.overruled_claims.join(', ')}` : ''}</span><span>{ev.recalled?.length ? `recalled ${ev.recalled.map((r: any) => r.lesson_id).join(', ')} from memory` : 'nothing like it in memory yet'}</span></div>
+          <div className="stampwrap"><span className="stamp stamp-in">OVERRULED</span></div>
+        </div></div> })()}
+
+      {/* the lesson */}
+      {cur === 'learn' && (() => { const ls: any[] = learned?.lessons || []; const ok = ls.filter(l => l.status === 'active'); const bad = ls.filter(l => l.status === 'rejected_by_gate'); const first = ok[0]; const g = first?.gate
+        return <div className="jade-wrap"><div className="jade lesson-card" role="dialog" aria-label="Lesson learned">
+          <div className="kicker">Learning · {learned ? `${ok.length} lesson${ok.length === 1 ? '' : 's'} learned, ${bad.length} rejected by the gate` : 'the Controller is reviewing the proposed lessons…'}</div>
+          {first ? <>
+            <div className="rule">“{first.rule}”</div>
+            <div className="steps">
+              <div className="step"><b>Proposed from</b>{first.cases.join(', ')} · by {String(first.proposed_by).replace('human:', '').replace(/^jade$/, 'Jade')}</div>
+              <div className="step ok"><b>Regression gate</b>{g ? `${g.pass_after} of ${g.claims} past claims pass · ${g.newly_failing.length} newly failing · ${g.newly_passing.length} newly passing` : '…'}</div>
+              <div className="step ok"><b>Approved</b>{first.approved_by} · playbook {learned.playbook?.version} from now on, never backwards</div>
+            </div>
+            {bad.length > 0 && <div className="steps" style={{ gridTemplateColumns: '1fr' }}><div className="step no"><b>Rejected by the gate</b>“{bad[0].rule}” — {bad[0].gate?.newly_failing?.slice(0, 3).map((x: any) => x.case_id).join(', ')} would flip.</div></div>}
+          </> : learned?.error ? <div className="rule" style={{ color: 'var(--recall)' }}>{learned.error}</div> : learned ? <div className="rule">Nothing new to learn: every lesson for this case is already active.</div> : null}
+        </div></div> })()}
+
       {/* the payoff */}
       {cur === 'payoff' && data && <div className="payoff">
         <div className="big num" style={{ fontFamily: 'var(--serif)' }}>{data.pings.reduce((a: number, p: any) => a + (p.n_items || 0), 0)} of {data.total}</div>
         <div className="bigsub">pieces of work needed an agent to look. Trackback checked the rest itself.</div>
         <div className="line">{pingAgents.length} of 3 agents needed to act · {data.compsWaiting} action{data.compsWaiting === 1 ? '' : 's'} waiting for a human · {data.stale} things left stale</div>
+        {data.evaluation && <div className="line" style={{ marginTop: '1.2vh' }}>Jade overruled {data.evaluation.jade?.summary?.overruled || 0} of 4 calls · {(learned?.lessons || []).filter((l: any) => l.status === 'active').length} lesson{(learned?.lessons || []).filter((l: any) => l.status === 'active').length === 1 ? '' : 's'} learned · playbook {learned?.playbook?.version || data.evaluation.playbook_version}</div>}
         <div className="tag">Trackback traces any correction forward.</div>
       </div>}
 
@@ -371,7 +418,9 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
         </div>
       </div>}
 
-      <div className="caption"><span>{caption.left}</span><span className="muted" style={{ whiteSpace: 'nowrap' }}>{kiosk === 'attract' ? caption.right : `${caption.right}`}</span></div>
+      <div className="caption"><span>{caption.left}</span><span className="muted" style={{ whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center' }}>
+        {cur !== 'title' && kiosk !== 'attract' && <span className="stepdots" aria-label={`step ${step + 1} of ${steps.length}`}>{steps.map((st, i) => <i key={st} className={i === step ? 'on' : i < step ? 'done' : ''} />)}</span>}
+        {kiosk === 'attract' ? caption.right : `${caption.right}`}</span></div>
     </div>
   )
 }

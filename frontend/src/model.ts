@@ -139,3 +139,50 @@ export function compText(comp: any, t: string): string {
   if (k === 'position_review') return 'the filled order goes to the PM for review'
   return `${t}: ${k.replace(/_/g, ' ')}`
 }
+
+/* ---------------------------------------------------------------- hover: what happened to this card, in two lines */
+const LONG: Record<string, string> = {
+  value_changed: 'a number it rests on changed, so Trackback recomputed it from its own formula. No agent was asked about the arithmetic.',
+  conclusion_flipped: 'the conclusion it states no longer holds at the new value.',
+  prose_judged: 'the sentence states something that is no longer true.',
+  rerendered: 'the figure it cites moved, so Trackback updated the figure in place. The claim itself still holds.',
+  claim_unchanged: 'it never read the rows that changed.',
+  different_period: 'it covers a different period.',
+  different_line_item: 'it reads a different line.',
+  below_materiality: 'it moved by less than the threshold in the materiality memo.',
+  conclusion_unchanged: 'the number underneath moved, but the conclusion it states still holds.',
+  early_cutoff: 'the change was too small to carry any further.',
+  estimate_change: 'this was a change in estimate: closed periods stay as booked (ASC 250).',
+  fields_not_read: 'it did not read the field that changed.',
+  supporters_cleared: 'everything it rests on cleared.',
+  parameters_within_materiality: 'it stayed within tolerance.',
+  supporter_retracted: 'a source it rests on was retracted; nothing can prove it until a replacement arrives.',
+  compensation_proposed: 'it already went out, so it cannot be un-done: a fix is proposed for a person to approve.',
+}
+export type Explain = { head: string; tone: State; lines: string[] }
+export function explain(n: any, st: State, comp?: any): Explain {
+  const t = title(n, 90)
+  const who = n.type === 'source' ? (n.system || 'source').replace(/_/g, ' ') : n.agent_id ? (agentLane('tidewall', n.agent_id) || agentLane('lyft', n.agent_id))?.name || n.agent_id : 'Trackback'
+  const lines: string[] = []
+  if (n.type === 'source') {
+    if (n.corrected) return { head: 'Source corrected', tone: 'invalidated', lines: [`${t}: the recall notice replaced the version the agents read with a corrected one.`, `${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'} · ${who}`] }
+    return { head: t, tone: 'idle', lines: [`A ${who} document the agents read. ${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'}, each pinned to the moment it was captured.`] }
+  }
+  const moved = n.old_value != null && n.new_value != null && n.old_value !== n.new_value
+  const what = n.kind === 'sentence' ? 'This sentence' : n.kind === 'action' ? 'This action' : n.kind === 'forecast_cell' ? 'This forecast cell' : 'This number'
+  if (st === 'idle' || !n.verdict) {
+    lines.push(`${what} was built by the ${who}${n.period ? ` for ${n.period}` : ''}${n.kind !== 'sentence' && n.value != null ? `: ${fmt(n.value, n.line_item)}` : ''}.`)
+    if (n.kind === 'sentence' && n.content) lines.push(`“${n.content.replace(/\s*\(corrected[^)]*\)/g, '').slice(0, 140)}”`)
+    lines.push('Not touched by the current correction.' + (n.verdict === null && n.kind !== 'action' ? ' Click for who built it, on top of whom.' : ''))
+    return { head: t, tone: 'idle', lines }
+  }
+  const reason = LONG[n.reason] || reasonText(n.reason)
+  if (st === 'invalidated') { lines.push(`Wrong now: ${reason}`); if (moved) lines.push(`${fmt(n.old_value, n.line_item)} → ${fmt(n.new_value, n.line_item)}`) }
+  else if (st === 'caution') { lines.push(n.kind === 'action' ? `Needs a human: this already went out${moved ? ` resting on ${fmt(n.old_value, n.line_item)}, now ${fmt(n.new_value, n.line_item)}` : ''}.` : `Needs a human: ${reason}`); if (comp) lines.push(`Fix proposed: ${compText(comp, t)}, waiting for ${(comp.approver_role || 'the Controller').replace('cfo', 'the CFO').replace('controller', 'the Controller').replace('hr', 'HR').replace('vp_sales', 'VP Sales').replace('+', ' and ')}.`) }
+  else if (st === 'reworked') { lines.push(`Reworked by its owner: the figure it cited moved${moved ? ` (${fmt(n.old_value, n.line_item)} → ${fmt(n.new_value, n.line_item)})` : ''}.`); if (n.rewrite) lines.push(`Now reads: “${String(n.rewrite).slice(0, 150)}”`) }
+  else if (st === 'skipped') lines.push(`Skipped without a ping: ${reason}`)
+  else if (st === 'cleared') lines.push(`Still valid: ${reason}` + (moved ? ` (${fmt(n.old_value, n.line_item)} → ${fmt(n.new_value, n.line_item)})` : ''))
+  else if (st === 'pending') lines.push('Pinged: its owner is re-checking it against the corrected inputs.')
+  lines.push(`${who}${n.hop != null && n.hop >= 0 ? ` · ${n.hop} hop${n.hop === 1 ? '' : 's'} from the correction` : ''}`)
+  return { head: `${STATE_WORD[st]} · ${t}`, tone: st, lines }
+}

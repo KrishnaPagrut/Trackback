@@ -67,6 +67,16 @@ def approve_compensations(correction_id: str, ts: str, approver_map: dict[str, s
         approve_and_execute(a["action_id"], approver, ts, f"compensation for {correction_id}", second=second)
 
 
+def learn(lesson_id: str, ts: str) -> None:
+    """The Controller reviews a proposed lesson: the regression gate runs, then she approves it (prospective from ts)."""
+    from trackback import lessons
+    if lessons.get(lesson_id) is None:
+        say(f"   lesson {lesson_id} was not proposed (no overrule to learn from)"); return
+    l = lessons.approve(lesson_id, CONTROLLER, ts)
+    g = l.get("gate") or {}
+    say(f"   lesson {lesson_id} {l['status']}: gate {g.get('pass_after')}/{g.get('claims')} claims pass, {len(g.get('newly_failing', []))} newly failing, {len(g.get('newly_passing', []))} newly passing")
+
+
 def main() -> None:
     mode = gateway.mode()
     say(f"== build_history in {mode} mode")
@@ -83,6 +93,7 @@ def main() -> None:
     say("   Q1 locked (2026-01..03) by the Controller")
     # ---- E01, E07 (estimate changes, April)
     correct("E01"); run(wo.fu_e01); approve_pending_jes("FU_E01", "2026-04-12T11:00:00-07:00")
+    learn("L-classification", "2026-04-14T09:00:00-07:00")   # Jade overruled the agent's 'error' call on E01 (invoice arrived after the close)
     correct("E07"); run(wo.fu_e07); approve_pending_jes("FU_E07", "2026-04-20T13:00:00-07:00")
     # ---- covenant calc, board deck, certificate
     run(wo.r3a_q1_covenant_calc)
@@ -119,6 +130,7 @@ def main() -> None:
     correct("E08")
     run(wo.r9_commissions); approve_and_execute("ACT-commission_payout_0620", VP, "2026-06-20T09:00:00-07:00", "June payroll", second=CONTROLLER)
     correct("E16"); approve_compensations("E16", "2026-06-22T11:00:00-07:00", roles)
+    learn("L-routing", "2026-06-23T09:00:00-07:00")          # Jade flagged the retraction notice routed to the Controller instead of AP
     correct("E13"); approve_compensations("E13", "2026-06-24T11:00:00-07:00", roles)
     # ---- norms mined June 30: N2 (Pacific Lumen) approved; N1 (Bayline winter factor) proposed, approved July 1
     m2 = norms.mine_short_pay("pacific_lumen_history", "Pacific Lumen Labs")

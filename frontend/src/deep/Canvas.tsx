@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ReactFlow, Background, BackgroundVariant, Controls, MiniMap, Handle, Position, useReactFlow, type Node, type Edge } from '@xyflow/react'
-import { type GraphEdge } from '../api'
-import { fmt } from '../api'
-import { LANES, laneOf, stateOf, reduceEdges, nodeTitle, reasonText, STATE_WORD, type State } from '../model'
-import { Lot, StatusIcon, Monogram, Envelope } from '../ui/primitives'
+import { api, fmt, type GraphEdge } from '../api'
+import { LANES, laneOf, stateOf, reduceEdges, nodeTitle, reasonText, explain, STATE_WORD, type State } from '../model'
+import { Lot, StatusIcon, Monogram, Envelope, HoverCard } from '../ui/primitives'
 import { TITLES } from '../labels'
 
 /* Deep mode canvas: horizontal swimlanes, ledger cards, the ripple 150 ms per hop, envelopes to each pinged lane. */
@@ -20,8 +19,9 @@ function CardNode({ data }: { data: any }) {
   const val = n.kind === 'sentence' || n.type === 'source' || n.value == null ? '' : fmt(n.value, n.line_item)
   const word = st === 'idle' ? (n.type === 'source' ? (n.system || 'source').replace(/_/g, ' ') : '') : st === 'skipped' ? 'skipped, no change' : `${STATE_WORD[st].toLowerCase()}${n.reason && st !== 'reworked' ? ' · ' + reasonText(n.reason) : ''}`
   const h = (id: string, pos: Position, type: 'source' | 'target') => <Handle id={id} type={type} position={pos} style={{ opacity: 0, width: 4, height: 4 }} />
-  return <div className={`dcard nopan nodrag ${st === 'idle' ? '' : st} ${data.selected ? 'selected' : ''} ${data.dim ? 'dim' : ''} ${data.lit ? 'lit' : ''}`} title={n.content || t}
-    role="button" tabIndex={0} onPointerUp={e => { e.stopPropagation(); data.onPick?.() }} onKeyDown={e => { if (e.key === 'Enter') data.onPick?.() }}>
+  return <div className={`dcard nopan nodrag ${st === 'idle' ? '' : st} ${data.selected ? 'selected' : ''} ${data.dim ? 'dim' : ''} ${data.lit ? 'lit' : ''}`}
+    role="button" tabIndex={0} onPointerUp={e => { e.stopPropagation(); data.onPick?.() }} onKeyDown={e => { if (e.key === 'Enter') data.onPick?.() }}
+    onMouseEnter={e => data.onHover?.(n, st, e.clientX, e.clientY)} onMouseMove={e => data.onHover?.(n, st, e.clientX, e.clientY)} onMouseLeave={() => data.onHover?.(null)}>
     {h('l', Position.Left, 'target')}{h('t', Position.Top, 'target')}{h('tb', Position.Bottom, 'target')}{h('r', Position.Right, 'source')}{h('b', Position.Bottom, 'source')}{h('bt', Position.Top, 'source')}
     <div className="r1"><Lot code={n.lot || (n.members ? `${n.members.length}×` : null)} /><StatusIcon state={st} size={17} /></div>
     <div className={`tt ${n.kind === 'sentence' ? 'prose' : ''}`}>{n.kind === 'sentence' ? `“${t}”` : t}</div>
@@ -120,6 +120,14 @@ export default function Canvas({ company, correction, data, pings, selected, onS
   const [hop, setHop] = useState(99)
   const [env, setEnv] = useState<{ lane: string; at: 'tb' | 'lane'; postmark: string } | null>(null)
   const [arrived, setArrived] = useState<Set<string>>(new Set())
+  const [hover, setHover] = useState<{ n: any; st: State; x: number; y: number } | null>(null)
+  const [comps, setComps] = useState<Record<string, any>>({})
+  useEffect(() => { if (!correction) { setComps({}); return } api.approvals().then(d => { const m: Record<string, any> = {}; d.actions.forEach((a: any) => { if (a.params?.compensates && a.run_id === `correction:${correction}`) m[a.params.compensates.replace(/^ACT-/, '')] = a }); setComps(m) }).catch(() => null) }, [correction, pings.length])
+  const onHover = useCallback((n: any, st?: State, cx?: number, cy?: number) => {
+    if (!n) { setHover(null); return }
+    const el = document.querySelector('.deep-wrap') as HTMLElement | null; const r = el?.getBoundingClientRect()
+    setHover({ n, st: st!, x: (cx || 0) - (r?.left || 0), y: (cy || 0) - (r?.top || 0) })
+  }, [])
   const lanes = LANES[company]
   const pingedNodes = useMemo(() => new Set<string>(pings.flatMap((p: any) => (p.items || []).map((i: any) => i.artifact_id))), [pings])
   const pingedLanes = useMemo(() => pings.map((p: any) => p.target_agent_id), [pings])
@@ -182,7 +190,7 @@ export default function Canvas({ company, correction, data, pings, selected, onS
         const st: State = correction ? (n.verdict && (n.hop ?? 0) <= hop ? stateOf(n, pingedNodes) : n.comp && hop >= 99 ? 'caution' : 'idle') : 'idle'
         const dim = !!trace && !trace.has(n.id) && n.id !== selected && !(n.members && n.members.some((m: string) => trace.has(m)))
         rf.push({ id: n.id, type: 'card', position: { x: X0 + c * COLW, y: laneY[i] + (LANE_H - CARD_H) / 2 }, width: 208, height: CARD_H, draggable: false,
-          data: { n, state: st, selected: selected === n.id || (n.members && n.members.includes(selected)), dim, lit: correction && n.verdict && (n.hop ?? 0) === hop, onPick: () => onSelect(n.members ? n.members[0] : n.id) } })
+          data: { n, state: st, selected: selected === n.id || (n.members && n.members.includes(selected)), dim, lit: correction && n.verdict && (n.hop ?? 0) === hop, onPick: () => onSelect(n.members ? n.members[0] : n.id), onHover } })
       })
     })
     // an empty band under the last lane: the minimap and the zoom controls live there, so they never cover a card
@@ -203,10 +211,12 @@ export default function Canvas({ company, correction, data, pings, selected, onS
       rf.push({ id: 'env', type: 'env', width: 150, height: 30, position: env.at === 'tb' ? { x: RAIL - 60, y: laneY[ti] + laneH[ti] - 34 } : { x: RAIL - 60, y: laneY[li] + laneH[li] - 34 }, draggable: false, selectable: false, zIndex: 20, className: 'env-node', data: { postmark: env.postmark } })
     }
     return { nodes: rf, edges: es, size: { w: width, h: laneY[laneY.length - 1] + laneH[laneH.length - 1] + 100 } }
-  }, [data, company, correction, pings, pingedNodes, hop, env, arrived, selected, trace, lanes, onLaneMore])
+  }, [data, company, correction, pings, pingedNodes, hop, env, arrived, selected, trace, lanes, onLaneMore, onHover])
 
   if (!data) return <div className="muted" style={{ padding: 24 }}>Loading the ledger…</div>
+  const box = (document.querySelector('.deep-wrap') as HTMLElement | null)?.getBoundingClientRect()
   return (
+    <div className="deep-wrap" style={{ position: 'absolute', inset: 0 }}>
     <ReactFlow className="deep-canvas" key={`${company}:${correction || 'none'}`} nodes={nodes} edges={edges} nodeTypes={nodeTypes} minZoom={0.3} maxZoom={1.8}
       nodesConnectable={false} onPaneClick={() => onSelect(null)} proOptions={{ hideAttribution: true }}>
       <AutoFit w={size.w} h={size.h} sig={`${company}:${correction || 'none'}`} />
@@ -214,5 +224,7 @@ export default function Canvas({ company, correction, data, pings, selected, onS
       <MiniMap position="bottom-right" pannable zoomable nodeColor={(n: any) => n.type === 'lane' || n.type === 'spacer' ? 'transparent' : n.data?.state === 'invalidated' ? '#C62828' : n.data?.state === 'caution' ? '#B26A00' : n.data?.state === 'reworked' ? '#1F5FBF' : n.data?.state === 'cleared' ? '#2E7D32' : '#6B675F'} maskColor="rgba(247,244,238,0.6)" style={{ width: 150, height: 76, margin: 12 }} />
       <Controls position="bottom-right" showInteractive={false} orientation="horizontal" style={{ marginRight: 176, marginBottom: 12 }} />
     </ReactFlow>
+    {hover && <HoverCard e={explain(hover.n.members ? { ...hover.n, id: hover.n.members[0] } : hover.n, hover.st, comps[hover.n.id])} x={hover.x} y={hover.y} box={{ w: box?.width || 1200, h: box?.height || 600 }} />}
+    </div>
   )
 }

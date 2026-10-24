@@ -1,7 +1,7 @@
 # STATUS.md
 
 ## Current phase
-Built to SPEC.md Part 1, amended by SPEC_ITERATION_2.md, with the frontend following DESIGN.md. The canonical world is built in scripted mode with 193 recorded Claude responses reused where their cache keys match; a full record-mode rebuild is blocked on API credits (see "Needs Krishna"). The demo runs offline in replay mode from `data/snapshots/canonical.sqlite`.
+V3 reconciled onto the verified build (Oct 24): Jade the reviewer, the lessons memory with recall and a regression gate, hover explanations on every card, a Jade beat and a lesson beat in Stage mode, Jade and Lessons tabs in Deep mode, Jade and learning numbers on the proof page. Built to SPEC.md Part 1, amended by SPEC_ITERATION_2.md, with the frontend following DESIGN.md; the V3 spec's reviewer, lessons and judge doors are grafted onto this world rather than the 48-gym rewrite (DECISIONS.md, Oct 24). The canonical world is built in scripted mode with 193 recorded Claude responses reused where their cache keys match; a full record-mode rebuild is blocked on API credits (see "Needs Krishna"). The demo runs offline in replay mode from `data/snapshots/canonical.sqlite`.
 
 ## Definition of done
 
@@ -17,22 +17,28 @@ From SPEC.md Part 1 section 14, SPEC_ITERATION_2 section 17 and the goal brief. 
 - [x] The Real world tab passes. Per Krishna's decision, Lyft's February 13, 2024 "500 basis points" release replaces Monolithic Power: the release is blocked before publishing (states 500, cites 50), the real correction pings the two outside agents, and fixes are proposed for the filled order and the published story. Proof: `make check`.
 - [x] The proof page shows real eval numbers and both key hashes: ping precision and recall, false still_valid, unnecessary rework, inspection fraction, LLM calls versus rerun-all, over-invalidation versus B1, Memento leaks, replay fidelity. Proof: `make eval` writes `data/eval/latest.json`; every tile reads from it.
 - [x] The core never imports or names the finance pack. Proof: `grep -r "domains" backend/trackback/core` prints nothing; the registry loads packs from `config.PACK_MODULES`.
-- [x] `make test` exits 0 (27 tests).
+- [x] `make test` exits 0 (31 tests).
+- [x] V3: Jade reviews every correction and overrules the agent's "immaterial" call on E11 with the real numbers; the overrule and the Controller's rejection propose lessons; the regression gate passes the narrow lessons and rejects the broad one; only the Controller can approve (an agent gets 403); the playbook reaches v2. Proof: `make check` (nine Jade/lessons checks) and `backend/tests/test_v3_jade_lessons.py`.
+- [x] V3: `make eval` writes the `learning` block (Jade catch rate and false-overrule rate; held-out v1 vs v2; lessons approved and rejected) and the proof page reads it. Proof: `backend/scripts/eval_learning.py`.
+- [x] V3: hover on any card in Stage or Deep mode shows what happened to it in words (`explain()` in `frontend/src/model.ts`); Stage mode shows the Jade card and the lesson card between the replies and the payoff; step dots in the caption. Proof: `docs/screenshots/round-5`.
 - [x] Design: `/styleguide` exists; Stage mode is the default and runs title card → layered reveal → recall notice → ripple → replies → payoff from keypresses alone, with the payoff numbers read from the run; `D` toggles to Deep mode and back without losing state; the kiosk attract loop starts after 60 s idle and hands control to a visitor on any input; the 40-cent preset shows zero pings. Proof: `backend/scripts/kiosk_check.py` (all checks pass).
 - [x] Screenshots of DESIGN.md's nine states at 1280x720 and 1920x1080 in `docs/screenshots/round-1` to `round-4`, with 25% copies of the Stage shots; written critique and fixes per round in `docs/design-review.md`. Proof: `backend/scripts/design_shots.py N`.
 - [x] Nothing under 13 px anywhere, measured after the canvas zoom. Proof: `backend/scripts/type_floor_check.py` (smallest rendered text 13.0 px in every state at both sizes).
 - [x] STATUS.md, README.md, PITCH.md and DEVPOST.md are current.
 
 ## Works (and the command that proves it)
-- `make test`: 27 tests (Memento profile, ping refusals, HMAC, idempotency, discovery, append-only, sum-to-zero, schema segregation of duties, the extra-zero check, the cache seed, and snapshot restores with existing/concurrent readers).
+- `make test`: 31 tests (Jade's playbook and overrules, lessons, the gate and recall; Memento profile, ping refusals, HMAC, idempotency, discovery, append-only, sum-to-zero, schema segregation of duties, the extra-zero check, the cache seed, and snapshot restores with existing/concurrent readers).
 - `make world`: generates Tidewall, runs every agent through the history in scripted mode (record mode with `TRACKBACK_LLM_MODE=record`), reuses the 193 recorded responses in `data/llm_cache/cache.jsonl`, builds the Lyft scenario, writes the snapshot. 188 artifacts and 305 receipts at rest.
 - `make eval`: both scorers, merged into `data/eval/latest.json` with a computed `headline` block. Per-artifact key: 21 corrections, precision 1.000, recall 1.000, 222 of 222 verdicts and reasons, 104 of 104 decoys cleared, over-invalidation 1.00 versus 5.59 for flag-everything, 0 leaks in 288 adversarial fetches, replay 162 of 162. Multi-agent key: 23 events, ping precision and recall 1.000, exact agent set in 23 of 23, false still_valid 0 of 27, unnecessary rework 0 of 14, 65 of 65 preserved, 12 of 12 compensations with correct amounts, 125 of 125 tie-outs, max one wave, 1 LLM call in waves versus 318 for rerunning every agent, mean inspection fraction 7%.
-- `make check`: the offline demo check described above.
+- `make check`: the offline demo check described above, now including Jade's E11 overrule, the lessons' states, the gate's rejection of the broad lesson, playbook v2 and the 403 for an agent approving a lesson.
+- `make eval` also writes the `learning` block: Jade on playbook v1: 13 of 13 planted agent mistakes caught, 0 false overrules in 63 correct claims; held-out learning: playbook v1 80.6% → v2 100.0% on 36 claims the agent never learned from, 4 lessons approved, 1 rejected by the regression gate.
 - `make demo`: builds the frontend, restores the snapshot, serves http://localhost:8000 in replay mode. Stage mode at `/`, Deep mode with `D` or `/?mode=deep`, `/styleguide`, kiosk off with `/?kiosk=off`.
 - Deployable: `Dockerfile`, `fly.toml`, `deploy/DEPLOY.md`. The image build itself is unverified on this machine (no Docker).
 
 ## Broken / pending
 - Record mode: the iteration-2 rebuild with the real model stopped with "credit balance is too low". Rework replies in pings are the labeled scripted stand-in until it is rerun.
+- Jade critiques judgment claims only in code; the LLM critique of prose (V3 spec section 8) is not wired, and no API credits exist to record it. Lessons are enforced as playbook checks; the "guidance text pulled into the LLM context" path is stored on each lesson but not sent anywhere.
+- The V3 prototype engines (48-gym world, reconciliations, lineage tracer) are not in the tree: they describe a different company and would have discarded every verified number.
 - Not built (stretch): A2A/MCP adapters, a second domain pack (the "Research" world shows disabled), the Mermaid sequence panel, the Muse adapter, the recursive norm beat, ALFRED/E19.
 - Sound on pings is off by default and toggles with `M` in Deep mode.
 

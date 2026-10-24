@@ -30,7 +30,7 @@ def caption(page) -> str:
     return page.locator(".stage .caption").inner_text()
 
 
-def run_to_payoff(page, max_steps=14) -> str:
+def run_to_payoff(page, max_steps=20) -> str:
     for _ in range(max_steps):
         if page.locator(".stage .payoff .big").count():
             break
@@ -47,7 +47,7 @@ with sync_playwright() as p:
     # ---------------- presenter sequence, keys only
     reset(); page.goto(f"{BASE}/?kiosk=off"); page.wait_for_timeout(2000)
     ok("told its lender leverage was" in page.locator(".stage .title-card").inner_text(), "Stage mode opens on the title card")
-    payoff = run_to_payoff(page, 16)
+    payoff = run_to_payoff(page, 20)
     m = re.search(r"(\d+) of (\d+)\s+pieces of work.*?(\d) of 3 agents needed to act · (\d+) actions? waiting for a human · (\d+) things left stale", payoff, re.S)
     ok(bool(m), "Space alone runs title → layered reveal → recall → ripple → replies → payoff", payoff.replace("\n", " | ")[:160])
     import json
@@ -88,7 +88,7 @@ with sync_playwright() as p:
             page.evaluate("window.dispatchEvent(new KeyboardEvent('keydown', {key: 'x'}))")
         page.get_by_role("button", name=name).click(); page.wait_for_timeout(1500)
         ok(page.locator(".recall-notice").count() == 1, f"preset '{name}': its recall notice appears")
-        out = run_to_payoff(page, 14)
+        out = run_to_payoff(page, 20)
         mm = re.search(r"(\d) of 3 agents needed to act", out)
         n = int(mm.group(1)) if mm else -1
         good = (n == expect) if expect is not None else (n >= 1)

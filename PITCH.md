@@ -16,11 +16,13 @@ Run it in Stage mode (the app opens there). Every beat is one press of `Space`; 
 | 0:40–1:00 | `Space`: the calc line "Leverage recomputed: 2.95x → 3.03x, crosses 3.00x". | "Trackback recomputes every number itself. No agent is asked about arithmetic. The certificate is now a breach." |
 | 1:00–1:40 | `Space` three times: one ping bubble per agent, in its lane. | Read the Covenant and Comp bubble aloud: "Your lender certificate rests on net leverage, which changed from 2.95x to 3.03x. It now crosses your 3.00x covenant. Still valid?" Point at the cash forecast card: "Skipped. No cash moved, so nobody asks." |
 | 1:40–2:10 | `Space` three times: each agent replies. The certificate card says "Waiting for the CFO". | "The Close Accountant reworks its memo. Covenant and Comp can't un-send a certificate, so a corrected one and a lender notice wait for the CFO. The Reporting Analyst rewrites three sentences and keeps one: revenue still grew." |
-| 2:10–2:30 | `Space`: the payoff. | "Ten pieces of work out of 174 needed an agent to look. Three of three agents acted, four actions wait for a human, nothing left stale." |
-| 2:30–2:45 | `T`: April 10 and the refusal stamp. | "Was the agent negligent? Here is what it saw on April 10: the duplicate rows were right there. And it can't read July 8 to look smart." |
-| 2:45–3:00 | `D` for ten seconds of Deep mode, then the tagline. | "And here's the full instrument. Trackback traces any correction forward." |
+| 2:10–2:25 | `Space`: Jade's card, stamped OVERRULED. | "The agent's own write-up called this immaterial: $118,000 is under the $160,000 rule of thumb. Jade, the reviewer, read the whole graph: over performance materiality, the covenant flips to 3.03x, bonuses already paid change. Overruled." |
+| 2:25–2:35 | `Space`: the lesson card. | "That mistake is now a lesson. It was re-run against every past case, nothing that passed before fails, the Controller approved it, and the playbook is v2. The broad misreading the gate rejected is on the card too." |
+| 2:35–2:45 | `Space`: the payoff. | "Ten pieces of work out of 174 needed an agent to look. Three of three agents acted, four actions wait for a human, nothing left stale. Jade overruled two of four calls; two lessons learned." |
+| 2:45–2:55 | `T`: April 10 and the refusal stamp. | "Was the agent negligent? Here is what it saw on April 10: the duplicate rows were right there. And it can't read July 8 to look smart." |
+| 2:55–3:00 | `D` for a few seconds of Deep mode, then the tagline. | "And here's the full instrument. Trackback traces any correction forward." |
 
-If the slot is shorter: cut the April 10 beat first, then the Deep mode coda. Never cut the bubbles, the skipped cash forecast, or the payoff. If judging is at a table, leave the laptop in Stage mode: after 60 seconds it loops on its own with captions, and a judge who presses a key gets three presets to try. The 40-cent bank fee is the precision demo: zero pings, everything cleared, five seconds.
+If the slot is shorter: cut the Deep mode coda first, then the April 10 beat, then the lesson card. Never cut Jade's overrule. Never cut the bubbles, the skipped cash forecast, or the payoff. If judging is at a table, leave the laptop in Stage mode: after 60 seconds it loops on its own with captions, and a judge who presses a key gets three presets to try. The 40-cent bank fee is the precision demo: zero pings, everything cleared, five seconds.
 
 The Lyft story (Real world tab, or a 20-second opener on a stage): "February 13, 2024: Lyft's release said 500 basis points. The model it came from said 50. Shares jumped 67% after hours. With Trackback the release is blocked before it goes out: the sentence says 500, the number it cites is 50."
 
@@ -32,6 +34,8 @@ The Lyft story (Real world tab, or a 20-second opener on a stage): "February 13,
 - Fresno bonus $2,000 → $720 (overpaid $1,280); Oakland $2,000 → $960 (overpaid $1,040); offset against the next bonus, HR plus Controller.
 - Q2 estimated tax $164,535 → $139,755; reduce the Q3 installment by $24,780 (company policy; tax advisor notified).
 - Compensations: corrected certificate and lender notice (CFO), bonus offset (HR + Controller), tax installment (Controller), deck v2 with corrected banner (Controller).
+- Jade: the agent's materiality call overruled (immaterial → material), its posting call overruled (March is locked → June with an out-of-period tag); L-posting recalled from memory (27% like E10). After the lesson beat: L-materiality and L-posting active, L-locked-means-estimate rejected by the gate, playbook v2.
+- Jade on playbook v1: 13 of 13 planted agent mistakes caught, 0 false overrules in 63 correct claims; held-out learning: playbook v1 80.6% → v2 100.0% on 36 claims the agent never learned from, 4 lessons approved, 1 rejected by the regression gate (`data/eval/latest.json`, `learning` block).
 
 ## The $80k utilities judge drill, both ways
 
@@ -53,6 +57,9 @@ Same number, two correct answers. The system asks which world it's in instead of
 Claims to avoid: not first at selective multi-agent re-activation (BoardroomAI), at recording input versions (PlanFence), at agent provenance graphs (MAP-Graph), or at bitemporal memory (Graphiti). Claim the combination: pings to the affected downstream agents, a value-aware materiality cutoff, compensation of already-executed actions with approvals, and per-agent as-of replay, on a real close workflow plus real SEC data. Rollback Repair says it cannot undo an irreversible external side effect; PlanFence notes passing validation doesn't stop an input changing before the effect. Cite both.
 
 ## Hard questions
+
+- **Does it learn?** From Jade's overrules and the Controller's rejections, never from grading itself. Each lesson is a named check that is gated against every past case before the Controller approves it, prospectively. Measured on held-out cases: v1 80.6% → v2 100% on 36 claims it never learned from; one broad lesson rejected by the gate.
+- **Isn't Jade just the engine wearing a hat?** Jade uses the same engines the pipeline trusts (Memento, the materiality memo, the period locks, the approval matrix) and is scored against the frozen answer keys like everything else: 13 of 13 planted mistakes caught, 0 false overrules in 63 correct claims. The point is that the agent's write-up is a judgment and the reviewer is arithmetic; the LLM never produces a number on either side.
 
 - **Isn't this Dagster for agents?** Dagster assumes recomputing is cheap, deterministic and side-effect free, uses equality on data versions as its cutoff, and relies on lineage declared up front. Trackback records what each run actually read, uses a materiality judgment on real values, asks agents to re-check judgment and prose, and proposes compensations for actions that already happened.
 - **LangGraph has time travel.** It replays one thread from a checkpoint by re-executing nodes. Memento returns what was knowable at a time across agents and sources, with a TimeMap and refusals, and doesn't re-execute anything to answer.

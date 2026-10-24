@@ -140,7 +140,7 @@ textarea.field { height: auto; padding: 8px 10px; }
 .drawer { position: absolute; top: 0; right: 0; bottom: 0; width: 420px; max-width: 92vw; background: var(--surface); border-left: 1px solid var(--rule); box-shadow: var(--shadow); display: flex; flex-direction: column; z-index: 30; animation: slide-in 180ms ease-out; }
 @keyframes slide-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
 .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--rule); padding: 0 12px; overflow-x: auto; }
-.tab { padding: 10px 8px 8px; font-size: 14px; font-weight: 600; color: var(--ink-muted); border: 0; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; background: none; }
+.tab { padding: 10px 7px 8px; font-size: 14px; font-weight: 600; color: var(--ink-muted); border: 0; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; background: none; }
 .tab.on { color: var(--ink); border-bottom-color: var(--ink); }
 .memo { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px 14px 20px; margin-bottom: 12px; position: relative; }
 .memo::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--rule); border-radius: 6px 0 0 6px; }
@@ -233,3 +233,46 @@ table.ledger-table tr:hover td { background: #FBF9F5; }
 .lane-rail .st { font-size: 16px; line-height: 18px; color: var(--ink-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lane-rail .lv { font-size: 16px; line-height: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lane-rail .more { font-size: 16px; line-height: 18px; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--sans); }
+
+/* hover cards: the error, in words, wherever the pointer rests */
+.hovercard { position: absolute; z-index: 60; background: var(--surface); border: 1px solid var(--ink); border-radius: 6px; box-shadow: var(--shadow); padding: 10px 12px 10px; font-size: 14px; line-height: 1.35; pointer-events: none; animation: fade 120ms ease-out both; }
+.hovercard .hd { display: flex; gap: 8px; align-items: center; font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.hovercard .ln { margin-top: 4px; }
+.hovercard .ft { margin-top: 6px; color: var(--ink-muted); font-family: var(--mono); font-size: 13px; }
+.hovercard.invalidated { border-color: var(--recall); } .hovercard.invalidated .hd { color: var(--recall); }
+.hovercard.cleared { border-color: var(--cleared); } .hovercard.cleared .hd { color: var(--cleared); }
+.hovercard.caution { border-color: var(--caution); border-style: dashed; } .hovercard.caution .hd { color: var(--caution-ink); }
+.hovercard.reworked, .hovercard.pending { border-color: var(--ping); } .hovercard.reworked .hd, .hovercard.pending .hd { color: var(--ping); }
+.hovercard.big { font-size: clamp(18px, 1.2vw, 24px); padding: 0.8vw 1vw; }
+.hovercard.big .hd { font-size: clamp(20px, 1.35vw, 28px); }
+.hovercard.big .ft { font-size: clamp(16px, 1vw, 20px); }
+
+/* Jade's review card and the lesson card (Stage mode) */
+.stage .jade-wrap { position: absolute; inset: 0 0 clamp(48px, 6vh, 72px) 0; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; }
+.stage .jade { position: relative; width: min(1180px, 86vw); background: var(--surface); border: 1px solid var(--ink); border-radius: 8px; box-shadow: var(--shadow); padding: 1.6vw 2vw 1.4vw; animation: drop-in 300ms ease-out both; pointer-events: auto; }
+.stage .jade .kicker { font-family: var(--mono); font-size: clamp(16px, 1.05vw, 22px); color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.stage .jade h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 2.6vw, 54px); line-height: 1.08; margin: 0.4vw 0 1vw; padding-right: 15%; }
+.stage .jade .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6vw; align-items: start; }
+.stage .jade .col { border-top: 2px solid var(--rule); padding-top: 0.8vw; font-size: clamp(20px, 1.5vw, 32px); line-height: 1.3; }
+.stage .jade .col .who { font-family: var(--mono); font-size: 0.6em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.4vw; }
+.stage .jade .col.agent { border-top-color: var(--ink-muted); }
+.stage .jade .col.jade-says { border-top-color: var(--recall); }
+.stage .jade .col.jade-says .who { color: var(--recall); }
+.stage .jade .foot { display: flex; justify-content: space-between; align-items: center; gap: 2vw; margin-top: 1.4vw; font-size: clamp(16px, 1.1vw, 22px); color: var(--ink-muted); font-family: var(--mono); }
+.stage .jade .stampwrap { position: absolute; right: 2vw; top: 1.2vw; }
+.stage .lesson-card .rule { font-family: var(--serif); font-size: clamp(26px, 2.1vw, 44px); line-height: 1.15; font-weight: 500; }
+.stage .lesson-card .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2vw; margin-top: 1.4vw; }
+.stage .lesson-card .step { border-top: 2px solid var(--rule); padding-top: 0.6vw; font-size: clamp(18px, 1.25vw, 26px); line-height: 1.3; }
+.stage .lesson-card .step b { display: block; font-family: var(--mono); font-size: 0.75em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.3vw; }
+.stage .lesson-card .step.ok { border-top-color: var(--cleared); } .stage .lesson-card .step.ok b { color: var(--cleared); }
+.stage .lesson-card .step.no { border-top-color: var(--recall); } .stage .lesson-card .step.no b { color: var(--recall); }
+.stage .stepdots { display: inline-flex; gap: 6px; align-items: center; margin-right: 14px; }
+.stage .stepdots i { width: 8px; height: 8px; border-radius: 50%; background: var(--rule); display: inline-block; }
+.stage .stepdots i.on { background: var(--ink); } .stage .stepdots i.done { background: var(--ink-muted); }
+.claimrow { display: grid; grid-template-columns: 96px 1fr; gap: 6px 10px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.claimrow .k { font-weight: 600; }
+.claimrow .said { color: var(--ink-muted); }
+.claimrow .jd { margin-top: 2px; }
+.claimrow.over .jd { color: var(--recall); }
+.claimrow .ev { font-family: var(--mono); font-size: 13px; color: var(--ink-muted); margin-top: 4px; word-break: break-word; }
+.stage .snode:hover { border-color: var(--ink); cursor: default; }

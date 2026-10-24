@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { X, Check, AlertCircle, RefreshCw, CircleDashed, Mail, MinusCircle } from 'lucide-react'
 import { fmt } from '../api'
-import { nodeTitle, reasonText, STATE_WORD, type State, type Lane } from '../model'
+import { nodeTitle, reasonText, STATE_WORD, type State, type Lane, type Explain } from '../model'
 
 const IC = { size: 18, strokeWidth: 1.5 }
 export function StatusIcon({ state, size = 18 }: { state: State; size?: number }) {
@@ -85,4 +85,15 @@ export function Seg<T extends string>({ value, options, onChange }: { value: T; 
 
 export function Empty({ children }: { children: ReactNode }) {
   return <div className="serif" style={{ fontSize: 22, color: 'var(--ink-muted)', padding: 24, fontStyle: 'italic' }}>{children}</div>
+}
+
+/* A hover card: what happened to this card and why, in two or three lines. Positioned by the caller inside a relative container. */
+export function HoverCard({ e, x, y, box, big }: { e: Explain; x: number; y: number; box: { w: number; h: number }; big?: boolean }) {
+  const w = big ? Math.min(560, box.w * 0.42) : 320
+  const left = Math.max(8, Math.min(x + 16, box.w - w - 8))
+  const flip = y > box.h * 0.6
+  return <div className={`hovercard ${e.tone} ${big ? 'big' : ''}`} role="tooltip" style={{ left, top: flip ? undefined : y + 18, bottom: flip ? box.h - y + 14 : undefined, width: w }}>
+    <div className="hd"><StatusIcon state={e.tone} size={big ? 22 : 18} /><span>{e.head}</span></div>
+    {e.lines.map((l, i) => <div key={i} className={i === e.lines.length - 1 && e.lines.length > 1 ? 'ft' : 'ln'}>{l}</div>)}
+  </div>
 }

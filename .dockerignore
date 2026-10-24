@@ -15,3 +15,7 @@ data/snapshots/canonical_i1_record.sqlite
 docs
 *.log
 .DS_Store
+brag-output
+.claude
+NEW_SPEC.md
+TIMELINE.md

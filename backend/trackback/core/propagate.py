@@ -361,7 +361,7 @@ def write_findings(correction_id: str, findings: dict, out: dict, ts: str) -> No
         dom.log_unbooked(correction_id, corr["booking_period"] or ts[:7], lines, total_delta, verdict != "log", f"{verdict}: {(corr['note'] or '')[:160]}", ts)
     c = _counts(findings.values())
     db.log_event("correction_applied", f"{correction_id}: naive {out.get('naive_count')}; Trackback {c['invalidated']} invalidated, {c['unaffected']} cleared, {c['needs_review']} need review, {c['unprovable']} unprovable ({verdict})",
-                 actor="trackback:engine", ts=ts, correction_id=correction_id, detail={"counts": c, "materiality_verdict": verdict})
+                 actor="trackback:engine", ts=ts, correction_id=correction_id, detail={"counts": c, "materiality_verdict": verdict, "total_delta": total_delta})
     db.commit()
 
 
