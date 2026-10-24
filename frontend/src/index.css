@@ -278,3 +278,9 @@ table.ledger-table tr:hover td { background: #FBF9F5; }
 .claimrow.over .jd { color: var(--recall); }
 .claimrow .ev { font-family: var(--mono); font-size: 13px; color: var(--ink-muted); margin-top: 4px; word-break: break-word; }
 .stage .snode:hover { border-color: var(--ink); cursor: default; }
+
+/* the guided tour (Deep mode, live link) */
+.tour { position: absolute; left: 16px; bottom: 16px; width: 440px; max-width: calc(100% - 32px); z-index: 24; background: var(--surface); border: 1px solid var(--ink); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 16px 14px; animation: fade 200ms ease-out both; }
+.tour .hd { display: flex; justify-content: space-between; align-items: center; }
+.tour-hi { outline: 3px solid var(--ping); outline-offset: 4px; border-radius: 999px; animation: tour-pulse 1.2s ease-in-out infinite; }
+@keyframes tour-pulse { 0%, 100% { outline-color: var(--ping); } 50% { outline-color: rgba(31, 95, 191, 0.25); } }

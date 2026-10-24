@@ -16,13 +16,13 @@ export function CounterStrip({ company, correction, graph, pings, waves, approva
     <div style={{ height: 52, flex: 'none', display: 'flex', alignItems: 'center', gap: 32, padding: '0 20px', borderBottom: '1px solid var(--rule)', background: 'var(--paper)' }}>
       {correction ? <div className="serif" style={{ fontSize: 30, lineHeight: 1 }}><span className="num" style={{ fontFamily: 'var(--serif)' }}>{pinged} of {agents}</span> agents pinged</div>
         : <div className="serif" style={{ fontSize: 24, fontStyle: 'italic', color: 'var(--ink-muted)' }}>Nothing's been corrected. Yet.</div>}
-      {!correction && onRecall && <button className="btn primary" style={{ marginLeft: 'auto' }} onClick={onRecall}>A correction arrived</button>}
+      {!correction && onRecall && <button className="btn primary" style={{ marginLeft: 'auto' }} data-tour="recall" onClick={onRecall}>A correction arrived</button>}
       {correction && <div className="mono t14" style={{ display: 'flex', gap: 24, color: 'var(--ink)' }}>
         <span title="How many pieces of work Trackback had to look at; the rest were cleared structurally (different period, different line, never read the changed rows)"><span className="muted">looked at</span> {inspected} of {total} pieces of work</span>
         <span title="Model calls spent on this correction, against what rerunning every agent from scratch would cost"><span className="muted">LLM calls</span> {st?.llm_calls ?? 0} <span className="muted">(rerunning every agent: {headline?.llm_calls_rerun_all ?? '…'})</span></span>
         <span title="Fixes for actions that already happened (a sent certificate, a paid bonus), waiting for the right person to approve"><span className="muted">fixes waiting for a person</span> {approvalsPending}</span>
       </div>}
-      {correction && evaluation && <button className={`chip ${evaluation.jade?.summary?.overruled ? 'recall' : 'cleared'}`} style={{ marginLeft: 'auto', height: 28, cursor: 'pointer', fontSize: 14 }} onClick={onJade} title="J">
+      {correction && evaluation && <button className={`chip ${evaluation.jade?.summary?.overruled ? 'recall' : 'cleared'}`} style={{ marginLeft: 'auto', height: 28, cursor: 'pointer', fontSize: 14 }} data-tour="jade" onClick={onJade} title="J">
         Jade · {evaluation.jade?.summary?.overruled ? `overruled ${evaluation.jade.summary.overruled_claims.join(', ')}` : 'every claim approved'} · playbook {evaluation.playbook_version}</button>}
     </div>
   )
@@ -110,7 +110,8 @@ function WhoBuilt({ id, company, refreshKey }: { id: string | null; company: str
         for (const s of arts.slice(0, 3)) await walk(s.supporter_id, depth + 1)
         if (!arts.length) { const src = r.supporters.find((s: any) => s.claim); if (src) out.push({ depth: depth + 1, source: src.claim.source_id, captured: src.claim.tx_from, version: src.supporter_version }) }
       }
-      await walk(id, 0); if (alive) setChain(out)
+      try { await walk(id, 0) } catch { out.push({ depth: 0, source: id, captured: null, version: null }) }   // a source document, not an artifact
+      if (alive) setChain(out)
     })()
     return () => { alive = false }
   }, [id, refreshKey])
@@ -119,7 +120,7 @@ function WhoBuilt({ id, company, refreshKey }: { id: string | null; company: str
   return <div>
     <div className="t14 muted" style={{ marginBottom: 10 }}>Each line is a receipt: who made it, from which version of what.</div>
     {chain.map((a, i) => a.source ? <div key={i} style={{ marginLeft: a.depth * 14, borderLeft: '2px solid var(--ink)', padding: '4px 0 8px 10px' }}>
-      <div className="t14"><b>Source</b> · {a.source.replace(/_/g, ' ')}</div><div className="mono" style={{ fontSize: 13 }}>captured {dateLabel(a.captured)}</div></div>
+      <div className="t14"><b>Source</b> · {a.source.replace(/_/g, ' ')}</div>{a.captured ? <div className="mono" style={{ fontSize: 13 }}>captured {dateLabel(a.captured)}</div> : <div className="t14 muted">A document the agents read; nothing was built before it.</div>}</div>
       : <div key={i} style={{ marginLeft: a.depth * 14, borderLeft: `2px solid ${a.depth === 0 ? 'var(--ink)' : 'var(--rule)'}`, padding: '4px 0 8px 10px' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Lot code={a.lot} /><span className="mono" style={{ fontSize: 13 }}>v{a.version}</span></div>
         <div style={{ fontWeight: 600, fontSize: 16, lineHeight: 1.25, marginTop: 2 }}>{title(a, 70)}</div>
@@ -298,7 +299,7 @@ export function Scrubber({ doc, setDoc, pin, setPin, now, sources, refreshKey, a
   const docTitle = (sources.find(s => s.source_id === doc)?.title || doc).replace(/^(REAL|RECONSTRUCTION):\s*/, '')
   if (!open) return (
     <div style={{ height: 40, flex: 'none', borderTop: '1px solid var(--rule)', background: 'var(--surface)', display: 'flex', alignItems: 'center', gap: 14, padding: '0 16px' }}>
-      <button className="btn" style={{ height: 28 }} onClick={() => setOpen(true)}>Time travel <span className="kbd" style={{ marginLeft: 4 }}>T</span></button>
+      <button className="btn" style={{ height: 28 }} data-tour="travel" onClick={() => setOpen(true)}>Time travel <span className="kbd" style={{ marginLeft: 4 }}>T</span></button>
       <span className="t14 muted">See exactly what the agents could see on any past date. Trackback refuses to show anything published after that date, so a replay can never cheat with hindsight.</span>
     </div>
   )

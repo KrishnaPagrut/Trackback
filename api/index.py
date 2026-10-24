@@ -47,14 +47,14 @@ if (db.q1("SELECT COUNT(*) n FROM artifacts") or {"n": 0})["n"] == 0:   # belt a
 # state-changing call it made (header x-tb-journal); a copy that is behind replays the missing calls through the app before
 # answering, and a copy that holds work the browser has since undone or reset restores the snapshot first. Replays are
 # deterministic: the world is rebuilt from the snapshot and the same calls in the same order.
+import asyncio  # noqa: E402
 import json  # noqa: E402
-import threading  # noqa: E402
 
 import httpx  # noqa: E402
 from starlette.requests import Request  # noqa: E402
 
 APPLIED: set[str] = set()
-_LOCK = threading.Lock()
+_SYNC = asyncio.Lock()   # one replay at a time per instance: concurrent page loads must not interleave half-applied worlds
 
 
 async def _replay(entries: list[dict]) -> None:
@@ -77,13 +77,13 @@ async def journal_sync(request: Request, call_next):
     except ValueError:
         entries = []
     ids = {e.get("id") for e in entries}
-    if APPLIED - ids:                      # this copy is ahead of the browser (reset or undo happened elsewhere): start over
-        with _LOCK:
+    async with _SYNC:
+        if APPLIED - ids:                  # this copy is ahead of the browser (reset or undo happened elsewhere): start over
             _restore()
             APPLIED.clear()
-    missing = [e for e in entries if e.get("id") and e["id"] not in APPLIED]
-    if missing:
-        await _replay(missing)
+        missing = [e for e in entries if e.get("id") and e["id"] not in APPLIED]
+        if missing:
+            await _replay(missing)
     response = await call_next(request)
     op = request.headers.get("x-tb-op")
     if op and request.method == "POST" and response.status_code < 400:

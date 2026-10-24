@@ -26,6 +26,9 @@ From SPEC.md Part 1 section 14, SPEC_ITERATION_2 section 17 and the goal brief. 
 - [x] Nothing under 13 px anywhere, measured after the canvas zoom. Proof: `backend/scripts/type_floor_check.py` (smallest rendered text 13.0 px in every state at both sizes).
 - [x] STATUS.md, README.md, PITCH.md and DEVPOST.md are current.
 
+## Live
+- https://trackback-gamma.vercel.app (Vercel, project `trackback`, production). Opens in Deep mode with the nine-step guided tour; `D` or `?mode=stage` for Stage mode. Verified end to end from a headless browser twice in a row (tour, the E11 drop, 3 of 3 agents pinged, Jade's overrule, Stage payoff 10 of 174 with 4 fixes waiting), see DECISIONS.md for the serverless consistency design.
+
 ## Works (and the command that proves it)
 - `make test`: 31 tests (Jade's playbook and overrules, lessons, the gate and recall; Memento profile, ping refusals, HMAC, idempotency, discovery, append-only, sum-to-zero, schema segregation of duties, the extra-zero check, the cache seed, and snapshot restores with existing/concurrent readers).
 - `make world`: generates Tidewall, runs every agent through the history in scripted mode (record mode with `TRACKBACK_LLM_MODE=record`), reuses the 193 recorded responses in `data/llm_cache/cache.jsonl`, builds the Lyft scenario, writes the snapshot. 188 artifacts and 305 receipts at rest.

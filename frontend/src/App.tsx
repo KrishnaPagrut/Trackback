@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { api, dayLabel } from './api'
 import Canvas from './deep/Canvas'
-import { CounterStrip, Sidebar, Drawer, Scrubber, Footer, Palette, LedgerTable, Legend, type DrawerTab } from './deep/Panels'
+import { CounterStrip, Sidebar, Drawer, Scrubber, Footer, Palette, LedgerTable, type DrawerTab } from './deep/Panels'
+import { Tour } from './deep/Tour'
 import Stage from './stage/Stage'
 import ProofPage from './pages/Proof'
 import RealWorld from './pages/RealWorld'
@@ -11,7 +12,9 @@ import { ancestors, descendants } from './model'
 type World = 'tidewall' | 'lyft'
 export default function App() {
   const qs = new URLSearchParams(window.location.search)
-  const [mode, setMode] = useState<'stage' | 'deep'>(qs.get('mode') === 'deep' ? 'deep' : 'stage')
+  // the live link opens in Deep mode with the guided tour; the presenter's laptop (localhost) opens in Stage mode
+  const live = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)
+  const [mode, setMode] = useState<'stage' | 'deep'>(qs.get('mode') === 'deep' || (live && qs.get('mode') !== 'stage') ? 'deep' : 'stage')
   const [world, setWorld] = useState<World>(qs.get('world') === 'lyft' ? 'lyft' : 'tidewall')
   const [view, setView] = useState<'graph' | 'ledger' | 'proof' | 'story'>(qs.get('view') === 'proof' ? 'proof' : qs.get('world') === 'lyft' ? 'story' : 'graph')
   const [state, setState] = useState<any>(null)
@@ -41,8 +44,8 @@ export default function App() {
   const [laneFilter, setLaneFilter] = useState<string | null>(null)
   const [sound, setSound] = useState(false)
   const [travelOpen, setTravelOpen] = useState(false)
-  const [legend, setLegend] = useState(() => { try { return localStorage.getItem('tb_legend_seen') !== '1' } catch { return true } })
-  const closeLegend = () => { setLegend(false); try { localStorage.setItem('tb_legend_seen', '1') } catch { /* private window */ } }
+  const [tour, setTour] = useState(() => { if (qs.get('tour') === '1') return true; if (qs.get('tour') === '0') return false; try { return localStorage.getItem('tb_tour_done') !== '1' } catch { return true } })
+  const closeTour = () => { setTour(false); try { localStorage.setItem('tb_tour_done', '1') } catch { /* private window */ } }
   const [kioskOn, setKioskOn] = useState(['on', '1', 'true'].includes(qs.get('kiosk') || ''))   // opt in: the table loop, never during a live pitch
   const idleSeconds = Number(qs.get('idle') || 60)
   const now = state?.now || '2026-07-08T09:00:00-07:00'
@@ -66,7 +69,7 @@ export default function App() {
   const resetWorld = useCallback(async () => { await api.reset(); setCorrection(null); setSelected(null); setDrawer(null); setAttempt(null); setPin(now); setNotice(false); refresh() }, [now, refresh])
   const dropE11 = useCallback(async () => {
     setBusy(true)
-    try { await api.liveE11(); setNotice(false); closeLegend(); setWorld('tidewall'); setCorrection('E11'); setRippleKey(k => k + 1); refresh() } finally { setBusy(false) }
+    try { await api.liveE11(); setNotice(false); setWorld('tidewall'); setCorrection('E11'); setRippleKey(k => k + 1); refresh() } finally { setBusy(false) }
   }, [refresh])
   const travel = useCallback(async () => {
     setTravelOpen(true); setDoc('billing_export_2026_03'); const p = '2026-04-10T17:00:00-07:00'; setPin(p)
@@ -91,8 +94,8 @@ export default function App() {
       if (k === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setMode('deep'); setPalette(p => !p); return }
       if (k === 'k' && !e.metaKey && !e.ctrlKey) { setKioskOn(x => !x); return }
       if (mode === 'stage') return
-      if (k === '?') { setHelp(x => !x); setLegend(false) }
-      else if (k === 'escape') { setDrawer(null); setPalette(false); setHelp(false); setNotice(false); setSelected(null); closeLegend() }
+      if (k === '?') setHelp(x => !x)
+      else if (k === 'escape') { setDrawer(null); setPalette(false); setHelp(false); setNotice(false); setSelected(null) }
       else if (k === 'r') resetWorld()
       else if (k === 't') travel()
       else if (k === ' ' && !correction && world === 'tidewall') { e.preventDefault(); if (notice) dropE11(); else setNotice(true) }
@@ -118,8 +121,9 @@ export default function App() {
         {mode === 'deep' && view !== 'proof' && !(world === 'lyft' && view === 'story') && <Seg value={view === 'ledger' ? 'ledger' : 'graph'} onChange={(v: any) => setView(v)} options={[{ v: 'graph', label: 'Graph' }, { v: 'ledger', label: 'Ledger' }]} />}
       </div>
       <span className="mono t14">Today · {dayLabel(now)}</span>
-      {mode === 'deep' && <button className="btn ghost" onClick={() => setView(v => v === 'proof' ? 'graph' : 'proof')}>{view === 'proof' ? 'Back to graph' : 'Scorecard'}</button>}
-      <button className="btn primary" onClick={() => setMode(m => m === 'stage' ? 'deep' : 'stage')} title="D">{mode === 'stage' ? 'Deep mode' : 'Stage mode'}</button>
+      {mode === 'deep' && <button className="btn ghost" onClick={() => { setTour(true); setView('graph') }}>Tour</button>}
+      {mode === 'deep' && <button className="btn ghost" data-tour="scorecard" onClick={() => setView(v => v === 'proof' ? 'graph' : 'proof')}>{view === 'proof' ? 'Back to graph' : 'Scorecard'}</button>}
+      <button className="btn primary" data-tour="stage" onClick={() => setMode(m => m === 'stage' ? 'deep' : 'stage')} title="D">{mode === 'stage' ? 'Deep mode' : 'Stage mode'}</button>
     </header>
   )
 
@@ -141,7 +145,7 @@ export default function App() {
               {view === 'ledger' ? <LedgerTable company={world} graph={graph} pings={pings} onSelect={id => { setSelected(id); setDrawer('who') }} laneFilter={laneFilter} />
                 : <Canvas company={world} correction={correction} data={graph} pings={pings} selected={selected} onSelect={id => { setSelected(id); if (id) setDrawer(d => d || 'who') }} trace={selected ? traceSet : null} rippleKey={rippleKey} sound={sound}
                   onLaneMore={l => { setLaneFilter(l); setView('ledger') }} />}
-              {legend && view === 'graph' && <Legend company={world} onClose={closeLegend} />}
+              {tour && view === 'graph' && world === 'tidewall' && <Tour onClose={closeTour} ctx={{ selected, correction, drawer, travelOpen, openNotice: () => setNotice(true), openDrawer: (t: DrawerTab) => setDrawer(t), openTravel: () => setTravelOpen(true), toStage: () => setMode('stage'), toScorecard: () => setView('proof') }} />}
               {notice && <div style={{ position: 'absolute', left: 24, top: 16, zIndex: 25 }}><RecallNotice id="E11" lot="7F3A" headline="March billing export: annual-plan revenue was released twice" reason="$118,000 counted twice across five gyms" issuer="Membership billing vendor" ts="Jul 8, 2026 · 9:05 AM" onDrop={dropE11} busy={busy} /></div>}
               {drawer && <Drawer tab={drawer} setTab={setDrawer} onClose={() => setDrawer(null)} selected={selected} company={world} refreshKey={refreshKey} onChanged={refresh} people={state?.people || {}} pings={pings} waves={waves} challenges={challenges} correction={correction} />}
               {palette && <Palette company={world} artifacts={artifacts} corrections={state?.corrections || []} onClose={() => setPalette(false)} onPick={p => {

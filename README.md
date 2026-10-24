@@ -14,6 +14,8 @@ Seats: *Trackback does the senior close accountant's and the reporting analyst's
 
 The name revives TrackBack, the 2002 Movable Type protocol that let a site notify another site when it referenced it; the replay feature is called Memento after RFC 7089.
 
+Live: **https://trackback-gamma.vercel.app** (opens in Deep mode with a guided tour; `?mode=stage` for the presentation view). Local: `make demo` opens in Stage mode.
+
 ## Run it
 
 ```bash
@@ -40,7 +42,9 @@ Recorded model responses survive rebuilds: `make history` exports the cache to `
 
 ## Deploy it
 
-`docker build -t trackback . && docker run -p 8000:8000 trackback` gives the whole demo (API, Memento, UI, the world, replay mode, no key) on one port. `deploy/DEPLOY.md` has the Fly.io one-liner, the Render setup and the caveats (one shared world per instance; press `R` to reset).
+Vercel (what the live link runs): `npx vercel deploy --prod`. `api/index.py` runs the whole app as one Python function in replay mode, copies the committed snapshot into `/tmp` on a cold start and restores from it; the UI build is committed in `web/` so no Node step runs on Vercel. Serverless hosts run several copies of the function, so the browser carries a journal of its own state-changing calls (`x-tb-journal`) and any copy that is behind replays them before answering; reset and undo shrink the journal and copies that are ahead restore first.
+
+Docker: `docker build -t trackback . && docker run -p 8000:8000 trackback` gives the whole demo (API, time-pinned documents, UI, the world, replay mode, no key) on one port. `deploy/DEPLOY.md` has the Fly.io one-liner, the Render setup and the caveats (one shared world per instance; press `R` to reset).
 
 ## Jade and the lessons memory
 
