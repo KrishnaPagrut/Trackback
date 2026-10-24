@@ -8,8 +8,8 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 |---|---|---|
 | CP0 housekeeping | done | SPEC.md is v3; CLAUDE.md; tasks.py; v2 tests pass on Windows (27) |
 | CP1 world | done | `python tasks.py world` in 2.4 s; `python tasks.py test`: 11 v3 calibration tests (TTM $32.0M close / $32.6M draft, cash $10.6M, 2.95x → 3.0208x / 3.0681x, overpaid bonuses $8,400/$7,200/$4,800, tax $195,000, $662k / $1.118M, Appendix A 40/23/5) |
-| CP2 detect | next | |
-| CP3 trace | | |
+| CP2 detect | done | `tests/test_v3_cp2_detect.py`: exactly six exceptions (X1 $750,000 duplicate import, X2 $140,000 unaccrued, X3 $58,000 true-up, X4 $18,750 duplicate invoice, X5 $2,310 R01, X6 $312.40 fee); P1 known x6; 12 in transit, 3 outstanding checks, 1 FX rounding, subset-sum, known short-pay, SSU alias; Priya's handoff confirmed 1-6, finished 7-9 |
+| CP3 trace | next | |
 | CP4 judge | | |
 | CP5 act (+ pings) | | |
 | CP6 prove | | |
@@ -18,7 +18,7 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | CP8 UI | | |
 | CP9 polish | | |
 
-Next three tasks: the four reconciliations; Priya's handoff; exactly six exceptions with P1 known.
+Next three tasks: lineage tracer (xlsx/pptx/pdf); Replay refusals; the ripple matching Appendix A.
 
 ---
 

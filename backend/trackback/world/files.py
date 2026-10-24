@@ -24,10 +24,10 @@ CUSTOMERS = [
     {"customer_id": "C010", "legal_name": "Harbor and Vine Hotels", "aliases": "HARBOR VINE HOTELS", "currency": "USD"},
 ]
 VENDORS = [
-    {"vendor_id": "V01", "name": "Cragline Route Setters"}, {"vendor_id": "V02", "name": "Bayline Power"}, {"vendor_id": "V03", "name": "Summit Mats Supply"},
-    {"vendor_id": "V04", "name": "Brightline Kessler LLP"}, {"vendor_id": "V05", "name": "Ridgeway Facilities"}, {"vendor_id": "V06", "name": "Pacific Chalk Co."},
-    {"vendor_id": "V07", "name": "Holdfast Climbing Holds"}, {"vendor_id": "V08", "name": "Northbay Janitorial"}, {"vendor_id": "V09", "name": "Crestline Insurance Brokers"},
-    {"vendor_id": "V10", "name": "Kletterwerk GmbH"},
+    {"vendor_id": "V01", "account": "6300", "name": "Cragline Route Setters"}, {"vendor_id": "V02", "account": "6200", "name": "Bayline Power"}, {"vendor_id": "V03", "account": "6700", "name": "Summit Mats Supply"},
+    {"vendor_id": "V04", "account": "6400", "name": "Brightline Kessler LLP"}, {"vendor_id": "V05", "account": "6700", "name": "Ridgeway Facilities"}, {"vendor_id": "V06", "account": "6700", "name": "Pacific Chalk Co."},
+    {"vendor_id": "V07", "account": "6700", "name": "Holdfast Climbing Holds"}, {"vendor_id": "V08", "account": "6700", "name": "Northbay Janitorial"}, {"vendor_id": "V09", "account": "6700", "name": "Crestline Insurance Brokers"},
+    {"vendor_id": "V10", "account": "1500", "name": "Kletterwerk GmbH"},
 ]
 
 

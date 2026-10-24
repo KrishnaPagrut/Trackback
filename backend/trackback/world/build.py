@@ -47,7 +47,7 @@ HUMAN_SOURCE = {"Covenant_Q1-26_PN.xlsx": "covenant_workbook", "Board_Deck_Q1-26
 def _write_csv(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as fh:
-        wr = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+        wr = csv.DictWriter(fh, fieldnames=list(rows[0].keys()), lineterminator="\n")
         wr.writeheader()
         wr.writerows(rows)
 
