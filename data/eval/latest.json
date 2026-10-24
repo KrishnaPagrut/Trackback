@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T00:42:59",
+ "generated_at": "2026-10-24T00:48:16",
  "world": "tidewall",
  "llm_mode": "replay",
  "answer_key": {
@@ -420,7 +420,7 @@
    "over_flagging_naive_vs_true": 1.07,
    "metrics_recomputed": 30,
    "metrics_total": 191,
-   "seconds": 0.217
+   "seconds": 0.149
   },
   "X2": {
    "invalidated": 10,
@@ -433,7 +433,7 @@
    "over_flagging_naive_vs_true": 3.8,
    "metrics_recomputed": 12,
    "metrics_total": 191,
-   "seconds": 0.17
+   "seconds": 0.118
   },
   "X4": {
    "invalidated": 0,
@@ -446,7 +446,7 @@
    "over_flagging_naive_vs_true": 38.0,
    "metrics_recomputed": 7,
    "metrics_total": 191,
-   "seconds": 0.144
+   "seconds": 0.127
   },
   "X6": {
    "invalidated": 0,
@@ -459,7 +459,7 @@
    "over_flagging_naive_vs_true": 41.0,
    "metrics_recomputed": 9,
    "metrics_total": 191,
-   "seconds": 0.134
+   "seconds": 0.143
   }
  },
  "learning": {
@@ -718,7 +718,7 @@
   },
   "s3": {
    "challenge": {
-    "challenge_id": "chal_07af0086",
+    "challenge_id": "chal_b9bb7aee",
     "state": "open",
     "to": "dana",
     "wave_started": false
@@ -841,7 +841,7 @@
    }
   ]
  },
- "seconds": 11.2,
+ "seconds": 11.3,
  "real_vs_simulated": {
   "real": [
    "the reconciliation, lineage, ripple and materiality engines",

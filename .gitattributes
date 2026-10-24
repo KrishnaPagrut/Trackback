@@ -11,3 +11,5 @@
 *.pdf binary
 *.woff2 binary
 *.woff binary
+*.htm binary
+*.sqlite binary

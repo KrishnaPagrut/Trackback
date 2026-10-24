@@ -20,19 +20,19 @@ app = FastAPI(title="Trackback", version="0.1.0", lifespan=lifespan)
 app.include_router(memento.router)
 
 try:  # api is imported lazily so M1 tests run before the API exists
-    from . import api, api_pings  # noqa: E402
-    app.include_router(api.router, prefix="/api")
+    from . import api_v3, api_pings  # noqa: E402
+    app.include_router(api_v3.router, prefix="/api")
     app.include_router(api_pings.router)
 except ImportError:  # pragma: no cover
     pass
 
 
-if config.FRONTEND_DIST.exists():
-    app.mount("/assets", StaticFiles(directory=config.FRONTEND_DIST / "assets"), name="assets")
+if config.WEB_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=config.WEB_DIST / "assets"), name="assets")
 
     @app.get("/{full_path:path}", include_in_schema=False)
     def spa(full_path: str):
-        candidate = config.FRONTEND_DIST / full_path
+        candidate = config.WEB_DIST / full_path
         if full_path and candidate.is_file():
             return FileResponse(candidate)
-        return FileResponse(config.FRONTEND_DIST / "index.html", headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
+        return FileResponse(config.WEB_DIST / "index.html", headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
