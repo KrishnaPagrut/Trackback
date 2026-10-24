@@ -114,7 +114,7 @@ def review(ev: dict, exc: dict, mat: dict, pin: str, proposer: str = "close_acco
         else:
             add(f"q7_fix.approvers.{kind}", "approve", f"{C.PEOPLE_V3[who]['name']} may approve {kind.replace('_', ' ')}s", who)
     # judgment: root-cause wording (LLM critique if available)
-    cr = llm.critique(f"jade:{eid}:root_cause", ev["q1_what"]["root_cause"], {"title": exc["title"], "evidence": exc.get("evidence", [])[:3]}, pin)
+    cr = llm.critique(f"jade:{eid}:root_cause", ev["q1_what"]["root_cause"], ev["q1_what"].get("facts") or {"title": exc["title"], "evidence": exc.get("evidence", [])[:3]}, pin)
     add("q1_what.root_cause", cr["verdict"], cr["why"] if cr["verified"] else "accepted; not independently verified (no model)", method="llm" if cr["verified"] else "accept")
     return out
 

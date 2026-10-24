@@ -45,10 +45,17 @@ def _node(aid: str, changed: list[dict], hop: int) -> dict | None:
     consumed = next((x for x in (_receipt(aid, art["version"], c["field"]) for c in changed) if x), None)
     executed = bool(db.q1("SELECT 1 FROM actions WHERE artifact_id=? AND state IN ('executed','compensation_proposed')", (aid,)))
     reads = [json.loads(r["fields_read_json"] or "[]") for r in G.receipts_for_consumer(aid, art["version"])]
+    moved = {c["field"] for c in changed}
+    unchanged = []
+    for r in G.receipts_for_consumer(aid, art["version"]):
+        if r["consumed_artifact_id"].startswith("M:") and r["consumed_artifact_id"][2:] not in moved:
+            c = db.artifact_current(r["consumed_artifact_id"])
+            if c is not None:
+                unchanged.append({"field": r["consumed_artifact_id"][2:], "label": c["content"] if c["value_num"] is not None else c["line_item"], "value": c["value_num"] if c["value_num"] is not None else c["content"]})
     return {"artifact_id": aid, "node_kind": art["node_kind"], "kind": art["kind"], "prior_version": art["version"], "prior_output_excerpt": (art["content"] or "")[:400],
             "prior_value": art["value_num"], "conclusions": json.loads(art["conclusions_json"]) if art["conclusions_json"] else None, "line_item": art["line_item"],
             "period": art["period"], "fields_read": sorted({x for r in reads for x in r}) or ["value"], "changed_fields": changed, "consumed": consumed, "hop": hop,
-            "executed": executed, "fields": fields}
+            "executed": executed, "fields": fields, "inputs_unchanged": unchanged}
 
 
 def _changed_for(entry: dict, metrics: dict | None = None) -> list[dict]:

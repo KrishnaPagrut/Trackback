@@ -67,7 +67,8 @@ def evaluate(exc: dict, ripple: dict | None, mat: dict, pb: dict, pin: str) -> d
     if exc["kind"] == "accrual_true_up":
         size = {"rollover": 0.0, "iron_curtain": 0.0}
     # q1: what happened (root cause in words: the LLM, or a template)
-    rc_facts = {"kind": exc["kind"], "title": exc["title"], "amount": f"${exc['amount']:,.2f}", "evidence": [str(e)[:220] for e in exc.get("evidence", [])][:3],
+    rc_facts = {"kind": exc["kind"], "title": exc["title"], "amount": f"${exc['amount']:,.2f}", "evidence": [{k: v for k, v in e.items() if v is not None} for e in exc.get("evidence", []) if isinstance(e, dict)][:4],
+                "trust": (exc.get("trust") or {}).get("why", ""),
                 "batch": exc.get("batch", ""), "period": exc.get("period", ""), "dup": exc.get("duplicate_import", ""), "kept": exc.get("kept_import", "")}
     rc_tpl = {"duplicate_import": "The March import of annual-plan batch {batch} ran twice: {kept} posted, the job timed out, and the retry {dup} posted the same {amount} again. Billing released the batch once.",
               "unaccrued_invoice": "{title}. It sat unprocessed in the AP inbox, so the close had no entry for it.",
@@ -75,8 +76,8 @@ def evaluate(exc: dict, ripple: dict | None, mat: dict, pb: dict, pin: str) -> d
               "duplicate_vendor_invoice": "{title}: the same invoice was keyed twice with different numbering.",
               "ach_return": "{title}: returned debits the cash book still shows as collected.",
               "unbooked_bank_fee": "{title}: a bank charge nobody booked."}.get(exc["kind"], "{title}.")
-    rc = llm.write(f"root_cause:{eid}", "Write the root cause in one sentence for the error memo.", rc_facts, rc_tpl, pin)
-    q1 = {"kind": exc["kind"], "root_cause": rc["text"], "root_cause_model": rc["model"], "evidence": [f"recon:{exc['recon']}:{eid}"] + [e.get("import_id") or e.get("invoice_no") or e.get("bank_id") or "" for e in exc.get("evidence", []) if isinstance(e, dict)][:4]}
+    rc = llm.write(f"root_cause:{eid}", "Write one plain sentence for the error memo that states the root cause. Use only the facts; name the systems and records involved; do not speculate beyond them.", rc_facts, rc_tpl, pin)
+    q1 = {"kind": exc["kind"], "root_cause": rc["text"], "root_cause_model": rc["model"], "facts": rc_facts, "evidence": [f"recon:{exc['recon']}:{eid}"] + [e.get("import_id") or e.get("invoice_no") or e.get("bank_id") or "" for e in exc.get("evidence", []) if isinstance(e, dict)][:4]}
     q2 = {"trusted": (exc.get("trust") or {}).get("trusted"), "over": (exc.get("trust") or {}).get("over"), "why": (exc.get("trust") or {}).get("why"), "system_of_record": exc.get("system_of_record"),
           "evidence": [f"source:{exc.get('system_of_record')}"]}
     q3 = {**cls, "evidence": kn["evidence"], "fact": kn["fact"]}

@@ -313,7 +313,8 @@ def evaluate(exc: dict, rp: dict, pb: dict, pin: str) -> dict:
     from ..agent import llm
     eid = exc["exception_id"]
     facts = {"stated": f"{exc['stated']:g}", "source": f"{exc.get('source_value') or 0:g}", "title": exc["title"]}
-    rc = llm.write(f"lyft:root_cause:{eid}", "Write the root cause in one sentence for the error memo.", facts,
+    facts.update(call_script="Prepared remarks: for the full year we expect roughly 50 basis points of Adjusted EBITDA margin expansion.", model_bridge="FY2023 margin 1.6% to FY2024 target 2.1%: +50 bps")
+    rc = llm.write(f"lyft:root_cause:{eid}", "Write one plain sentence for the error memo that states the root cause. Use only the facts; do not speculate beyond them.", facts,
                    "The release draft typed {stated} where the guidance model and the CFO's prepared remarks say {source}: a clerical error (an extra zero) that the publication sign-off did not catch.", pin)
     v1 = pb["materiality"]["rule"] == "five_percent_pretax"
     q5 = ({"material": False, "method": "5% of annual pretax, rollover only", "why": "a guidance sentence has no financial-statement effect: 0% of pretax income, immaterial", "triggers": []} if v1 else
@@ -362,7 +363,9 @@ def jade(ev: dict, exc: dict, rp: dict, pin: str) -> list[dict]:
     if ev["q7_fix"]["treatment"] == "silent_fix":
         out.append({"claim_key": "q7_fix.treatment", "verdict": "escalate", "agent_value": "silent_fix", "method": "code", "corrected": None,
                     "why": "a furnished release cannot be edited silently; the General Counsel decides the correction (routed)"})
-    cr = llm.critique(f"jade:{ev['exception_id']}:root_cause", ev["q1_what"]["root_cause"], {"title": exc["title"]}, pin)
+    cr = llm.critique(f"jade:{ev['exception_id']}:root_cause", ev["q1_what"]["root_cause"], {"title": exc["title"], "stated": exc["stated"], "source_value": exc.get("source_value"), "trust": exc["trust"],
+                                                                                         "call_script": "Prepared remarks: for the full year we expect roughly 50 basis points of Adjusted EBITDA margin expansion.",
+                                                                                         "fence": "the draft sentence states 500 while citing the guidance model's 50"}, pin)
     out.append({"claim_key": "q1_what.root_cause", "verdict": cr["verdict"], "why": cr["why"] if cr["verified"] else "accepted; not independently verified (no model)", "method": "llm" if cr["verified"] else "accept",
                 "agent_value": None, "corrected": None})
     return out

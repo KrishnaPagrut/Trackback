@@ -35,7 +35,8 @@ def build(run_id: str, exception_id: str, ts: str) -> str:
     facts = {"title": exc["title"], "amount": _m(exc["amount"]), "classification": q3["value"].replace("_", " "), "material": "material" if q5.get("material") else "not material",
              "leverage": f"{lev['old']:.2f}x to {lev['new']:.2f}x" if lev else "unchanged", "root_cause": ev["q1_what"]["root_cause"],
              "invalidated": rp.get("counts", {}).get("invalidated", 0), "compensations": rp.get("counts", {}).get("compensations", 0)}
-    summ = llm.write(f"memo:{exception_id}:summary", "Write a three-sentence summary for an error memo to the auditor: what happened, whether it matters and why, and what is being done.", facts,
+    summ = llm.write(f"memo:{exception_id}:summary", "Write a three-sentence summary for an error memo to the auditor: what happened, whether it matters and why, and what is being done. "
+                     "The agent never posts anything: the correcting entries and compensations are drafted and routed to the people who approve them.", facts,
                      "{title} ({amount}). It is an {classification}, {material} after aggregation and qualitative review; net leverage moves {leverage}. "
                      "{invalidated} figures and actions rested on it; correcting entries and {compensations} compensations are routed for approval.", ts, max_tokens=300)
     L: list[str] = []

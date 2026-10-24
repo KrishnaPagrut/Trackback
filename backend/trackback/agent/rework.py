@@ -134,7 +134,7 @@ def _heuristic(it: dict) -> dict:
 
 def _ask(agent: str, data: dict, todo: list[dict], ts: str) -> list[dict]:
     payload = {"correction": data["correction_id"], "causal_chain": data["causal_chain"][:8], "constraints": data["constraints"],
-               "your_nodes": [{k: it.get(k) for k in ("artifact_id", "kind", "prior_output_excerpt", "conclusions", "changed_fields")} for it in todo]}
+               "your_nodes": [{k: it.get(k) for k in ("artifact_id", "kind", "prior_output_excerpt", "conclusions", "changed_fields", "inputs_unchanged")} for it in todo]}
     messages = [{"role": "user", "content": json.dumps(payload, default=str)}]
 
     def scripted(_req):
