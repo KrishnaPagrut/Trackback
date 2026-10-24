@@ -1,0 +1,87 @@
+{
+ "doc_id": "payroll_tax_2026",
+ "kind": "generic",
+ "system": "payroll",
+ "title": "Payroll tax register 2026",
+ "version_id": "payroll_tax_2026@v2",
+ "tx_from": "2026-06-04T09:00:02-07:00",
+ "document_date": "2026-06-04",
+ "supersedes": "payroll_tax_2026@v1",
+ "correction_id": "E18",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "sui_rate",
+    "unit": "ratio",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 0.039,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "payroll_tax",
+    "unit": "USD",
+    "account": "6500",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 61033,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "payroll_tax",
+    "unit": "USD",
+    "account": "6500",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 61033,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "payroll_tax",
+    "unit": "USD",
+    "account": "6500",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 61033,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "payroll_tax",
+    "unit": "USD",
+    "account": "6500",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 61033,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "payroll_tax",
+    "unit": "USD",
+    "account": "6500",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 61033,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "payroll_tax",
+    "unit": "USD",
+    "account": "6500",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 61033,
+    "value_text": null
+   }
+  ],
+  "note": "v2: EDD revised the 2026 UI rate to 3.9% retroactive to January 1; +$6,200 YTD",
+  "title": "Payroll tax register 2026"
+ }
+}

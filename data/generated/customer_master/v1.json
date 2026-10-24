@@ -1,0 +1,36 @@
+{
+ "doc_id": "customer_master",
+ "kind": "generic",
+ "system": "erp",
+ "title": "Customer master (AR)",
+ "version_id": "customer_master@v1",
+ "tx_from": "2026-01-05T12:00:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "payment_terms_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 30,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "payment_terms_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 30,
+    "value_text": null
+   }
+  ],
+  "title": "Customer master (AR)"
+ }
+}

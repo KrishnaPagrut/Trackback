@@ -1,0 +1,26 @@
+{
+ "doc_id": "gl_cash_2026_05",
+ "kind": "generic",
+ "system": "gl",
+ "title": "GL cash account 1010, May 2026",
+ "version_id": "gl_cash_2026_05@v1",
+ "tx_from": "2026-05-31T20:00:00-07:00",
+ "document_date": "2026-05-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "book_cash_balance",
+    "unit": "USD",
+    "account": "1010",
+    "period_start": "2026-05-31",
+    "period_end": "2026-05-31",
+    "value_num": 1580000,
+    "value_text": null
+   }
+  ],
+  "title": "GL cash account 1010, May 2026"
+ }
+}

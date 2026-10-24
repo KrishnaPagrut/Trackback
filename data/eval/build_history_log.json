@@ -1,0 +1,230 @@
+[
+ {
+  "msg": "== build_history in scripted mode"
+ },
+ {
+  "msg": "Lyft loaded: inside runs 4/5/2 turns, release publication BLOCKED by the fence; outside runs 4/5 turns; LYFT_TYPO applied"
+ },
+ {
+  "msg": "run R0_q4_2025_cert          2026-02-13T10:00 turns= 5 produced=  4 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-cert_send_q4_2025: approved by Sam Whitfield; executed=True"
+ },
+ {
+  "msg": "run R1_q1_close              2026-04-10T17:00 turns=11 produced= 35 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_q1_utilities_accrual_G3: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "   JE-je_q1_wallbuild_revenue: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "   Q1 locked (2026-01..03) by the Controller"
+ },
+ {
+  "msg": "corr E01  2026-04-12T16:00 naive= 35 invalidated= 0 cleared=34 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "run FU_E01                   2026-04-12T10:00 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_e01_utilities_trueup: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "corr E07  2026-04-20T18:00 naive= 35 invalidated= 0 cleared=33 review=0 unprovable=0 verdict=book_prospective"
+ },
+ {
+  "msg": "run FU_E07                   2026-04-20T12:00 turns= 6 produced=  4 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_e07_catchup: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "run R3a_q1_covenant_calc     2026-04-22T10:00 turns= 4 produced=  3 refusals=0 errors=0"
+ },
+ {
+  "msg": "run R2_q1_board_deck         2026-04-24T15:00 turns= 8 produced= 29 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-deck_publish_q1_2026: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "run R3_q1_covenant_cert      2026-05-15T10:00 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-cert_send_q1_2026: approved by Sam Whitfield; executed=True"
+ },
+ {
+  "msg": "corr E10  2026-05-20T21:00 naive= 35 invalidated=11 cleared=37 review=0 unprovable=0 verdict=book_oop"
+ },
+ {
+  "msg": "   compensation: artifact_supersession (COMP-ACT-deck_publish_q1_2026-E10)"
+ },
+ {
+  "msg": "run FU_E10                   2026-05-20T15:00 turns= 3 produced=  1 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_e10_legal_oop: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "   COMP-ACT-deck_publish_q1_2026-E10: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "corr E02  2026-05-27T17:00 naive= 36 invalidated=14 cleared=35 review=0 unprovable=0 verdict=book_oop"
+ },
+ {
+  "msg": "   compensation: artifact_supersession (COMP-ACT-deck_publish_q1_2026-E02)"
+ },
+ {
+  "msg": "run FU_E02                   2026-05-27T11:00 turns= 3 produced=  1 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_e02_route_setting_oop: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "   COMP-ACT-deck_publish_q1_2026-E02: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "run R4_q1_gm_bonus           2026-05-29T09:00 turns= 5 produced=  8 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-bonus_payout_q1_2026: approved by Mei Tanaka + Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "run R5_cash_refresh_0602     2026-06-02T09:00 turns=17 produced= 22 refusals=0 errors=0"
+ },
+ {
+  "msg": "corr E03  2026-06-03T23:00 naive= 22 invalidated= 2 cleared=20 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "corr E17+E18 (coalesced, X2) naive=86 invalidated=1 cleared=82 pings=[]"
+ },
+ {
+  "msg": "run R6_h2_forecast           2026-06-05T10:00 turns= 6 produced= 12 refusals=0 errors=0"
+ },
+ {
+  "msg": "corr E06  2026-06-09T18:00 naive= 47 invalidated= 3 cleared=59 review=0 unprovable=0 verdict=book_prospective"
+ },
+ {
+  "msg": "E15  refused: sender domain 'kletterwerk-gmbh.co' does not match the vendor master domain 'kletterwerk.d"
+ },
+ {
+  "msg": "run R7_ap_run_0612           2026-06-12T09:00 turns= 5 produced=  3 refusals=0 errors=0"
+ },
+ {
+  "msg": "corr E14  2026-06-12T16:20 naive=  3 invalidated= 2 cleared= 1 review=0 unprovable=0 verdict=book_oop"
+ },
+ {
+  "msg": "   compensation: redraft (None)"
+ },
+ {
+  "msg": "   fence on ACT-payment_run_0612: BLOCKED (2 stale supporters)"
+ },
+ {
+  "msg": "run R7_ap_run_0612_v2        2026-06-12T09:35 turns= 5 produced=  3 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-payment_run_0612_v2: approved by Priya Nair; executed=True"
+ },
+ {
+  "msg": "run R8_q2_est_tax            2026-06-15T10:00 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-tax_payment_q2_2026: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "run R5b_cash_refresh_0616    2026-06-16T09:00 turns= 4 produced=  4 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-dunning_email_pacific_lumen_0616: approved by Priya Nair; executed=True"
+ },
+ {
+  "msg": "corr E05  2026-06-16T21:00 naive= 28 invalidated=18 cleared=10 review=0 unprovable=0 verdict=book_oop"
+ },
+ {
+  "msg": "run FU_E05                   2026-06-16T15:00 turns= 3 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_e05_wire_reversal: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "   ACT-collections_northgate_0616: approved by Priya Nair; executed=True"
+ },
+ {
+  "msg": "corr E08  2026-06-18T17:00 naive= 12 invalidated= 0 cleared=12 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "run R9_june_commissions      2026-06-19T09:00 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "   ACT-commission_payout_0620: approved by Leo Brandt + Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "corr E16  2026-06-22T17:00 naive=  4 invalidated= 4 cleared= 0 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "   compensation: retraction_notice (COMP-ACT-dunning_email_pacific_lumen_0616-E16)"
+ },
+ {
+  "msg": "   COMP-ACT-dunning_email_pacific_lumen_0616-E16: approved by Priya Nair; executed=True"
+ },
+ {
+  "msg": "corr E13  2026-06-24T17:00 naive=  2 invalidated= 2 cleared= 0 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "   compensation: offset_next_commission (COMP-ACT-commission_payout_0620-E13)"
+ },
+ {
+  "msg": "   COMP-ACT-commission_payout_0620-E13: approved by Leo Brandt + Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "norm N2 approved: Pacific Lumen Labs short-pays $15 to $35, 11 of 12 times, matching intermediary bank fees. Auto-clear to 6400 under $50"
+ },
+ {
+  "msg": "norm N1 proposed: G3: +7.8% median over 10 winter months. Accrue at 1.08x, November to March"
+ },
+ {
+  "msg": "run R12_q2_accrual_est       2026-06-30T10:00 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "run R5d_cash_preview_0701    2026-07-01T09:00 turns= 4 produced=  3 refusals=0 errors=0"
+ },
+ {
+  "msg": "norm N1 approved by the Controller (valid from July 1, prospective)"
+ },
+ {
+  "msg": "X1 self-revision: REV-q2_utilities_accrual_est_G3-32b1 naive=4 invalidated=2 cleared=2 pings=['reporting_analyst']"
+ },
+ {
+  "msg": "corr E09  2026-07-02T17:00 naive= 35 invalidated= 2 cleared=31 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "run FU_E09                   2026-07-02T11:00 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "   JE-je_e09_fx_capex: approved by Dana Ortiz; executed=True"
+ },
+ {
+  "msg": "corr E24  2026-07-03T17:00 naive= 39 invalidated= 0 cleared=58 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "corr E25  2026-07-05T16:00 naive= 12 invalidated= 0 cleared= 9 review=0 unprovable=3 verdict=log"
+ },
+ {
+  "msg": "corr E04  2026-07-07T22:00 naive= 22 invalidated= 2 cleared=20 review=0 unprovable=0 verdict=log"
+ },
+ {
+  "msg": "run R10_june_close           2026-07-08T08:00 turns= 8 produced= 14 refusals=0 errors=0"
+ },
+ {
+  "msg": "run R5c_cash_refresh_0708    2026-07-08T08:45 turns= 4 produced=  2 refusals=0 errors=0"
+ },
+ {
+  "msg": "primed the replay cache with the live flows: 13 rows"
+ },
+ {
+  "msg": "== history built: 188 artifacts, 746 edges, 579 findings, 352 cached LLM responses, unbalanced entries: []"
+ }
+]

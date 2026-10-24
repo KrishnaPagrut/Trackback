@@ -1,0 +1,67 @@
+{
+ "doc_id": "ach_batch_2026_06_01",
+ "kind": "generic",
+ "system": "ach",
+ "title": "ACH dues batch June 1, 2026",
+ "version_id": "ach_batch_2026_06_01@v3",
+ "tx_from": "2026-07-07T15:00:00-07:00",
+ "document_date": "2026-07-07",
+ "supersedes": "ach_batch_2026_06_01@v2",
+ "correction_id": "E04",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "debits_presented",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 987000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "collected",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 984501,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r01_count",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 14,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r01",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 2310,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r10",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 189,
+    "value_text": null
+   }
+  ],
+  "note": "v3: return file July 7: one R10 (customer advises not authorized) for $189, member M-48812, with a signed Written Statement of Unauthorized Debit. 36 days after the entry.",
+  "title": "ACH dues batch June 1, 2026"
+ }
+}

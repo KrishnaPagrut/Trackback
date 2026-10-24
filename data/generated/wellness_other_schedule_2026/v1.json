@@ -1,0 +1,136 @@
+{
+ "doc_id": "wellness_other_schedule_2026",
+ "kind": "generic",
+ "system": "contracts",
+ "title": "Other corporate wellness contracts: monthly schedule 2026",
+ "version_id": "wellness_other_schedule_2026@v1",
+ "tx_from": "2026-01-05T11:30:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-07-01",
+    "period_end": "2026-07-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-08-01",
+    "period_end": "2026-08-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-09-01",
+    "period_end": "2026-09-30",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-10-01",
+    "period_end": "2026-10-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-11-01",
+    "period_end": "2026-11-30",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-12-01",
+    "period_end": "2026-12-31",
+    "value_num": 20000,
+    "value_text": null
+   }
+  ],
+  "title": "Other corporate wellness contracts: monthly schedule 2026"
+ }
+}

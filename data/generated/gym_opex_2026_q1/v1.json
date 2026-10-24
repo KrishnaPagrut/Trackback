@@ -1,0 +1,106 @@
+{
+ "doc_id": "gym_opex_2026_q1",
+ "kind": "generic",
+ "system": "gl",
+ "title": "Gym operating expenses Q1 2026 (payroll, rent, other; excludes utilities)",
+ "version_id": "gym_opex_2026_q1@v1",
+ "tx_from": "2026-04-09T11:00:00-07:00",
+ "document_date": "2026-03-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "G1",
+    "line_item": "gym_opex_ex_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1502500,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "gym_opex_ex_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1203000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "gym_opex_ex_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1129500,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "gym_opex_ex_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1318000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "gym_opex_ex_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1090500,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "gym_opex_ex_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1269500,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "depreciation",
+    "unit": "USD",
+    "account": "6700",
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 310000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "interest_expense",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 270000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "realized_fx",
+    "unit": "USD",
+    "account": "7100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 0,
+    "value_text": null
+   }
+  ],
+  "title": "Gym operating expenses Q1 2026 (payroll, rent, other; excludes utilities)"
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "doc_id": "ap_invoices_2026_q1",
+ "kind": "generic",
+ "system": "ap",
+ "title": "AP invoices and corporate costs, Q1 2026",
+ "version_id": "ap_invoices_2026_q1@v3",
+ "tx_from": "2026-05-27T10:00:00-07:00",
+ "document_date": "2026-03-31",
+ "supersedes": "ap_invoices_2026_q1@v2",
+ "correction_id": "E02",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "route_setting",
+    "unit": "USD",
+    "account": "6200",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 40000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "route_setting",
+    "unit": "USD",
+    "account": "6200",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 38000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "route_setting",
+    "unit": "USD",
+    "account": "6200",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 59800,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "legal",
+    "unit": "USD",
+    "account": "6300",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 10000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "legal",
+    "unit": "USD",
+    "account": "6300",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 11000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "legal",
+    "unit": "USD",
+    "account": "6300",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "corporate_payroll",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 440000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "corporate_ga",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 129700,
+    "value_text": null
+   }
+  ],
+  "note": "v3: March route-setting invoice $22,500 dated April 3 surfaced in the AP inbox; signed March timesheets were in the contractor portal on March 31",
+  "title": "AP invoices and corporate costs, Q1 2026"
+ }
+}

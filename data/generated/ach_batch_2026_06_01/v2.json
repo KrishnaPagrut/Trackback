@@ -1,0 +1,67 @@
+{
+ "doc_id": "ach_batch_2026_06_01",
+ "kind": "generic",
+ "system": "ach",
+ "title": "ACH dues batch June 1, 2026",
+ "version_id": "ach_batch_2026_06_01@v2",
+ "tx_from": "2026-06-03T16:00:00-07:00",
+ "document_date": "2026-06-03",
+ "supersedes": "ach_batch_2026_06_01@v1",
+ "correction_id": "E03",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "debits_presented",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 987000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "collected",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 984690,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r01_count",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 14,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r01",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 2310,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r10",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 0,
+    "value_text": null
+   }
+  ],
+  "note": "v2: return file June 3: 14 R01 (insufficient funds) returns totaling $2,310",
+  "title": "ACH dues batch June 1, 2026"
+ }
+}

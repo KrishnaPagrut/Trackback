@@ -1,0 +1,46 @@
+{
+ "doc_id": "fx_rates_2026_03",
+ "kind": "generic",
+ "system": "rate_vendor",
+ "title": "EUR/USD daily rates March 2026 (rate vendor)",
+ "version_id": "fx_rates_2026_03@v1",
+ "tx_from": "2026-03-20T17:00:00-07:00",
+ "document_date": "2026-03-20",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "eurusd",
+    "unit": "rate",
+    "account": null,
+    "period_start": "2026-03-20",
+    "period_end": "2026-03-20",
+    "value_num": 1.028,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "eurusd",
+    "unit": "rate",
+    "account": null,
+    "period_start": "2026-03-19",
+    "period_end": "2026-03-19",
+    "value_num": 1.081,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "eurusd",
+    "unit": "rate",
+    "account": null,
+    "period_start": "2026-03-23",
+    "period_end": "2026-03-23",
+    "value_num": 1.0835,
+    "value_text": null
+   }
+  ],
+  "title": "EUR/USD daily rates March 2026 (rate vendor)"
+ }
+}

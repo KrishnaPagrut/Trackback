@@ -1,0 +1,46 @@
+{
+ "doc_id": "order_form_northgate_amendment",
+ "kind": "generic",
+ "system": "crm",
+ "title": "Order form: Northgate amendment (sales CRM)",
+ "version_id": "order_form_northgate_amendment@v1",
+ "tx_from": "2026-06-17T09:00:00-07:00",
+ "document_date": "2026-06-17",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "seats",
+    "unit": "count",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 50,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "seat_price",
+    "unit": "USD/seat",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 60,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "term_months",
+    "unit": "months",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 12,
+    "value_text": null
+   }
+  ],
+  "title": "Order form: Northgate amendment (sales CRM)"
+ }
+}

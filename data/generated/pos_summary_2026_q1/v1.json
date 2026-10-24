@@ -1,0 +1,76 @@
+{
+ "doc_id": "pos_summary_2026_q1",
+ "kind": "generic",
+ "system": "pos",
+ "title": "Point-of-sale summary Q1 2026 (day passes and retail)",
+ "version_id": "pos_summary_2026_q1@v1",
+ "tx_from": "2026-04-02T09:00:00-07:00",
+ "document_date": "2026-03-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "G1",
+    "line_item": "daypass_retail_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 490000,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "daypass_retail_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 430000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "daypass_retail_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 400000,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "daypass_retail_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 460000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "daypass_retail_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 350000,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "daypass_retail_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 414000,
+    "value_text": null
+   }
+  ],
+  "title": "Point-of-sale summary Q1 2026 (day passes and retail)"
+ }
+}

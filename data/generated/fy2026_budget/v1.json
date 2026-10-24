@@ -1,0 +1,176 @@
+{
+ "doc_id": "fy2026_budget",
+ "kind": "generic",
+ "system": "fpa",
+ "title": "FY2026 Budget (board approved)",
+ "version_id": "fy2026_budget@v1",
+ "tx_from": "2026-01-05T10:00:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "budget_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 42000000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 6000000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_pretax",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 3200000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 10500000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_membership_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 7350000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 540000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_route_setting",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 120000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_legal",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 30000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_payroll_tax",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 190000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 1500000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 150000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "budget_utilities",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 52000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "budget_payroll_tax",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-06-30",
+    "value_num": 380000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "weekly_opex_cash",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 215000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "federal_tax_rate",
+    "unit": "ratio",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 0.21,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "avg_monthly_dues",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-12-31",
+    "value_num": 105,
+    "value_text": null
+   }
+  ],
+  "title": "FY2026 Budget (board approved)"
+ }
+}

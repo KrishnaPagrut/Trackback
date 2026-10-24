@@ -1,0 +1,327 @@
+{
+ "doc_id": "contract_northgate",
+ "kind": "generic",
+ "system": "contracts",
+ "title": "Northgate Biotech corporate wellness MSA + order form",
+ "version_id": "contract_northgate@v2",
+ "tx_from": "2026-06-09T11:00:00-07:00",
+ "document_date": "2026-05-15",
+ "supersedes": "contract_northgate@v1",
+ "correction_id": "E06",
+ "body": {
+  "text": "Amendment No. 1 signed May 15, 2026, effective June 1, 2026: adds 50 seats at $45 per seat per month (standalone price $60) for the remaining 19 months. ASC 606-10-25-13(a) prospective modification: remaining $228,000 + $42,750 = $270,750 over 19 months = $14,250 per month.",
+  "claims": [
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "seats",
+    "unit": "count",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 200,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "seat_price",
+    "unit": "USD/seat",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 60,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "term_months",
+    "unit": "months",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 24,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "payment_terms",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "net 30"
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-07-01",
+    "period_end": "2026-07-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-08-01",
+    "period_end": "2026-08-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-09-01",
+    "period_end": "2026-09-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-10-01",
+    "period_end": "2026-10-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-11-01",
+    "period_end": "2026-11-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-12-01",
+    "period_end": "2026-12-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-01-01",
+    "period_end": "2027-01-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-02-01",
+    "period_end": "2027-02-28",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-03-01",
+    "period_end": "2027-03-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-04-01",
+    "period_end": "2027-04-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-05-01",
+    "period_end": "2027-05-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-06-01",
+    "period_end": "2027-06-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-07-01",
+    "period_end": "2027-07-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-08-01",
+    "period_end": "2027-08-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-09-01",
+    "period_end": "2027-09-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-10-01",
+    "period_end": "2027-10-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-11-01",
+    "period_end": "2027-11-30",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2027-12-01",
+    "period_end": "2027-12-31",
+    "value_num": 14250,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "amendment_seats",
+    "unit": "count",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 50,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "amendment_seat_price",
+    "unit": "USD/seat",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 45,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "amendment_effective",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "2026-06-01"
+   }
+  ],
+  "title": "Northgate Biotech corporate wellness MSA + order form"
+ }
+}

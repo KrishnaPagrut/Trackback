@@ -1,0 +1,441 @@
+# Trackback answer key. Hand-written from Part 2's 23-item table and the engine rules in DECISIONS.md, BEFORE the engine was
+# run on the full history. For every correction: every artifact it reaches (verdict + reason) and the compensations expected.
+# Artifacts not listed default to `unaffected` (not reached). Reasons use the engine's vocabulary.
+# Frozen at milestone M3: see `frozen` below and STATUS.md. Later edits go in CHANGELOG.md.
+version: 1
+frozen: null
+default_verdict: unaffected
+reasons: [value_changed, conclusion_flipped, early_cutoff, below_materiality, conclusion_unchanged, different_period, different_line_item, claim_unchanged, prose_judged, estimate_change, supporter_retracted, supporters_cleared, parameters_within_materiality]
+decoy_categories:
+  different_period: [E06, E20]
+  different_line_item: [E18, E09]
+  immaterial: [E08, E17, E04]
+  offsetting: [E24]
+  qualitative_prose_still_true: [E11, LYFT_TYPO]
+  sign_flip: [E26]
+  retraction_no_replacement: [E25]
+
+corrections:
+  E01:
+    title: "Bayline invoice $51,900 vs $48,000 accrual (estimate change)"
+    kind: estimate
+    expected_materiality: log
+    artifacts:
+      q1_utilities_expense: {verdict: unaffected, reason: estimate_change}
+      q1_gym_ebitda_G3: {verdict: unaffected, reason: estimate_change}
+      memo_q1_utilities_accrual: {verdict: unaffected, reason: estimate_change}
+      je_q1_utilities_accrual_G3: {verdict: unaffected, reason: estimate_change}
+    compensations: []
+    must_stay_valid: [deck_s_utilities, tile_q1_net_leverage, cert_send_q1_2026]
+    note: "True-up of +$3,900 booked in April by the Close Accountant (FU_E01). Under the $8k trivial line."
+  E07:
+    title: "UC Sierra change order: prospective catch-up, Q1 was right as of March"
+    kind: estimate
+    expected_materiality: book_prospective
+    artifacts:
+      uc_sierra_progress_pct: {verdict: unaffected, reason: estimate_change}
+      q1_wallbuild_revenue: {verdict: unaffected, reason: estimate_change}
+      memo_q1_wallbuild: {verdict: unaffected, reason: estimate_change}
+    compensations: []
+    must_stay_valid: [q1_revenue_total, deck_s_wallbuild, je_q1_wallbuild_revenue]
+    note: "+$21,818 cumulative catch-up booked in April (FU_E07)."
+  E10:
+    title: "March legal invoice $14,000 un-accrued (error, out of period)"
+    kind: error
+    expected_materiality: book_oop
+    artifacts:
+      q1_legal_expense: {verdict: invalidated, reason: value_changed}
+      q1_corporate_costs: {verdict: invalidated, reason: value_changed}
+      bva_q1_legal: {verdict: invalidated, reason: value_changed}
+      q1_ebitda: {verdict: invalidated, reason: value_changed}
+      q1_pretax: {verdict: invalidated, reason: value_changed}
+      ttm_adj_ebitda_2026_q1: {verdict: invalidated, reason: value_changed}
+      bva_q1_ebitda: {verdict: invalidated, reason: value_changed}
+      tile_q1_ebitda_margin: {verdict: invalidated, reason: value_changed}
+      deck_s_ebitda_margin: {verdict: invalidated, reason: prose_judged}
+      deck_publish_q1_2026: {verdict: invalidated, reason: value_changed}
+      tile_q1_ebitda: {verdict: unaffected, reason: conclusion_unchanged}
+      tile_q1_net_leverage: {verdict: unaffected, reason: conclusion_unchanged}
+      leverage_2026_q1: {verdict: unaffected, reason: conclusion_unchanged}
+      covenant_headroom_2026_q1: {verdict: unaffected, reason: conclusion_unchanged}
+      cert_s_compliance: {verdict: unaffected, reason: conclusion_unchanged}
+      deck_s_covenant: {verdict: invalidated, reason: rerendered}
+      cert_send_q1_2026: {verdict: unaffected, reason: conclusion_unchanged}
+    compensations:
+      - {for: ACT-deck_publish_q1_2026, kind: artifact_supersession, approver: controller}
+    must_stay_valid: [cert_send_q1_2026, tile_q1_revenue, deck_s_revenue_growth]
+    note: "Leverage 2.954x, still compliant: certificate touched, still valid, calculation attached."
+  E02:
+    title: "March route-setting invoice $22,500 dated April 3 (error, timesheets existed)"
+    kind: error
+    expected_materiality: book_oop
+    artifacts:
+      q1_route_setting_expense: {verdict: invalidated, reason: value_changed}
+      q1_corporate_costs: {verdict: invalidated, reason: value_changed}
+      bva_q1_route_setting: {verdict: invalidated, reason: value_changed}
+      kpi_q1_route_setting_qoq: {verdict: invalidated, reason: value_changed}
+      q1_ebitda: {verdict: invalidated, reason: value_changed}
+      q1_pretax: {verdict: invalidated, reason: value_changed}
+      ttm_adj_ebitda_2026_q1: {verdict: invalidated, reason: value_changed}
+      bva_q1_ebitda: {verdict: invalidated, reason: value_changed}
+      tile_q1_ebitda_margin: {verdict: invalidated, reason: value_changed}
+      deck_s_route_setting: {verdict: invalidated, reason: prose_judged}
+      deck_s_ebitda_margin: {verdict: invalidated, reason: prose_judged}
+      deck_s_covenant: {verdict: invalidated, reason: rerendered}
+      cert_s_compliance: {verdict: invalidated, reason: rerendered}
+      deck_publish_q1_2026: {verdict: invalidated, reason: value_changed}
+      tile_q1_ebitda: {verdict: unaffected, reason: conclusion_unchanged}
+      tile_q1_net_leverage: {verdict: unaffected, reason: conclusion_unchanged}
+      leverage_2026_q1: {verdict: unaffected, reason: conclusion_unchanged}
+      covenant_headroom_2026_q1: {verdict: unaffected, reason: conclusion_unchanged}
+      cert_send_q1_2026: {verdict: unaffected, reason: conclusion_unchanged}
+    compensations:
+      - {for: ACT-deck_publish_q1_2026, kind: artifact_supersession, approver: controller}
+    must_stay_valid: [tile_q1_revenue, tile_q1_membership_revenue, deck_s_revenue_growth, cert_send_q1_2026]
+    note: "'Fell 18% QoQ' becomes 'fell 2%'. Leverage 2.966x, still compliant; headroom $63.5k."
+  E03:
+    title: "June 1 dues batch: 14 R01 returns, $2,310"
+    kind: fact_update
+    expected_materiality: log
+    artifacts:
+      cf_2026_w23_actual_collections: {verdict: invalidated, reason: value_changed}
+      ar_member_dues_2026_06: {verdict: invalidated, reason: value_changed}
+      cf_2026_w23: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w24: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w25: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w26: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w27: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w28: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w29: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w30: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w31: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w32: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w33: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w34: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w35: {verdict: unaffected, reason: below_materiality}
+      cash_s_may: {verdict: unaffected, reason: conclusion_unchanged}
+    compensations: []
+    must_stay_valid: [q1_revenue_total, deck_s_membership_flux, fc_revenue_h2_total]
+    note: "Reversal 1015->1210 and one retry per policy T-4 are booked by the June close (R10). P&L untouched."
+  E17:
+    title: "Bank fee revised $25.00 -> $25.40"
+    kind: fact_update
+    expected_materiality: log
+    artifacts:
+      recon_bank_fee_2026_06_w1: {verdict: invalidated, reason: value_changed}
+    compensations: []
+    must_stay_valid: [cf_2026_w23, kpi_may_cash_collected, cash_s_may]
+    note: "Exactly one recon line recalculated (auto-adjust), zero alerts."
+  E06:
+    title: "Northgate amendment: +50 seats at $45 from June (prospective modification)"
+    kind: estimate
+    expected_materiality: book_prospective
+    artifacts:
+      fc_wellness_2026-06: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_2026-07: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_2026-08: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_2026-09: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_2026-10: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_2026-11: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_2026-12: {verdict: unaffected, reason: below_materiality}
+      fc_wellness_h2_total: {verdict: invalidated, reason: value_changed}
+      fc_revenue_h2_total: {verdict: invalidated, reason: value_changed}
+      fc_s_h2: {verdict: invalidated, reason: prose_judged}
+      wellness_revenue_ytd_may: {verdict: unaffected, reason: claim_unchanged}
+      q1_wellness_revenue: {verdict: unaffected, reason: claim_unchanged}
+    compensations: []
+    must_stay_valid: [q1_wellness_revenue, q1_revenue_total, tile_q1_revenue, deck_publish_q1_2026]
+    note: "Trap: never reaches Q1 (Jan-May claims unchanged)."
+  E14:
+    title: "Duplicate invoice 2231 / INV-2231 in the June 12 run (blocked by the fence)"
+    kind: fact_update
+    expected_materiality: book_oop
+    artifacts:
+      ap_run_0612_total: {verdict: invalidated, reason: value_changed}
+      ap_run_0612_cash_after: {verdict: unaffected, reason: conclusion_unchanged}
+      payment_run_0612: {verdict: invalidated, reason: value_changed}
+    compensations:
+      - {for: ACT-payment_run_0612, kind: redraft, approver: ap}
+    fence: {action: ACT-payment_run_0612, expected: blocked}
+    must_stay_valid: []
+    note: "The second run (payment_run_0612_v2) pays INV-2231 once."
+  E05:
+    title: "Corrected May statement: $40,000 wire misdirected"
+    kind: fact_update
+    expected_materiality: book_oop
+    artifacts:
+      cash_opening_2026_w23: {verdict: invalidated, reason: value_changed}
+      cf_2026_w23: {verdict: invalidated, reason: value_changed}
+      cf_2026_w24: {verdict: invalidated, reason: value_changed}
+      cf_2026_w25: {verdict: invalidated, reason: value_changed}
+      cf_2026_w26: {verdict: invalidated, reason: value_changed}
+      cf_2026_w27: {verdict: invalidated, reason: value_changed}
+      cf_2026_w28: {verdict: invalidated, reason: value_changed}
+      cf_2026_w29: {verdict: invalidated, reason: value_changed}
+      cf_2026_w30: {verdict: invalidated, reason: value_changed}
+      cf_2026_w31: {verdict: invalidated, reason: value_changed}
+      cf_2026_w32: {verdict: invalidated, reason: value_changed}
+      cf_2026_w33: {verdict: invalidated, reason: value_changed}
+      cf_2026_w34: {verdict: invalidated, reason: value_changed}
+      cf_2026_w35: {verdict: invalidated, reason: value_changed}
+      cash_s_may: {verdict: invalidated, reason: prose_judged}
+      kpi_may_cash_collected: {verdict: invalidated, reason: value_changed}
+      recon_cash_2026_05: {verdict: invalidated, reason: value_changed}
+      ar_northgate_2026_05_31: {verdict: invalidated, reason: conclusion_flipped}
+      ap_run_0612_cash_after: {verdict: unaffected, reason: conclusion_unchanged}
+      ap_run_0612_cash_after_v2: {verdict: unaffected, reason: conclusion_unchanged}
+      payment_run_0612_v2: {verdict: unaffected, reason: conclusion_unchanged}
+      payment_run_0612: {verdict: unaffected, reason: conclusion_unchanged}
+    compensations: []
+    must_stay_valid: [wellness_revenue_ytd_may, fc_wellness_2026-06, q1_revenue_total]
+    note: "May revenue untouched (earned whether or not paid). Reversal referencing May and the collections task come from FU_E05. Cash-floor check recomputed: buffer still OK, note only."
+  E16:
+    title: "Contract net-45 vs master net-30: dunning sent on day 31"
+    kind: fact_update
+    expected_materiality: log
+    artifacts:
+      ar_pacific_lumen_days_past_due_0616: {verdict: invalidated, reason: conclusion_flipped}
+      cf_0616_collections_w25: {verdict: invalidated, reason: value_changed}
+      cf_0616_collections_w27: {verdict: invalidated, reason: value_changed}
+      dunning_email_pacific_lumen_0616: {verdict: invalidated, reason: conclusion_flipped}
+    compensations:
+      - {for: ACT-dunning_email_pacific_lumen_0616, kind: retraction_notice, approver: ap}
+    must_stay_valid: [q1_revenue_total, wellness_revenue_ytd_may]
+    note: "Contract wins. Revenue untouched."
+  E13:
+    title: "Commission at list ($60) instead of $45: $720 overpaid"
+    kind: error
+    expected_materiality: log
+    artifacts:
+      commission_northgate_amendment: {verdict: invalidated, reason: value_changed}
+      commission_payout_0620: {verdict: invalidated, reason: value_changed}
+    compensations:
+      - {for: ACT-commission_payout_0620, kind: offset_next_commission, approver: vp_sales+controller, amount: 720}
+    must_stay_valid: [fc_wellness_h2_total, q1_revenue_total]
+    note: "Payouts are exact lines: $720 is recovered by offset even though it is under the trivial threshold."
+  E18:
+    title: "Revised 2026 UI rate retroactive to January (+$6,200 YTD)"
+    kind: estimate
+    expected_materiality: log
+    artifacts:
+      q1_payroll_tax_expense: {verdict: unaffected, reason: estimate_change}
+      deck_s_payroll_tax: {verdict: unaffected, reason: estimate_change}
+    compensations: []
+    must_stay_valid: [deck_s_revenue_growth, tile_q1_net_leverage, cert_send_q1_2026, q1_revenue_total]
+    note: "Different line item: revenue commentary and the covenant are never reached. YTD true-up booked in June (R10 h1_payroll_tax_bva consumes v2)."
+  E09:
+    title: "EUR/USD fixing 1.0280 -> 1.0820 on the Kletterwerk invoice"
+    kind: error
+    expected_materiality: log
+    artifacts:
+      capex_holds_2026_03: {verdict: invalidated, reason: value_changed}
+      depreciation_schedule_holds_2026: {verdict: invalidated, reason: value_changed}
+    compensations: []
+    must_stay_valid: [q1_ebitda, ttm_adj_ebitda_2026_q1, q1_revenue_total, cert_send_q1_2026]
+    note: "FX and depreciation sit outside covenant EBITDA: different line item. Asset adjustment +$4,590 in July (FU_E09)."
+  E24:
+    title: "Decoy (offsetting): job-cost reclass, total unchanged"
+    kind: fact_update
+    expected_materiality: log
+    artifacts:
+      q1_wallbuild_cost: {verdict: unaffected, reason: early_cutoff}
+      uc_sierra_progress_pct: {verdict: unaffected, reason: claim_unchanged}
+      q1_wallbuild_revenue: {verdict: unaffected, reason: claim_unchanged}
+      memo_q1_wallbuild: {verdict: unaffected, reason: claim_unchanged}
+    compensations: []
+    must_stay_valid: [q1_ebitda, q1_wallbuild_revenue]
+    note: "Materials up, labor down, sum identical: early cutoff stops the walk before EBITDA."
+  E25:
+    title: "Decoy (retraction): member total withdrawn, no replacement"
+    kind: fact_update
+    expected_materiality: log
+    artifacts:
+      fc_membership_h2: {verdict: unprovable, reason: supporter_retracted}
+      fc_revenue_h2_total: {verdict: unprovable, reason: supporter_retracted}
+      fc_s_h2: {verdict: unprovable, reason: supporter_retracted}
+    compensations: []
+    must_stay_valid: [fc_wellness_h2_total]
+    note: "Per-gym counts unchanged; only the company total was retracted."
+  E04:
+    title: "$189 R10 return with a signed WSUD (36 days)"
+    kind: fact_update
+    expected_materiality: log
+    artifacts:
+      cf_2026_w23_actual_collections: {verdict: invalidated, reason: value_changed}
+      ar_member_dues_2026_06: {verdict: invalidated, reason: value_changed}
+      cf_2026_w23: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w24: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w25: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w26: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w27: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w28: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w29: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w30: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w31: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w32: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w33: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w34: {verdict: unaffected, reason: below_materiality}
+      cf_2026_w35: {verdict: unaffected, reason: below_materiality}
+      cash_s_may: {verdict: unaffected, reason: conclusion_unchanged}
+    compensations: []
+    deny_list_check: "never a retry: the June close opens a Member Services case and suspends debits (member_case_m48812)"
+    must_stay_valid: [q1_revenue_total, fc_revenue_h2_total]
+    note: "Trap: default retry logic treats it like R01. Trackback's R10 policy and norm deny-list forbid re-presenting."
+  E08:
+    title: "$6,500 SLA credit for the May closure (known in May, booked in June)"
+    kind: error
+    expected_materiality: log
+    artifacts:
+      wellness_revenue_ytd_may: {verdict: unaffected, reason: below_materiality}
+    compensations: []
+    misstatement_log: true
+    must_stay_valid: [fc_wellness_h2_total, q1_wellness_revenue]
+    note: "Immaterial; logged so the aggregate gets tested; booked to 4900 in June by R10."
+  E11:
+    title: "THE MOMENT: March annual-prepaid release duplicated, $118,000"
+    kind: error
+    expected_materiality: escalate
+    artifacts:
+      q1_deferred_release_2026_03: {verdict: invalidated, reason: value_changed}
+      memo_q1_deferred_revenue: {verdict: invalidated, reason: prose_judged}
+      q1_membership_revenue_G1: {verdict: invalidated, reason: value_changed}
+      q1_membership_revenue_G3: {verdict: invalidated, reason: value_changed}
+      q1_membership_revenue_G4: {verdict: invalidated, reason: value_changed}
+      q1_membership_revenue_G5: {verdict: invalidated, reason: value_changed}
+      q1_membership_revenue_G6: {verdict: invalidated, reason: value_changed}
+      q1_membership_revenue: {verdict: invalidated, reason: value_changed}
+      q1_gym_ebitda_G1: {verdict: invalidated, reason: value_changed}
+      q1_gym_ebitda_G3: {verdict: invalidated, reason: value_changed}
+      q1_gym_ebitda_G4: {verdict: invalidated, reason: value_changed}
+      q1_gym_ebitda_G5: {verdict: invalidated, reason: value_changed}
+      q1_gym_ebitda_G6: {verdict: invalidated, reason: value_changed}
+      q1_revenue_total: {verdict: invalidated, reason: value_changed}
+      q1_ebitda: {verdict: invalidated, reason: value_changed}
+      q1_pretax: {verdict: invalidated, reason: value_changed}
+      ttm_adj_ebitda_2026_q1: {verdict: invalidated, reason: value_changed}
+      tile_q1_revenue: {verdict: invalidated, reason: value_changed}
+      tile_q1_ebitda: {verdict: invalidated, reason: value_changed}
+      tile_q1_ebitda_margin: {verdict: invalidated, reason: value_changed}
+      tile_q1_membership_revenue: {verdict: invalidated, reason: value_changed}
+      tile_q1_net_leverage: {verdict: invalidated, reason: conclusion_flipped}
+      bva_q1_revenue: {verdict: invalidated, reason: value_changed}
+      bva_q1_membership: {verdict: invalidated, reason: value_changed}
+      bva_q1_ebitda: {verdict: invalidated, reason: value_changed}
+      deck_s_membership_flux: {verdict: invalidated, reason: prose_judged}
+      deck_s_ebitda_margin: {verdict: invalidated, reason: prose_judged}
+      deck_s_covenant: {verdict: invalidated, reason: prose_judged}
+      deck_publish_q1_2026: {verdict: invalidated, reason: value_changed}
+      leverage_2026_q1: {verdict: invalidated, reason: conclusion_flipped}
+      covenant_headroom_2026_q1: {verdict: invalidated, reason: conclusion_flipped}
+      cert_s_compliance: {verdict: invalidated, reason: prose_judged}
+      cert_send_q1_2026: {verdict: invalidated, reason: conclusion_flipped}
+      gm_bonus_q1_G1: {verdict: invalidated, reason: value_changed}
+      gm_bonus_q1_G4: {verdict: invalidated, reason: value_changed}
+      gm_bonus_q1_total: {verdict: invalidated, reason: value_changed}
+      bonus_payout_q1_2026: {verdict: invalidated, reason: value_changed}
+      q2_estimated_tax_2026: {verdict: invalidated, reason: value_changed}
+      tax_payment_q2_2026: {verdict: invalidated, reason: value_changed}
+      q1_membership_revenue_G2: {verdict: unaffected, reason: claim_unchanged}
+      q1_gym_ebitda_G2: {verdict: unaffected, reason: claim_unchanged}
+      gm_bonus_q1_G2: {verdict: unaffected, reason: claim_unchanged}
+      gm_bonus_q1_G3: {verdict: unaffected, reason: conclusion_unchanged}
+      gm_bonus_q1_G5: {verdict: unaffected, reason: conclusion_unchanged}
+      gm_bonus_q1_G6: {verdict: unaffected, reason: conclusion_unchanged}
+      kpi_q1_revenue_growth_yoy: {verdict: unaffected, reason: conclusion_unchanged}
+      deck_s_revenue_growth: {verdict: unaffected, reason: prose_judged}
+      cf_2026_weekly_dues: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w24: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w25: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w26: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w27: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w28: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w29: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w30: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w31: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w32: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w33: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w34: {verdict: unaffected, reason: claim_unchanged}
+      cf_2026_w35: {verdict: unaffected, reason: claim_unchanged}
+    compensations:
+      - {for: ACT-cert_send_q1_2026, kind: corrected_certificate, approver: cfo}
+      - {for: ACT-bonus_payout_q1_2026, kind: offset_next_bonus, approver: hr+controller, amount: 2320}
+      - {for: ACT-tax_payment_q2_2026, kind: reduce_next_installment, approver: controller, amount: 24780}
+      - {for: ACT-deck_publish_q1_2026, kind: artifact_supersession, approver: controller}
+    expected_values:
+      ttm_adj_ebitda_2026_q1: 5445500
+      leverage_2026_q1: 3.030
+      gm_bonus_q1_G4_delta: -1280
+      gm_bonus_q1_G1_delta: -1040
+    must_stay_valid: [kpi_q1_route_setting_qoq, tile_q1_cash_collected, deck_s_cash, kpi_may_cash_collected, cash_opening_2026_w23, cf_2026_w23_actual_collections, fc_revenue_h2_total, payment_run_0612_v2]
+    note: "Leverage 2.966x -> 3.030x against 3.00x: breach. No cash moved, so every cash artifact clears. E12 (bonus offsets) and E23 (tax installment) are the compensations. E22 (controller rejects the March-dated draft) is in the live flow."
+  E20:
+    title: "Scenario B: December 2025 annual memberships ($95,000 of 2026 service) recognized in 2025 (prior-year error, little r)"
+    kind: error
+    expected_materiality: little_r
+    artifacts:
+      ttm_adj_ebitda_2025_q4: {verdict: invalidated, reason: value_changed}
+      leverage_2025_q4: {verdict: unaffected, reason: conclusion_unchanged}
+      cert_send_q4_2025: {verdict: unaffected, reason: conclusion_unchanged}
+      ttm_adj_ebitda_2026_q1: {verdict: invalidated, reason: value_changed}
+      tile_q1_net_leverage: {verdict: unaffected, reason: conclusion_unchanged}
+      leverage_2026_q1: {verdict: unaffected, reason: conclusion_unchanged}
+      covenant_headroom_2026_q1: {verdict: unaffected, reason: conclusion_unchanged}
+      cert_s_compliance: {verdict: invalidated, reason: rerendered}
+      deck_s_covenant: {verdict: invalidated, reason: rerendered}
+      cert_send_q1_2026: {verdict: unaffected, reason: conclusion_unchanged}
+      comp_fy2025_revenue: {verdict: invalidated, reason: value_changed}
+      comp_fy2025_ebitda: {verdict: invalidated, reason: value_changed}
+      kpi_fy2025_ebitda_margin: {verdict: invalidated, reason: value_changed}
+      deck_s_fy2025_comp: {verdict: invalidated, reason: prose_judged}
+      deck_publish_q1_2026: {verdict: invalidated, reason: value_changed}
+      kpi_q1_revenue_growth_yoy: {verdict: unaffected, reason: claim_unchanged}
+      deck_s_revenue_growth: {verdict: unaffected, reason: claim_unchanged}
+      kpi_q1_route_setting_qoq: {verdict: unaffected, reason: claim_unchanged}
+      net_debt_2025_q4: {verdict: unaffected, reason: claim_unchanged}
+    compensations:
+      - {for: ACT-deck_publish_q1_2026, kind: artifact_supersession, approver: controller}
+    must_stay_valid: [june_sales_credits, h1_payroll_tax_bva, bva_2026_04_utilities, fc_revenue_h2_total]
+    note: "Applied after E11, so the Q1 certificate's conclusion (breach) is unchanged. Q4 2025 certificate rechecked: 2.915x, still compliant. Trap: agent proposes a Q2 out-of-period entry; the Controller says no (revise comparatives, adjust opening RE and deferred revenue)."
+  E26:
+    title: "Eval scenario (sign flip): Q4 2025 route-setting was $130,000"
+    kind: error
+    expected_materiality: escalate
+    eval_only: true
+    artifacts:
+      kpi_q1_route_setting_qoq: {verdict: invalidated, reason: conclusion_flipped}
+      deck_s_route_setting: {verdict: invalidated, reason: prose_judged}
+      deck_publish_q1_2026: {verdict: invalidated, reason: value_changed}
+    compensations:
+      - {for: ACT-deck_publish_q1_2026, kind: artifact_supersession, approver: controller}
+    must_stay_valid: [tile_q1_net_leverage, q1_ebitda]
+    note: "A sentence whose direction flips must be invalidated even though the Q1 numbers do not move."
+  LYFT_TYPO:
+    title: "Real world: Lyft's Q4 2023 release said 500 basis points; the CFO corrected it to 50 on the call (Feb 13, 2024)"
+    kind: error
+    expected_materiality: big_r
+    artifacts:
+      lyft_ext_fy24_margin: {verdict: invalidated, reason: value_changed}
+      lyft_ext_fy24_adj_ebitda: {verdict: invalidated, reason: value_changed}
+      lyft_ext_fy24_gross_bookings: {verdict: unaffected, reason: claim_unchanged}
+      lyft_ext_s_note: {verdict: invalidated, reason: prose_judged}
+      lyft_ext_headline: {verdict: invalidated, reason: prose_judged}
+      lyft_ext_s_q4_beat: {verdict: unaffected, reason: claim_unchanged}
+      lyft_ext_s_story_q4: {verdict: unaffected, reason: claim_unchanged}
+      lyft_ext_buy_order: {verdict: invalidated, reason: value_changed}
+      lyft_ext_publish_story: {verdict: invalidated, reason: value_changed}
+    compensations:
+      - {for: ACT-lyft_ext_buy_order, kind: position_review, approver: pm}
+      - {for: ACT-lyft_ext_publish_story, kind: issue_correction_note, approver: editor}
+    knowable_after_pin: true
+    must_stay_valid: [lyft_ext_fy24_gross_bookings, lyft_ext_s_q4_beat, lyft_ext_s_story_q4]
+    note: "Only the margin-expansion claim changes (500 -> 50 bps). The Q4 beat sentences and the bookings projection never cited it. The note, the headline, the filled order and the published story did; the order and the story already executed, so they get compensations. Inside the company the same typo is caught by the fence before publication (non_source_items LYFT_FENCE)."
+
+non_source_items:
+  LYFT_FENCE: {check: "event fence_block for ACT-lyft_publish_release with problem figure_mismatch (stated 500, cited 50 on lyft_margin_expansion_bps); ACT-lyft_publish_release state blocked; ACT-lyft_file_8k stays proposed; event figure_mismatch logged at emit time for lyft_s_outlook_margin"}
+  E12: {check: "compensation offset_next_bonus for ACT-bonus_payout_q1_2026 with amount 2320 (G4 1280 + G1 1040); G3/G5/G6 cleared conclusion_unchanged; G2 cleared claim_unchanged"}
+  E15: {check: "event correction_refused for vendor_master from email_kletterwerk_iban_2026_06_10; vendor master has one version"}
+  E19: {check: "cut (no ALFRED vintages); documented in STATUS.md"}
+  E21: {check: "R10: pl_auto_clear_0706 == 35, pl_dispute_0706 == 1000, route_to_human event, je_pl_bank_fee_0706 lines 6400/1200 $35"}
+  E22: {check: "JE-je_e11_dedupe_v1 posting period 2026-03 locked; sod_violation event (schema CHECK); controller rejection recorded; JE-je_e11_dedupe_v2 posted to 2026-06 with orig 2026-03"}
+  E23: {check: "compensation reduce_next_installment for ACT-tax_payment_q2_2026 with amount 24780"}
+  E-norm: {check: "norm bayline_winter_accrual proposed with factor 1.08 from 10 winter months, median +7.8%, status proposed (not applied); norm pacific_lumen_short_pay approved 2026-06-30"}

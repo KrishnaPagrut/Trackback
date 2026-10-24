@@ -1,0 +1,56 @@
+{
+ "doc_id": "vendor_master",
+ "kind": "generic",
+ "system": "erp",
+ "title": "Vendor master (AP)",
+ "version_id": "vendor_master@v1",
+ "tx_from": "2026-01-05T12:30:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Kletterwerk GmbH",
+    "line_item": "iban",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "DE89 3704 0044 0532 0130 00"
+   },
+   {
+    "entity": "Kletterwerk GmbH",
+    "line_item": "email_domain",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "kletterwerk.de"
+   },
+   {
+    "entity": "Kletterwerk GmbH",
+    "line_item": "owner",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "Priya Nair (AP Specialist)"
+   },
+   {
+    "entity": "Summit Mats Supply",
+    "line_item": "iban",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "US12 SUMMIT 0099 2231"
+   }
+  ],
+  "title": "Vendor master (AP)"
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "doc_id": "bank_feed_2026_06_w1",
+ "kind": "generic",
+ "system": "bank",
+ "title": "Bank feed, week of June 1, 2026",
+ "version_id": "bank_feed_2026_06_w1@v1",
+ "tx_from": "2026-06-02T08:00:00-07:00",
+ "document_date": "2026-06-02",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "bank_fee",
+    "unit": "USD",
+    "account": "6400",
+    "period_start": "2026-06-02",
+    "period_end": "2026-06-02",
+    "value_num": 25.0,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "deposits",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 987000,
+    "value_text": null
+   }
+  ],
+  "title": "Bank feed, week of June 1, 2026"
+ }
+}

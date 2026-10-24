@@ -1,0 +1,37 @@
+{
+ "doc_id": "contract_pacific_lumen",
+ "kind": "generic",
+ "system": "contracts",
+ "title": "Pacific Lumen Labs wellness contract",
+ "version_id": "contract_pacific_lumen@v1",
+ "tx_from": "2025-09-01T10:00:00-07:00",
+ "document_date": "2025-09-01",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "Pacific Lumen Labs corporate wellness contract, $24,000 per month, payment terms net 45.",
+  "claims": [
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "payment_terms_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 45,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "monthly_fee",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 24000,
+    "value_text": null
+   }
+  ],
+  "title": "Pacific Lumen Labs wellness contract"
+ }
+}

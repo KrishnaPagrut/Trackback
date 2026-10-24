@@ -1,0 +1,66 @@
+{
+ "doc_id": "ach_batch_2026_06_01",
+ "kind": "generic",
+ "system": "ach",
+ "title": "ACH dues batch June 1, 2026",
+ "version_id": "ach_batch_2026_06_01@v1",
+ "tx_from": "2026-06-01T12:00:00-07:00",
+ "document_date": "2026-06-01",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "debits_presented",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 987000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "collected",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 987000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r01_count",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 0,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r01",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 0,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "returns_r10",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-01",
+    "value_num": 0,
+    "value_text": null
+   }
+  ],
+  "title": "ACH dues batch June 1, 2026"
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "doc_id": "comp_plan",
+ "kind": "generic",
+ "system": "hr",
+ "title": "FY2026 Incentive Compensation Plan (GM bonus and sales commission)",
+ "version_id": "comp_plan@v1",
+ "tx_from": "2026-01-05T09:30:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "GM QUARTERLY BONUS: 4% of gym quarterly EBITDA above target, paid within 60 days of quarter end, subject to true-up: any overpayment arising from a later correction of gym EBITDA is offset against the next quarterly bonus (no ad-hoc payroll deduction). SALES COMMISSION: 8% of first-year contract value on new and amended corporate wellness contracts, paid in the month following signature; overpayments are offset against future commissions. Q1 2026 gym EBITDA targets: Oakland $380,000; San Jose $280,000; Sacramento $310,000; Fresno $340,000; Santa Cruz $240,000; Berkeley $310,000.",
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "gm_bonus_rate",
+    "unit": "ratio",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 0.04,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "commission_rate",
+    "unit": "ratio",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 0.08,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "bonus_offset_clause",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "overpayment from a later EBITDA correction is offset against the next quarterly bonus"
+   },
+   {
+    "entity": "",
+    "line_item": "commission_offset_clause",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "commission overpayments are offset against future commissions"
+   },
+   {
+    "entity": "G1",
+    "line_item": "gym_ebitda_target",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 380000,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "gym_ebitda_target",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 280000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "gym_ebitda_target",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 310000,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "gym_ebitda_target",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 340000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "gym_ebitda_target",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 240000,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "gym_ebitda_target",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 310000,
+    "value_text": null
+   }
+  ],
+  "title": "FY2026 Incentive Compensation Plan (GM bonus and sales commission)"
+ }
+}

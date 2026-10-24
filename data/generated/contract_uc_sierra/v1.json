@@ -1,0 +1,37 @@
+{
+ "doc_id": "contract_uc_sierra",
+ "kind": "generic",
+ "system": "contracts",
+ "title": "UC Sierra climbing wall: fixed-price construction contract",
+ "version_id": "contract_uc_sierra@v1",
+ "tx_from": "2025-11-15T10:00:00-08:00",
+ "document_date": "2025-11-15",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "UC Sierra Recreation Center wall build. Contract price $900,000. Estimated total cost $600,000. Revenue recognized over time, cost-to-cost.",
+  "claims": [
+   {
+    "entity": "UC Sierra",
+    "line_item": "contract_price",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 900000,
+    "value_text": null
+   },
+   {
+    "entity": "UC Sierra",
+    "line_item": "estimated_total_cost",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 600000,
+    "value_text": null
+   }
+  ],
+  "title": "UC Sierra climbing wall: fixed-price construction contract"
+ }
+}

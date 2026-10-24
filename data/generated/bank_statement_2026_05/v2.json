@@ -1,0 +1,47 @@
+{
+ "doc_id": "bank_statement_2026_05",
+ "kind": "generic",
+ "system": "bank",
+ "title": "Redwood Bank statement, May 2026",
+ "version_id": "bank_statement_2026_05@v2",
+ "tx_from": "2026-06-16T14:00:00-07:00",
+ "document_date": "2026-05-31",
+ "supersedes": "bank_statement_2026_05@v1",
+ "correction_id": "E05",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "cash_balance",
+    "unit": "USD",
+    "account": "1010",
+    "period_start": "2026-05-31",
+    "period_end": "2026-05-31",
+    "value_num": 1580000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "cash_collected",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 3270000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wire_credit",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-30",
+    "period_end": "2026-05-30",
+    "value_num": 0,
+    "value_text": null
+   }
+  ],
+  "note": "v2: corrected statement: the $40,000 wire credited May 30 belonged to another bank customer and was reversed by the bank",
+  "title": "Redwood Bank statement, May 2026"
+ }
+}

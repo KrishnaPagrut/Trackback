@@ -1,0 +1,77 @@
+{
+ "doc_id": "materiality_memo",
+ "kind": "generic",
+ "system": "controller",
+ "title": "FY2026 Materiality Memo (Dana Ortiz, Controller)",
+ "version_id": "materiality_memo@v1",
+ "tx_from": "2026-01-05T09:00:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "MATERIALITY MEMO FY2026. Overall annual materiality $160,000 (5% of budgeted pretax income of $3.2M). Quarterly performance materiality $60,000. Clearly trivial threshold $8,000: items below this are logged, not booked individually. Flux commentary threshold: variance greater than 10% AND greater than $25,000 versus prior quarter or budget (company policy; common practice, no published standard). Cash forecast tolerance $2,500 per week. Qualitative overrides: anything affecting covenant compliance, a bonus tier, or the sign of a reported change is material regardless of size (SAB 99 factors).",
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "materiality_annual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 160000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "materiality_quarterly_performance",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 60000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "clearly_trivial",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 8000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "flux_threshold_pct",
+    "unit": "ratio",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 0.1,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "flux_threshold_abs",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 25000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "cash_tolerance",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 2500,
+    "value_text": null
+   }
+  ],
+  "title": "FY2026 Materiality Memo (Dana Ortiz, Controller)"
+ }
+}

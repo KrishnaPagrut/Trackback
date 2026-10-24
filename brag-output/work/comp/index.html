@@ -1,0 +1,196 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Trackback brag</title>
+<style>
+@font-face { font-family: Newsreader; font-weight: 500; src: url(fonts/newsreader-latin-500-normal.woff2); }
+@font-face { font-family: Newsreader; font-weight: 600; src: url(fonts/newsreader-latin-600-normal.woff2); }
+@font-face { font-family: Newsreader; font-weight: 500; font-style: italic; src: url(fonts/newsreader-latin-500-italic.woff2); }
+@font-face { font-family: Plex; font-weight: 400; src: url(fonts/ibm-plex-sans-latin-400-normal.woff2); }
+@font-face { font-family: Plex; font-weight: 500; src: url(fonts/ibm-plex-sans-latin-500-normal.woff2); }
+@font-face { font-family: Plex; font-weight: 600; src: url(fonts/ibm-plex-sans-latin-600-normal.woff2); }
+@font-face { font-family: PlexMono; font-weight: 500; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2); }
+@font-face { font-family: PlexMono; font-weight: 600; src: url(fonts/ibm-plex-mono-latin-600-normal.woff2); }
+:root { --paper:#F7F4EE; --surface:#FFFFFF; --ink:#1C1B19; --muted:#6B675F; --rule:#E3DED4; --recall:#C62828; --ping:#1F5FBF; --cleared:#2E7D32; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); color: var(--ink); font-family: Plex, sans-serif; -webkit-font-smoothing: antialiased; }
+.scene { position: absolute; inset: 0; opacity: 0; overflow: hidden; background: var(--paper); }
+.serif { font-family: Newsreader, serif; }
+.mono { font-family: PlexMono, monospace; }
+/* camera over a 1600x900 screenshot */
+.shot { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; }
+.shot img { width: 1600px; height: 900px; display: block; }
+.caption { position: absolute; left: 96px; bottom: 92px; background: var(--ink); color: #fff; font-size: 50px; font-weight: 600; line-height: 1.2; padding: 22px 34px 24px; border-radius: 4px; max-width: 1240px; box-shadow: 0 18px 40px rgba(28,27,25,.22); }
+.caption em { font-style: normal; color: #FF8A80; }
+/* the hackathon slate, persistent */
+#slate { position: absolute; right: 64px; bottom: 64px; display: flex; align-items: stretch; font-family: PlexMono; font-size: 22px; font-weight: 600; letter-spacing: .06em; z-index: 50; box-shadow: 0 10px 26px rgba(28,27,25,.16); }
+#slate .a { background: var(--ink); color: #fff; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+#slate .b { background: var(--surface); color: var(--ink); padding: 10px 16px; border: 2px solid var(--ink); border-left: 0; }
+#slate .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--recall); }
+/* hook */
+#s1 .ticket { position: absolute; left: 160px; top: 230px; display: flex; gap: 0; font-family: PlexMono; font-size: 30px; font-weight: 600; letter-spacing: .08em; }
+#s1 .ticket span { padding: 12px 20px; border: 3px solid var(--ink); }
+#s1 .ticket span:first-child { background: var(--ink); color: #fff; }
+#s1 h1 { position: absolute; left: 160px; top: 360px; width: 1600px; font-family: Newsreader; font-weight: 500; font-size: 150px; line-height: 1.04; letter-spacing: -.01em; }
+#s1 h1 .w { display: inline-block; margin-right: .22em; }
+#s1 .num { position: absolute; left: 164px; top: 760px; font-family: PlexMono; font-size: 64px; font-weight: 600; padding: 8px 22px; border: 3px solid var(--ink); background: var(--surface); }
+/* notice drop */
+#notice { position: absolute; left: 680px; top: 64px; width: 400px; height: 270px; border-radius: 4px; background: url(img/recall.png) -680px -64px / 1600px 900px; box-shadow: 0 24px 48px rgba(28,27,25,.28); transform-origin: 50% 0; }
+/* reveal */
+#s3 .mark { position: absolute; left: 160px; top: 250px; font-family: Newsreader; font-weight: 600; font-size: 230px; letter-spacing: -.02em; line-height: 1; }
+#s3 .rule { position: absolute; left: 168px; top: 520px; height: 10px; width: 980px; background: var(--recall); transform-origin: 0 50%; }
+#s3 .sub1 { position: absolute; left: 164px; top: 590px; font-size: 64px; font-weight: 600; }
+#s3 .sub2 { position: absolute; left: 164px; top: 680px; font-size: 54px; font-weight: 400; color: #3a3833; }
+#s3 .sub2 b { font-weight: 600; color: var(--ping); }
+/* highlight sweep */
+.sweep { position: absolute; background: rgba(198,40,40,.16); border-bottom: 3px solid var(--recall); transform-origin: 0 50%; }
+/* payoff wipes */
+.wipe { position: absolute; left: 0; width: 1600px; background: var(--paper); transform-origin: 100% 50%; }
+/* outro card */
+#card { position: absolute; left: 50%; top: 200px; width: 1440px; margin-left: -720px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 30px 70px rgba(28,27,25,.18); padding: 56px 72px 60px; }
+#card .top { display: flex; justify-content: space-between; font-family: PlexMono; font-weight: 600; font-size: 24px; letter-spacing: .1em; color: var(--muted); }
+#card .name { font-family: Newsreader; font-weight: 600; font-size: 150px; line-height: 1; margin-top: 26px; letter-spacing: -.02em; }
+#card .tag { font-family: Newsreader; font-style: italic; font-weight: 500; font-size: 46px; line-height: 1.25; margin-top: 22px; max-width: 1220px; }
+#card .chips { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
+#card .chip { font-family: PlexMono; font-weight: 600; font-size: 26px; padding: 8px 16px; border: 2px solid var(--ink); border-radius: 3px; background: var(--paper); }
+#card .chip.g { color: var(--cleared); border-color: var(--cleared); background: #EDF5EC; }
+#card .chip.b { color: var(--ping); border-color: var(--ping); background: #EAF0FA; }
+#stamp { position: absolute; right: 330px; top: 770px; font-family: PlexMono; font-weight: 600; font-size: 46px; letter-spacing: .12em; color: var(--recall); border: 5px solid var(--recall); padding: 10px 26px; border-radius: 6px; background: rgba(251,236,234,.85); }
+</style></head>
+<body>
+
+<div class="scene" id="s1">
+  <div class="ticket"><span>TRACKBACK</span></div>
+  <h1><span class="w">Three</span><span class="w">AI</span><span class="w">agents</span><span class="w">built</span><span class="w">on</span><br><span class="w">one</span><span class="w">number.</span></h1>
+  <div class="num">2.95x</div>
+</div>
+
+<div class="scene" id="s2">
+  <div class="shot" id="s2shot"><img src="img/reveal.png"><div id="notice"></div></div>
+  <div class="caption" id="s2cap">July 8: <em>$118,000</em> was counted twice.</div>
+</div>
+
+<div class="scene" id="s3">
+  <div class="mark">Trackback</div>
+  <div class="rule" id="s3rule"></div>
+  <div class="sub1" id="s3a">TrackBack, for AI agents.</div>
+  <div class="sub2" id="s3b">When work you built on changes, <b>you get pinged.</b></div>
+</div>
+
+<div class="scene" id="s4">
+  <div class="shot" id="s4shot"><img src="img/calc.png"><div class="sweep" id="s4sweep" style="left:1138px; top:160px; width:184px; height:34px"></div></div>
+  <div class="caption" id="s4cap" style="top:48px; bottom:auto">It recomputes every number itself.</div>
+</div>
+
+<div class="scene" id="s5">
+  <div class="shot" id="s5shot"><img src="img/ping.png"></div>
+  <div class="caption" id="s5cap">One ping per agent, only about what it used.</div>
+</div>
+
+<div class="scene" id="s6">
+  <div class="shot" id="s6shot"><img src="img/payoff.png">
+    <div class="wipe" id="w0" style="top:290px;height:150px"></div>
+    <div class="wipe" id="w1" style="top:440px;height:62px"></div>
+    <div class="wipe" id="w2" style="top:505px;height:70px"></div>
+    <div class="wipe" id="w3" style="top:582px;height:76px"></div>
+  </div>
+</div>
+
+<div class="scene" id="s7">
+  <div id="card">
+    <div class="top"><span>HACKATHON SUBMISSION</span><span>TRACKBACK</span></div>
+    <div class="name">Trackback</div>
+    <div class="tag">Trackback traces any correction forward.</div>
+    <div class="chips">
+      <span class="chip g" id="c0">ping precision 1.000 · recall 1.000</span>
+      <span class="chip" id="c1">3 agents · 1 hub · 0 stale</span>
+      <span class="chip b" id="c2">runs offline · replay mode</span>
+      <span class="chip" id="c3">built with Claude</span>
+    </div>
+  </div>
+  <div id="stamp">SUBMITTED</div>
+</div>
+
+<img src="img/recall.png" style="display:none"><div id="slate"><div class="a"><span class="dot" id="dot"></span></div><div class="b">LIVE DEMO</div></div>
+
+<script>
+const $ = id => document.getElementById(id)
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x))
+const p = (t, a, b) => clamp((t - a) / (b - a))
+const eo = x => 1 - Math.pow(1 - x, 3)
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+const back = x => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2) }
+const lerp = (a, b, x) => a + (b - a) * x
+// scene windows [start, end]
+const S = { s1: [0, 3], s2: [3, 6], s3: [6, 9], s4: [9, 12.5], s5: [12.5, 16], s6: [16, 19], s7: [19, 23] }
+function vis(id, t, fin = .22, fout = .22) {
+  const [a, b] = S[id]; const el = $(id)
+  if (t < a || t >= b) { el.style.opacity = 0; el.style.display = 'none'; return false }
+  el.style.display = 'block'
+  const o = id === 's1' ? 1 : Math.min(p(t, a, a + fin), id === 's7' ? 1 : 1 - p(t, b - fout, b))
+  el.style.opacity = o; return true
+}
+// camera: focus (cx, cy) in screenshot css px, absolute scale s
+function cam(el, cx, cy, s) {
+  let tx = 960 - cx * s, ty = 540 - cy * s
+  tx = clamp(tx, 1920 - 1600 * s, 0); ty = clamp(ty, 1080 - 900 * s, 0)
+  el.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`
+}
+function rise(el, t, a, d = .45, dy = 40) { const x = eo(p(t, a, a + d)); el.style.opacity = x; el.style.transform = `translateY(${(1 - x) * dy}px)` }
+
+function render(t) {
+  // 1 hook
+  if (vis('s1', t)) {
+    const tk = document.querySelector('#s1 .ticket'); const k = back(p(t, .05, .4)); tk.style.opacity = p(t, .05, .2); tk.style.transform = `scale(${lerp(1.25, 1, k)})`; tk.style.transformOrigin = '0 50%'
+    document.querySelectorAll('#s1 .w').forEach((w, i) => rise(w, t, .35 + i * .085, .4, 50))
+    const n = $('s1').querySelector('.num'); rise(n, t, 1.25, .4, 30)
+    const out = p(t, 2.75, 3); $('s1').style.opacity = 1 - out
+  }
+  // 2 the recall notice drops onto the real Stage screen
+  if (vis('s2', t)) {
+    const z = lerp(1.2, 1.55, eio(p(t, 3, 6)))
+    cam($('s2shot'), lerp(800, 760, p(t, 3, 6)), lerp(450, 300, eio(p(t, 3, 6))), z)
+    const d = p(t, 3.25, 3.75); const nt = $('notice')
+    nt.style.opacity = p(t, 3.25, 3.35)
+    nt.style.transform = `translateY(${(1 - back(d)) * -380}px) rotate(${(1 - eo(d)) * -6}deg) scale(${lerp(1.12, 1, eo(d))})`
+    rise($('s2cap'), t, 3.7, .35, 30)
+  }
+  // 3 reveal
+  if (vis('s3', t)) {
+    const m = document.querySelector('#s3 .mark'); rise(m, t, 6.05, .5, 70)
+    $('s3rule').style.transform = `scaleX(${eo(p(t, 6.35, 6.9))})`
+    rise($('s3a'), t, 6.5, .4, 30); rise($('s3b'), t, 6.8, .4, 30)
+  }
+  // 4 recompute
+  if (vis('s4', t)) {
+    const x = eio(p(t, 9, 12.5))
+    cam($('s4shot'), lerp(800, 820, x), 0, lerp(1.3, 1.6, x))
+    $('s4sweep').style.transform = `scaleX(${eo(p(t, 10.1, 10.6))})`
+    rise($('s4cap'), t, 9.4, .35, -30)
+  }
+  // 5 the ping
+  if (vis('s5', t)) {
+    const x = eio(p(t, 12.5, 16))
+    cam($('s5shot'), lerp(820, 1030, x), lerp(450, 470, x), lerp(1.25, 1.75, x))
+    rise($('s5cap'), t, 12.9, .35, 30)
+  }
+  // 6 payoff
+  if (vis('s6', t)) {
+    const x = eo(p(t, 16, 19))
+    cam($('s6shot'), 800, 470, lerp(1.2, 1.27, x))
+    ;[16.15, 16.55, 16.85, 17.2].forEach((a, i) => { $('w' + i).style.transform = `scaleX(${1 - eo(p(t, a, a + .45))})` })
+  }
+  // 7 submission card
+  if (vis('s7', t)) {
+    const c = $('card'); const k = eo(p(t, 19, 19.55)); c.style.opacity = k; c.style.transform = `translateY(${(1 - k) * 80}px)`
+    ;['c0', 'c1', 'c2', 'c3'].forEach((id, i) => rise($(id), t, 19.7 + i * .12, .35, 20))
+    const s = $('stamp'); const d = p(t, 20.5, 20.75)
+    s.style.opacity = d > 0 ? 1 : 0; s.style.transform = `rotate(-8deg) scale(${lerp(2.2, 1, eo(d))})`
+  }
+  // slate: in from 0.6s, red dot blinks once a second
+  const sl = $('slate'); const si = eo(p(t, .6, 1)); sl.style.opacity = si * (1 - p(t, 18.8, 19)); sl.style.transform = `translateY(${(1 - si) * 20}px)`
+  $('dot').style.opacity = (Math.floor(t * 2) % 2 === 0) ? 1 : .25
+}
+window.render = render
+window.ready = Promise.all([document.fonts.ready, ...[...document.images].map(i => i.decode())]).then(() => Promise.all([...document.fonts].map(f => f.load())))
+render(0)
+</script>
+</body></html>

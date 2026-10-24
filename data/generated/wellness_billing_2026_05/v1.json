@@ -1,0 +1,46 @@
+{
+ "doc_id": "wellness_billing_2026_05",
+ "kind": "generic",
+ "system": "ar",
+ "title": "Corporate wellness billing May 2026",
+ "version_id": "wellness_billing_2026_05@v1",
+ "tx_from": "2026-06-01T09:00:00-07:00",
+ "document_date": "2026-05-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_billed",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_billed",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "sla_credit",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 0,
+    "value_text": null
+   }
+  ],
+  "title": "Corporate wellness billing May 2026"
+ }
+}

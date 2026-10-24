@@ -1,0 +1,37 @@
+{
+ "doc_id": "customer_master",
+ "kind": "generic",
+ "system": "erp",
+ "title": "Customer master (AR)",
+ "version_id": "customer_master@v2",
+ "tx_from": "2026-06-22T10:00:00-07:00",
+ "document_date": "2026-06-22",
+ "supersedes": "customer_master@v1",
+ "correction_id": "E16",
+ "body": {
+  "claims": [
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "payment_terms_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 45,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "payment_terms_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 30,
+    "value_text": null
+   }
+  ],
+  "note": "v2: Pacific Lumen terms corrected to net 45 per contract (owner: Priya Nair approved)",
+  "title": "Customer master (AR)"
+ }
+}

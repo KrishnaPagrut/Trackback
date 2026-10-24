@@ -1,0 +1,67 @@
+{
+ "doc_id": "ap_aging_2026_06_12",
+ "kind": "generic",
+ "system": "ap",
+ "title": "AP aging for the June 12 payment run",
+ "version_id": "ap_aging_2026_06_12@v2",
+ "tx_from": "2026-06-12T09:20:00-07:00",
+ "document_date": "2026-06-12",
+ "supersedes": "ap_aging_2026_06_12@v1",
+ "correction_id": "E14",
+ "body": {
+  "claims": [
+   {
+    "entity": "Summit Mats Supply INV-2231",
+    "line_item": "payable",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-12",
+    "period_end": "2026-06-12",
+    "value_num": 18750,
+    "value_text": null
+   },
+   {
+    "entity": "Summit Mats Supply 2231",
+    "line_item": "payable",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-12",
+    "period_end": "2026-06-12",
+    "value_num": 0,
+    "value_text": null
+   },
+   {
+    "entity": "Bayline Power BP-33840",
+    "line_item": "payable",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-12",
+    "period_end": "2026-06-12",
+    "value_num": 42000,
+    "value_text": null
+   },
+   {
+    "entity": "Holdfast Route Setting RS-118",
+    "line_item": "payable",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-12",
+    "period_end": "2026-06-12",
+    "value_num": 15500,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "min_cash_buffer",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 500000,
+    "value_text": null
+   }
+  ],
+  "note": "v2: '2231' is a duplicate of INV-2231 (same PO 7781, same lines, same $18,750); removed before release",
+  "title": "AP aging for the June 12 payment run"
+ }
+}

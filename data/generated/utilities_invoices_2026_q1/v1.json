@@ -1,0 +1,186 @@
+{
+ "doc_id": "utilities_invoices_2026_q1",
+ "kind": "generic",
+ "system": "ap",
+ "title": "Utilities invoices received, Q1 2026",
+ "version_id": "utilities_invoices_2026_q1@v1",
+ "tx_from": "2026-04-08T15:00:00-07:00",
+ "document_date": "2026-03-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "G1",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 31000,
+    "value_text": null
+   },
+   {
+    "entity": "G1",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 29500,
+    "value_text": null
+   },
+   {
+    "entity": "G1",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 27000,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 27000,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 26000,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 52000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 50500,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 33000,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 31000,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 28000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 21000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 18500,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 29000,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 28000,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 25500,
+    "value_text": null
+   }
+  ],
+  "title": "Utilities invoices received, Q1 2026"
+ }
+}

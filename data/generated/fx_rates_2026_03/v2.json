@@ -1,0 +1,47 @@
+{
+ "doc_id": "fx_rates_2026_03",
+ "kind": "generic",
+ "system": "rate_vendor",
+ "title": "EUR/USD daily rates March 2026 (rate vendor)",
+ "version_id": "fx_rates_2026_03@v2",
+ "tx_from": "2026-07-02T10:00:00-07:00",
+ "document_date": "2026-03-20",
+ "supersedes": "fx_rates_2026_03@v1",
+ "correction_id": "E09",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "eurusd",
+    "unit": "rate",
+    "account": null,
+    "period_start": "2026-03-20",
+    "period_end": "2026-03-20",
+    "value_num": 1.082,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "eurusd",
+    "unit": "rate",
+    "account": null,
+    "period_start": "2026-03-19",
+    "period_end": "2026-03-19",
+    "value_num": 1.081,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "eurusd",
+    "unit": "rate",
+    "account": null,
+    "period_start": "2026-03-23",
+    "period_end": "2026-03-23",
+    "value_num": 1.0835,
+    "value_text": null
+   }
+  ],
+  "note": "v2: vendor correction notice: 2026-03-20 EUR/USD was published with transposed digits (1.0280); the correct fixing is 1.0820",
+  "title": "EUR/USD daily rates March 2026 (rate vendor)"
+ }
+}

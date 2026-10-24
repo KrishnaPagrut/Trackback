@@ -1,0 +1,277 @@
+{
+ "doc_id": "bayline_history",
+ "kind": "generic",
+ "system": "ap",
+ "title": "Bayline Power (Sacramento) accrual vs invoice history",
+ "version_id": "bayline_history@v1",
+ "tx_from": "2026-06-30T08:00:00-07:00",
+ "document_date": "2026-06-30",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2024-11-01",
+    "period_end": "2024-11-30",
+    "value_num": 44000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2024-11-01",
+    "period_end": "2024-11-30",
+    "value_num": 47500,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2024-12-01",
+    "period_end": "2024-12-31",
+    "value_num": 49000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2024-12-01",
+    "period_end": "2024-12-31",
+    "value_num": 52800,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-31",
+    "value_num": 51000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-31",
+    "value_num": 54900,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-02-01",
+    "period_end": "2025-02-28",
+    "value_num": 49500,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-02-01",
+    "period_end": "2025-02-28",
+    "value_num": 53380,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-03-01",
+    "period_end": "2025-03-31",
+    "value_num": 46000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-03-01",
+    "period_end": "2025-03-31",
+    "value_num": 49700,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-11-01",
+    "period_end": "2025-11-30",
+    "value_num": 45000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-11-01",
+    "period_end": "2025-11-30",
+    "value_num": 48600,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-01",
+    "period_end": "2025-12-31",
+    "value_num": 50000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-01",
+    "period_end": "2025-12-31",
+    "value_num": 53800,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 50000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-01-31",
+    "value_num": 52000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 48500,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-02-01",
+    "period_end": "2026-02-28",
+    "value_num": 50500,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 48000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 51900,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-06-01",
+    "period_end": "2025-06-30",
+    "value_num": 30000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-06-01",
+    "period_end": "2025-06-30",
+    "value_num": 30200,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-07-01",
+    "period_end": "2025-07-31",
+    "value_num": 31000,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-07-01",
+    "period_end": "2025-07-31",
+    "value_num": 30700,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_accrual",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-08-01",
+    "period_end": "2025-08-31",
+    "value_num": 31500,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_invoice",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-08-01",
+    "period_end": "2025-08-31",
+    "value_num": 31900,
+    "value_text": null
+   }
+  ],
+  "vendor": "Bayline Power",
+  "title": "Bayline Power (Sacramento) accrual vs invoice history"
+ }
+}

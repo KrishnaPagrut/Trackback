@@ -1,0 +1,47 @@
+{
+ "doc_id": "order_form_northgate_amendment",
+ "kind": "generic",
+ "system": "crm",
+ "title": "Order form: Northgate amendment (sales CRM)",
+ "version_id": "order_form_northgate_amendment@v2",
+ "tx_from": "2026-06-24T10:00:00-07:00",
+ "document_date": "2026-06-24",
+ "supersedes": "order_form_northgate_amendment@v1",
+ "correction_id": "E13",
+ "body": {
+  "claims": [
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "seats",
+    "unit": "count",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 50,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "seat_price",
+    "unit": "USD/seat",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 45,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "term_months",
+    "unit": "months",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 12,
+    "value_text": null
+   }
+  ],
+  "note": "v2: sales keyed the list price; actual contracted price is $45",
+  "title": "Order form: Northgate amendment (sales CRM)"
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "doc_id": "wallbuild_costs_2026_03",
+ "kind": "generic",
+ "system": "gl",
+ "title": "Wall Build job cost report, UC Sierra, through March 31, 2026",
+ "version_id": "wallbuild_costs_2026_03@v1",
+ "tx_from": "2026-04-08T09:00:00-07:00",
+ "document_date": "2026-03-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "UC Sierra",
+    "line_item": "cost_incurred_to_date",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-03-31",
+    "period_end": "2026-03-31",
+    "value_num": 240000,
+    "value_text": null
+   },
+   {
+    "entity": "UC Sierra",
+    "line_item": "cost_materials",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 150000,
+    "value_text": null
+   },
+   {
+    "entity": "UC Sierra",
+    "line_item": "cost_labor",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 90000,
+    "value_text": null
+   }
+  ],
+  "title": "Wall Build job cost report, UC Sierra, through March 31, 2026"
+ }
+}

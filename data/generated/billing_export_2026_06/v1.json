@@ -1,0 +1,104 @@
+{
+ "doc_id": "billing_export_2026_06",
+ "kind": "billing_export",
+ "system": "billing",
+ "title": "Billing export 2026-06 (deferred revenue release)",
+ "version_id": "billing_export_2026_06@v1",
+ "tx_from": "2026-06-01T10:00:00-07:00",
+ "document_date": "2026-06-30",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "rows": [
+   {
+    "gym": "G1",
+    "period": "2026-06",
+    "line": "monthly_dues",
+    "members": 4527,
+    "amount": 203245,
+    "batch": "DUES-2026-06-G1"
+   },
+   {
+    "gym": "G1",
+    "period": "2026-06",
+    "line": "annual_release",
+    "members": 274,
+    "amount": 26000,
+    "batch": "ANN-2026-06-G1"
+   },
+   {
+    "gym": "G2",
+    "period": "2026-06",
+    "line": "monthly_dues",
+    "members": 3651,
+    "amount": 185734,
+    "batch": "DUES-2026-06-G2"
+   },
+   {
+    "gym": "G3",
+    "period": "2026-06",
+    "line": "monthly_dues",
+    "members": 3403,
+    "amount": 191673,
+    "batch": "DUES-2026-06-G3"
+   },
+   {
+    "gym": "G3",
+    "period": "2026-06",
+    "line": "annual_release",
+    "members": 232,
+    "amount": 22000,
+    "batch": "ANN-2026-06-G3"
+   },
+   {
+    "gym": "G4",
+    "period": "2026-06",
+    "line": "monthly_dues",
+    "members": 3848,
+    "amount": 238073,
+    "batch": "DUES-2026-06-G4"
+   },
+   {
+    "gym": "G4",
+    "period": "2026-06",
+    "line": "annual_release",
+    "members": 337,
+    "amount": 32000,
+    "batch": "ANN-2026-06-G4"
+   },
+   {
+    "gym": "G5",
+    "period": "2026-06",
+    "line": "monthly_dues",
+    "members": 3010,
+    "amount": 206623,
+    "batch": "DUES-2026-06-G5"
+   },
+   {
+    "gym": "G5",
+    "period": "2026-06",
+    "line": "annual_release",
+    "members": 189,
+    "amount": 18000,
+    "batch": "ANN-2026-06-G5"
+   },
+   {
+    "gym": "G6",
+    "period": "2026-06",
+    "line": "monthly_dues",
+    "members": 3613,
+    "amount": 267349,
+    "batch": "DUES-2026-06-G6"
+   },
+   {
+    "gym": "G6",
+    "period": "2026-06",
+    "line": "annual_release",
+    "members": 211,
+    "amount": 20000,
+    "batch": "ANN-2026-06-G6"
+   }
+  ],
+  "title": "Billing export 2026-06 (deferred revenue release)"
+ }
+}

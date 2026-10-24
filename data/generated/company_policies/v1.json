@@ -1,0 +1,67 @@
+{
+ "doc_id": "company_policies",
+ "kind": "generic",
+ "system": "controller",
+ "title": "Accounting and Treasury Policies (excerpts)",
+ "version_id": "company_policies@v1",
+ "tx_from": "2026-01-05T10:30:00-08:00",
+ "document_date": "2026-01-05",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "POLICY T-4 ACH returns (company policy; the NACHA re-presentment limit is unverified and labeled as such): R01 insufficient-funds returns may be re-presented once after 5 banking days. R05, R07 and R10 returns are authorization disputes: never re-present without new written authorization; suspend future debits and open a Member Services case. POLICY X-2 Estimated tax overpayments are applied against the next installment rather than refunded (company policy; IRS rule to be verified by the tax advisor). POLICY C-1 Period locks: only the Controller may unlock a period; corrections to a locked period are booked in the open period tagged with the original period. POLICY V-3 Vendor master changes require the AP Specialist (owner) and a callback to the number on file; bank-detail changes by email are never accepted.",
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "r01_retry_policy",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "company policy: R01 may be re-presented once after 5 banking days (NACHA limit unverified)"
+   },
+   {
+    "entity": "",
+    "line_item": "r10_policy",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "R05/R07/R10: never re-present without new authorization; suspend debits; open a case"
+   },
+   {
+    "entity": "",
+    "line_item": "tax_overpayment_policy",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "company policy: apply estimated-tax overpayment to the next installment (IRS rule to be verified)"
+   },
+   {
+    "entity": "",
+    "line_item": "period_lock_policy",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "only the Controller unlocks; book in the open period with an out-of-period tag"
+   },
+   {
+    "entity": "",
+    "line_item": "vendor_master_policy",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "bank-detail changes by email are never accepted; callback required; owner Priya Nair"
+   }
+  ],
+  "title": "Accounting and Treasury Policies (excerpts)"
+ }
+}

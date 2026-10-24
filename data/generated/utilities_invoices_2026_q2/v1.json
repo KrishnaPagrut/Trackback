@@ -1,0 +1,196 @@
+{
+ "doc_id": "utilities_invoices_2026_q2",
+ "kind": "generic",
+ "system": "ap",
+ "title": "Utilities invoices received, April-June 2026 (June: five of six gyms)",
+ "version_id": "utilities_invoices_2026_q2@v1",
+ "tx_from": "2026-07-07T16:00:00-07:00",
+ "document_date": "2026-06-30",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "G1",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 24800,
+    "value_text": null
+   },
+   {
+    "entity": "G1",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 23000,
+    "value_text": null
+   },
+   {
+    "entity": "G1",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 21600,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 22100,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 20400,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 19200,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 44200,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 40800,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 38400,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 25800,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 23800,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 22400,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 17000,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 15700,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 14800,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 23500,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 21700,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 20400,
+    "value_text": null
+   }
+  ],
+  "title": "Utilities invoices received, April-June 2026 (June: five of six gyms)"
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "doc_id": "remittance_pacific_lumen_2026_07_06",
+ "kind": "generic",
+ "system": "bank",
+ "title": "Wire remittance: Pacific Lumen Labs, July 6, 2026",
+ "version_id": "remittance_pacific_lumen_2026_07_06@v1",
+ "tx_from": "2026-07-06T11:00:00-07:00",
+ "document_date": "2026-07-06",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-06-30",
+    "period_end": "2026-06-30",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-07-06",
+    "period_end": "2026-07-06",
+    "value_num": 22965,
+    "value_text": null
+   }
+  ],
+  "title": "Wire remittance: Pacific Lumen Labs, July 6, 2026"
+ }
+}

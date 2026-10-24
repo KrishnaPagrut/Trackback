@@ -1,0 +1,143 @@
+# Trackback answer key, iteration 2 (SPEC_ITERATION_2 section 13.1): rules about what things rest on, resolved against whatever
+# artifacts the agents actually produced, by metric tag, period and stated conclusions. Ground truth comes from the generator's
+# own model of the world (world.py: which source rows feed which true quantities), never from Trackback's recorded edges.
+# The iteration-1 key (answer_key.yaml, frozen) stays as the per-artifact reference for the deterministic engine.
+version: 2
+frozen: null   # frozen after the rules were written; later edits go in CHANGELOG.md
+default: unaffected
+agents: [close_accountant, reporting_analyst, covenant_comp, street_analyst, newsroom]
+metric_vocabulary:   # controlled metric names an artifact's `metric` tag must come from (line items + fixed KPI list)
+  - membership_revenue
+  - daypass_revenue
+  - wellness_revenue
+  - wallbuild_revenue
+  - revenue
+  - ebitda
+  - gym_ebitda
+  - pretax
+  - ttm_ebitda
+  - net_debt
+  - leverage
+  - headroom
+  - bonus_payout
+  - commission_payout
+  - tax_payment
+  - cash_forecast
+  - cash_actual
+  - cash_kpi
+  - cash_recon
+  - member_ar
+  - ar_balance
+  - ar_aging
+  - margin
+  - growth
+  - route_setting
+  - route_setting_growth
+  - utilities
+  - legal
+  - payroll_tax
+  - capex
+  - depreciation_schedule
+  - journal_entry
+  - certificate
+  - deck
+  - bva_revenue
+  - bva_membership
+  - bva_utilities
+  - bva_route_setting
+  - bva_legal
+  - bva_payroll_tax
+  - bva_ebitda
+  - wellness_forecast
+  - membership_forecast
+  - revenue_forecast
+
+corrections:
+  E11:
+    title: "THE MOMENT: March annual-prepaid release duplicated, $118,000"
+    ground_truth_affected:
+      claims: [billing_export_2026_03.annual_release.G1, billing_export_2026_03.annual_release.G3, billing_export_2026_03.annual_release.G4, billing_export_2026_03.annual_release.G5, billing_export_2026_03.annual_release.G6]
+      metrics_changed: [membership_revenue.2026-Q1, revenue.2026-Q1, gym_ebitda.G1.2026-Q1, gym_ebitda.G3.2026-Q1, gym_ebitda.G4.2026-Q1, gym_ebitda.G5.2026-Q1, gym_ebitda.G6.2026-Q1, ebitda.2026-Q1, pretax.2026-Q1, ttm_ebitda.2026-Q1, leverage.2026-Q1, headroom.2026-Q1, margin.2026-Q1, bva_revenue.2026-Q1, bva_membership.2026-Q1, bva_ebitda.2026-Q1, bonus_payout.G1.2026-Q1, bonus_payout.G4.2026-Q1, bonus_payout.total.2026-Q1, tax_payment.2026-Q2, growth.2026-Q1]
+      conclusions_flipped: ["covenant_status.2026-Q1: compliant->breach", "bonus.G1: overpaid 1040", "bonus.G4: overpaid 1280"]
+    must_invalidate: "any calc artifact on a metric in metrics_changed whose value moves beyond its line's threshold; any prose stating a figure or conclusion that no longer holds; executed actions resting on them (compensation)"
+    must_stay: "artifacts resting only on metrics not in metrics_changed: cash_forecast, cash_actual, cash_kpi, anything for G2; bonus_payout for G3, G5, G6 (zero before and after); growth KPI (still up); qualitative growth prose"
+    must_ping: {close_accountant: true, reporting_analyst: true, covenant_comp: true}
+    must_ping_nodes: [memo_q1_deferred_revenue, bonus_payout_q1_2026, cert_send_q1_2026, tax_payment_q2_2026, deck_publish_q1_2026, deck_s_membership_flux, deck_s_ebitda_margin, deck_s_covenant, cert_s_compliance]
+    must_not_ping_nodes: [cf_2026_w23, cf_2026_w24, cf_2026_w25, cf_2026_w26, cf_2026_w27, cf_2026_w28, cf_2026_w29, cf_2026_w30, cf_2026_w31, cf_2026_w32, cf_2026_w33, cf_2026_w34, cf_2026_w35, cash_opening_2026_w23, kpi_may_cash_collected, gm_bonus_q1_G2, q1_gym_ebitda_G2, q1_membership_revenue_G2]
+    still_valid_expected: [deck_s_revenue_growth]
+    reworked_expected: [memo_q1_deferred_revenue, deck_s_membership_flux, deck_s_ebitda_margin, deck_s_covenant, cert_s_compliance]
+    needs_human_expected: [bonus_payout_q1_2026, cert_send_q1_2026, tax_payment_q2_2026, deck_publish_q1_2026]
+    required_compensations:
+      - {deliverable: cert_send_q1_2026, compensation: corrected_certificate, approver: cfo}
+      - {deliverable: bonus_payout_q1_2026, compensation: offset_next_bonus, approver: hr+controller, amount: 2320}
+      - {deliverable: tax_payment_q2_2026, compensation: reduce_next_installment, approver: controller, amount: 24780}
+      - {deliverable: deck_publish_q1_2026, compensation: artifact_supersession, approver: controller}
+    expected_values: {ttm_adj_ebitda_2026_q1: 5445500, leverage_2026_q1: 3.030, gm_bonus_q1_G4: 720, gm_bonus_q1_G1: 960, q2_estimated_tax_2026: 139755}
+    waves_max: 1
+    note: "Why the Close Accountant is not pinged: its Q1 numbers are calc nodes that Trackback recomputes itself; its judgment (the correcting entry) is a new task, not a rework of a suspect node. The E22 recovery runs as that task."
+  E20:
+    title: "Scenario B: December 2025 annual memberships recognized in 2025 (little r)"
+    ground_truth_affected:
+      metrics_changed: [revenue.2025, ebitda.2025-Q4, ebitda.2025, pretax.2025, ttm_ebitda.2025-Q4, ttm_ebitda.2026-Q1, margin.2025, revenue.2025-12]
+      conclusions_flipped: []
+    must_stay: "Q4 2025 certificate (2.915x, still compliant), the Q1 2026 certificate's conclusion (already breach after E11), Q2 artifacts"
+    must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}
+    must_ping_nodes: [deck_s_fy2025_comp, deck_publish_q1_2026]
+    must_not_ping_nodes: [cert_send_q4_2025, leverage_2025_q4, june_sales_credits, h1_payroll_tax_bva]
+    reworked_expected: [deck_s_fy2025_comp]
+    needs_human_expected: [deck_publish_q1_2026]
+    required_compensations:
+      - {deliverable: deck_publish_q1_2026, compensation: artifact_supersession, approver: controller}
+    waves_max: 1
+  E10:
+    title: "March legal invoice un-accrued (error, out of period)"
+    ground_truth_affected: {metrics_changed: [legal.2026-Q1, corporate_costs.2026-Q1, ebitda.2026-Q1, pretax.2026-Q1, ttm_ebitda.2026-Q1, margin.2026-Q1, bva_legal.2026-Q1, bva_ebitda.2026-Q1], conclusions_flipped: []}
+    must_stay: "leverage (2.954x, conclusion unchanged), the certificate, revenue tiles, covenant prose (re-rendered, no ping)"
+    must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}
+    must_ping_nodes: [deck_s_ebitda_margin, deck_publish_q1_2026]
+    must_not_ping_nodes: [cert_send_q1_2026, cert_s_compliance, deck_s_covenant, tile_q1_revenue, deck_s_revenue_growth]
+    reworked_expected: [deck_s_ebitda_margin]
+    needs_human_expected: [deck_publish_q1_2026]
+    required_compensations: [{deliverable: deck_publish_q1_2026, compensation: artifact_supersession, approver: controller}]
+  E02:
+    title: "March route-setting invoice (error, out of period)"
+    ground_truth_affected: {metrics_changed: [route_setting.2026-Q1, route_setting_growth.2026-Q1, corporate_costs.2026-Q1, ebitda.2026-Q1, pretax.2026-Q1, ttm_ebitda.2026-Q1, margin.2026-Q1, bva_route_setting.2026-Q1, bva_ebitda.2026-Q1], conclusions_flipped: []}
+    must_stay: "leverage 2.966x (conclusion unchanged), certificate, covenant prose (re-rendered), revenue tiles"
+    must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}
+    must_ping_nodes: [deck_s_route_setting, deck_s_ebitda_margin, deck_publish_q1_2026]
+    must_not_ping_nodes: [cert_send_q1_2026, cert_s_compliance, deck_s_covenant, tile_q1_revenue]
+    reworked_expected: [deck_s_route_setting, deck_s_ebitda_margin]
+    needs_human_expected: [deck_publish_q1_2026]
+    required_compensations: [{deliverable: deck_publish_q1_2026, compensation: artifact_supersession, approver: controller}]
+  E01: {title: "Bayline invoice vs accrual (estimate change)", ground_truth_affected: {metrics_changed: [], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [q1_utilities_expense, memo_q1_utilities_accrual], required_compensations: [], category: immaterial}
+  E07: {title: "UC Sierra change order (prospective)", ground_truth_affected: {metrics_changed: [], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [q1_wallbuild_revenue, deck_s_wallbuild], required_compensations: [], category: estimate_change}
+  E03: {title: "June 1 batch R01 returns", ground_truth_affected: {metrics_changed: [cash_actual.2026-W23, member_ar.2026-06], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [cash_s_may, q1_revenue_total], required_compensations: [], category: material_no_crossing}
+  E17: {title: "Bank fee $25.00 -> $25.40 (coalesced with E18 as X2)", ground_truth_affected: {metrics_changed: [cash_recon.2026-06], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [cf_2026_w23, cash_s_may], required_compensations: [], category: immaterial, coalesced_with: E18}
+  E18: {title: "Retroactive UI rate (+$6,200 YTD), coalesced with E17 as X2", ground_truth_affected: {metrics_changed: [], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [deck_s_revenue_growth, cert_send_q1_2026], required_compensations: [], category: estimate_change, note: "Q1 artifacts clear as an estimate change; the H1 BvA line is built later by the June close from v2, so no ping is due at June 4."}
+  E06: {title: "Northgate amendment (prospective modification)", ground_truth_affected: {metrics_changed: [wellness_forecast.2026-H2, revenue_forecast.2026-H2], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}, must_ping_nodes: [fc_s_h2], must_not_ping_nodes: [q1_wellness_revenue, wellness_revenue_ytd_may, deck_publish_q1_2026], reworked_expected: [fc_s_h2], required_compensations: [], category: material_no_crossing}
+  E14: {title: "Duplicate invoice blocked by the fence", ground_truth_affected: {metrics_changed: [payment.2026-06], conclusions_flipped: []}, must_ping: {close_accountant: true, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [payment_run_0612], needs_human_expected: [payment_run_0612], must_not_ping_nodes: [ap_run_0612_cash_after], required_compensations: [], fence: {action: ACT-payment_run_0612, expected: blocked}}
+  E05: {title: "Corrected May statement ($40k wire)", ground_truth_affected: {metrics_changed: [cash_forecast.2026-W23, cash_kpi.2026-05, cash_recon.2026-05, ar_balance.2026-05], conclusions_flipped: ["northgate_ar: within 60 days -> over"]}, must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}, must_ping_nodes: [cash_s_may], must_not_ping_nodes: [payment_run_0612_v2, wellness_revenue_ytd_may], reworked_expected: [cash_s_may], required_compensations: [], category: material_no_crossing}
+  E16: {title: "Contract net-45 vs master net-30", ground_truth_affected: {metrics_changed: [ar_aging.2026-06, cash_forecast.2026-W25, cash_forecast.2026-W27], conclusions_flipped: ["past_due: yes -> no"]}, must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}, must_ping_nodes: [dunning_email_pacific_lumen_0616], needs_human_expected: [dunning_email_pacific_lumen_0616], must_not_ping_nodes: [q1_revenue_total], required_compensations: [{deliverable: dunning_email_pacific_lumen_0616, compensation: retraction_notice, approver: ap}]}
+  E13: {title: "Commission at list price", ground_truth_affected: {metrics_changed: [commission_payout.2026-06], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: true}, must_ping_nodes: [commission_payout_0620], needs_human_expected: [commission_payout_0620], must_not_ping_nodes: [fc_wellness_h2_total], required_compensations: [{deliverable: commission_payout_0620, compensation: offset_next_commission, approver: vp_sales+controller, amount: 720}]}
+  E09: {title: "FX fixing corrected", ground_truth_affected: {metrics_changed: [capex.2026-03, depreciation_schedule.2026], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [cert_send_q1_2026, q1_ebitda], required_compensations: [], category: material_no_crossing}
+  E24: {title: "Decoy: offsetting reclass", ground_truth_affected: {metrics_changed: [], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [q1_wallbuild_cost, q1_ebitda, memo_q1_wallbuild], required_compensations: [], category: cancels_downstream}
+  E25: {title: "Decoy: retraction, no replacement", ground_truth_affected: {metrics_changed: [membership_forecast.2026-H2, revenue_forecast.2026-H2], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [fc_wellness_h2_total], unprovable_expected: [fc_membership_h2, fc_revenue_h2_total, fc_s_h2], required_compensations: [], category: retraction}
+  E04: {title: "R10 return $189", ground_truth_affected: {metrics_changed: [cash_actual.2026-W23, member_ar.2026-06], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [cash_s_may, cf_2026_w23], required_compensations: [], category: immaterial, deny_list: "never a retry for R10"}
+  E08: {title: "SLA credit (immaterial, logged)", ground_truth_affected: {metrics_changed: [], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, must_ping_nodes: [], must_not_ping_nodes: [wellness_revenue_ytd_may, fc_s_h2], required_compensations: [], category: immaterial}
+  E26: {title: "Eval scenario: sign flip of the route-setting trend", ground_truth_affected: {metrics_changed: [route_setting_growth.2026-Q1], conclusions_flipped: ["route_setting_trend: down -> up"]}, must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}, must_ping_nodes: [deck_s_route_setting, deck_publish_q1_2026], reworked_expected: [deck_s_route_setting], needs_human_expected: [deck_publish_q1_2026], must_not_ping_nodes: [cert_send_q1_2026], required_compensations: [{deliverable: deck_publish_q1_2026, compensation: artifact_supersession, approver: controller}], category: threshold_crossing}
+  LYFT_TYPO: {title: "Real world: Lyft's 500-basis-point typo, corrected on the call", ground_truth_affected: {metrics_changed: [margin.2024, adj_ebitda.2024], conclusions_flipped: []}, must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false, street_analyst: true, newsroom: true}, must_ping_nodes: [lyft_ext_s_note, lyft_ext_headline, lyft_ext_buy_order, lyft_ext_publish_story], must_not_ping_nodes: [lyft_ext_fy24_gross_bookings, lyft_ext_s_q4_beat, lyft_ext_s_story_q4], reworked_expected: [lyft_ext_s_note, lyft_ext_headline], needs_human_expected: [lyft_ext_buy_order, lyft_ext_publish_story], required_compensations: [{deliverable: lyft_ext_buy_order, compensation: position_review, approver: pm}, {deliverable: lyft_ext_publish_story, compensation: issue_correction_note, approver: editor}], category: real_world}
+  X1:
+    title: "Agent self-revision: the Close Accountant revises its Q2 accrual estimate after the norm approval"
+    correction_id_prefix: "REV-q2_utilities_accrual_est_G3"
+    ground_truth_affected: {metrics_changed: [bva_utilities.2026-06, cash_forecast.2026-W27], conclusions_flipped: []}
+    must_ping: {close_accountant: false, reporting_analyst: true, covenant_comp: false}
+    must_ping_nodes: []
+    must_not_ping_nodes: [cert_send_q1_2026, q2_utilities_accrual_est_G3]
+    expected_recomputed: [bva_2026_06_utilities_prelim, cf_0701_w27_utilities]
+    required_compensations: []
+    category: agent_revision
+    note: "The revising agent is never pinged about its own node; the Covenant agent is not pinged because the Q1 certificate consumed no Q2 accrual (different period). The RA's two calc nodes recompute; if the RA had prose resting on them it would be pinged."
+  X2: {title: "Coalesced corrections: E17 + E18 in one wave", wave_of: E17, coalesced: [E17, E18], must_ping: {close_accountant: false, reporting_analyst: false, covenant_comp: false}, expected_waves: 1, note: "Zero pings for E17 (below trivial), none for E18 at June 4 (Q1 artifacts are an estimate change; the H1 line is built later). One wave, two corrections."}
+  X3: {title: "Upstream challenge during E11", from_agent: reporting_analyst, target: q1_membership_revenue_G4, expected_state: open, starts_wave: false}
+
+termination_rules: {max_waves: 2, max_hops: 6, one_ping_per_agent_per_wave: true, no_self_pings: true, oscillation_guard: content_hash, max_llm_calls_per_event: 12}

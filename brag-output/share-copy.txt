@@ -1,0 +1,2 @@
+Trackback, TrackBack for AI agents. When a source changes under work three agents already built on, it recomputes every number itself, pings only the agents who used it, and clears the rest with a reason: 10 of 174 pieces of work needed a look.
+Trackback traces any correction forward.

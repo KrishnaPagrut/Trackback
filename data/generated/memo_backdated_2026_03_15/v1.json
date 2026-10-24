@@ -1,0 +1,27 @@
+{
+ "doc_id": "memo_backdated_2026_03_15",
+ "kind": "generic",
+ "system": "ap_inbox",
+ "title": "Vendor memo claiming a March 15 date (captured July 1)",
+ "version_id": "memo_backdated_2026_03_15@v1",
+ "tx_from": "2026-07-01T10:00:00-07:00",
+ "document_date": "2026-03-15",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "Dated March 15, 2026. This memo confirms the revised route-setting rates effective March 1.",
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "claimed_date",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "2026-03-15"
+   }
+  ],
+  "title": "Vendor memo claiming a March 15 date (captured July 1)"
+ }
+}

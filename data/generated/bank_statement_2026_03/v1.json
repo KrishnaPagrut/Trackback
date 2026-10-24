@@ -1,0 +1,36 @@
+{
+ "doc_id": "bank_statement_2026_03",
+ "kind": "generic",
+ "system": "bank",
+ "title": "Redwood Bank statement, March 2026",
+ "version_id": "bank_statement_2026_03@v1",
+ "tx_from": "2026-04-03T08:00:00-07:00",
+ "document_date": "2026-03-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "cash_balance",
+    "unit": "USD",
+    "account": "1010",
+    "period_start": "2026-03-31",
+    "period_end": "2026-03-31",
+    "value_num": 1500000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "cash_collected",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "value_num": 9900000,
+    "value_text": null
+   }
+  ],
+  "title": "Redwood Bank statement, March 2026"
+ }
+}

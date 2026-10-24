@@ -1,0 +1,67 @@
+{
+ "doc_id": "credit_agreement",
+ "kind": "generic",
+ "system": "contracts",
+ "title": "Redwood Commercial Credit: Term Loan Credit Agreement (synthetic)",
+ "version_id": "credit_agreement@v1",
+ "tx_from": "2025-06-01T10:00:00-07:00",
+ "document_date": "2025-06-01",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "text": "CREDIT AGREEMENT dated June 1, 2025 between Tidewall Climbing Co. (Borrower) and Redwood Commercial Credit (Lender). Section 1.01 Definitions. 'Consolidated Adjusted EBITDA' means, for any trailing twelve-month period, consolidated net income plus income tax expense, interest expense and depreciation, and excluding realized foreign exchange gains and losses. For the avoidance of doubt, legal fees and route-setting contract labor are operating expenses and are NOT added back. Section 7.11 Financial Covenant. The Borrower shall not permit the Net Leverage Ratio (Net Debt divided by Consolidated Adjusted EBITDA) as of the last day of any fiscal quarter to exceed 3.00 to 1.00. Section 6.02(c) Compliance Certificate due within 45 days after quarter end. Section 6.02(f) If any financial statement previously delivered is corrected, the Borrower shall deliver a corrected Compliance Certificate within 10 business days. Term Loan principal: $18,000,000.",
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "covenant_max_leverage",
+    "unit": "x",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 3.0,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "term_loan_principal",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 18000000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "adjusted_ebitda_definition",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "net income + income tax + interest + depreciation; excludes realized FX gains/losses; legal and route-setting are NOT added back"
+   },
+   {
+    "entity": "",
+    "line_item": "corrected_certificate_clause",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "corrected Compliance Certificate within 10 business days of any correction to delivered financial statements"
+   },
+   {
+    "entity": "",
+    "line_item": "certificate_due_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 45,
+    "value_text": null
+   }
+  ],
+  "title": "Redwood Commercial Credit: Term Loan Credit Agreement (synthetic)"
+ }
+}

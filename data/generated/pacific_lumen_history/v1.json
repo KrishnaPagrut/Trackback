@@ -1,0 +1,256 @@
+{
+ "doc_id": "pacific_lumen_history",
+ "kind": "generic",
+ "system": "ar",
+ "title": "Pacific Lumen Labs wire remittance history (12 months)",
+ "version_id": "pacific_lumen_history@v1",
+ "tx_from": "2026-06-30T08:00:00-07:00",
+ "document_date": "2026-06-30",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-31",
+    "value_num": 23985,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-02-01",
+    "period_end": "2025-02-28",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-02-01",
+    "period_end": "2025-02-28",
+    "value_num": 23975,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-03-01",
+    "period_end": "2025-03-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-03-01",
+    "period_end": "2025-03-31",
+    "value_num": 23965,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-04-01",
+    "period_end": "2025-04-30",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-04-01",
+    "period_end": "2025-04-30",
+    "value_num": 23980,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-05-01",
+    "period_end": "2025-05-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-05-01",
+    "period_end": "2025-05-31",
+    "value_num": 23970,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-06-01",
+    "period_end": "2025-06-30",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-06-01",
+    "period_end": "2025-06-30",
+    "value_num": 23985,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-07-01",
+    "period_end": "2025-07-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-07-01",
+    "period_end": "2025-07-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-08-01",
+    "period_end": "2025-08-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-08-01",
+    "period_end": "2025-08-31",
+    "value_num": 23975,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-09-01",
+    "period_end": "2025-09-30",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-09-01",
+    "period_end": "2025-09-30",
+    "value_num": 23965,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-31",
+    "value_num": 23980,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-11-01",
+    "period_end": "2025-11-30",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-11-01",
+    "period_end": "2025-11-30",
+    "value_num": 23970,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-01",
+    "period_end": "2025-12-31",
+    "value_num": 24000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "cash_received",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-01",
+    "period_end": "2025-12-31",
+    "value_num": 23975,
+    "value_text": null
+   }
+  ],
+  "title": "Pacific Lumen Labs wire remittance history (12 months)"
+ }
+}

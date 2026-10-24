@@ -1,0 +1,257 @@
+{
+ "doc_id": "fy2025_monthly_summary",
+ "kind": "generic",
+ "system": "gl",
+ "title": "FY2025 monthly summary (membership system + GL)",
+ "version_id": "fy2025_monthly_summary@v2",
+ "tx_from": "2026-07-08T09:30:00-07:00",
+ "document_date": "2025-12-31",
+ "supersedes": "fy2025_monthly_summary@v1",
+ "correction_id": "E20",
+ "body": {
+  "claims": [
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-31",
+    "value_num": 3050000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-02-01",
+    "period_end": "2025-02-28",
+    "value_num": 3000000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-03-01",
+    "period_end": "2025-03-31",
+    "value_num": 3200000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-04-01",
+    "period_end": "2025-04-30",
+    "value_num": 3180000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-05-01",
+    "period_end": "2025-05-31",
+    "value_num": 3250000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-06-01",
+    "period_end": "2025-06-30",
+    "value_num": 3300000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-07-01",
+    "period_end": "2025-07-31",
+    "value_num": 3400000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-08-01",
+    "period_end": "2025-08-31",
+    "value_num": 3420000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-09-01",
+    "period_end": "2025-09-30",
+    "value_num": 3350000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-31",
+    "value_num": 3300000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-11-01",
+    "period_end": "2025-11-30",
+    "value_num": 3200000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-01",
+    "period_end": "2025-12-31",
+    "value_num": 3355000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "membership_revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-01",
+    "period_end": "2025-12-31",
+    "value_num": 2385000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-03-31",
+    "value_num": 1350000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-04-01",
+    "period_end": "2025-06-30",
+    "value_num": 1350000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-07-01",
+    "period_end": "2025-09-30",
+    "value_num": 1450000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-10-01",
+    "period_end": "2025-12-31",
+    "value_num": 1305000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-03-31",
+    "value_num": 9820000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "revenue",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "value_num": 39005000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "ebitda",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "value_num": 5455000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "pretax",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "value_num": 3055000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "route_setting",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-10-01",
+    "period_end": "2025-12-31",
+    "value_num": 140600,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "net_debt",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-31",
+    "period_end": "2025-12-31",
+    "value_num": 15900000,
+    "value_text": null
+   },
+   {
+    "entity": "",
+    "line_item": "deferred_revenue_memberships",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2025-12-31",
+    "period_end": "2025-12-31",
+    "value_num": 405000,
+    "value_text": null
+   }
+  ],
+  "note": "v2: $95,000 of annual memberships sold December 2025 for 2026 service were fully recognized in December 2025 (prior-year error, little r)",
+  "title": "FY2025 monthly summary (membership system + GL)"
+ }
+}

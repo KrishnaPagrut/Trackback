@@ -1,0 +1,77 @@
+{
+ "doc_id": "member_stats_2026",
+ "kind": "generic",
+ "system": "billing",
+ "title": "Member counts by gym (June 2026)",
+ "version_id": "member_stats_2026@v2",
+ "tx_from": "2026-07-05T09:00:00-07:00",
+ "document_date": "2026-07-05",
+ "supersedes": "member_stats_2026@v1",
+ "correction_id": "E25",
+ "body": {
+  "claims": [
+   {
+    "entity": "G1",
+    "line_item": "active_members",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 1940,
+    "value_text": null
+   },
+   {
+    "entity": "G2",
+    "line_item": "active_members",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 1460,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "active_members",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 1480,
+    "value_text": null
+   },
+   {
+    "entity": "G4",
+    "line_item": "active_members",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 1700,
+    "value_text": null
+   },
+   {
+    "entity": "G5",
+    "line_item": "active_members",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 1290,
+    "value_text": null
+   },
+   {
+    "entity": "G6",
+    "line_item": "active_members",
+    "unit": "count",
+    "account": null,
+    "period_start": "2026-06-01",
+    "period_end": "2026-06-30",
+    "value_num": 1530,
+    "value_text": null
+   }
+  ],
+  "note": "v2: the billing vendor withdrew the company-wide active-member total pending a recount of migrated annual plans; no replacement figure yet",
+  "title": "Member counts by gym (June 2026)"
+ }
+}

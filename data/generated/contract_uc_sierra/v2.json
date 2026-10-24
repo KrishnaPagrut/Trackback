@@ -1,0 +1,37 @@
+{
+ "doc_id": "contract_uc_sierra",
+ "kind": "generic",
+ "system": "contracts",
+ "title": "UC Sierra climbing wall: fixed-price construction contract",
+ "version_id": "contract_uc_sierra@v2",
+ "tx_from": "2026-04-20T11:00:00-07:00",
+ "document_date": "2026-04-20",
+ "supersedes": "contract_uc_sierra@v1",
+ "correction_id": "E07",
+ "body": {
+  "text": "Change Order 1 (April 20, 2026): adds a 12 m speed wall to the same performance obligation. Price +$150,000 (total $1,050,000). Estimated cost +$60,000 (total $660,000).",
+  "claims": [
+   {
+    "entity": "UC Sierra",
+    "line_item": "contract_price",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 1050000,
+    "value_text": null
+   },
+   {
+    "entity": "UC Sierra",
+    "line_item": "estimated_total_cost",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 660000,
+    "value_text": null
+   }
+  ],
+  "title": "UC Sierra climbing wall: fixed-price construction contract"
+ }
+}

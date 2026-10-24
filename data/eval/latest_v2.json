@@ -1,0 +1,1438 @@
+{
+ "generated_at": "2026-10-23T21:59:55",
+ "llm_mode": "replay",
+ "answer_key_v2": {
+  "sha256": "cfc67c46fc6d09b28415303813b4b41ede2b9363f6d6953aaca4d77540d36d2b",
+  "frozen": null,
+  "git": ""
+ },
+ "n_events": 23,
+ "ping_precision_recall": {
+  "tp": 27,
+  "fp": 0,
+  "fn": 0,
+  "precision": 1.0,
+  "recall": 1.0
+ },
+ "agents_match": 23,
+ "false_still_valid": {
+  "n": 0,
+  "of": 27,
+  "cases": []
+ },
+ "unnecessary_rework": {
+  "n": 0,
+  "of": 14
+ },
+ "preservation": {
+  "preserved": 65,
+  "of": 65
+ },
+ "rework_correctness": {
+  "values_ok": 5,
+  "values_n": 5,
+  "unprovable_ok": true
+ },
+ "compensations": {
+  "tp": 12,
+  "fp": 0,
+  "fn": 0,
+  "amounts_ok": true
+ },
+ "inspection_fraction_mean": 0.07191212300332647,
+ "convergence": {
+  "max_waves": 1,
+  "events_over_cap": 0
+ },
+ "cost": {
+  "llm_calls_in_waves": 1,
+  "rerun_all_calls": 318
+ },
+ "tie_outs": {
+  "n": 125,
+  "ok": 125,
+  "failed": []
+ },
+ "baselines": {
+  "B0_no_tracking": {
+   "stale_artifacts_left": 32,
+   "pings": 0
+  },
+  "B1_rerun_all": {
+   "agents_pinged_per_event": 3,
+   "agent_ping_precision": 0.21739130434782608,
+   "llm_calls": 318,
+   "runs": 28
+  },
+  "B2_ping_every_descendant": {
+   "ping_tp": 14,
+   "ping_fp": 17,
+   "ping_fn": 13,
+   "precision": 0.45161290322580644,
+   "recall": 0.5185185185185185
+  }
+ },
+ "replay_fidelity": {
+  "runs": [
+   {
+    "run": "R0_q4_2025_cert",
+    "artifacts": 4,
+    "identical": 4,
+    "cache_misses": 0
+   },
+   {
+    "run": "R1_q1_close",
+    "artifacts": 35,
+    "identical": 35,
+    "cache_misses": 0
+   },
+   {
+    "run": "R3a_q1_covenant_calc",
+    "artifacts": 3,
+    "identical": 3,
+    "cache_misses": 0
+   },
+   {
+    "run": "R2_q1_board_deck",
+    "artifacts": 29,
+    "identical": 29,
+    "cache_misses": 0
+   },
+   {
+    "run": "R3_q1_covenant_cert",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "R4_q1_gm_bonus",
+    "artifacts": 8,
+    "identical": 8,
+    "cache_misses": 0
+   },
+   {
+    "run": "R5_cash_refresh_0602",
+    "artifacts": 22,
+    "identical": 22,
+    "cache_misses": 0
+   },
+   {
+    "run": "R6_h2_forecast",
+    "artifacts": 12,
+    "identical": 12,
+    "cache_misses": 0
+   },
+   {
+    "run": "R7_ap_run_0612",
+    "artifacts": 3,
+    "identical": 3,
+    "cache_misses": 0
+   },
+   {
+    "run": "R8_q2_est_tax",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "R5b_cash_refresh_0616",
+    "artifacts": 4,
+    "identical": 4,
+    "cache_misses": 0
+   },
+   {
+    "run": "R9_june_commissions",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "R12_q2_accrual_est",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "R5d_cash_preview_0701",
+    "artifacts": 3,
+    "identical": 3,
+    "cache_misses": 0
+   },
+   {
+    "run": "R10_june_close",
+    "artifacts": 14,
+    "identical": 14,
+    "cache_misses": 0
+   },
+   {
+    "run": "R5c_cash_refresh_0708",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "R7_ap_run_0612_v2",
+    "artifacts": 3,
+    "identical": 3,
+    "cache_misses": 0
+   },
+   {
+    "run": "FU_E01",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "FU_E07",
+    "artifacts": 4,
+    "identical": 4,
+    "cache_misses": 0
+   },
+   {
+    "run": "FU_E10",
+    "artifacts": 1,
+    "identical": 1,
+    "cache_misses": 0
+   },
+   {
+    "run": "FU_E02",
+    "artifacts": 1,
+    "identical": 1,
+    "cache_misses": 0
+   },
+   {
+    "run": "FU_E05",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   },
+   {
+    "run": "FU_E09",
+    "artifacts": 2,
+    "identical": 2,
+    "cache_misses": 0
+   }
+  ],
+  "artifacts": 162,
+  "identical": 162,
+  "fidelity": 1.0,
+  "cache_misses": 0
+ },
+ "per_event": [
+  {
+   "key": "E10",
+   "correction_id": "E10",
+   "title": "March legal invoice un-accrued (error, out of period)",
+   "category": null,
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 2,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "deck_publish_q1_2026",
+    "deck_s_ebitda_margin"
+   ],
+   "verdicts": {
+    "deck_publish_q1_2026": "needs_human",
+    "deck_s_ebitda_margin": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 2,
+   "unnecessary_rework": [],
+   "reworked_n": 1,
+   "preserved": 5,
+   "must_stay_n": 5,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 1,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "deck_publish_q1_2026",
+     "artifact_supersession"
+    ]
+   ],
+   "inspected": 17,
+   "total_nodes": 102,
+   "inspection_fraction": 0.16666666666666666,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 11,
+    "unaffected": 37,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E02",
+   "correction_id": "E02",
+   "title": "March route-setting invoice (error, out of period)",
+   "category": null,
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 3,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "deck_publish_q1_2026",
+    "deck_s_ebitda_margin",
+    "deck_s_route_setting"
+   ],
+   "verdicts": {
+    "deck_publish_q1_2026": "needs_human",
+    "deck_s_route_setting": "reworked",
+    "deck_s_ebitda_margin": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 3,
+   "unnecessary_rework": [],
+   "reworked_n": 2,
+   "preserved": 4,
+   "must_stay_n": 4,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 1,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "deck_publish_q1_2026",
+     "artifact_supersession"
+    ]
+   ],
+   "inspected": 19,
+   "total_nodes": 104,
+   "inspection_fraction": 0.18269230769230768,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 14,
+    "unaffected": 35,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E01",
+   "correction_id": "E01",
+   "title": "Bayline invoice vs accrual (estimate change)",
+   "category": "immaterial",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 4,
+   "total_nodes": 61,
+   "inspection_fraction": 0.06557377049180328,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 0,
+    "unaffected": 34,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E07",
+   "correction_id": "E07",
+   "title": "UC Sierra change order (prospective)",
+   "category": "estimate_change",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 3,
+   "total_nodes": 63,
+   "inspection_fraction": 0.047619047619047616,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 0,
+    "unaffected": 33,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E03",
+   "correction_id": "E03",
+   "title": "June 1 batch R01 returns",
+   "category": "material_no_crossing",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 16,
+   "total_nodes": 135,
+   "inspection_fraction": 0.11851851851851852,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 2,
+    "unaffected": 20,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E17",
+   "correction_id": "E17",
+   "title": "Bank fee $25.00 -> $25.40 (coalesced with E18 as X2)",
+   "category": "immaterial",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 3,
+   "total_nodes": 135,
+   "inspection_fraction": 0.022222222222222223,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 1,
+    "unaffected": 82,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E18",
+   "correction_id": "E18",
+   "title": "Retroactive UI rate (+$6,200 YTD), coalesced with E17 as X2",
+   "category": "estimate_change",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 2,
+   "total_nodes": 135,
+   "inspection_fraction": 0.014814814814814815,
+   "waves": 0,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 0,
+    "unaffected": 61,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E06",
+   "correction_id": "E06",
+   "title": "Northgate amendment (prospective modification)",
+   "category": "material_no_crossing",
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 1,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "fc_s_h2"
+   ],
+   "verdicts": {
+    "fc_s_h2": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 1,
+   "unnecessary_rework": [],
+   "reworked_n": 1,
+   "preserved": 3,
+   "must_stay_n": 3,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 10,
+   "total_nodes": 147,
+   "inspection_fraction": 0.06802721088435375,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 3,
+    "unaffected": 59,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E14",
+   "correction_id": "E14",
+   "title": "Duplicate invoice blocked by the fence",
+   "category": null,
+   "pinged_agents": [
+    "close_accountant"
+   ],
+   "expected_agents": [
+    "close_accountant"
+   ],
+   "agents_match": true,
+   "ping_tp": 1,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "payment_run_0612"
+   ],
+   "verdicts": {
+    "payment_run_0612": "needs_human"
+   },
+   "false_still_valid": [],
+   "must_change_n": 1,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 1,
+   "must_stay_n": 1,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 3,
+   "total_nodes": 150,
+   "inspection_fraction": 0.02,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 2,
+    "unaffected": 1,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E05",
+   "correction_id": "E05",
+   "title": "Corrected May statement ($40k wire)",
+   "category": "material_no_crossing",
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 1,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "cash_s_may"
+   ],
+   "verdicts": {
+    "cash_s_may": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 1,
+   "unnecessary_rework": [],
+   "reworked_n": 1,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 22,
+   "total_nodes": 159,
+   "inspection_fraction": 0.13836477987421383,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 18,
+    "unaffected": 10,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E16",
+   "correction_id": "E16",
+   "title": "Contract net-45 vs master net-30",
+   "category": null,
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 1,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "dunning_email_pacific_lumen_0616"
+   ],
+   "verdicts": {
+    "dunning_email_pacific_lumen_0616": "needs_human"
+   },
+   "false_still_valid": [],
+   "must_change_n": 1,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 1,
+   "must_stay_n": 1,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 1,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "dunning_email_pacific_lumen_0616",
+     "retraction_notice"
+    ]
+   ],
+   "inspected": 4,
+   "total_nodes": 164,
+   "inspection_fraction": 0.024390243902439025,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 4,
+    "unaffected": 0,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E13",
+   "correction_id": "E13",
+   "title": "Commission at list price",
+   "category": null,
+   "pinged_agents": [
+    "covenant_comp"
+   ],
+   "expected_agents": [
+    "covenant_comp"
+   ],
+   "agents_match": true,
+   "ping_tp": 1,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "commission_payout_0620"
+   ],
+   "verdicts": {
+    "commission_payout_0620": "needs_human"
+   },
+   "false_still_valid": [],
+   "must_change_n": 1,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 1,
+   "must_stay_n": 1,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 1,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "commission_payout_0620",
+     "offset_next_commission"
+    ]
+   ],
+   "inspected": 2,
+   "total_nodes": 165,
+   "inspection_fraction": 0.012121212121212121,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 2,
+    "unaffected": 0,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E09",
+   "correction_id": "E09",
+   "title": "FX fixing corrected",
+   "category": "material_no_crossing",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 2,
+   "total_nodes": 170,
+   "inspection_fraction": 0.011764705882352941,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 2,
+    "unaffected": 31,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E24",
+   "correction_id": "E24",
+   "title": "Decoy: offsetting reclass",
+   "category": "cancels_downstream",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 3,
+   "must_stay_n": 3,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 1,
+   "total_nodes": 172,
+   "inspection_fraction": 0.005813953488372093,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 0,
+    "unaffected": 58,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E25",
+   "correction_id": "E25",
+   "title": "Decoy: retraction, no replacement",
+   "category": "retraction",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 1,
+   "must_stay_n": 1,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 3,
+   "total_nodes": 172,
+   "inspection_fraction": 0.01744186046511628,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 0,
+    "unaffected": 9,
+    "needs_review": 0,
+    "unprovable": 3
+   }
+  },
+  {
+   "key": "E04",
+   "correction_id": "E04",
+   "title": "R10 return $189",
+   "category": "immaterial",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 16,
+   "total_nodes": 172,
+   "inspection_fraction": 0.09302325581395349,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 2,
+    "unaffected": 20,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E08",
+   "correction_id": "E08",
+   "title": "SLA credit (immaterial, logged)",
+   "category": "immaterial",
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 1,
+   "total_nodes": 161,
+   "inspection_fraction": 0.006211180124223602,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 0,
+    "unaffected": 12,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "LYFT_TYPO",
+   "correction_id": "LYFT_TYPO",
+   "title": "Real world: Lyft's 500-basis-point typo, corrected on the call",
+   "category": "real_world",
+   "pinged_agents": [
+    "newsroom",
+    "street_analyst"
+   ],
+   "expected_agents": [
+    "newsroom",
+    "street_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 4,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "lyft_ext_buy_order",
+    "lyft_ext_headline",
+    "lyft_ext_publish_story",
+    "lyft_ext_s_note"
+   ],
+   "verdicts": {
+    "lyft_ext_publish_story": "needs_human",
+    "lyft_ext_headline": "reworked",
+    "lyft_ext_buy_order": "needs_human",
+    "lyft_ext_s_note": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 4,
+   "unnecessary_rework": [],
+   "reworked_n": 2,
+   "preserved": 3,
+   "must_stay_n": 3,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 2,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "lyft_ext_buy_order",
+     "position_review"
+    ],
+    [
+     "lyft_ext_publish_story",
+     "issue_correction_note"
+    ]
+   ],
+   "inspected": 6,
+   "total_nodes": 22,
+   "inspection_fraction": 0.2727272727272727,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 6,
+    "unaffected": 3,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "X1",
+   "correction_id": "REV-q2_utilities_accrual_est_G3-32b1",
+   "title": "Agent self-revision: the Close Accountant revises its Q2 accrual estimate after the norm approval",
+   "category": "agent_revision",
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "cash_s_june_preview"
+   ],
+   "verdicts": {
+    "cash_s_june_preview": "still_valid"
+   },
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 2,
+   "must_stay_n": 2,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 4,
+   "total_nodes": 170,
+   "inspection_fraction": 0.023529411764705882,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 1,
+   "llm_calls_in_wave": 1,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 2,
+    "unaffected": 2,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "X2",
+   "correction_id": "E17",
+   "title": "Coalesced corrections: E17 + E18 in one wave",
+   "category": null,
+   "pinged_agents": [],
+   "expected_agents": [],
+   "agents_match": true,
+   "ping_tp": 0,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [],
+   "verdicts": {},
+   "false_still_valid": [],
+   "must_change_n": 0,
+   "unnecessary_rework": [],
+   "reworked_n": 0,
+   "preserved": 0,
+   "must_stay_n": 0,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 0,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [],
+   "inspected": 3,
+   "total_nodes": 135,
+   "inspection_fraction": 0.022222222222222223,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 1,
+    "unaffected": 82,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E11",
+   "correction_id": "E11",
+   "title": "THE MOMENT: March annual-prepaid release duplicated, $118,000",
+   "category": null,
+   "pinged_agents": [
+    "close_accountant",
+    "covenant_comp",
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "close_accountant",
+    "covenant_comp",
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 9,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "bonus_payout_q1_2026",
+    "cert_s_compliance",
+    "cert_send_q1_2026",
+    "deck_publish_q1_2026",
+    "deck_s_covenant",
+    "deck_s_ebitda_margin",
+    "deck_s_membership_flux",
+    "deck_s_revenue_growth",
+    "memo_q1_deferred_revenue",
+    "tax_payment_q2_2026"
+   ],
+   "verdicts": {
+    "memo_q1_deferred_revenue": "reworked",
+    "bonus_payout_q1_2026": "needs_human",
+    "cert_send_q1_2026": "needs_human",
+    "tax_payment_q2_2026": "needs_human",
+    "cert_s_compliance": "reworked",
+    "deck_publish_q1_2026": "needs_human",
+    "deck_s_membership_flux": "reworked",
+    "deck_s_ebitda_margin": "reworked",
+    "deck_s_covenant": "reworked",
+    "deck_s_revenue_growth": "still_valid"
+   },
+   "false_still_valid": [],
+   "must_change_n": 9,
+   "unnecessary_rework": [],
+   "reworked_n": 5,
+   "preserved": 18,
+   "must_stay_n": 18,
+   "values_ok": 5,
+   "values_n": 5,
+   "unprovable_ok": true,
+   "comp_tp": 4,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "bonus_payout_q1_2026",
+     "offset_next_bonus"
+    ],
+    [
+     "cert_send_q1_2026",
+     "corrected_certificate"
+    ],
+    [
+     "deck_publish_q1_2026",
+     "artifact_supersession"
+    ],
+    [
+     "tax_payment_q2_2026",
+     "reduce_next_installment"
+    ]
+   ],
+   "inspected": 44,
+   "total_nodes": 192,
+   "inspection_fraction": 0.22916666666666666,
+   "waves": 1,
+   "waves_max": 1,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 39,
+    "unaffected": 45,
+    "needs_review": 0,
+    "unprovable": 0
+   },
+   "e22": {
+    "draft1_period_locked": true,
+    "self_approval_rejected_by_schema": true,
+    "controller_rejected": true
+   },
+   "x3": {
+    "filed": true,
+    "state": "open",
+    "started_wave": false
+   }
+  },
+  {
+   "key": "E20",
+   "correction_id": "E20",
+   "title": "Scenario B: December 2025 annual memberships recognized in 2025 (little r)",
+   "category": null,
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 2,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "deck_publish_q1_2026",
+    "deck_s_fy2025_comp"
+   ],
+   "verdicts": {
+    "deck_publish_q1_2026": "needs_human",
+    "deck_s_fy2025_comp": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 2,
+   "unnecessary_rework": [],
+   "reworked_n": 1,
+   "preserved": 4,
+   "must_stay_n": 4,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 1,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "deck_publish_q1_2026",
+     "artifact_supersession"
+    ]
+   ],
+   "inspected": 15,
+   "total_nodes": 197,
+   "inspection_fraction": 0.07614213197969544,
+   "waves": 1,
+   "waves_max": 1,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 9,
+    "unaffected": 61,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  },
+  {
+   "key": "E26",
+   "correction_id": "E26",
+   "title": "Eval scenario: sign flip of the route-setting trend",
+   "category": "threshold_crossing",
+   "pinged_agents": [
+    "reporting_analyst"
+   ],
+   "expected_agents": [
+    "reporting_analyst"
+   ],
+   "agents_match": true,
+   "ping_tp": 2,
+   "ping_fp": 0,
+   "ping_fn": 0,
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "pinged_nodes": [
+    "deck_publish_q1_2026",
+    "deck_s_route_setting"
+   ],
+   "verdicts": {
+    "deck_publish_q1_2026": "needs_human",
+    "deck_s_route_setting": "reworked"
+   },
+   "false_still_valid": [],
+   "must_change_n": 2,
+   "unnecessary_rework": [],
+   "reworked_n": 1,
+   "preserved": 1,
+   "must_stay_n": 1,
+   "values_ok": 0,
+   "values_n": 0,
+   "unprovable_ok": true,
+   "comp_tp": 1,
+   "comp_fp": 0,
+   "comp_fn": 0,
+   "comp_amounts_ok": true,
+   "compensations_got": [
+    [
+     "deck_publish_q1_2026",
+     "artifact_supersession"
+    ]
+   ],
+   "inspected": 3,
+   "total_nodes": 201,
+   "inspection_fraction": 0.014925373134328358,
+   "waves": 1,
+   "waves_max": null,
+   "llm_calls_live": 0,
+   "llm_calls_in_wave": 0,
+   "rerun_all_calls": 318,
+   "counts": {
+    "invalidated": 3,
+    "unaffected": 71,
+    "needs_review": 0,
+    "unprovable": 0
+   }
+  }
+ ],
+ "seconds": 2.2108829021453857
+}

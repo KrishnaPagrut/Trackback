@@ -1,0 +1,47 @@
+{
+ "doc_id": "accrual_workpaper_2026_03",
+ "kind": "generic",
+ "system": "gl",
+ "title": "March 2026 accrual workpaper",
+ "version_id": "accrual_workpaper_2026_03@v2",
+ "tx_from": "2026-04-12T09:00:00-07:00",
+ "document_date": "2026-04-11",
+ "supersedes": "accrual_workpaper_2026_03@v1",
+ "correction_id": "E01",
+ "body": {
+  "text": "Bayline Power invoice BP-33817 received April 12, 2026 for March service: $51,900 (+8.1% vs the $48,000 accrual). True-up booked in April.",
+  "claims": [
+   {
+    "entity": "G3",
+    "line_item": "utilities",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-03-01",
+    "period_end": "2026-03-31",
+    "value_num": 51900,
+    "value_text": null
+   },
+   {
+    "entity": "G3",
+    "line_item": "accrual_basis",
+    "unit": "USD",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": null,
+    "value_text": "actual invoice BP-33817 dated April 11, 2026"
+   },
+   {
+    "entity": "G3",
+    "line_item": "utilities_trueup",
+    "unit": "USD",
+    "account": "6100",
+    "period_start": "2026-04-01",
+    "period_end": "2026-04-30",
+    "value_num": 3900,
+    "value_text": null
+   }
+  ],
+  "title": "March 2026 accrual workpaper"
+ }
+}

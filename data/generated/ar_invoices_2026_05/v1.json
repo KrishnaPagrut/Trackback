@@ -1,0 +1,66 @@
+{
+ "doc_id": "ar_invoices_2026_05",
+ "kind": "generic",
+ "system": "ar",
+ "title": "Corporate AR invoices issued May 2026",
+ "version_id": "ar_invoices_2026_05@v1",
+ "tx_from": "2026-05-31T18:00:00-07:00",
+ "document_date": "2026-05-31",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-16",
+    "period_end": "2026-05-16",
+    "value_num": 18000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "invoice_amount",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-01",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "ar_balance",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-31",
+    "period_end": "2026-05-31",
+    "value_num": 48000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "ar_balance",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-31",
+    "period_end": "2026-05-31",
+    "value_num": 18000,
+    "value_text": null
+   },
+   {
+    "entity": "Pacific Lumen Labs",
+    "line_item": "invoice_age_days",
+    "unit": "days",
+    "account": null,
+    "period_start": "2026-06-16",
+    "period_end": "2026-06-16",
+    "value_num": 31,
+    "value_text": null
+   }
+  ],
+  "title": "Corporate AR invoices issued May 2026"
+ }
+}

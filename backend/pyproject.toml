@@ -1,0 +1,10 @@
+[project]
+name = "trackback"
+version = "0.1.0"
+description = "Trackback: traces any correction forward."
+requires-python = ">=3.11"
+dependencies = ["fastapi", "uvicorn[standard]", "anthropic", "pyyaml", "pydantic", "python-dotenv", "httpx"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

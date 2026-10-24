@@ -1,0 +1,47 @@
+{
+ "doc_id": "wellness_billing_2026_05",
+ "kind": "generic",
+ "system": "ar",
+ "title": "Corporate wellness billing May 2026",
+ "version_id": "wellness_billing_2026_05@v2",
+ "tx_from": "2026-06-18T10:00:00-07:00",
+ "document_date": "2026-05-31",
+ "supersedes": "wellness_billing_2026_05@v1",
+ "correction_id": "E08",
+ "body": {
+  "claims": [
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "wellness_billed",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 12000,
+    "value_text": null
+   },
+   {
+    "entity": "Other wellness",
+    "line_item": "wellness_billed",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": 20000,
+    "value_text": null
+   },
+   {
+    "entity": "Northgate Biotech",
+    "line_item": "sla_credit",
+    "unit": "USD",
+    "account": null,
+    "period_start": "2026-05-01",
+    "period_end": "2026-05-31",
+    "value_num": -6500,
+    "value_text": null
+   }
+  ],
+  "note": "v2: $6,500 SLA credit for the San Jose flood closure May 10-24 (incident report dated May 25)",
+  "title": "Corporate wellness billing May 2026"
+ }
+}

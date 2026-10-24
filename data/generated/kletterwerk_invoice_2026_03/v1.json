@@ -1,0 +1,36 @@
+{
+ "doc_id": "kletterwerk_invoice_2026_03",
+ "kind": "generic",
+ "system": "ap",
+ "title": "Kletterwerk GmbH invoice KW-5520 (climbing holds)",
+ "version_id": "kletterwerk_invoice_2026_03@v1",
+ "tx_from": "2026-03-21T09:00:00-07:00",
+ "document_date": "2026-03-20",
+ "supersedes": null,
+ "correction_id": null,
+ "body": {
+  "claims": [
+   {
+    "entity": "Kletterwerk GmbH",
+    "line_item": "invoice_amount_eur",
+    "unit": "EUR",
+    "account": null,
+    "period_start": "2026-03-20",
+    "period_end": "2026-03-20",
+    "value_num": 85000,
+    "value_text": null
+   },
+   {
+    "entity": "Kletterwerk GmbH",
+    "line_item": "useful_life_months",
+    "unit": "months",
+    "account": null,
+    "period_start": "",
+    "period_end": "",
+    "value_num": 60,
+    "value_text": null
+   }
+  ],
+  "title": "Kletterwerk GmbH invoice KW-5520 (climbing holds)"
+ }
+}
