@@ -10,5 +10,5 @@ export default defineConfig({
         .map(path => [path, 'http://127.0.0.1:8000']),
     ),
   },
-  build: { outDir: 'dist', emptyOutDir: true },
+  build: { outDir: '../web', emptyOutDir: true, chunkSizeWarningLimit: 2000 },
 })
