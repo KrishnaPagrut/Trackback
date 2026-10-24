@@ -30,6 +30,9 @@ LESSON_PATCHES = {
                             "rule": "Post corrections in the open period with orig_period set; never date an entry in a locked period."},
     "lender_documents_to_cfo": {"path": ["routing", "lender_document"], "value": "cfo",
                                 "rule": "Lender documents (corrected certificate, lender notice) go to the CFO, the only signatory under the credit agreement."},
+    # an over-generalization a person might write after X3; the regression gate should refuse it (it breaks the invoices that arrived before the close)
+    "closed_period_invoices_are_estimates": {"path": ["classification"], "value": {"by_knowable_at": False, "closed_period_invoice": "estimate_change"},
+                                             "rule": "Never restate for an invoice that covers a closed period: treat it as a change in estimate."},
 }
 ROLE_PERSON = {"controller": "dana", "cfo": "sam", "hr": "lena", "ap": "marco", "assistant_controller": "priya"}
 

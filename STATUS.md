@@ -12,13 +12,13 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | CP3 trace | done | `tests/test_v3_cp3_trace.py`: 49/49 lineage truths + 6 derived cells; H1 stale; X1 ripple 40 invalidated / 23 still valid / 5 compensations in 0.2 s (30 of 191 metrics recomputed; naive 43); X2/X4/X6 match the key; Replay refuses the Jul 8 export at an Apr 10 pin (403) |
 | CP4 judge | done | `tests/test_v3_cp4_judge.py`: aggregate $662,000 (passes) / $1,118,000 (fails); v1 calls X1 immaterial (4.69%), Jade overrules (covenant 3.0208x, compensation); Jade overrules X3 to a change in estimate; flags lender routing to the CFO; escalates the locked March posting to Dana |
 | CP5 act (+ pings) | done | `tests/test_v3_cp5_act.py`: Dana rejects the March-dated entry, the agent re-drafts in June tagged to March, self-approval raises, Jul 15 bonus run held for R1/R2/R4 and released by Lena's approval, Summit Mats held, Sam signs the corrected certificate, reminders and escalation, memo renders; X1 wave pings all three agents (reworked / needs_human / still_valid with reasons), cash forecast skipped, Priya's notice routed to Marco; S1 pings only the Reporting Analyst; S2 coalesced; S3 to Dana with no wave |
-| CP6 prove | next | |
-| CP7 learn | | |
-| Lyft parity | | |
+| CP6 prove | done | `python tasks.py eval` writes data/eval/latest.json in ~11 s: 34 cases (6 Tidewall + 28 variants over 9 families); 6/6 exceptions, 0 noise false alarms; lineage 55/55; X1 40/23/5 vs 43 naive; materiality accuracy naive 5% rule 0.59, v1 0.59, v1+Jade 1.00; Jade catches 43/43 planted mistakes, 0 false overrules; Replay 0 leaks |
+| CP7 learn | done | four lessons from Jade's overrules and Dana's rejection pass the regression gate and are approved by Dana; the over-general 'closed-period invoices are estimates' lesson fails the gate (breaks X2 and the invoices received before the close); held-out pass rate v1 0.28 -> v2 1.00 |
+| Lyft parity | next | |
 | CP8 UI | | |
 | CP9 polish | | |
 
-Next three tasks: case library (~30 variants); scorecard with baselines; lessons and the regression gate.
+Next three tasks: Lyft through every v3 step; the v3 API; the Stage and Deep UI.
 
 ---
 

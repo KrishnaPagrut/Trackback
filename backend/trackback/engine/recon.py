@@ -280,8 +280,11 @@ def bank_to_book(inp: dict) -> dict:
 
 
 # ======================================================================================================================== 3
+ACRONYM_SKIP = {"INC", "INC.", "LLC", "CO", "CO.", "AG", "THE", "AND", "OF", "&", "LTD", "GMBH"}
+
+
 def _acronym(name: str) -> str:
-    return "".join(w[0] for w in re.split(r"\s+", name) if w and w[0].isalpha() and w.upper() not in STOP)
+    return "".join(w[0] for w in re.split(r"\s+", name) if w and w[0].isalpha() and w.upper() not in ACRONYM_SKIP)
 
 
 def cash_application(inp: dict) -> dict:

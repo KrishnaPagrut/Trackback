@@ -94,7 +94,8 @@ def evaluate(exceptions: list[dict], misstatement_log: list[dict], ripples: dict
         agg_fail = [t for t in tests if t["subject"] == "aggregate" and t["fails"]]
         in_agg = not r.get("trivial")
         triggers = [t["method"] for t in quant] + [f"aggregate_{t['method']}" for t in agg_fail if in_agg and (q or quant)] + [x["factor"] for x in q]
-        material = bool(quant or (in_agg and agg_fail and (q or abs(r["iron_curtain"]) > perf or abs(r["rollover"]) > perf)) or q)
+        # clearly trivial means inconsequential by any measure, alone or aggregated: no qualitative factor makes it material
+        material = False if r.get("trivial") else bool(quant or (in_agg and agg_fail and (q or abs(r["iron_curtain"]) > perf or abs(r["rollover"]) > perf)) or q)
         per_item[r["id"]] = {"material": material, "triggers": triggers, "qualitative": q,
                              "above_performance": max(abs(r["rollover"]), abs(r["iron_curtain"])) > perf, "trivial": bool(r.get("trivial")),
                              "pct_budgeted_pretax": round(max(abs(r["rollover"]), abs(r["iron_curtain"])) / m.get("budgeted_pretax", 16e6) * 100, 2)}

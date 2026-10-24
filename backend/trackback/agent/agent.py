@@ -37,7 +37,11 @@ def classify(exc: dict, pb: dict, kn: dict) -> dict:
         return {"value": "fact_update", "rule": "a new bank fact in the open period", "knowable_at": kn["at"], "original_made_at": None}
     if k == "duplicate_vendor_invoice":
         return {"value": "error", "rule": "one invoice keyed twice and paid twice", "knowable_at": kn["at"], "original_made_at": kn["at"]}
+    if k in ("duplicate_import", "misclassification", "fx_error", "prior_year_recognition"):
+        return {"value": "error", "rule": "the books recorded something that never happened as recorded: an error whenever it is found", "knowable_at": kn["at"], "original_made_at": made}
     if k in ("accrual_true_up", "unaccrued_invoice") and not pb["classification"]["by_knowable_at"]:
+        if pb["classification"]["closed_period_invoice"] == "estimate_change":
+            return {"value": "estimate_change", "rule": "invoice for a closed period's service (treated as a change in estimate)", "knowable_at": kn["at"], "original_made_at": made}
         # weakness 2: any invoice for a closed period's service is an error, without asking when it arrived
         return {"value": "error", "rule": "invoice for a closed period's service (v1: treated as an error)", "knowable_at": kn["at"], "original_made_at": made}
     value = "error" if kn["at"] <= made else "estimate_change"

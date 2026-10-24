@@ -1,0 +1,764 @@
+{
+ "generated_at": "2026-10-24T00:29:45",
+ "world": "tidewall",
+ "llm_mode": "replay",
+ "answer_key": {
+  "sha256": "5cb38fc027025984360d1a83192f6985f493b0c0666d7d7ac71e6ad93eb55aae",
+  "path": "data/world/answer_key.json"
+ },
+ "cases": {
+  "n": 36,
+  "by_family": {
+   "tidewall": 6,
+   "duplicate_import": 9,
+   "unaccrued_before": 3,
+   "unaccrued_after": 3,
+   "accrual_true_up": 3,
+   "misclassification": 2,
+   "fx_error": 2,
+   "prior_year_recognition": 2,
+   "trivial": 2,
+   "noise": 4
+  },
+  "train": 18,
+  "heldout": 18,
+  "list": [
+   {
+    "id": "TW-X1",
+    "family": "tidewall",
+    "split": "train",
+    "title": "Tidewall X1"
+   },
+   {
+    "id": "TW-X2",
+    "family": "tidewall",
+    "split": "heldout",
+    "title": "Tidewall X2"
+   },
+   {
+    "id": "TW-X3",
+    "family": "tidewall",
+    "split": "train",
+    "title": "Tidewall X3"
+   },
+   {
+    "id": "TW-X4",
+    "family": "tidewall",
+    "split": "train",
+    "title": "Tidewall X4"
+   },
+   {
+    "id": "TW-X5",
+    "family": "tidewall",
+    "split": "heldout",
+    "title": "Tidewall X5"
+   },
+   {
+    "id": "TW-X6",
+    "family": "tidewall",
+    "split": "heldout",
+    "title": "Tidewall X6"
+   },
+   {
+    "id": "DUP-B07-2026-01",
+    "family": "duplicate_import",
+    "split": "train",
+    "title": "Batch B07 2026-01 imported twice ($750,000)"
+   },
+   {
+    "id": "DUP-B03-2026-02",
+    "family": "duplicate_import",
+    "split": "heldout",
+    "title": "Batch B03 2026-02 imported twice ($152,499)"
+   },
+   {
+    "id": "DUP-B05-2026-03",
+    "family": "duplicate_import",
+    "split": "train",
+    "title": "Batch B05 2026-03 imported twice ($152,124)"
+   },
+   {
+    "id": "DUP-B01-2026-01",
+    "family": "duplicate_import",
+    "split": "heldout",
+    "title": "Batch B01 2026-01 imported twice ($152,771)"
+   },
+   {
+    "id": "DUP-B07-2026-02",
+    "family": "duplicate_import",
+    "split": "train",
+    "title": "Batch B07 2026-02 imported twice ($750,000)"
+   },
+   {
+    "id": "DUP-B08-2026-03",
+    "family": "duplicate_import",
+    "split": "heldout",
+    "title": "Batch B08 2026-03 imported twice ($152,650)"
+   },
+   {
+    "id": "DUP-B02-2026-05",
+    "family": "duplicate_import",
+    "split": "train",
+    "title": "Batch B02 2026-05 imported twice ($152,608)"
+   },
+   {
+    "id": "DUP-B06-2026-06",
+    "family": "duplicate_import",
+    "split": "heldout",
+    "title": "Batch B06 2026-06 imported twice ($152,916)"
+   },
+   {
+    "id": "DUP-R6-B04-2026-02",
+    "family": "duplicate_import",
+    "split": "heldout",
+    "title": "R6-only duplicate release ($24,864)"
+   },
+   {
+    "id": "UNACC-RF-0331",
+    "family": "unaccrued_before",
+    "split": "train",
+    "title": "Ridgeway Facilities RF-0331 ($96,000, 2026-03 service) received 2026-04-06"
+   },
+   {
+    "id": "UNACC-CIB-2203",
+    "family": "unaccrued_before",
+    "split": "heldout",
+    "title": "Crestline Insurance Brokers CIB-2203 ($310,000, 2026-02 service) received 2026-03-25"
+   },
+   {
+    "id": "UNACC-HCH-7714",
+    "family": "unaccrued_after",
+    "split": "train",
+    "title": "Holdfast Climbing Holds HCH-7714 ($64,000, 2026-03 service) received 2026-05-28"
+   },
+   {
+    "id": "UNACC-PCC-0418",
+    "family": "unaccrued_after",
+    "split": "heldout",
+    "title": "Pacific Chalk Co. PCC-0418 ($44,500, 2026-03 service) received 2026-06-18"
+   },
+   {
+    "id": "UNACC-NBJ-3121",
+    "family": "unaccrued_before",
+    "split": "train",
+    "title": "Northbay Janitorial NBJ-3121 ($182,000, 2026-03 service) received 2026-04-09"
+   },
+   {
+    "id": "UNACC-BRK-26-0228",
+    "family": "unaccrued_after",
+    "split": "heldout",
+    "title": "Brightline Kessler LLP BRK-26-0228 ($210,000, 2026-02 service) received 2026-04-29"
+   },
+   {
+    "id": "TRUEUP-RF-TU1",
+    "family": "accrual_true_up",
+    "split": "train",
+    "title": "Ridgeway Facilities true-up $+21,000"
+   },
+   {
+    "id": "TRUEUP-CIB-TU2",
+    "family": "accrual_true_up",
+    "split": "heldout",
+    "title": "Crestline Insurance Brokers true-up $-13,500"
+   },
+   {
+    "id": "TRUEUP-NBJ-TU3",
+    "family": "accrual_true_up",
+    "split": "train",
+    "title": "Northbay Janitorial true-up $+32,000"
+   },
+   {
+    "id": "MISCLASS-1",
+    "family": "misclassification",
+    "split": "train",
+    "title": "Utilities booked to other opex (HQ, March)"
+   },
+   {
+    "id": "MISCLASS-2",
+    "family": "misclassification",
+    "split": "heldout",
+    "title": "Route setting booked to payroll (gyms, February)"
+   },
+   {
+    "id": "FX-CAPEX-1",
+    "family": "fx_error",
+    "split": "train",
+    "title": "FX on the Kletterwerk wall-holds purchase (capex)"
+   },
+   {
+    "id": "FX-CAPEX-2",
+    "family": "fx_error",
+    "split": "heldout",
+    "title": "FX revaluation of a EUR equipment payable"
+   },
+   {
+    "id": "PRIOR-1",
+    "family": "prior_year_recognition",
+    "split": "train",
+    "title": "December 2025 corporate wellness prepaid recognized at billing"
+   },
+   {
+    "id": "PRIOR-2",
+    "family": "prior_year_recognition",
+    "split": "heldout",
+    "title": "November 2025 wall build revenue recognized early"
+   },
+   {
+    "id": "TRIV-DUPINV",
+    "family": "trivial",
+    "split": "train",
+    "title": "Pacific Chalk Co. PCC-5510 ($4,380)"
+   },
+   {
+    "id": "TRIV-UNACC",
+    "family": "trivial",
+    "split": "heldout",
+    "title": "Northbay Janitorial NBJ-0390 ($9,250)"
+   },
+   {
+    "id": "NOISE-TIMING",
+    "family": "noise",
+    "split": "train",
+    "title": "A late card batch in transit"
+   },
+   {
+    "id": "NOISE-ROUNDING",
+    "family": "noise",
+    "split": "heldout",
+    "title": "A second euro wire, 2 cents off"
+   },
+   {
+    "id": "NOISE-ALIAS",
+    "family": "noise",
+    "split": "train",
+    "title": "Mission Ridge pays as MRCU OPERATIONS"
+   },
+   {
+    "id": "NOISE-BUNDLE",
+    "family": "noise",
+    "split": "heldout",
+    "title": "Bayshore pays two invoices with one wire"
+   }
+  ]
+ },
+ "configs": {
+  "naive_5pct_rule": {
+   "detect": {
+    "n": 29,
+    "correct": 29,
+    "accuracy": 1.0
+   },
+   "classify": {
+    "n": 0,
+    "correct": 0,
+    "accuracy": null
+   },
+   "size": {
+    "n": 0,
+    "correct": 0,
+    "accuracy": null
+   },
+   "materiality": {
+    "n": 32,
+    "correct": 19,
+    "accuracy": 0.594
+   },
+   "fix": {
+    "n": 0,
+    "correct": 0,
+    "accuracy": null
+   },
+   "materiality_small_covenant_breaking": {
+    "n": 0,
+    "correct": 0,
+    "accuracy": null
+   },
+   "cases": {
+    "n": 36,
+    "passed": 23,
+    "pass_rate": 0.639
+   }
+  },
+  "agent_v1_no_jade": {
+   "detect": {
+    "n": 29,
+    "correct": 29,
+    "accuracy": 1.0
+   },
+   "classify": {
+    "n": 32,
+    "correct": 25,
+    "accuracy": 0.781
+   },
+   "size": {
+    "n": 23,
+    "correct": 23,
+    "accuracy": 1.0
+   },
+   "materiality": {
+    "n": 32,
+    "correct": 19,
+    "accuracy": 0.594
+   },
+   "fix": {
+    "n": 32,
+    "correct": 5,
+    "accuracy": 0.156
+   },
+   "materiality_small_covenant_breaking": {
+    "n": 3,
+    "correct": 0,
+    "accuracy": 0.0
+   },
+   "cases": {
+    "n": 36,
+    "passed": 9,
+    "pass_rate": 0.25
+   }
+  },
+  "agent_v1_with_jade": {
+   "detect": {
+    "n": 29,
+    "correct": 29,
+    "accuracy": 1.0
+   },
+   "classify": {
+    "n": 32,
+    "correct": 32,
+    "accuracy": 1.0
+   },
+   "size": {
+    "n": 23,
+    "correct": 23,
+    "accuracy": 1.0
+   },
+   "materiality": {
+    "n": 32,
+    "correct": 32,
+    "accuracy": 1.0
+   },
+   "fix": {
+    "n": 32,
+    "correct": 12,
+    "accuracy": 0.375
+   },
+   "materiality_small_covenant_breaking": {
+    "n": 3,
+    "correct": 3,
+    "accuracy": 1.0
+   },
+   "cases": {
+    "n": 36,
+    "passed": 16,
+    "pass_rate": 0.444
+   }
+  },
+  "agent_v2_with_jade": {
+   "detect": {
+    "n": 29,
+    "correct": 29,
+    "accuracy": 1.0
+   },
+   "classify": {
+    "n": 32,
+    "correct": 32,
+    "accuracy": 1.0
+   },
+   "size": {
+    "n": 23,
+    "correct": 23,
+    "accuracy": 1.0
+   },
+   "materiality": {
+    "n": 32,
+    "correct": 32,
+    "accuracy": 1.0
+   },
+   "fix": {
+    "n": 32,
+    "correct": 32,
+    "accuracy": 1.0
+   },
+   "materiality_small_covenant_breaking": {
+    "n": 3,
+    "correct": 3,
+    "accuracy": 1.0
+   },
+   "cases": {
+    "n": 36,
+    "passed": 36,
+    "pass_rate": 1.0
+   }
+  }
+ },
+ "jade": {
+  "planted_mistakes": 43,
+  "caught": 43,
+  "catch_rate": 1.0,
+  "correct_claims": 82,
+  "false_overrules": 0,
+  "false_overrule_rate": 0.0,
+  "misses": []
+ },
+ "lineage": {
+  "truths": 55,
+  "correct": 55,
+  "precision": 1.0,
+  "recall": 1.0,
+  "stale_detection": "55/55",
+  "min_confidence": 0.793
+ },
+ "impact": {
+  "X1": {
+   "invalidated": 40,
+   "still_valid": 23,
+   "compensations": 5,
+   "precision": 1.0,
+   "recall": 1.0,
+   "reasons_correct": "63/63",
+   "naive_flagged": 43,
+   "over_flagging_naive_vs_true": 1.07,
+   "metrics_recomputed": 30,
+   "metrics_total": 191,
+   "seconds": 0.121
+  },
+  "X2": {
+   "invalidated": 10,
+   "still_valid": 53,
+   "compensations": 1,
+   "precision": 1.0,
+   "recall": 1.0,
+   "reasons_correct": "63/63",
+   "naive_flagged": 38,
+   "over_flagging_naive_vs_true": 3.8,
+   "metrics_recomputed": 12,
+   "metrics_total": 191,
+   "seconds": 0.118
+  },
+  "X4": {
+   "invalidated": 0,
+   "still_valid": 63,
+   "compensations": 0,
+   "precision": 1.0,
+   "recall": 1.0,
+   "reasons_correct": "63/63",
+   "naive_flagged": 38,
+   "over_flagging_naive_vs_true": 38.0,
+   "metrics_recomputed": 7,
+   "metrics_total": 191,
+   "seconds": 0.118
+  },
+  "X6": {
+   "invalidated": 0,
+   "still_valid": 63,
+   "compensations": 0,
+   "precision": 1.0,
+   "recall": 1.0,
+   "reasons_correct": "63/63",
+   "naive_flagged": 41,
+   "over_flagging_naive_vs_true": 41.0,
+   "metrics_recomputed": 9,
+   "metrics_total": 191,
+   "seconds": 0.115
+  }
+ },
+ "learning": {
+  "mistakes": 24,
+  "lessons": [
+   {
+    "lesson": "classify_by_knowable_at",
+    "gate": "pass",
+    "broke": [],
+    "fixed": 14
+   },
+   {
+    "lesson": "lender_documents_to_cfo",
+    "gate": "pass",
+    "broke": [],
+    "fixed": 0
+   },
+   {
+    "lesson": "materiality_framework",
+    "gate": "pass",
+    "broke": [],
+    "fixed": 13
+   },
+   {
+    "lesson": "post_in_open_period",
+    "gate": "pass",
+    "broke": [],
+    "fixed": 20
+   },
+   {
+    "lesson": "closed_period_invoices_are_estimates",
+    "gate": "fail",
+    "broke": [
+     "TRIV-UNACC:classify",
+     "TRIV-UNACC:fix",
+     "TW-X2:classify",
+     "TW-X2:fix",
+     "TW-X2:materiality",
+     "UNACC-CIB-2203:classify"
+    ],
+    "fixed": 0
+   }
+  ],
+  "active": [
+   "classify_by_knowable_at",
+   "lender_documents_to_cfo",
+   "materiality_framework",
+   "post_in_open_period"
+  ],
+  "playbook": "v1+classify_by_knowable_at+lender_documents_to_cfo+materiality_framework+post_in_open_period",
+  "heldout": {
+   "v1": {
+    "detect": {
+     "n": 14,
+     "correct": 14,
+     "accuracy": 1.0
+    },
+    "classify": {
+     "n": 16,
+     "correct": 13,
+     "accuracy": 0.812
+    },
+    "size": {
+     "n": 11,
+     "correct": 11,
+     "accuracy": 1.0
+    },
+    "materiality": {
+     "n": 16,
+     "correct": 10,
+     "accuracy": 0.625
+    },
+    "fix": {
+     "n": 16,
+     "correct": 3,
+     "accuracy": 0.188
+    },
+    "materiality_small_covenant_breaking": {
+     "n": 0,
+     "correct": 0,
+     "accuracy": null
+    },
+    "cases": {
+     "n": 18,
+     "passed": 5,
+     "pass_rate": 0.278
+    }
+   },
+   "v2": {
+    "detect": {
+     "n": 14,
+     "correct": 14,
+     "accuracy": 1.0
+    },
+    "classify": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "size": {
+     "n": 11,
+     "correct": 11,
+     "accuracy": 1.0
+    },
+    "materiality": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "fix": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "materiality_small_covenant_breaking": {
+     "n": 0,
+     "correct": 0,
+     "accuracy": null
+    },
+    "cases": {
+     "n": 18,
+     "passed": 18,
+     "pass_rate": 1.0
+    }
+   },
+   "v1_with_jade": {
+    "detect": {
+     "n": 14,
+     "correct": 14,
+     "accuracy": 1.0
+    },
+    "classify": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "size": {
+     "n": 11,
+     "correct": 11,
+     "accuracy": 1.0
+    },
+    "materiality": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "fix": {
+     "n": 16,
+     "correct": 6,
+     "accuracy": 0.375
+    },
+    "materiality_small_covenant_breaking": {
+     "n": 0,
+     "correct": 0,
+     "accuracy": null
+    },
+    "cases": {
+     "n": 18,
+     "passed": 8,
+     "pass_rate": 0.444
+    }
+   },
+   "v2_with_jade": {
+    "detect": {
+     "n": 14,
+     "correct": 14,
+     "accuracy": 1.0
+    },
+    "classify": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "size": {
+     "n": 11,
+     "correct": 11,
+     "accuracy": 1.0
+    },
+    "materiality": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "fix": {
+     "n": 16,
+     "correct": 16,
+     "accuracy": 1.0
+    },
+    "materiality_small_covenant_breaking": {
+     "n": 0,
+     "correct": 0,
+     "accuracy": null
+    },
+    "cases": {
+     "n": 18,
+     "passed": 18,
+     "pass_rate": 1.0
+    }
+   }
+  }
+ },
+ "replay": {
+  "adversarial_fetches": 73,
+  "leaked": 0,
+  "refused": 73
+ },
+ "iteration2": {
+  "x1": {
+   "agents_expected": [
+    "close_accountant",
+    "covenant_comp",
+    "reporting_analyst"
+   ],
+   "agents_pinged": [
+    "close_accountant",
+    "covenant_comp",
+    "reporting_analyst"
+   ],
+   "ping_precision": 1.0,
+   "ping_recall": 1.0,
+   "nodes_in_pings": 17,
+   "still_valid_with_reason": [
+    "RA.commentary.membership_growth",
+    "RA.commentary.regions_profitable"
+   ],
+   "false_still_valid": 0,
+   "unnecessary_rework": 0,
+   "skipped": [
+    "CA.q1_accruals",
+    "RA.cash_forecast.opening"
+   ],
+   "inspection_fraction": 0.63,
+   "notices": [
+    {
+     "owner": "priya",
+     "to": "marco"
+    },
+    {
+     "owner": "sam",
+     "to": "sam"
+    }
+   ]
+  },
+  "s2": {
+   "coalesced": [
+    "EX-02",
+    "EX-03"
+   ],
+   "pings": [
+    "reporting_analyst"
+   ],
+   "solo_pings": {
+    "EX-02": 1,
+    "EX-03": 0
+   }
+  },
+  "s3": {
+   "challenge": {
+    "challenge_id": "chal_8d6c2752",
+    "state": "open",
+    "to": "dana",
+    "wave_started": false
+   }
+  },
+  "llm_calls_in_waves": 1,
+  "rerun_all_agent_runs": 7
+ },
+ "seconds": 7.8,
+ "real_vs_simulated": {
+  "real": [
+   "the reconciliation, lineage, ripple and materiality engines",
+   "Jade's code checks",
+   "the scoring",
+   "file parsing (xlsx formulas, pptx, pdf)",
+   "the ping protocol and the approvals schema",
+   "Lyft's Feb 13, 2024 release as filed, the CFO's correction and the tape"
+  ],
+  "simulated": [
+   "Tidewall Climbing Co., its books, people and files",
+   "the planted cases and variants",
+   "the agents' history (scripted unless recorded)"
+  ]
+ },
+ "headline": {
+  "exceptions_found": "6/6",
+  "noise_false_alarms": 0,
+  "lineage": "55/55",
+  "x1_invalidated": 40,
+  "x1_still_valid": 23,
+  "x1_compensations": 5,
+  "x1_naive_flagged": 43,
+  "materiality_naive": 0.594,
+  "materiality_v1": 0.594,
+  "materiality_v1_jade": 1.0,
+  "materiality_v2_jade": 1.0,
+  "jade_catch_rate": 1.0,
+  "jade_false_overrule_rate": 0.0,
+  "heldout_pass_v1": 0.278,
+  "heldout_pass_v2": 1.0,
+  "replay_leaks": 0
+ }
+}

@@ -51,7 +51,7 @@ def review(ev: dict, exc: dict, mat: dict, pin: str, proposer: str = "close_acco
     kn = AG.knowable(exc)
     if exc["kind"] in ("ach_return", "unbooked_bank_fee"):
         want = "fact_update"
-    elif exc["kind"] == "duplicate_vendor_invoice":
+    elif exc["kind"] in ("duplicate_vendor_invoice", "duplicate_import", "misclassification", "fx_error", "prior_year_recognition"):
         want = "error"
     else:
         want = "error" if kn["at"] <= db.norm_ts(C.KEY_DATES["q1_close"]) else "estimate_change"
