@@ -92,7 +92,7 @@ def export_cache(path=None) -> int:
     path = path or config.LLM_CACHE_EXPORT
     path.parent.mkdir(parents=True, exist_ok=True)
     rows = db.q("SELECT * FROM llm_cache ORDER BY ts")
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         for r in rows:
             f.write(db.dumps(dict(r)) + "\n")
     return len(rows)
@@ -105,7 +105,7 @@ def import_cache(path=None, *, real_only: bool = True) -> int:
     if not path.exists():
         return 0
     n = 0
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             if not line.strip():
                 continue
@@ -124,7 +124,7 @@ def merge_export(extra_db_paths: list, path=None) -> int:
     path = path or config.LLM_CACHE_EXPORT
     rows: dict[str, dict] = {}
     if path.exists():
-        with open(path) as f:
+        with open(path, encoding="utf-8") as f:
             for line in f:
                 if line.strip():
                     r = json.loads(line); rows[r["cache_key"]] = r
@@ -137,7 +137,7 @@ def merge_export(extra_db_paths: list, path=None) -> int:
             rows.setdefault(r["cache_key"], r)
         c.close()
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         for r in sorted(rows.values(), key=lambda r: (r["ts"], r["cache_key"])):
             f.write(json.dumps(r, sort_keys=True) + "\n")
     return len(rows)

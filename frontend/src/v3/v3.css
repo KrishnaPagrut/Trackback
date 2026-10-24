@@ -119,3 +119,6 @@
 .rnode { max-width: clamp(220px, 17vw, 340px); }
 .rnode .pr { font-family: var(--serif); font-style: italic; color: var(--ink); white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .rlane .rname .s { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* Tailwind's preflight makes svg a block; icons inside text must sit on the line */
+.beat svg, .panel svg, .claim svg, .row svg, table svg, .bcard svg, .modal svg, .envchip svg, .rmore svg { display: inline-block; vertical-align: -3px; }
+.rnode .ic svg, .overrule .stamp svg { vertical-align: 0; }

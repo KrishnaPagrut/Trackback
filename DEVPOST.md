@@ -1,61 +1,45 @@
 # Trackback
 
-**Headline:** Trackback is TrackBack for agents. When work you built on changes, you get pinged, and you fix your own piece.
+**Trackback does the close accountant's error review: when sources disagree, it finds what broke, sizes it, drafts the fix and the memo, and never posts anything without the controller.**
 
-**Tagline:** Trackback traces any correction forward.
+*Hyphenate traces any number back. Trackback traces any correction forward.*
 
-**Seats:** Trackback does the senior close accountant's and the reporting analyst's job every time a source changes: it finds what broke, proves what didn't, and drafts the fix for the controller to sign.
+## Inspiration
+
+A wrong number in a finance team doesn't stay in one place. It lands in a spreadsheet someone typed by hand, a board deck, a certificate already sent to the bank, a bonus already paid. When someone finally spots it, the hard part isn't fixing the ledger; it's knowing what else it broke, whether it matters, and who has to fix what. Today a person guesses. TrackBack, the 2002 blogging protocol, let a page notify everything that referenced it; we wanted that for corrections.
 
 ## What it does
 
-Three AI agents (a Close Accountant, a Reporting Analyst, and a Covenant & Comp analyst) do real record-to-report work for Tidewall Climbing Co., a fictional chain of six California climbing gyms with a term loan, a 3.00x leverage covenant, ACH dues, corporate wellness contracts, a wall-build division and GM bonuses. Every source they read (bank statements, billing exports, contracts, FX tables, the materiality memo) is stored as versioned claims with two clocks: when the fact applies and when the system learned it. Every number, sentence, forecast cell and executed action records exactly which claim versions it rested on, down to a lot code.
+Two worlds run on the same engines.
 
-Agents read each other's outputs only through the hub, which writes a consumption receipt with the fields read. When a source is corrected, or an agent revises its own earlier output, Trackback walks the dependency graph forward. It recomputes numbers in plain code, stops where values or conclusions don't move enough to matter, asks an LLM only about prose, and then sends one trackback ping per affected agent per wave, along hash-verified receipts only. Each pinged agent re-checks its own piece and answers still_valid (with a reason), reworked, or needs_human. Actions that already moved money get a compensating action from a fixed menu, routed to a human approver who is not the preparer. Memento replays any past decision exactly as the system saw it and refuses, with an HTTP 403 and both timestamps, to serve anything published after the decision time.
+**Tidewall Climbing Co.** (synthetic): 48 gyms, $186M of revenue, a $105M loan, leverage reported at 2.95x against a 3.00x covenant. On July 8 Trackback:
 
-The moment: on July 8 the billing system admits a February migration double-counted $118,000 of March revenue. A naive "under 5% of pretax" rule shrugs. Trackback follows it into the Q1 lender certificate (2.97x becomes 3.03x against a 3.00x covenant), two board-deck tiles, the Fresno and Oakland GM bonuses and the Q2 tax estimate, and shows 44 things it checked and cleared, each with a reason. Its first correcting entry is dated into locked Q1 and tries to self-approve; the database's CHECK constraint says no, the controller rejects the date, and the agent re-drafts in June with an out-of-period tag. Replay April 10 and the duplicate rows are visibly in the export the agent read, so Trackback owns the miss and proposes a dedupe control.
+1. **Reconciles** four ways (billing to GL, bank to book, cash application, AP) and clears the ordinary mess with reasons: deposits in transit, outstanding checks, a one-cent FX difference, a bundled wire found by subset-sum, a customer's habitual short-pay, a payer under another name, a colleague's half-finished reconciliation. Six real exceptions remain. One is big: the March import of a billing batch ran twice, $750,000 of revenue counted twice.
+2. **Traces** every number people typed into a covenant workbook, a board deck and a signed compliance certificate back to the books, with nobody having drawn the links (55 of 55), and notices that the deck's $32.6M was typed from a draft.
+3. **Ripples** the correction forward: 40 figures and actions are now wrong, including the certificate already sent to the bank, three overpaid bonuses and the Q2 tax; 23 were checked and still hold, each with a reason. Three AI agents that built on the number each get one ping and answer still valid, reworked or needs a human.
+4. **Judges** it. The agent's first draft calls it immaterial (4.7% of pretax). Jade, its reviewer, overrules: SAB 108 rollover $662,000 passes but iron curtain $1,118,000 fails; leverage moves to 3.02x, a breach; management bonuses change.
+5. **Asks** the right people. It drafts; it never posts. The controller rejects the March-dated entry ("Q1 is locked"); the agent re-drafts in June with an out-of-period tag. The next bonus run is on hold. The database refuses self-approval.
+6. **Owns the miss**: Replay shows the duplicate was visible on April 9, before the close, and refuses to show anything published later.
+7. **Writes the memo** an auditor will ask for, and **learns**: lessons from Jade's overrules and the controller's rejection, approved by the controller and gated by a full regression run.
+
+**Lyft, February 13, 2024** (real): the release said "approximately 500 basis points" of margin expansion; the model said 50. Trackback reads the real filing (24 of 25 figures tie; the 25th is 500 against a source of 50, the same digits at another power of ten), blocks the release before publication when it runs inside, and pings only the newsroom and sell-side desk that built on the 500 when the correction lands.
 
 ## How we built it
 
-Python 3.11, FastAPI, SQLite (append-only, bitemporal: the only UPDATE allowed closes a transaction-time interval), a hand-rolled RFC 7089 Memento service with a time-pinning profile (four documented deviations, RFC 9457 problem bodies, no 425 on the wire), a safe formula evaluator so the model never does arithmetic, the Anthropic Messages API behind a record/replay cache (agents on Claude Sonnet 5.5, the judge on Claude Opus 5.5 to avoid self-preference; the Citations API path for prose with a claim-marker fallback), a truth-maintenance-style propagation engine with build-system early cutoff, a fixed compensation menu, a PlanFence-style pre-execution fence, learned norms mined from the correction log with a hard deny-list, and a Vite + React + React Flow UI served from the same process, typeset like a ledger crossed with a recall notice (Newsreader, IBM Plex, bundled). Stage mode is the presentation view: four lanes, ten cards, one ping bubble at a time, a payoff number read from the run, and a kiosk loop that plays itself at the table and hands over to a judge on any key. Deep mode is the full instrument. The whole demo runs offline in replay mode, and `make check` proves it with networking refused in-process.
+Python (FastAPI, SQLite, numpy, scipy, openpyxl, python-pptx, pypdf), React and TypeScript. An append-only, bitemporal ledger and versioned sources; a metric library over ledger slices; Hungarian assignment and subset-sum for reconciliations; a lineage tracer with its own formula evaluator and display-precision matching; a ripple engine with early cutoff and conclusion checks; SAB 108/99 materiality computed through the graph; a versioned playbook; Jade's code checks; a ping hub (CloudEvents envelope, HMAC, hash-verified consumption receipts); Claude Sonnet 5.5 for the agent's words and Claude Opus 5.5 for Jade's critique, every response cached so the demo runs offline.
 
-## The real-world story: Lyft, February 13, 2024
-
-Lyft's Q4 2023 earnings release said Adjusted EBITDA margin would expand by "approximately 500 basis points" in 2024. The number in the CFO's prepared remarks, and in the model, was 50. The stock rose as much as 67% after hours before the correction on the call, and closed up 35% the next day on the quarter itself. The `Real world` tab rebuilds that afternoon from inside Lyft's finance team: an FP&A agent's model says 50, a Reporting/IR agent's draft cites that number and says 500, the CFO approves, and Trackback's pre-execution fence blocks the release before it leaves the building, with the fix rendered in place. Then it replays what actually happened outside the company: the real release, a newsroom and a sell-side desk that built on it, the correction at 5 pm, two pings, three cleared sentences, two compensations. Only the release, the correction and the tape are real; the internal documents and the outside dependents are reconstructions from those public numbers, labeled as such on screen.
-
-## Real vs simulated
-
-Real: the claim graph, propagation engine, early cutoff and materiality logic; the Memento service, TimeMaps, pin enforcement and refusals; typed-tool provenance capture and the LLM judge (cached); the ledger (sums to zero, integer cents), compensations and approvals with schema-enforced segregation of duties; Lyft's February 13, 2024 release as filed (500 basis points), the CFO's correction on the call (50), and the tape.
-
-Simulated: Tidewall, its gyms, vendors, customers and people; the bank feed, ACH processor, billing system and AP inbox; the 23 planted errors, each designed from a cited accounting rule (ASC 250, ASC 606, SAB 99, NACHA return codes); the lender and credit agreement. Unverified rules are labeled "company policy" in the data. Agent runs: the frozen build replays 193 recorded Claude responses (Sonnet 5.5 agents, Opus 5.5 judge, Citations API prose) where their cache keys match; the rest, including the agents' rework replies to pings, is a labeled deterministic stand-in until a full record-mode rebuild. The proof page counts which is which. For Lyft, the finance-team documents and the outside dependents are reconstructions from the public numbers.
+Math decides what matches and what it's worth; AI handles judgment and language, and everything it says gets checked.
 
 ## Proof
 
-Two answer keys, both hand-written before the engine was tuned, hashes on the proof page, later edits in a changelog. Per artifact (git tag `answer-key-frozen`): 21 corrections, precision 1.000 and recall 1.000 on invalidated artifacts, 222 of 222 verdicts and reasons, 104 of 104 decoys cleared, over-invalidation 1.00 versus 5.59 for flagging everything that touched the file, 0 future reads leaked in 288 adversarial attempts, replay 162 of 162 artifacts byte-identical. Multi-agent (tag `answer-key-v2-frozen`), 23 events including an agent's self-revision, two coalesced corrections and an upstream challenge: ping precision 1.000 and recall 1.000, the exact set of agents pinged in 23 of 23, 0 of 27 must-change nodes wrongly waved through, 0 of 14 unnecessary rework, 65 of 65 must-stay nodes preserved, 12 of 12 compensations with the right amounts, 125 of 125 tie-outs, every event settled in one wave, 1 LLM call in waves versus 318 to rerun every agent. Every number is read from `data/eval/latest.json`, which `make eval` writes.
+36 planted cases with an answer key the generator writes from its own arithmetic: exceptions found 6 of 6, no false alarms on noise; lineage 55/55; the $750k ripple 40/23/5 with 63 of 63 reasons right; materiality 19/32 for a 5% rule vs 32/32 with Jade; Jade catches 43 of 43 planted agent mistakes with no false overrules; held-out cases go from 5/18 to 18/18 after approved lessons; zero future reads leaked in 73 adversarial fetches; Lyft variants 5 of 5. `python tasks.py check` runs the whole demo with outside connections refused.
 
-## The story behind the names
-
-TrackBack (2002) was the Movable Type protocol that let a site notify another site when it referenced it. Trackback does that for numbers inside a company, forward. Memento is RFC 7089, the HTTP time-travel standard; plain Memento returns the nearest version even if it's later, so Trackback adds a time-pinning profile: the pin is server-side per run, nothing after it is served, a missing datetime means the pin, and a document that didn't exist yet is a 404. We wanted to answer with 425 Too Early; RFC 8470 reserves it for TLS replay with mandatory retry, so it stays on a slide.
+**Real vs simulated:** the engines, Jade, the scoring, the file parsing and Lyft's filing, correction and tape are real; Tidewall, its people and files, and Lyft's internal documents and outside dependents are simulated or reconstructed, and labeled.
 
 ## Challenges
 
-Deciding what a correction does not break is the whole product: different period and different line item are structural, early cutoff is arithmetic, conclusions (covenant, bonus tier, sign of a trend) can absorb a change that a dollar threshold cannot, and ratios need no dollar threshold at all. Estimate versus error (ASC 250) turned out to be a query on the transaction-time axis, which is what Memento answers. Keeping replays byte-identical meant keeping every state-dependent field out of what the model sees.
+Making "is it material?" honest: a 5% rule is wrong in both directions, so the qualitative tests are computed from the graph (does it flip the covenant, change someone's pay, sit in a delivered document) rather than guessed, and a clearly trivial amount never becomes material. Keeping the answer key independent of the engines. Making a ripple across people, agents and executed actions readable in three minutes.
 
 ## What's next
 
-A full record-mode run of the rework pings with the real model (the agents' history runs and the Citations API are recorded; the ping replies are the scripted stand-in until the API balance is topped up, and the proof page says which rows are which); A2A and MCP adapters so any agent framework can receive a trackback; a second domain pack (research citations) to show the core has no finance in it; the recursive norm beat (correct one Bayline invoice and the 1.08 factor goes back to review); XTDB as the production store.
-
-## Finance capabilities
-
-Pick a company and a corner: Tidewall's record-to-report seat. Sources disagree (contract vs master, bank vs ledger, a spoofed vendor email that is refused). Time: a March fact changes June's accrual policy. Working with others: an approvals inbox where the controller says no and the agent recovers. Limits: `CHECK (proposer <> approver)` in the schema, period locks, the CFO alone signs lender documents. Explainable and accountable: every verdict cites exact claim versions, every decision replays. Judges can type their own correction: the form asks "when did this fact first exist?" and the deterministic impact set returns in milliseconds.
-
-## For Most Technically Advanced
-
-A bitemporal append-only store, a Memento service with an enforcing profile, a truth-maintenance walk with value-aware cutoff, typed-tool provenance capture that makes the dependency graph complete by construction, replay-as-cache determinism, and an eval harness with three baselines and a frozen key.
-
-## For Microsoft "Built for the Real World"
-
-It plugs into an existing ERP and agent stack without replacing either: sources are documents, agents only touch data through three read tools, and every output carries provenance a forward-deployed engineer can audit. The real-data scenario is a public company's actual restatement parsed from SEC XBRL.
-
-## For CRS Best Financial AI Agent
-
-Three agents with named seats, limited access, a clean record and a habit of asking when timing or materiality is ambiguous, judged against a planted answer key.
+An SDK so any agent's tool calls write receipts; uploads of people's files with confirm-the-link flows; a hosted hub with webhooks; domains beyond finance (the ping hub and receipts are already domain-agnostic; the metric library and materiality rules are the finance plug-in).
