@@ -166,6 +166,37 @@ def judge(excs: list[dict], ripples: dict, pin: str, run_id: str | None, pb: dic
     return out
 
 
+def send_waves(excs: list[dict], ripples: dict, links: list[dict], agent_nodes: list[dict], pin: str, run_id: str) -> dict:
+    """Iteration 2: tell every owner. One wave per error with invalidations (X1 first); bank fact updates found together are coalesced into
+    one wave (S2), each keeping its own reach; the Reporting Analyst then challenges the Close Accountant's allocation (S3)."""
+    from . import hub
+    out = {}
+    ts = db.norm_ts(pin)
+    order = sorted(excs, key=lambda e: (e["kind"] != "duplicate_import", e["exception_id"]))
+    for e in order:
+        rp = ripples.get(e["exception_id"])
+        if not rp or e["recon"] == "bank_to_book":
+            continue
+        if rp["counts"]["invalidated"] or rp["counts"]["agent_suspect"]:
+            out[e["exception_id"]] = hub.dispatch(rp, ts)
+    bank = [e for e in excs if e["recon"] == "bank_to_book" and (e.get("correction") or {}).get("lines")]
+    if bank:
+        cid = "+".join(e["exception_id"] for e in bank)
+        lines = [l for e in bank for l in e["correction"]["lines"]]
+        rp = ripple_for({"exception_id": cid, "title": "Bank fact updates found together (coalesced): " + "; ".join(e["title"] for e in bank), "correction": {"lines": lines}},
+                        links, pin, run_id, agent_nodes)
+        solo = {e["exception_id"]: ripples[e["exception_id"]]["counts"]["agent_suspect"] for e in bank}
+        w = hub.dispatch(rp, ts)
+        w["coalesced"] = [e["exception_id"] for e in bank]
+        w["solo_pings"] = solo
+        out[cid] = w
+    x1 = next((e for e in excs if e["kind"] == "duplicate_import"), None)
+    if x1:
+        out["S3"] = {"challenge": hub.challenge("reporting_analyst", "CA.q1_close_memo", "Is the duplicate allocated to the right gyms? Slide 4 moves by region; please confirm the B07 cohort's gym mapping before I reissue.", ts)}
+    db.insert("kv", {"key": f"waves.{run_id}", "value": json.dumps(out, default=str)})
+    return out
+
+
 def new_run(pin: str, playbook: str = "v1") -> str:
     rid = f"RV-{uuid.uuid4().hex[:8]}"
     db.insert("review_runs", {"run_id": rid, "world": "tidewall", "pinned_at": db.norm_ts(pin), "playbook_version": playbook, "status": "running", "started_at": db.norm_ts(pin), "finished_at": None, "summary_json": None})
@@ -189,9 +220,16 @@ def run_all(pin: str | None = None, playbook: str = "v1") -> dict:
         agent_nodes = history.agent_nodes()
     ripples = {e["exception_id"]: ripple_for(e, links, pin, rid, agent_nodes) for e in excs if (e.get("correction") or {}).get("lines")}
     j = judge(excs, ripples, pin, rid)
+    waves = send_waves(excs, ripples, links, agent_nodes, pin, rid)
+    from . import memo, workflow
+    by_id = {e["exception_id"]: e for e in excs}
+    proposals = workflow.propose(j["final"], by_id, pin)
+    memos = [eid for eid, fin in j["final"].items() if fin["q5_matters"].get("material")]
+    for eid in memos:
+        memo.build(rid, eid, pin)
     overrules = {eid: [f["claim_key"] for f in fs if f["verdict"] in ("overrule", "flag")] for eid, fs in j["jade"].items()}
     summary = {"exceptions": len(excs), "links": len(links), "ripples": {k: v["counts"] for k, v in ripples.items()}, "jade": overrules,
-               "aggregate": j["materiality"]["aggregate"], "seconds": round(time.time() - t0, 2)}
+               "aggregate": j["materiality"]["aggregate"], "waves": {k: v.get("stats") for k, v in waves.items()}, "proposals": proposals, "memos": memos, "seconds": round(time.time() - t0, 2)}
     db.get_conn().execute("UPDATE review_runs SET status='done', finished_at=?, summary_json=? WHERE run_id=?", (db.norm_ts(pin), json.dumps(summary), rid))
     db.insert("kv", {"key": "review.latest.tidewall", "value": rid}) if db.q1("SELECT 1 FROM kv WHERE key='review.latest.tidewall'") is None else \
         db.get_conn().execute("UPDATE kv SET value=? WHERE key='review.latest.tidewall'", (rid,))

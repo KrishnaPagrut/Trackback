@@ -37,3 +37,23 @@ def tw(tmp_path_factory):
     yield gen
     config.DB_PATH = old
     db.reset_connection()
+
+
+@pytest.fixture(scope="module")
+def canon(tmp_path_factory):
+    """The canonical state (world + the agents' history + the review run, as shipped in the snapshot), in its own database."""
+    from trackback import config, review
+    from trackback.core import db
+    from trackback.world import build as WB, history
+    p = tmp_path_factory.mktemp("canon") / "canon.sqlite"
+    old = config.DB_PATH
+    config.DB_PATH = p
+    db.reset_connection()
+    gen = WB.generate()
+    WB.load(gen)
+    history.run_all()
+    out = review.run_all()
+    out["key"] = gen["key"]
+    yield out
+    config.DB_PATH = old
+    db.reset_connection()

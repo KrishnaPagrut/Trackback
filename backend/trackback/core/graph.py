@@ -9,6 +9,7 @@ from .. import config
 from . import db
 
 
+DEFAULT_WORLD = "tidewall"   # which world new artifacts belong to unless the caller says otherwise
 NODE_KIND = {"number": "calc", "forecast_cell": "calc", "sentence": "prose", "action": "action", "judgment": "judgment"}
 
 
@@ -21,7 +22,7 @@ def new_artifact(*, artifact_id: str, kind: str, run_id: str, pinned_at: str, pe
                  content: str | None, value_num: float | None, formula: dict | None, conclusions: dict | None,
                  status: str = "valid", tx_from: str | None = None, version: int | None = None,
                  agent_id: str | None = None, origin: str = "initial", reason: str | None = None, approved_by: str | None = None,
-                 metric: str | None = None, fields: dict | None = None, node_kind: str | None = None) -> int:
+                 metric: str | None = None, fields: dict | None = None, node_kind: str | None = None, world: str | None = None) -> int:
     cur = db.artifact_current(artifact_id)
     v = version or ((cur["version"] + 1) if cur is not None else 1)
     if agent_id is None:
@@ -33,7 +34,8 @@ def new_artifact(*, artifact_id: str, kind: str, run_id: str, pinned_at: str, pe
                             "status": status, "tx_from": db.norm_ts(tx_from or pinned_at), "tx_to": config.TX_CURRENT,
                             "agent_id": agent_id, "node_kind": node_kind or NODE_KIND.get(kind, kind), "origin": origin,
                             "supersedes_version": cur["version"] if cur is not None else None, "content_hash": content_hash(value_num, content, conclusions),
-                            "reason": reason, "approved_by": approved_by, "metric": metric or line_item, "fields_json": db.dumps(fields) if fields else None})
+                            "reason": reason, "approved_by": approved_by, "metric": metric or line_item, "fields_json": db.dumps(fields) if fields else None,
+                            "world": world or DEFAULT_WORLD})
     return v
 
 

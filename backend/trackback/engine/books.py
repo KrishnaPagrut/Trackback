@@ -56,7 +56,9 @@ class Books:
         for e in entries:
             if as_of is not None and e["posted_at"] > as_of:
                 continue
-            self._add(e["account"], e["period"], e["entity"], e["amount_cents"])
+            # a posted correction (out-of-period entry) restates the period it corrects: metrics read it in its orig_period
+            per = e["orig_period"] if e.get("correction_id") and e.get("orig_period") else e["period"]
+            self._add(e["account"], per, e["entity"], e["amount_cents"])
         for a in adjustments or []:
             self._add(a["account"], a.get("orig_period") or a["period"], a["entity"], int(a["amount_cents"]))
 

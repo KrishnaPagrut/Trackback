@@ -197,8 +197,10 @@ def ripple(*, correction: dict, lib: MetricLibrary, entries: list[dict], snapsho
             m = lib.metrics.get(parts[0])
             cb, ca = (conclusion_state(m, b), conclusion_state(m, a)) if m else (None, None)
             if (isinstance(b, str) and b != a) or (not isinstance(b, str) and abs(a - b) > 0.005):
+                tol = n.get("tolerance")
+                mat = (abs(a - b) >= tol or cb != ca) if (tol and not isinstance(b, str)) else material_change(m.unit if m else "usd", b, a, cb != ca)
                 changed_fields.append({"field": mid, "label": m.label if m else mid, "old": b, "new": a, "delta": None if isinstance(b, str) else a - b,
-                                       "crossed_threshold": cb != ca, "material": material_change(m.unit if m else "usd", b, a, cb != ca)})
+                                       "crossed_threshold": cb != ca, "material": mat})
         base = {"node_id": n["id"], "owner": n["owner"], "kind": n["kind"], "label": n.get("label"), "content": n.get("content"), "consumes": n["consumes"]}
         if not any_reached:
             nodes[n["id"]] = {**base, "verdict": "still_valid", "reason": structural_reason(lib, n["consumes"][0], lines), "skipped": True}

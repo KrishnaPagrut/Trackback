@@ -11,14 +11,14 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | CP2 detect | done | `tests/test_v3_cp2_detect.py`: exactly six exceptions (X1 $750,000 duplicate import, X2 $140,000 unaccrued, X3 $58,000 true-up, X4 $18,750 duplicate invoice, X5 $2,310 R01, X6 $312.40 fee); P1 known x6; 12 in transit, 3 outstanding checks, 1 FX rounding, subset-sum, known short-pay, SSU alias; Priya's handoff confirmed 1-6, finished 7-9 |
 | CP3 trace | done | `tests/test_v3_cp3_trace.py`: 49/49 lineage truths + 6 derived cells; H1 stale; X1 ripple 40 invalidated / 23 still valid / 5 compensations in 0.2 s (30 of 191 metrics recomputed; naive 43); X2/X4/X6 match the key; Replay refuses the Jul 8 export at an Apr 10 pin (403) |
 | CP4 judge | done | `tests/test_v3_cp4_judge.py`: aggregate $662,000 (passes) / $1,118,000 (fails); v1 calls X1 immaterial (4.69%), Jade overrules (covenant 3.0208x, compensation); Jade overrules X3 to a change in estimate; flags lender routing to the CFO; escalates the locked March posting to Dana |
-| CP5 act (+ pings) | next | |
-| CP6 prove | | |
+| CP5 act (+ pings) | done | `tests/test_v3_cp5_act.py`: Dana rejects the March-dated entry, the agent re-drafts in June tagged to March, self-approval raises, Jul 15 bonus run held for R1/R2/R4 and released by Lena's approval, Summit Mats held, Sam signs the corrected certificate, reminders and escalation, memo renders; X1 wave pings all three agents (reworked / needs_human / still_valid with reasons), cash forecast skipped, Priya's notice routed to Marco; S1 pings only the Reporting Analyst; S2 coalesced; S3 to Dana with no wave |
+| CP6 prove | next | |
 | CP7 learn | | |
 | Lyft parity | | |
 | CP8 UI | | |
 | CP9 polish | | |
 
-Next three tasks: agents' history with receipts; the workflow (approvals, Dana's rejection and re-draft, holds, reminders); pings to owners.
+Next three tasks: case library (~30 variants); scorecard with baselines; lessons and the regression gate.
 
 ---
 
