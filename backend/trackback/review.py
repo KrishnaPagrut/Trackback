@@ -233,8 +233,30 @@ def run_all(pin: str | None = None, playbook: str = "v1") -> dict:
     db.get_conn().execute("UPDATE review_runs SET status='done', finished_at=?, summary_json=? WHERE run_id=?", (db.norm_ts(pin), json.dumps(summary), rid))
     db.insert("kv", {"key": "review.latest.tidewall", "value": rid}) if db.q1("SELECT 1 FROM kv WHERE key='review.latest.tidewall'") is None else \
         db.get_conn().execute("UPDATE kv SET value=? WHERE key='review.latest.tidewall'", (rid,))
+    from . import lessons
+    lessons.from_review(rid, pin)
     print(f"review {rid}: {len(excs)} exceptions, {len(links)} traced items, ripples {summary['ripples']} ({summary['seconds']}s)")
     return {"run_id": rid, "detect": res, "links": links, "ripples": ripples, "judge": j, "summary": summary}
+
+
+def evaluate_only(pin: str | None = None) -> dict:
+    """Re-run the evaluation under the current playbook (v1 plus every approved lesson) without sending pings or proposals again:
+    what would the agent claim now, and what would Jade still have to correct?"""
+    from .agent import playbook as PB
+    pin = pin or C.KEY_DATES["now"]
+    excs = [e for r in detect(pin, store=False) for e in r["exceptions"]]
+    links = trace(pin, store=False)
+    from .world import history
+    nodes = history.agent_nodes()
+    ripples = {e["exception_id"]: ripple_for(e, links, pin, None, nodes, store=False) for e in excs if (e.get("correction") or {}).get("lines")}
+    pb = PB.current()
+    j = judge(excs, ripples, pin, None, pb=pb, store=False)
+    out = {}
+    for eid, ev in j["evaluations"].items():
+        out[eid] = {"title": ev["title"], "classification": ev["q3_classification"]["value"], "material": ev["q5_matters"]["material"], "posting": ev["q7_fix"].get("posting_period"),
+                    "treatment": ev["q7_fix"].get("treatment"), "approvers": ev["q7_fix"].get("approvers"),
+                    "jade": [{"claim": f["claim_key"], "verdict": f["verdict"], "why": f["why"]} for f in j["jade"][eid] if f["verdict"] in ("overrule", "flag", "escalate")]}
+    return {"playbook": pb["version"], "lessons": pb.get("lessons", []), "exceptions": out}
 
 
 def latest_run() -> str | None:

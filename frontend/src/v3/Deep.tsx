@@ -353,17 +353,41 @@ function Scorecard() {
 
 function Lessons() {
   const [d, setD] = useState<Any>(null)
-  useEffect(() => { api.lessons().then(setD) }, [])
+  const [busy, setBusy] = useState<string | null>(null)
+  const [cmp, setCmp] = useState<Any>(null)
+  const load = () => api.lessons().then(setD)
+  useEffect(() => { load() }, [])
   if (!d) return null
   const L = d.learning
+  const gate = async (id: string) => { setBusy(id); try { await api.gateLesson(id) } finally { setBusy(null); load() } }
+  const approve = async (id: string) => { await api.approveLesson(id, 'dana'); load() }
+  const rerun = async () => { setBusy('rerun'); try { setCmp(await api.rerun()) } finally { setBusy(null) } }
   return (
     <div>
       <h3>Lessons</h3>
-      <div className="t14 muted">Mistake signals are never the agent grading itself: Jade's overrules and the Controller's rejection. Each lesson is a check in the playbook; it needs Dana's approval and must pass the regression gate (the whole scorecard rerun; any previously passing check that fails rejects it).</div>
-      {L && <><div className="grid-cards" style={{ marginTop: 12 }}>{L.lessons.map((l: Any) => (
-        <div key={l.lesson} className={`panel ${l.gate === 'pass' ? 'cleared' : 'recall'}`}><b>{l.lesson.replace(/_/g, ' ')}</b><div className="t14">gate: <b>{l.gate}</b>{l.fixed ? ` · fixed ${l.fixed} checks` : ''}</div>{l.broke?.length > 0 && <div className="t14 red">broke: {l.broke.join(', ')}</div>}</div>))}</div>
-        <h4>Held-out cases, agent alone</h4>
-        <div className="t14">v1 passes {L.heldout.v1.cases.passed}/{L.heldout.v1.cases.n}; v2 ({L.playbook}) passes {L.heldout.v2.cases.passed}/{L.heldout.v2.cases.n}.</div></>}
+      <div className="t14 muted">Mistake signals are never the agent grading itself: Jade's overrules and flags, and the Controller's rejection. Each lesson is a check in the playbook. It needs Dana's approval, and before it goes live the regression gate reruns the whole case library with it: if any check that passed before now fails, the lesson is refused.</div>
+      <div className="grid-cards" style={{ marginTop: 12 }}>{(d.lessons as Any[]).map(l => (
+        <div key={l.lesson_id} className={`panel ${l.status === 'active' ? 'cleared' : l.status === 'gate_failed' ? 'recall' : l.status === 'gate_passed' ? 'cleared' : ''}`}>
+          <b>{l.mistake_kind.replace(/_/g, ' ')}</b> <span className="pill">{l.status.replace('_', ' ')}</span>
+          <div className="t14" style={{ marginTop: 6 }}>{l.rule}</div>
+          <div className="t14 muted" style={{ marginTop: 4 }}>From: {l.source === 'jade' ? "Jade's review" : 'a person'} · {(l.evidence || []).slice(0, 3).map((e: Any) => e.case).join(', ')}</div>
+          {l.gate && <div className="t14" style={{ marginTop: 6 }}>Gate: <b className={l.gate.result === 'pass' ? 'green' : 'red'}>{l.gate.result}</b> · {l.gate.passed_before} → {l.gate.passed_after} checks passing of {l.gate.cases}{l.gate.fixed?.length ? ` · fixed ${l.gate.fixed.length}` : ''}
+            {l.gate.broke?.length > 0 && <div className="red">would break: {l.gate.broke.slice(0, 6).join(', ')}</div>}</div>}
+          <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+            {l.status === 'proposed' && <button className="btn" disabled={!!busy} onClick={() => gate(l.lesson_id)}>{busy === l.lesson_id ? 'Running 36 cases twice…' : 'Run the gate'}</button>}
+            {l.status === 'gate_passed' && <button className="btn primary" onClick={() => approve(l.lesson_id)}>Approve as Dana</button>}
+          </div>
+        </div>))}</div>
+      <div className="panel" style={{ marginTop: 6 }}>
+        <b>Re-run the review with the approved lessons.</b> <span className="t14 muted">The same six exceptions, evaluated under the current playbook; nothing is re-sent or re-proposed.</span>
+        <div style={{ marginTop: 8 }}><button className="btn primary" disabled={!!busy} onClick={rerun}>{busy === 'rerun' ? 'Re-running…' : 'Re-run the review'}</button></div>
+        {cmp && <table className="ledger-table" style={{ marginTop: 10 }}><thead><tr><th>Exception</th><th>Shipped (v1): agent said</th><th>Jade corrected</th><th>Now ({cmp.now.playbook}): agent says</th><th>Jade corrects</th></tr></thead>
+          <tbody>{Object.entries(cmp.now.exceptions).map(([k, v]: Any) => { const b = cmp.before.exceptions[k] || {}; const fmt = (x: Any) => `${x.classification?.replace('_', ' ')}; ${x.material ? 'material' : 'immaterial'}${x.posting ? `; posts ${x.posting}` : ''}${x.approvers?.lender_document ? `; lender docs → ${who(x.approvers.lender_document)}` : ''}`
+            return <tr key={k}><td><b>{k}</b><div className="t14">{v.title}</div></td><td className="t14">{fmt(b)}</td><td className="t14 red">{(b.jade || []).map((j: Any) => j.claim).join(', ') || 'nothing'}</td>
+              <td className="t14">{fmt(v)}</td><td className="t14">{v.jade.map((j: Any) => `${j.claim} (${j.verdict})`).join(', ') || <span className="green">nothing</span>}</td></tr> })}</tbody></table>}
+      </div>
+      {L && <><h4>The learning experiment (from python tasks.py eval)</h4>
+        <div className="t14">Training half under v1 with Jade, mistakes turned into lessons, gated, approved; then the held-out half: v1 passes {L.heldout.v1.cases.passed}/{L.heldout.v1.cases.n}, v2 passes {L.heldout.v2.cases.passed}/{L.heldout.v2.cases.n} (agent alone, no Jade). Gate results: {L.lessons.map((l: Any) => `${l.lesson.replace(/_/g, ' ')} ${l.gate}`).join('; ')}.</div></>}
     </div>
   )
 }

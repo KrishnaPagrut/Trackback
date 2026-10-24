@@ -444,7 +444,32 @@ def lessons_view():
 @router.post("/lessons/{lesson_id}/approve")
 def lesson_approve(lesson_id: str, d: Decision):
     from . import lessons
+    _snapshot_for_undo()
+    if d.person == "close_accountant":
+        return JSONResponse({"refused": True, "error": "the agent cannot approve its own lesson"}, status_code=409)
     return lessons.approve(lesson_id, d.person, C.KEY_DATES["now"])
+
+
+@router.post("/lessons/{lesson_id}/gate")
+def lesson_gate(lesson_id: str):
+    """Run the regression gate live: the whole case library without and with the lesson, on top of the lessons already active."""
+    from . import lessons
+    return lessons.gate_live(lesson_id)
+
+
+@router.post("/review/rerun")
+def review_rerun():
+    """The same review under the current playbook (v1 plus approved lessons), next to the shipped v1 run. Nothing is re-sent or re-proposed."""
+    from . import review
+    now = review.evaluate_only()
+    rid = _latest("tidewall")
+    before = {}
+    for r in db.q("SELECT exception_id, claims_json FROM evaluations WHERE run_id=? AND playbook_version NOT LIKE '%+jade'", (rid,)):
+        ev = json.loads(r["claims_json"])
+        js = [dict(x) for x in db.q("SELECT claim_key, verdict, why FROM jade_reviews WHERE eval_id=? AND verdict IN ('overrule','flag','escalate')", (f"EV-{rid}-{r['exception_id']}",))]
+        before[r["exception_id"]] = {"title": ev["title"], "classification": ev["q3_classification"]["value"], "material": ev["q5_matters"]["material"], "posting": ev["q7_fix"].get("posting_period"),
+                                     "treatment": ev["q7_fix"].get("treatment"), "approvers": ev["q7_fix"].get("approvers"), "jade": [{"claim": x["claim_key"], "verdict": x["verdict"], "why": x["why"]} for x in js]}
+    return {"before": {"playbook": "v1", "exceptions": before}, "now": now}
 
 
 @router.get("/scorecard")

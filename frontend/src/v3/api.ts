@@ -29,6 +29,8 @@ export const api = {
   memos: (w: World) => j(`/api/memos?world=${w}`),
   lessons: () => j('/api/lessons'),
   approveLesson: (id: string, person: string) => post(`/api/lessons/${id}/approve`, { person, decision: 'approved' }),
+  gateLesson: (id: string) => post(`/api/lessons/${id}/gate`),
+  rerun: () => post('/api/review/rerun'),
   scorecard: () => j('/api/scorecard'),
   timemap: (s: string) => j(`/api/memento/timemap/${s}`),
   timegate: (s: string, at: string) => j(`/api/memento/timegate/${s}?at=${encodeURIComponent(at)}`),

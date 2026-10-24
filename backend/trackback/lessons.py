@@ -54,6 +54,31 @@ def propose(mistakes: list[dict], ts: str, world: str = "tidewall", extra: list[
     return ids
 
 
+def from_review(run_id: str, ts: str) -> list[str]:
+    """Lessons proposed from a real review: Jade's overrules and flags on its claims, the locked-period escalation the Controller rejects,
+    plus one over-general rule a person might write after X3 (the gate should refuse it)."""
+    rows = [dict(r) for r in db.q("SELECT eval_id, claim_key, verdict, why FROM jade_reviews WHERE eval_id LIKE ?", (f"EV-{run_id}-%",))]
+    results = [{"case": r["eval_id"].split("-")[-2] + "-" + r["eval_id"].split("-")[-1], "jade": [r]} for r in rows]
+    return propose(mistakes_from(results), ts, extra=["closed_period_invoices_are_estimates"])
+
+
+_PRE: dict = {}
+
+
+def gate_live(lesson_id: str) -> dict:
+    """The regression gate on the live world: the whole case library scored without and with the lesson, on top of the active lessons."""
+    from .eval import scorecard as S
+    if "pre" not in _PRE:
+        base = S.prepare()
+        _PRE.update(pre=S.precompute(base), key=base["key"])
+    active = [r["mistake_kind"] for r in db.q("SELECT mistake_kind FROM lessons WHERE status='active' AND world='tidewall' ORDER BY decided_at")]
+
+    def run(keys):
+        return {"passed": S.score(_PRE["pre"], _PRE["key"], keys, False)["checks"]}
+
+    return gate(lesson_id, run, active)
+
+
 def gate(lesson_id: str, run_scorecard, baseline_keys: list[str]) -> dict:
     """Rerun the whole scorecard with the lesson added; reject it if any previously passing case fails."""
     key = db.q1("SELECT mistake_kind FROM lessons WHERE lesson_id=?", (lesson_id,))["mistake_kind"]

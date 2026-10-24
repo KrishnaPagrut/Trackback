@@ -56,4 +56,7 @@ def current(lesson_keys: list[str] | None = None) -> dict:
     if lesson_keys is None:
         from ..core import db
         lesson_keys = [r["mistake_kind"] for r in db.q("SELECT mistake_kind FROM lessons WHERE status='active' AND world='tidewall' ORDER BY decided_at")]
-    return apply(V1, lesson_keys, "v2" if len(lesson_keys) == len(LESSON_PATCHES) else None) if lesson_keys else copy.deepcopy(V1)
+    return apply(V1, lesson_keys, "v2" if set(GOOD) <= set(lesson_keys) else None) if lesson_keys else copy.deepcopy(V1)
+
+
+GOOD = ["materiality_framework", "classify_by_knowable_at", "post_in_open_period", "lender_documents_to_cfo"]
