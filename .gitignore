@@ -17,3 +17,5 @@ data/*.sqlite-shm
 data/eval/*.sqlite*
 data/snapshots/undo/
 .vercel/
+.vercel
+.env*
