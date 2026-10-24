@@ -18,11 +18,17 @@ def knowable(exc: dict) -> dict:
         caps = [v for v in R.timemap("billing_release_lines") if v["captured_at"] >= _utc(posted)]
         first = caps[0] if caps else None
         return {"at": first["captured_at"] if first else _utc(posted), "evidence": f"replay:{first['version_id']}" if first else f"gl_import_log:{exc['duplicate_import']}",
-                "fact": f"the duplicate import {exc['duplicate_import']} posted {posted[:16].replace('T', ' ')}; the billing line export captured {first['captured_at'][:16].replace('T', ' ')} UTC already showed batch {exc['batch']} once"}
+                "fact": f"the duplicate import {exc['duplicate_import']} posted {_pt(posted)}; the billing line export captured {_pt(first['captured_at']) if first else '?'} already showed batch {exc['batch']} once, before the Q1 close"}
     if k in ("unaccrued_invoice", "accrual_true_up", "duplicate_vendor_invoice"):
         at = exc["knowable"]["at"]
         return {"at": _utc(at), "evidence": "replay:ap_invoices", "fact": exc["knowable"]["fact"]}
     return {"at": _utc(exc["knowable"]["at"]), "evidence": f"replay:{exc.get('system_of_record')}", "fact": exc["knowable"]["fact"]}
+
+
+def _pt(ts: str) -> str:
+    from datetime import datetime, timedelta, timezone
+    d = datetime.fromisoformat(_utc(ts)).astimezone(timezone(timedelta(hours=-7)))
+    return f"{d:%b} {d.day} {d:%H:%M} PT"
 
 
 def _utc(ts: str) -> str:

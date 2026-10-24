@@ -484,7 +484,7 @@ def match(items: list[Item], lib: MetricLibrary, snapshot_values: dict[str, dict
                     break
         cands.sort(key=lambda c: (c["hinted"] + 0.3 * c["version"], c["raw"]), reverse=True)
         link = {"item_id": it.item_id, "file": it.file, "locator": it.locator, "label": it.label, "value": it.value, "unit": it.unit, "kind": it.kind,
-                "display": it.display, "refs": it.refs, "tolerance": it.tolerance, "exact": it.exact, "candidates": [{k: c[k] for k in ("metric", "snapshot", "raw", "hinted", "version")} for c in cands[:4]]}
+                "display": it.display, "refs": it.refs, "tolerance": it.tolerance, "exact": it.exact, "context": (it.context or "").strip(), "candidates": [{k: c[k] for k in ("metric", "snapshot", "raw", "hinted", "version")} for c in cands[:4]]}
         best = cands[0] if cands else None
         if best and (best["raw"] >= 0.3 or (best["strong"] and best["raw"] >= 0.15)):
             runner = cands[1]["hinted"] + 0.3 * cands[1]["version"] if len(cands) > 1 else 0.0

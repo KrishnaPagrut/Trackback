@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { ReactFlow, Background, Controls, type Node, type Edge } from '@xyflow/react'
 import { api, money, fig, lev, when, reason, who, type Any, type World } from './api'
 import { Icon } from './Stage'
+import { RippleLanes } from './Lanes'
 
 export const TABS = ['Reconcile', 'Trace', 'Graph', 'Evaluate', 'Pings', 'Approvals', 'Memo', 'Time travel', 'Scorecard', 'Lessons', 'Access'] as const
 export type Tab = typeof TABS[number]
@@ -159,13 +160,23 @@ function Graph({ world, id }: { world: World; id: string }) {
     const es: Edge[] = d.graph.edges.map((e: Any, i: number) => ({ id: `e${i}`, source: e.source, target: e.target, className: 'recall' }))
     return { nodes: [...laneNodes, ...ns], edges: es }
   }, [d])
+  const [full, setFull] = useState(false)
   if (!d) return <div className="muted">Loading the ripple…</div>
   if (d.error) return <div className="panel">No ripple for {id}: it has no correcting entry (for example, a change in estimate already booked).</div>
+  const rows = [...Object.entries(d.items as Record<string, Any>).map(([k, v]) => ({ k, ...v, what: `${v.file} ${v.locator}` })), ...Object.entries(d.actions as Record<string, Any>).map(([k, v]) => ({ k, ...v, what: v.label })),
+    ...Object.entries((d.agent_nodes || {}) as Record<string, Any>).map(([k, v]) => ({ k, ...v, what: `${who(v.owner)}: ${(v.content || '').slice(0, 70)}` }))]
+    .sort((a, b) => (a.verdict === b.verdict ? 0 : a.verdict === 'invalidated' ? -1 : b.verdict === 'invalidated' ? 1 : a.verdict === 'suspect' ? -1 : 1))
   return (
-    <div style={{ height: 'calc(100vh - 170px)', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ marginBottom: 8 }}><b className="red">{d.counts.invalidated}</b> invalidated · <b className="green">{d.counts.still_valid}</b> still valid · <b className="amber">{d.counts.compensations}</b> compensations · {d.counts.metrics_recomputed} of {d.counts.metrics_total} metrics recomputed in {d.seconds}s · naive {d.counts.naive}
-        <span className="muted t14"> · cleared: {Object.entries(d.graph.cleared_by_reason).map(([k, v]) => `${v} ${reason(k)}`).join(', ')}</span></div>
-      <div style={{ flex: 1, border: '1px solid var(--rule)', borderRadius: 6 }}><ReactFlow nodes={nodes} edges={edges} fitView minZoom={0.2} proOptions={{ hideAttribution: true }}><Background gap={18} size={1} /><Controls showInteractive={false} /></ReactFlow></div>
+    <div>
+      <div style={{ marginBottom: 8, display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}><span><b className="red">{d.counts.invalidated}</b> invalidated · <b className="green">{d.counts.still_valid}</b> still valid · <b className="amber">{d.counts.compensations}</b> compensations · {d.counts.metrics_recomputed} of {d.counts.metrics_total} metrics recomputed in {d.seconds}s · naive {d.counts.naive}</span>
+        <span className="spacer" /><button className="btn" onClick={() => setFull(f => !f)}>{full ? 'Lanes' : 'Full graph (zoomable)'}</button></div>
+      {full ? <div style={{ height: 'calc(100vh - 210px)', border: '1px solid var(--rule)', borderRadius: 6 }}><ReactFlow nodes={nodes} edges={edges} fitView minZoom={0.2} proOptions={{ hideAttribution: true }}><Background gap={18} size={1} /><Controls showInteractive={false} /></ReactFlow></div>
+        : <div style={{ height: '58vh', display: 'flex' }}><RippleLanes rp={d} world={world} animate={false} /></div>}
+      <h4>Every node, with its verdict and reason</h4>
+      <table className="ledger-table"><thead><tr><th>Node</th><th>What</th><th>Verdict</th><th>Reason</th><th className="n">Before</th><th className="n">After</th></tr></thead>
+        <tbody>{rows.map(r => <tr key={r.k} className={r.verdict === 'invalidated' ? 'dup' : ''}><td className="t14 num">{r.k}</td><td className="t14">{r.what}</td>
+          <td><Icon s={r.verdict === 'invalidated' ? 'invalidated' : r.verdict === 'suspect' ? 'ping' : r.skipped ? 'skipped' : 'cleared'} size={14} /> {r.verdict}</td><td className="t14">{reason(r.reason)}</td>
+          <td className="n t14">{fig(r.old, null, r.metric || '')}</td><td className="n t14">{fig(r.new, null, r.metric || '')}</td></tr>)}</tbody></table>
     </div>
   )
 }

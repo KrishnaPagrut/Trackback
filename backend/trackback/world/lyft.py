@@ -378,7 +378,7 @@ def run_review(pin: str | None = None) -> dict:
     links = trace(rid)
     det = detect(links)
     for l in links:
-        db.insert("trace_items", {"item_id": l["item_id"], "run_id": rid, "world": "lyft", "file": l["file"], "locator": l["locator"], "label": l["label"][:300], "kind": l["kind"],
+        db.insert("trace_items", {"item_id": l["item_id"], "run_id": rid, "world": "lyft", "file": l["file"], "locator": l["locator"], "label": (l.get("context") or l["label"])[:400], "kind": l["kind"],
                                   "value_num": l["value"] if isinstance(l["value"], (int, float)) else None, "value_text": None, "unit": l["unit"], "tolerance": l.get("tolerance"),
                                   "display": l.get("display"), "owner": "lyft_ir", "refs_json": "[]"})
         db.insert("trace_links", {"item_id": l["item_id"], "run_id": rid, "status": l["status"], "metric_id": l.get("metric_id"), "snapshot": l.get("snapshot"), "method": l.get("method"),

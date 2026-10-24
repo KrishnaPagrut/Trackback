@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useState } from 'react'
 import { X, Check, AlertCircle, RefreshCw, MinusCircle, Mail, Lock } from 'lucide-react'
-import { api, money, fig, lev, when, reason, who, type Any, type World } from './api'
+import { api, money, lev, when, who, type Any, type World } from './api'
+import { RippleLanes } from './Lanes'
 
 export const TIDEWALL_BEATS = ['Title', 'Reconcile', 'Evidence', 'Ripple', 'Jade', 'Approvals', 'Dana says no', 'Replay', 'Scorecard', 'Memo']
 export const LYFT_BEATS = ['Title', 'Trace', 'Inside', 'Ripple', 'Jade', 'General Counsel', 'Tape']
@@ -153,76 +154,15 @@ function EvidenceBeat({ d }: { d: Any }) {
   )
 }
 
-const LANES = [
-  { k: 'Trackback', n: 'Trackback', s: 'recomputes every number itself' },
-  { k: 'People', n: 'People', s: "files typed by hand: Priya's workbook, the CFO office's slide" },
-  { k: 'close_accountant', n: 'Close Accountant', s: 'agent · Q1 close memo' },
-  { k: 'covenant_comp', n: 'Covenant and Comp', s: 'agent · certificate, bonuses, tax' },
-  { k: 'reporting_analyst', n: 'Reporting Analyst', s: 'agent · board deck slides 3 and 4' },
-  { k: 'Actions', n: 'Executed actions', s: 'money already moved' },
-]
-
 function RippleBeat({ d }: { d: Any }) {
   const rp = d.ripple
-  const [hop, setHop] = useState(0)
-  useEffect(() => { const t = setInterval(() => setHop(h => (h < 8 ? h + 1 : h)), 420); return () => clearInterval(t) }, [])
-  const pings: Record<string, Any> = {}
-  for (const p of rp.wave?.pings || []) pings[p.agent] = p
-  const items = Object.entries(rp.items as Record<string, Any>)
-  const inv = items.filter(([, v]) => v.verdict === 'invalidated')
-  const cleared = items.filter(([, v]) => v.verdict === 'still_valid')
-  const metrics = ['ttm_adj_ebitda@2026Q1', 'leverage@2026Q1', 'covenant_status@2026Q1', 'covenant_headroom@2026Q1', 'tax_installment@2026Q2'].map(k => [k, rp.metrics[k]]).filter(([, v]) => v)
-  const lane: Record<string, Any[]> = { Trackback: [], People: [], close_accountant: [], covenant_comp: [], reporting_analyst: [], Actions: [] }
-  for (const [k, m] of metrics as Any[]) lane.Trackback.push({ id: k, t: m.label.split(',')[0], old: fig(m.old, m.unit, k), now: fig(m.new, m.unit, k), s: 'invalidated', w: m.conclusion_old !== m.conclusion_new ? `crosses ${m.conclusion_new === 'above' || m.conclusion_new === 'BREACH' ? 'the 3.00x covenant' : 'zero'}` : 'recomputed', hop: 1 })
-  const wb = inv.filter(([i]) => i.startsWith('WB.'))
-  const s2 = inv.filter(([i]) => i.startsWith('DECK.s2'))
-  const notice = (rp.wave?.notices || []) as Any[]
-  if (wb.length) lane.People.push({ id: 'wb', t: `Covenant workbook: ${wb.length} cells`, old: money(rp.items['WB.Covenant.B7']?.old), now: money(rp.items['WB.Covenant.B7']?.new), s: 'invalidated', w: `notice to ${notice.find(n => n.owner === 'priya')?.to === 'marco' ? 'Marco (Priya is out of office)' : 'Priya'}`, hop: 2 })
-  if (s2.length) lane.People.push({ id: 's2', t: `Board deck slide 2: ${s2.length} lines`, old: '$32.6M', now: fig(rp.items['DECK.s2.l2']?.new, null), s: 'invalidated', w: 'stale since Apr 24; notice to Sam', hop: 2 })
-  const pingItems = (a: string) => (pings[a]?.items || []) as Any[]
-  const st = (v: string) => (v === 'reworked' ? 'reworked' : v === 'still_valid' ? 'cleared' : v === 'needs_human' ? 'caution' : 'invalidated')
-  for (const it of pingItems('close_accountant')) lane.close_accountant.push({ id: it.artifact_id, t: 'Q1 close memo', s: st(it.verdict), w: it.verdict.replace('_', ' '), prose: (it.new_version?.content || '').slice(0, 90), hop: 3 })
-  const cc = pingItems('covenant_comp')
-  const certLines = cc.filter(i => i.artifact_id.startsWith('CERT.'))
-  if (certLines.length) lane.covenant_comp.push({ id: 'cert', t: `Certificate: ${certLines.length} lines`, old: '2.95 to 1.00', now: lev(rp.metrics['leverage@2026Q1']?.new) + ' to 1.00', s: 'caution', w: 'needs the CFO', hop: 3 })
-  lane.covenant_comp.push({ id: 'acts', t: `${cc.filter(i => i.artifact_id.startsWith('ACT')).length} executed actions`, s: 'caution', w: "can't un-send; compensations proposed", hop: 3 })
-  const ra = pingItems('reporting_analyst')
-  const s4 = ra.filter(i => i.artifact_id.startsWith('DECK.s4'))
-  for (const it of ra.filter(i => !i.artifact_id.startsWith('DECK.s4'))) lane.reporting_analyst.push({ id: it.artifact_id, t: it.artifact_id === 'DECK.s3.l1' ? 'Slide 3: covenant sentence' : it.artifact_id.includes('growth') ? '“Membership revenue grew”' : '“All six regions were profitable”', s: st(it.verdict), w: it.verdict === 'still_valid' ? 'still valid: ' + (it.reason || '').split(';')[0].slice(0, 60) : it.verdict, prose: it.verdict === 'reworked' ? (it.new_version?.content || '').slice(0, 90) : '', hop: 4 })
-  if (s4.length) lane.reporting_analyst.splice(1, 0, { id: 's4', t: `Slide 4: ${s4.length} regions re-rendered`, s: 'reworked', w: 'figures from Trackback', hop: 4 })
-  for (const [aid, a] of Object.entries(rp.actions as Record<string, Any>)) {
-    if (a.verdict === 'invalidated') lane.Actions.push({ id: aid, t: a.label.split('(')[0].replace('Q1 GM bonus paid, ', 'Bonus ').replace('Q1 compliance certificate sent to Redwood', 'Certificate sent').replace('Q2 estimated tax paid', 'Q2 tax paid'), s: 'invalidated', w: a.compensation?.amount ? `${money(a.compensation.amount)} ${a.compensation.direction} → ${who(a.compensation.approver)}` : `corrected certificate → ${who(a.compensation?.approver)}`, hop: 5 })
-  }
-  const actCleared = Object.values(rp.actions as Record<string, Any>).filter((a: Any) => a.verdict === 'still_valid').length
-  const skipped = Object.values(rp.agent_nodes as Record<string, Any>).filter((n: Any) => n.skipped)
   return (
     <div className="beat" style={{ gap: '1.2vh' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '2vw' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '2vw', flexWrap: 'wrap' }}>
         <h2 style={{ fontSize: 'clamp(30px, 2.4vw, 50px)' }}>The ripple</h2>
-        <span className="big"><span className="red num">{rp.counts.invalidated}</span> now wrong · <span className="green num">{rp.counts.still_valid}</span> checked and still valid · <span className="amber num">{rp.counts.compensations}</span> compensations · {rp.counts.metrics_recomputed} of {rp.counts.metrics_total} metrics recomputed · naive count {rp.counts.naive}</span>
+        <span className="big"><span className="red num">{rp.counts.invalidated}</span> now wrong · <span className="green num">{rp.counts.still_valid}</span> checked and still valid · <span className="amber num">{rp.counts.compensations}</span> compensations · {rp.counts.metrics_recomputed} of {rp.counts.metrics_total} metrics recomputed</span>
       </div>
-      <div className="rlanes">
-        {LANES.map(L => (
-          <div key={L.k} className="rlane">
-            <div className="rname"><div className="n">{L.n}</div><div className="s">{L.s}</div>
-              {pings[L.k] && hop >= 3 && <div style={{ marginTop: 4 }}><span className="envchip"><Mail size={16} /> pinged · {pings[L.k].state.replace('_', ' ')}</span></div>}</div>
-            <div className="rnodes">
-              {lane[L.k].filter(n => n.hop <= hop).map(n => (
-                <div key={n.id} className={`rnode ${n.s}`}>
-                  <span className="ic"><Icon s={n.s} size={18} /></span>
-                  <div className="t">{n.t}</div>
-                  {n.old && <div className="v"><span className="strike-old">{n.old}</span>{n.now}</div>}
-                  {n.prose && <div className="w" style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', color: 'var(--ink)' }}>“{n.prose}”</div>}
-                  <div className="w">{n.w}</div>
-                </div>
-              ))}
-              {L.k === 'Actions' && hop >= 6 && <span className="rmore"><Check size={16} /> {actCleared} actions still valid (R3 and R5 stay $0; R6 never used it)</span>}
-              {L.k === 'reporting_analyst' && hop >= 6 && skipped.length > 0 && <div className="rnode skipped"><span className="ic"><Icon s="skipped" size={18} /></span><div className="t">13-week cash forecast</div><div className="w">skipped: no material change</div></div>}
-              {L.k === 'People' && hop >= 6 && <span className="rmore"><Check size={16} /> {cleared.length} lines checked and still valid ({Object.entries(cleared.reduce((a: Any, [, v]) => { a[reason(v.reason)] = (a[reason(v.reason)] || 0) + 1; return a }, {})).slice(0, 3).map(([k, v]) => `${v} ${k}`).join(', ')})</span>}
-            </div>
-          </div>
-        ))}
-      </div>
+      <RippleLanes rp={rp} world="tidewall" />
     </div>
   )
 }
@@ -237,7 +177,7 @@ function JadeBeat({ d }: { d: Any }) {
   return (
     <div className="beat">
       <h2>The agent's draft says immaterial. Jade disagrees.</h2>
-      <div className="grid2">
+      <div className="grid2" style={{ gridTemplateColumns: '1fr 1.5fr' }}>
         <div className="bcard ink">
           <div className="sub">The agent, playbook {ev.playbook}</div>
           <div className="big" style={{ margin: '1vh 0', fontWeight: 600 }}>Materiality: {a.q5_matters.material ? 'material' : 'immaterial'}</div>
@@ -247,7 +187,7 @@ function JadeBeat({ d }: { d: Any }) {
         <div className="bcard recall overrule fly-in">
           <span className="stamp stamp-in">OVERRULED</span>
           <div className="sub">Jade, the reviewer</div>
-          <div className="kv big" style={{ marginTop: '1vh' }}>
+          <div className="kv big" style={{ marginTop: '1vh', whiteSpace: 'nowrap' }}>
             <span className="k">Rollover</span><span className="v">{money(agg.rollover)} <Check size={20} color="var(--cleared)" /> passes</span>
             <span className="k">Iron curtain</span><span className="v red">{money(agg.iron_curtain)} <X size={20} /> fails ({money(d.materiality.thresholds.overall)})</span>
             <span className="k">Covenant</span><span className="v red">{lev(lev1?.old)} → {lev(lev1?.new)} <X size={20} /> breaches 3.00x</span>
@@ -297,7 +237,8 @@ function ApprovalsBeat({ d, live, onRefresh }: { d: Any; live: boolean; onRefres
           {live && busy && <div className="big muted">Dana is reading her inbox…</div>}
         </div>
         <div>
-          {others.map(a => <div key={a.action_id} className="bcard" style={{ marginBottom: '1vh' }}><div className="sub">to {a.assignee_name} · {a.state}</div><div>{a.summary}</div></div>)}
+          <div className="bcard" style={{ marginBottom: '1vh' }}><h3>Also routed</h3>
+            {others.map(a => <div key={a.action_id} style={{ display: 'flex', gap: '0.6vw', alignItems: 'baseline' }}><Icon s={a.state === 'executed' ? 'cleared' : 'caution'} size={18} /><span>{shortSummary(a)} <span className="sub">→ {a.assignee_name}</span></span></div>)}</div>
           <div className="bcard caution">
             <h3><Lock size={22} style={{ verticalAlign: 'middle' }} /> On hold</h3>
             {holds.filter(h => h.state === 'held').map(h => <div key={h.hold_id}>{h.target}</div>)}
@@ -307,6 +248,14 @@ function ApprovalsBeat({ d, live, onRefresh }: { d: Any; live: boolean; onRefres
       {live && rej && <div className="big">It never posts, and the proposer can never approve: the schema refuses it.</div>}
     </div>
   )
+}
+
+function shortSummary(a: Any): string {
+  const p = a.params || {}
+  if (a.kind === 'comp_offset') return `Offset ${money(p.amount)} against the Q2 bonus (${String(p.compensates).split('-').pop()})`
+  if (a.kind === 'tax_offset') return `Reduce the Q3 tax installment by ${money(p.amount)}`
+  if (a.kind === 'lender_document') return 'Corrected certificate and lender notice'
+  return a.summary
 }
 
 function ReplayBeat() {
@@ -322,7 +271,7 @@ function ReplayBeat() {
       const l = await api.timemap('gl_import_log')
       const lf = await api.file('tidewall', 'gl_import_log', `&version=${l.versions[0].version_id}&q=B07&limit=20`)
       setLog((lf.rows || []).filter((r: Any) => r.period === '2026-03'))
-      setTimeout(async () => setPeek(await api.attempt('billing_release_lines', '2026-04-10T17:00:00-07:00', tm.versions[tm.versions.length - 1].version_id)), 2200)
+      setTimeout(async () => setPeek(await api.attempt('billing_release_lines', '2026-04-10T17:00:00-07:00', tm.versions[tm.versions.length - 1].version_id)), 900)
     })()
   }, [])
   return (
@@ -358,9 +307,10 @@ function ScoreBeat({ d }: { d: Any }) {
       <table className="ledger-table" style={{ fontSize: 'clamp(22px, 1.4vw, 30px)' }}>
         <thead><tr><th>Step</th>{cols.map(([, n]) => <th key={n} className="n">{n}</th>)}</tr></thead>
         <tbody>{steps.map(([k, n]) => (
-          <tr key={k}><td>{n}</td>{cols.map(([ck]) => { const s = c[ck]?.[k]; return <td key={ck} className="n">{s && s.n ? `${s.correct}/${s.n}` : '—'}</td> })}</tr>
+          <tr key={k}><td>{n}{k === 'fix' && <span className="sub"> (before the Controller)</span>}</td>{cols.map(([ck]) => { const s = c[ck]?.[k]; return <td key={ck} className="n">{s && s.n ? `${s.correct}/${s.n}` : '—'}</td> })}</tr>
         ))}</tbody>
       </table>
+      <div className="sub">Jade escalates locked posting periods to the Controller instead of rewriting them; Dana rejects those entries, and the approved lesson fixes the agent.</div>
       <div className="grid4">
         <div className="bcard"><div className="sub">Lineage</div><div className="counter">{h.lineage}</div></div>
         <div className="bcard"><div className="sub">Jade catches planted mistakes</div><div className="counter">{Math.round((h.jade_catch_rate || 0) * 100)}%</div><div className="sub">{Math.round((h.jade_false_overrule_rate || 0) * 100)}% false overrules</div></div>
@@ -376,7 +326,7 @@ function MemoBeat({ d }: { d: Any }) {
   useEffect(() => { api.memo('tidewall', d.hero.exception_id).then(setM) }, [d.hero.exception_id])
   const summary = useMemo(() => (m?.markdown || '').split('## 1. Summary')[1]?.split('##')[0]?.trim(), [m])
   return (
-    <div className="stage"><div className="payoff">
+    <div className="stage" style={{ bottom: 'clamp(48px, 6vh, 72px)' }}><div className="payoff">
       <div className="smallcaps muted t22">Error memo · {d.hero.exception_id}</div>
       <div className="serif" style={{ fontSize: 'clamp(26px, 2vw, 40px)', maxWidth: '62ch', marginTop: '2vh', lineHeight: 1.3 }}>{summary || '…'}</div>
       <div className="line" style={{ maxWidth: '70ch', fontFamily: 'var(--sans)' }}>{d.seat_line}</div>
@@ -399,18 +349,28 @@ export function LyftStage({ data, step, onRefresh }: { data: Any; step: number; 
     </div></div>
   )
   if (b === 'Trace') {
-    const items = data.trace.files[Object.keys(data.trace.files)[0]] || []
+    const items = (data.trace.files[Object.keys(data.trace.files)[0]] || []) as Any[]
+    const sents: Record<string, Any[]> = {}
+    for (const i of items) (sents[i.label] ||= []).push(i)
+    const tied = items.filter(i => i.status !== 'unlinked').length
     return (
       <div className="beat">
         <h2>The tracer reads the filing as filed.</h2>
-        <p className="lede">{items.filter((i: Any) => i.status === 'linked').length} of {items.length} figures tie to the close pack or the guidance model. One does not.</p>
-        <div style={{ columns: 2, columnGap: '2vw' }}>
-          {items.map((i: Any) => (
-            <div key={i.item_id} className={`bcard ${i.status === 'unlinked' ? 'recall' : ''}`} style={{ breakInside: 'avoid', marginBottom: '0.8vh', padding: '0.5vh 0.8vw', fontSize: 'clamp(18px, 1vw, 22px)' }}>
-              <Icon s={i.status === 'unlinked' ? 'invalidated' : 'cleared'} size={18} /> <span className="num">{i.display}</span> <span className="muted">{(i.label || '').slice(-60)}</span>
-              {i.status === 'unlinked' && <div className="red">No source has 500. The guidance model has 50: the same digits at another power of ten.</div>}
-            </div>
-          ))}
+        <p className="lede">{tied} of {items.length} figures tie to the close pack or the guidance model. One does not.</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7vh' }}>
+          {Object.entries(sents).map(([sent, its]) => {
+            const bad = its.some(i => i.status === 'unlinked')
+            let html = sent.replace(/^[\s\u2022\ufffd]+/, '')
+            for (const i of its) if (i.display) html = html.replace(i.display, `\u0000${i.status === 'unlinked' ? 'R' : 'G'}${i.display}\u0001`)
+            const parts = html.split(/(\u0000[RG][^\u0001]*\u0001)/)
+            return (
+              <div key={sent} className={`bcard ${bad ? 'recall' : ''}`} style={{ padding: '0.5vh 0.9vw', fontSize: 'clamp(18px, 1.05vw, 22px)', display: 'flex', gap: '0.6vw', alignItems: 'baseline' }}>
+                <Icon s={bad ? 'invalidated' : 'cleared'} size={18} />
+                <span>{parts.map((p, k) => p.startsWith('\u0000') ? <b key={k} className={`num ${p[1] === 'R' ? 'red' : 'green'}`}>{p.slice(2, -1)}</b> : <span key={k}>{p}</span>)}
+                  {bad && <span className="red"> No source has 500. The guidance model has 50: the same digits at another power of ten.</span>}</span>
+              </div>
+            )
+          })}
         </div>
       </div>
     )

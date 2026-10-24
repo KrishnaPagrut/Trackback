@@ -65,7 +65,7 @@ export default function App() {
       <div className="topbar">
         <div className="brand">Trackback<small>traces any correction forward</small></div>
         <div className="seg" role="tablist">
-          <button className={world === 'tidewall' ? 'on' : ''} onClick={() => { setWorld('tidewall'); setStep(0) }}>Tidewall <span className="t14" style={{ opacity: 0.7 }}>synthetic</span></button>
+          <button className={world === 'tidewall' ? 'on' : ''} onClick={() => { setWorld('tidewall'); setStep(0) }}>Tidewall</button>
           <button className={world === 'lyft' ? 'on' : ''} onClick={() => { setWorld('lyft'); setStep(0) }}>Real world: Lyft</button>
         </div>
         <div className="seg"><button className={mode === 'stage' ? 'on' : ''} onClick={() => setMode('stage')}>Stage</button><button className={mode === 'deep' ? 'on' : ''} onClick={() => setMode('deep')}>Deep</button></div>
