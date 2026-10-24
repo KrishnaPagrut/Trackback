@@ -53,6 +53,8 @@ def canon(tmp_path_factory):
     WB.load(gen)
     history.run_all()
     out = review.run_all()
+    from trackback.world import lyft
+    out["lyft"] = lyft.build_all()
     out["key"] = gen["key"]
     yield out
     config.DB_PATH = old

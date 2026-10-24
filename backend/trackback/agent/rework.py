@@ -25,14 +25,39 @@ SCHEMA = {"type": "object", "properties": {"items": {"type": "array", "items": {
 NAMES = {"close_accountant": "the Close Accountant", "reporting_analyst": "the Reporting Analyst", "covenant_comp": "Covenant and Comp"}
 
 
-def _fmt(v, field: str = "") -> str:
+def _fmt(v, field: str = "", unit: str | None = None) -> str:
     if isinstance(v, str):
         return v
-    if field.startswith("leverage"):
+    if unit == "bps":
+        return f"{v:g}"
+    if field.startswith("leverage") or unit == "ratio":
         return f"{v:.2f}x"
-    if field.startswith("membership_growth"):
+    if field.startswith("membership_growth") or unit == "pct":
         return f"{v:.1f}%"
+    if abs(v) >= 1e9:
+        return f"${v / 1e9:.2f}B"
+    if abs(v) >= 1e8 and unit == "usd":
+        return f"${v / 1e6:,.0f}M"
     return f"${v:,.0f}"
+
+
+FORMATS = [lambda v: f"${v / 1e9:.2f}B", lambda v: f"${v / 1e9:.1f}B", lambda v: f"${v / 1e9:.2f} billion", lambda v: f"${v / 1e9:.1f} billion",
+           lambda v: f"{v:.1f}%", lambda v: f"{v:.2f}x", lambda v: f"${v:,.0f}", lambda v: f"{v:,.0f}", lambda v: f"{v:g}", lambda v: f"{v:.2f}"]
+
+
+def substitute(text: str, changed: list[dict]) -> str | None:
+    """Literal substitution: the sentence states the old figure of a changed field; write the new one in the same format. None if nothing matched."""
+    new_text = text
+    for c in changed:
+        if not isinstance(c.get("old"), (int, float)) or not isinstance(c.get("new"), (int, float)):
+            continue
+        for fmt in FORMATS:
+            old_s = fmt(c["old"])
+            pat = r"(?<![\d.])" + re.escape(old_s) + r"(?![\d])"
+            if re.search(pat, new_text):
+                new_text = re.sub(pat, fmt(c["new"]).replace("\\", "\\\\"), new_text, count=1)
+                break
+    return new_text if new_text != text else None
 
 
 def handle(envelope: dict) -> list[dict]:
@@ -44,7 +69,7 @@ def handle(envelope: dict) -> list[dict]:
         aid, kind, fields = it["artifact_id"], it["kind"], it.get("fields") or {}
         changed = it.get("changed_fields") or []
         crossed = any(c.get("crossed_threshold") for c in changed)
-        moved = "; ".join(f"{c.get('label') or c['field']}: {_fmt(c['old'], c['field'])} to {_fmt(c['new'], c['field'])}" for c in changed if c.get("old") is not None)
+        moved = "; ".join(f"{c.get('label') or c['field']}: {_fmt(c['old'], c['field'], c.get('unit'))} to {_fmt(c['new'], c['field'], c.get('unit'))}" for c in changed if c.get("old") is not None)
         if kind == "action" and it.get("executed"):
             out.append({"artifact_id": aid, "verdict": "needs_human", "reason_code": "executed_action",
                         "reason": f"Already executed; {moved}. I can't undo it: a compensation goes to a human who is not the preparer." + (" A stated threshold was crossed." if crossed else "")})
@@ -58,9 +83,10 @@ def handle(envelope: dict) -> list[dict]:
                         "reason": f"Figure re-rendered from Trackback's calc node ({moved}).", "new_version": {"content": text, "value_num": new}, "material_change": True})
         elif kind == "sentence" and fields.get("template") and not crossed and changed:
             vals = {c["field"]: c["new"] for c in changed}
+            units = {c["field"]: c.get("unit") for c in changed}
             text = fields["template"]
             for f, v in vals.items():
-                text = text.replace("{" + f + "}", _fmt(v, f))
+                text = text.replace("{" + f + "}", _fmt(v, f, units.get(f)))
             text = re.sub(r"\{([^}]+)\}", lambda m: _fmt(_current(m.group(1)), m.group(1)), text)
             out.append({"artifact_id": aid, "verdict": "reworked", "reason_code": "rerendered", "model": "trackback:slots", "reason": f"Cited figures moved ({moved}); wording unchanged.",
                         "new_version": {"content": text}, "material_change": True})
@@ -99,6 +125,10 @@ def _heuristic(it: dict) -> dict:
                    if lev else "We are above our 3.00x net leverage covenant; a corrected certificate is going to the lender.")
             return {"artifact_id": aid, "verdict": "reworked", "reason": f"Covenant status moved from {st['old']} to {st['new']}: the sentence is no longer true.", "new_content": new}
         return {"artifact_id": aid, "verdict": "still_valid", "reason": "The covenant conclusion still holds.", "new_content": None}
+    sub = substitute(it.get("prior_output_excerpt") or "", changed)
+    if sub:
+        moved = "; ".join(f"{c.get('label') or c['field']}: {_fmt(c['old'], c['field'], c.get('unit'))} to {_fmt(c['new'], c['field'], c.get('unit'))}" for c in changed)
+        return {"artifact_id": aid, "verdict": "reworked", "reason": f"The sentence states figures that moved ({moved}); rewritten with the new figures.", "new_content": sub}
     return {"artifact_id": aid, "verdict": "needs_human", "reason": "Cannot tell from the changed fields whether the wording still holds.", "new_content": None}
 
 

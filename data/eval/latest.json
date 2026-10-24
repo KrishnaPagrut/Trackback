@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T00:29:45",
+ "generated_at": "2026-10-24T00:42:59",
  "world": "tidewall",
  "llm_mode": "replay",
  "answer_key": {
@@ -420,7 +420,7 @@
    "over_flagging_naive_vs_true": 1.07,
    "metrics_recomputed": 30,
    "metrics_total": 191,
-   "seconds": 0.121
+   "seconds": 0.217
   },
   "X2": {
    "invalidated": 10,
@@ -433,7 +433,7 @@
    "over_flagging_naive_vs_true": 3.8,
    "metrics_recomputed": 12,
    "metrics_total": 191,
-   "seconds": 0.118
+   "seconds": 0.17
   },
   "X4": {
    "invalidated": 0,
@@ -446,7 +446,7 @@
    "over_flagging_naive_vs_true": 38.0,
    "metrics_recomputed": 7,
    "metrics_total": 191,
-   "seconds": 0.118
+   "seconds": 0.144
   },
   "X6": {
    "invalidated": 0,
@@ -459,7 +459,7 @@
    "over_flagging_naive_vs_true": 41.0,
    "metrics_recomputed": 9,
    "metrics_total": 191,
-   "seconds": 0.115
+   "seconds": 0.134
   }
  },
  "learning": {
@@ -718,16 +718,130 @@
   },
   "s3": {
    "challenge": {
-    "challenge_id": "chal_8d6c2752",
+    "challenge_id": "chal_07af0086",
     "state": "open",
     "to": "dana",
     "wave_started": false
    }
   },
-  "llm_calls_in_waves": 1,
-  "rerun_all_agent_runs": 7
+  "llm_calls_in_waves": 2,
+  "rerun_all_agent_runs": 12
  },
- "seconds": 7.8,
+ "lyft": {
+  "detect_cases": [
+   {
+    "case": "LY-REAL",
+    "title": "the real release: approximately 500 basis points",
+    "expected": "figure_mismatch",
+    "found": [
+     "figure_mismatch"
+    ],
+    "ok": true,
+    "matched": 24
+   },
+   {
+    "case": "LY-REV-X10",
+    "title": "Revenue typed as $12 billion (another power of ten)",
+    "expected": "figure_mismatch",
+    "found": [
+     "figure_mismatch"
+    ],
+    "ok": true,
+    "matched": 24
+   },
+   {
+    "case": "LY-EBITDA-DIGIT",
+    "title": "Adjusted EBITDA typed as $66.0 million",
+    "expected": "unsupported_figure",
+    "found": [
+     "unsupported_figure"
+    ],
+    "ok": true,
+    "matched": 24
+   },
+   {
+    "case": "LY-GROWTH-SWAP",
+    "title": "Gross Bookings growth typed as 71%",
+    "expected": "unsupported_figure",
+    "found": [
+     "unsupported_figure"
+    ],
+    "ok": true,
+    "matched": 24
+   },
+   {
+    "case": "LY-CORRECT",
+    "title": "the corrected release (expected: nothing but the figures that tie)",
+    "expected": null,
+    "found": [],
+    "ok": true,
+    "matched": 25
+   }
+  ],
+  "detect_accuracy": 1.0,
+  "trace": {
+   "figures": 25,
+   "tied": 24,
+   "unlinked": [
+    "Adjusted EBITDA margin expansion (calculated as a percentage of Gross Bookings) of approxi"
+   ]
+  },
+  "jade_v1": {
+   "q5_matters": "overrule",
+   "q7_fix.approvers.disclosure": "flag",
+   "q7_fix.treatment": "escalate"
+  },
+  "v1": {
+   "material": false,
+   "route": "controller",
+   "treatment": "silent_fix"
+  },
+  "v2": {
+   "material": true,
+   "route": "cfo",
+   "treatment": "correcting_and_replacing"
+  },
+  "pings": {
+   "agents": [
+    "newsroom",
+    "street_analyst"
+   ],
+   "expected": [
+    "newsroom",
+    "street_analyst"
+   ],
+   "items": {
+    "LY.news.headline": "reworked",
+    "LY.news.publish": "needs_human",
+    "LY.street.order": "needs_human",
+    "LY.street.note": "reworked"
+   },
+   "skipped": [
+    "LY.news.story_q4",
+    "LY.street.q4_beat"
+   ]
+  },
+  "fence_blocked_inside": true,
+  "general_counsel": [
+   {
+    "action_id": "LY.disc.file_8k",
+    "decision": "approved",
+    "redraft": null
+   },
+   {
+    "action_id": "LY-FIX-LY-01-1",
+    "decision": "rejected",
+    "redraft": "LY-FIX-LY-01-2"
+   }
+  ],
+  "cfo": [
+   {
+    "action_id": "LY-FIX-LY-01-2",
+    "decision": "approved"
+   }
+  ]
+ },
+ "seconds": 11.2,
  "real_vs_simulated": {
   "real": [
    "the reconciliation, lineage, ripple and materiality engines",

@@ -293,6 +293,34 @@ def iteration2_metrics(key: dict) -> dict:
             "s3": w.get("S3"), "llm_calls_in_waves": calls, "rerun_all_agent_runs": runs}
 
 
+def lyft_metrics() -> dict:
+    """Lyft through the same steps: detect on the real exhibit and four variants, Jade on the v1 evaluation, v2 after the lessons, the pings, the fence,
+    and the General Counsel's rejection with the re-draft (run on the scratch copy)."""
+    from ..agent import playbook as PB
+    from ..world import lyft as LY
+    rid = db.q1("SELECT value FROM kv WHERE key='review.latest.lyft'")["value"]
+    cases = [LY.variant_detect(c) for c in LY.VARIANTS]
+    exc = json.loads(db.q1("SELECT detail_json FROM exceptions WHERE run_id=? ORDER BY exception_id LIMIT 1", (rid,))["detail_json"])
+    rp = LY.ripple(exc)
+    v1 = LY.evaluate(exc, rp, PB.V1, LY.T["review"])
+    j1 = LY.jade(v1, exc, rp, LY.T["review"])
+    v2 = LY.evaluate(exc, rp, PB.apply(PB.V1, ["materiality_framework", "lender_documents_to_cfo"]), LY.T["review"])
+    w = json.loads(db.q1("SELECT value FROM kv WHERE key=?", (f"waves.{rid}",))["value"])[exc["exception_id"]]
+    gc = LY.simulate("general_counsel")
+    cfo = LY.simulate("cfo")
+    fence = db.q1("SELECT 1 FROM events WHERE kind='fence_block' AND summary LIKE '%LY.ir.publish_release%'") is not None
+    links = LY.trace()
+    return {"detect_cases": cases, "detect_accuracy": round(sum(c["ok"] for c in cases) / len(cases), 3),
+            "trace": {"figures": len(links), "tied": sum(1 for l in links if l["status"] in ("linked", "policy")), "unlinked": [l["label"][:90] for l in links if l["status"] == "unlinked"]},
+            "jade_v1": {f["claim_key"]: f["verdict"] for f in j1 if f["verdict"] != "approve"},
+            "v1": {"material": v1["q5_matters"]["material"], "route": v1["q7_fix"]["approvers"].get("disclosure"), "treatment": v1["q7_fix"]["treatment"]},
+            "v2": {"material": v2["q5_matters"]["material"], "route": v2["q7_fix"]["approvers"].get("disclosure"), "treatment": v2["q7_fix"]["treatment"]},
+            "pings": {"agents": [p["agent"] for p in w["pings"]], "expected": ["newsroom", "street_analyst"], "items": {i["artifact_id"]: i["verdict"] for p in w["pings"] for i in p["items"]},
+                      "skipped": [s["node_id"] for s in w["skipped"]]},
+            "fence_blocked_inside": fence,
+            "general_counsel": [{k: x.get(k) for k in ("action_id", "decision", "redraft")} for x in gc], "cfo": [{k: x.get(k) for k in ("action_id", "decision")} for x in cfo]}
+
+
 def main() -> dict:
     old = C.DB_PATH
     try:
@@ -353,6 +381,7 @@ def _main() -> dict:
                      "playbook": PB.apply(PB.V1, active)["version"], "heldout": {"v1": v1_held, "v2": v2_held, "v1_with_jade": v1j_held, "v2_with_jade": v2j_held}},
         "replay": replay_leak_test(),
         "iteration2": iteration2_metrics(key),
+        "lyft": lyft_metrics(),
         "seconds": round(time.time() - t0, 1),
         "real_vs_simulated": {"real": ["the reconciliation, lineage, ripple and materiality engines", "Jade's code checks", "the scoring", "file parsing (xlsx formulas, pptx, pdf)", "the ping protocol and the approvals schema",
                                        "Lyft's Feb 13, 2024 release as filed, the CFO's correction and the tape"],

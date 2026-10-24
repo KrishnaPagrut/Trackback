@@ -1,0 +1,24 @@
+{
+ "title": "RECONSTRUCTION: Lyft Q4 2023 close pack (figures as later published in the release)",
+ "reconstruction": true,
+ "figures": {
+  "q4_gb": 3700000000.0,
+  "q4_gb_growth": 17.0,
+  "q4_rev": 1200000000.0,
+  "q4_rev_growth": 4.0,
+  "q4_net_loss": 26300000.0,
+  "q4_adj_ebitda": 66600000.0,
+  "q4_22_net_loss": 588100000.0,
+  "q4_22_adj_ebitda": -248300000.0,
+  "q4_margin": 1.8,
+  "q4_22_margin": -7.8,
+  "fy_gb": 13800000000.0,
+  "fy_gb_growth": 14.0,
+  "fy_rev": 4400000000.0,
+  "fy_rev_growth": 8.0,
+  "fy_adj_ebitda": 222400000.0,
+  "fy22_adj_ebitda": -416500000.0,
+  "fy_margin": 1.6,
+  "fy22_margin": -3.5
+ }
+}

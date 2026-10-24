@@ -203,7 +203,7 @@ def ripple(*, correction: dict, lib: MetricLibrary, entries: list[dict], snapsho
                                        "crossed_threshold": cb != ca, "material": mat})
         base = {"node_id": n["id"], "owner": n["owner"], "kind": n["kind"], "label": n.get("label"), "content": n.get("content"), "consumes": n["consumes"]}
         if not any_reached:
-            nodes[n["id"]] = {**base, "verdict": "still_valid", "reason": structural_reason(lib, n["consumes"][0], lines), "skipped": True}
+            nodes[n["id"]] = {**base, "verdict": "still_valid", "reason": structural_reason(lib, n["consumes"][0], lines) if n["consumes"] else "different_line_item", "skipped": True}
         elif not any(c["material"] for c in changed_fields):
             nodes[n["id"]] = {**base, "verdict": "still_valid", "reason": "below_materiality" if changed_fields else "value_unchanged", "skipped": True, "changed_fields": changed_fields}
         else:

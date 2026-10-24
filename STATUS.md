@@ -14,11 +14,11 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | CP5 act (+ pings) | done | `tests/test_v3_cp5_act.py`: Dana rejects the March-dated entry, the agent re-drafts in June tagged to March, self-approval raises, Jul 15 bonus run held for R1/R2/R4 and released by Lena's approval, Summit Mats held, Sam signs the corrected certificate, reminders and escalation, memo renders; X1 wave pings all three agents (reworked / needs_human / still_valid with reasons), cash forecast skipped, Priya's notice routed to Marco; S1 pings only the Reporting Analyst; S2 coalesced; S3 to Dana with no wave |
 | CP6 prove | done | `python tasks.py eval` writes data/eval/latest.json in ~11 s: 34 cases (6 Tidewall + 28 variants over 9 families); 6/6 exceptions, 0 noise false alarms; lineage 55/55; X1 40/23/5 vs 43 naive; materiality accuracy naive 5% rule 0.59, v1 0.59, v1+Jade 1.00; Jade catches 43/43 planted mistakes, 0 false overrules; Replay 0 leaks |
 | CP7 learn | done | four lessons from Jade's overrules and Dana's rejection pass the regression gate and are approved by Dana; the over-general 'closed-period invoices are estimates' lesson fails the gate (breaks X2 and the invoices received before the close); held-out pass rate v1 0.28 -> v2 1.00 |
-| Lyft parity | next | |
-| CP8 UI | | |
+| Lyft parity | done | `tests/test_v3_lyft.py`: the tracer reads the real as-filed exhibit (25 figures, 24 tie to the reconstructed close pack and guidance model; 500 bps has no source and matches the model's 50 at another power of ten); release-to-sources exception; v1 calls it immaterial, Jade overrules (qualitative) and flags the routing (CFO + General Counsel); the fence blocks the inside release; the correction pings only the newsroom and the sell-side desk (headline and note reworked, order and story needs_human, Q4 sentences skipped); the General Counsel rejects the silent fix, the agent re-drafts a CORRECTING and REPLACING release, the CFO approves; memo; 5 variants detected correctly |
+| CP8 UI | next | |
 | CP9 polish | | |
 
-Next three tasks: Lyft through every v3 step; the v3 API; the Stage and Deep UI.
+Next three tasks: the v3 API; Stage mode (Section 2 beats); Deep mode tabs.
 
 ---
 

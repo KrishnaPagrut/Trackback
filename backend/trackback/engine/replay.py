@@ -85,7 +85,8 @@ def _read_file(path: str, mtime: float) -> tuple:
 
 
 def file_path(version: dict) -> Path:
-    return C.FILES_DIR / version["body"]["path"]
+    base = C.DATA_DIR if version["body"].get("world") == "lyft" else C.FILES_DIR
+    return base / version["body"]["path"]
 
 
 def rows(source: str, pin: str, run_id: str | None = None) -> list[dict]:

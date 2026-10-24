@@ -40,6 +40,8 @@ def world() -> None:
     if importlib.util.find_spec("trackback.review"):
         from . import review
         review.run_all()
+    from .world import lyft
+    lyft.build_all()
     snapshot_write()
     print(f"world built in {time.time() - t0:.1f}s")
 

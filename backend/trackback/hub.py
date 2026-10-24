@@ -58,7 +58,7 @@ def _changed_for(entry: dict, metrics: dict | None = None) -> list[dict]:
     m = entry.get("metric")
     if not out and m and entry.get("old") is not None:
         crossed = entry.get("reason") == "conclusion_flipped"
-        out = [{"field": m, "label": (metrics.get(m) or {}).get("label", m), "old": entry["old"], "new": entry["new"],
+        out = [{"field": m, "label": (metrics.get(m) or {}).get("label", m), "unit": (metrics.get(m) or {}).get("unit"), "old": entry["old"], "new": entry["new"],
                 "delta": None if isinstance(entry["old"], str) else entry["new"] - entry["old"], "crossed_threshold": crossed}]
     art = db.artifact_current(entry["item_id"])
     if art is not None:
@@ -67,12 +67,21 @@ def _changed_for(entry: dict, metrics: dict | None = None) -> list[dict]:
             mid = r["consumed_artifact_id"][2:] if r["consumed_artifact_id"].startswith("M:") else None
             mm = metrics.get(mid) if mid else None
             if mm and mm["changed"] and mid not in have:
-                out.append({"field": mid, "label": mm["label"], "old": mm["old"], "new": mm["new"], "delta": None if isinstance(mm["old"], str) else mm["new"] - mm["old"],
+                out.append({"field": mid, "label": mm["label"], "unit": mm.get("unit"), "old": mm["old"], "new": mm["new"], "delta": None if isinstance(mm["old"], str) else mm["new"] - mm["old"],
                             "crossed_threshold": mm["conclusion_old"] != mm["conclusion_new"]})
     for c in out:
         if c.get("label") in (None, c["field"]) and c["field"] in metrics:
             c["label"] = metrics[c["field"]]["label"]
+        if not c.get("unit") and c["field"] in metrics:
+            c["unit"] = metrics[c["field"]].get("unit")
     return out
+
+
+def is_agent(owner: str | None) -> bool:
+    if not owner or owner in C.PEOPLE_V3:
+        return False
+    r = db.q1("SELECT ping_endpoint FROM agents WHERE agent_id=?", (owner,))
+    return bool(r and r["ping_endpoint"])
 
 
 def bundles(ripple: dict) -> tuple[dict[str, list[dict]], dict[str, list[dict]], list[dict]]:
@@ -83,7 +92,7 @@ def bundles(ripple: dict) -> tuple[dict[str, list[dict]], dict[str, list[dict]],
         if v["verdict"] != "invalidated":
             continue
         owner = v.get("owner") or "unknown"
-        if owner not in AGENTS:
+        if not is_agent(owner):
             people[owner].append({"item_id": iid, **v})
         elif v.get("link_status") != "derived":
             agents[owner].append({"item_id": iid, **v})
@@ -91,7 +100,7 @@ def bundles(ripple: dict) -> tuple[dict[str, list[dict]], dict[str, list[dict]],
         if v["verdict"] == "suspect":
             agents[v["owner"]].append({"item_id": nid, **v})
     for aid, v in ripple["actions"].items():
-        if v["verdict"] == "invalidated" and v.get("owner") in AGENTS:
+        if v["verdict"] == "invalidated" and is_agent(v.get("owner")):
             agents[v["owner"]].append({"item_id": aid, **v})
     skipped = [{"node_id": n, **v} for n, v in ripple.get("agent_nodes", {}).items() if v.get("skipped")]
     return dict(agents), dict(people), skipped
@@ -148,7 +157,8 @@ def dispatch(ripple: dict, ts: str, wave_no: int = 1, handler=None, people_notic
                 v = G.new_artifact(artifact_id=r["artifact_id"], kind=art["kind"], run_id=f"ping:{rec['ping_id']}", pinned_at=ts, period=art["period"], line_item=art["line_item"],
                                    content=r["new_version"].get("content", art["content"]), value_num=r["new_version"].get("value_num", art["value_num"]), formula=None,
                                    conclusions=json.loads(art["conclusions_json"]) if art["conclusions_json"] else None, agent_id=agent, origin="rework", reason=r.get("reason"),
-                                   fields=json.loads(art["fields_json"]) if art["fields_json"] else None)
+                                   fields=json.loads(art["fields_json"]) if art["fields_json"] else None, world=art["world"])
+                _carry_edges(r["artifact_id"], art["version"], v)
                 r["new_version_no"] = v
         out_pings.append({"agent": agent, "ping_id": rec["ping_id"], "state": st["state"], "hop": ORDER.get(agent, 1),
                           "items": [{k: r.get(k) for k in ("artifact_id", "verdict", "reason", "model", "new_version", "reason_code")} for r in resp]})
@@ -163,6 +173,17 @@ def dispatch(ripple: dict, ts: str, wave_no: int = 1, handler=None, people_notic
                  actor="trackback:hub", ts=ts, correction_id=corr, detail={"pings": out_pings, "notices": notices})
     db.commit()
     return {"wave_id": wave_id, "pings": out_pings, "notices": notices, "skipped": skipped, "stats": stats}
+
+
+def _carry_edges(artifact_id: str, old_version: int, new_version: int) -> None:
+    """A reworked version rests on the same inputs, at their current versions (so the next ripple reaches it, and its receipts are fresh)."""
+    for e in G.supporters_of(artifact_id, old_version):
+        sv = e["supporter_version"]
+        if e["supporter_kind"] == "artifact":
+            cur = db.artifact_current(e["supporter_id"])
+            sv = str(cur["version"]) if cur else sv
+        G.add_edge(consumer_id=artifact_id, consumer_version=new_version, supporter_kind=e["supporter_kind"], supporter_id=e["supporter_id"], supporter_version=sv,
+                   dep_kind=e["dep_kind"], capture=e["capture"])
 
 
 def _notice(corr: str, person: str, to: str, why: str | None, lines: list[dict], ts: str) -> dict:

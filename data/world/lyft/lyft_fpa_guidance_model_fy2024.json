@@ -1,0 +1,15 @@
+{
+ "title": "RECONSTRUCTION: FP&A FY2024 guidance model (margin bridge), Feb 9, 2024",
+ "reconstruction": true,
+ "figures": {
+  "fy23_margin": 1.6,
+  "fy24_margin_target": 2.1,
+  "q1_gb_low": 3500000000.0,
+  "q1_gb_high": 3600000000.0,
+  "q1_ebitda_low": 50000000.0,
+  "q1_ebitda_high": 55000000.0,
+  "q1_margin_low": 1.4,
+  "q1_margin_high": 1.5
+ },
+ "bridge": "FY2023 margin 1.6% -> FY2024 target 2.1%: +50 bps"
+}

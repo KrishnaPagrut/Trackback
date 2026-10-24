@@ -87,6 +87,8 @@ def parse_numbers(text: str) -> list[dict]:
             continue
         if start > 0 and text[start - 1].isalpha():                    # Q1, R1, G01
             continue
+        if start > 0 and text[start - 1] in "'’`":                 # Q4'22: a year shorthand
+            continue
         digits = re.sub(r"[^\d.]", "", core)
         if not digits or digits == ".":
             continue
@@ -111,10 +113,18 @@ def parse_numbers(text: str) -> list[dict]:
         ratio_to_one = m.group(0).lower().rstrip().endswith("to 1.00")
         if ratio_to_one:
             unit = "ratio"
+        if re.match(r"\s*basis points", text[m.end(1):], re.I):
+            unit = "bps"
         if raw.startswith("(") and raw.endswith(")"):
             val = -val
         v = val * mult
         tol = 0.5 * (10 ** -dec) * mult
+        if re.match(r"\s*(billion|million|thousand)", text[m.end(1):], re.I):
+            w = re.match(r"\s*(billion|million|thousand)", text[m.end(1):], re.I).group(1).lower()
+            mult = {"billion": 1e9, "million": 1e6, "thousand": 1e3}[w]
+            unit = "usd" if "$" in core else unit
+            v = val * mult
+            tol = 0.5 * (10 ** -dec) * mult
         if unit is None and "$" not in core and dec == 0 and val < 10 and not ratio_to_one:   # small bare integers are counts or list numbers
             continue
         out.append({"value": v, "unit": unit, "tolerance": max(tol, 1e-9), "display": m.group(0).strip(), "pos": start})
@@ -373,7 +383,7 @@ def extract_html_lines(path: Path, prefix: str, wanted: list[str]) -> list[Item]
     raw = path.read_text(encoding="utf-8", errors="ignore")
     text = H.unescape(re.sub(r"<[^>]+>", " ", raw))
     text = re.sub(r"\s+", " ", text)
-    sents = re.split(r"(?<=[.;])\s+(?=[A-Z])", text)
+    sents = [x.strip(" •�") for x in re.split(r"(?<=[.;])\s+(?=[A-Z•�])|\s[•�]\s", text)]
     items: list[Item] = []
     for i, phrase in enumerate(wanted, start=1):
         s = next((x for x in sents if phrase.lower() in x.lower()), None)
@@ -383,7 +393,7 @@ def extract_html_lines(path: Path, prefix: str, wanted: list[str]) -> list[Item]
 
 
 # ======================================================================================================================== matching
-UNIT_OK = {None: {"usd", "ratio", "pct"}, "usd": {"usd"}, "ratio": {"ratio"}, "pct": {"pct"}, "status": {"status"}}
+UNIT_OK = {None: {"usd", "ratio", "pct", "bps"}, "usd": {"usd"}, "ratio": {"ratio"}, "pct": {"pct"}, "status": {"status"}, "bps": {"bps"}}
 
 
 def label_score(item_text: str, metric) -> float:
