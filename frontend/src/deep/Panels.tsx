@@ -76,7 +76,7 @@ export function Sidebar({ company, correction, graph, pings, selected, onSelect,
 export type DrawerTab = 'who' | 'history' | 'approvals' | 'pings' | 'review' | 'lessons' | 'norms'
 export function Drawer({ tab, setTab, onClose, selected, company, refreshKey, onChanged, people, pings, waves, challenges, correction }: { tab: DrawerTab; setTab: (t: DrawerTab) => void; onClose: () => void; selected: string | null; company: string
   refreshKey: number; onChanged: () => void; people: Record<string, string>; pings: any[]; waves: any[]; challenges: any[]; correction?: string | null }) {
-  const tabs: [DrawerTab, string][] = [['who', 'Who built it'], ['history', 'History'], ['approvals', 'Approvals'], ['pings', 'Pings'], ['review', 'Jade'], ['lessons', 'Lessons'], ['norms', 'Norms']]
+  const tabs: [DrawerTab, string][] = [['who', 'Built it'], ['history', 'History'], ['approvals', 'Approvals'], ['pings', 'Pings'], ['review', 'Jade'], ['lessons', 'Lessons'], ['norms', 'Norms']]
   return (
     <div className="drawer" role="complementary" aria-label="Details">
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -272,9 +272,9 @@ export function Lessons({ refreshKey, onChanged, people }: { refreshKey: number;
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}><span className="mono t14 muted">{l.lesson_id} · {l.mistake_kind}</span><span className={`chip ${l.status === 'active' ? 'cleared' : l.status === 'proposed' ? 'caution' : 'recall'}`}>{l.status.replace(/_/g, ' ')}</span></div>
         <div className="t16" style={{ fontWeight: 600, margin: '6px 0' }}>{l.rule}</div>
         <div className="t14 muted">{l.guidance}</div>
-        <div className="t14" style={{ marginTop: 6 }}>From {l.cases.length} case{l.cases.length === 1 ? '' : 's'}: <span className="mono">{l.cases.join(', ')}</span> · proposed by {String(l.proposed_by).replace('human:', '')}{l.approved_by ? ` · approved by ${l.approved_by} ${dateLabel(l.approved_at)}` : ''}</div>
+        <div className="t14" style={{ marginTop: 6 }}>From {l.cases.length} case{l.cases.length === 1 ? '' : 's'}: <span className="mono">{l.cases.join(', ')}</span> · proposed by {String(l.proposed_by).replace('human:', '').replace(/^jade$/, 'Jade')}{l.approved_by ? ` · approved by ${l.approved_by} ${dateLabel(l.approved_at)}` : ''}</div>
         {g && <div className="t14" style={{ marginTop: 6, color: g.passed ? 'var(--cleared)' : 'var(--recall)' }}>Gate: {g.pass_after} of {g.claims} past claims pass ({g.pass_before} before) · {g.newly_failing.length} newly failing{g.newly_failing.length ? `: ${g.newly_failing.map((x: any) => `${x.case_id} ${x.claim}`).join(', ')}` : ''} · {g.newly_passing.length} newly passing</div>}
-        {l.status === 'proposed' && <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+        {l.status === 'proposed' && <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
           <button className="btn" disabled={busy} onClick={() => act(() => api.gateLesson(l.lesson_id), 'Gate run.')}>Run the gate</button>
           <button className="btn primary" disabled={busy} onClick={() => act(() => api.approveLesson(l.lesson_id, controller), `Decided as ${controller}.`)}>Approve as {controller}</button>
           <button className="btn ghost" disabled={busy} title="Only the Controller approves a lesson" onClick={() => act(() => api.approveLesson(l.lesson_id, 'agent:close_accountant'), 'Approved.')}>Try as the agent</button>
