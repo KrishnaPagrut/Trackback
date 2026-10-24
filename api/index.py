@@ -49,12 +49,13 @@ if (db.q1("SELECT COUNT(*) n FROM artifacts") or {"n": 0})["n"] == 0:   # belt a
 # deterministic: the world is rebuilt from the snapshot and the same calls in the same order.
 import asyncio  # noqa: E402
 import json  # noqa: E402
+import threading  # noqa: E402
 
 import httpx  # noqa: E402
 from starlette.requests import Request  # noqa: E402
 
 APPLIED: set[str] = set()
-_SYNC = asyncio.Lock()   # one replay at a time per instance: concurrent page loads must not interleave half-applied worlds
+_SYNC = threading.Lock()   # one replay at a time per copy (a threading lock: the host may run each request on its own event loop)
 
 
 async def _replay(entries: list[dict]) -> None:
@@ -67,9 +68,15 @@ async def _replay(entries: list[dict]) -> None:
             APPLIED.add(e["id"])
 
 
+def _internal(request: Request) -> bool:
+    """Requests the app makes to itself (replays, and the agents' in-process document reads at http://trackback.local) must pass straight through."""
+    return bool(request.headers.get("x-tb-replaying") or request.headers.get("x-trackback-run")) or request.headers.get("host", "").startswith("trackback.local") \
+        or request.url.path.startswith(("/r/", "/tg/", "/m/", "/tm/"))
+
+
 @app.middleware("http")
 async def journal_sync(request: Request, call_next):
-    if request.headers.get("x-tb-replaying"):
+    if _internal(request):
         return await call_next(request)
     raw = request.headers.get("x-tb-journal")
     try:
@@ -77,13 +84,18 @@ async def journal_sync(request: Request, call_next):
     except ValueError:
         entries = []
     ids = {e.get("id") for e in entries}
-    async with _SYNC:
-        if APPLIED - ids:                  # this copy is ahead of the browser (reset or undo happened elsewhere): start over
-            _restore()
-            APPLIED.clear()
-        missing = [e for e in entries if e.get("id") and e["id"] not in APPLIED]
-        if missing:
-            await _replay(missing)
+    if (APPLIED - ids) or any(e.get("id") and e["id"] not in APPLIED for e in entries):
+        got = await asyncio.to_thread(_SYNC.acquire, True, 50)
+        try:
+            if APPLIED - ids:              # this copy is ahead of the browser (reset or undo happened elsewhere): start over
+                _restore()
+                APPLIED.clear()
+            missing = [e for e in entries if e.get("id") and e["id"] not in APPLIED]
+            if missing:
+                await _replay(missing)
+        finally:
+            if got:
+                _SYNC.release()
     response = await call_next(request)
     op = request.headers.get("x-tb-op")
     if op and request.method == "POST" and response.status_code < 400:
