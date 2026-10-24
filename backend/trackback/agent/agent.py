@@ -77,7 +77,7 @@ def evaluate(exc: dict, ripple: dict | None, mat: dict, pb: dict, pin: str) -> d
               "ach_return": "{title}: returned debits the cash book still shows as collected.",
               "unbooked_bank_fee": "{title}: a bank charge nobody booked."}.get(exc["kind"], "{title}.")
     rc = llm.write(f"root_cause:{eid}", "Write one plain sentence for the error memo that states the root cause. Use only the facts; name the systems and records involved; do not speculate beyond them.", rc_facts, rc_tpl, pin)
-    q1 = {"kind": exc["kind"], "root_cause": rc["text"], "root_cause_model": rc["model"], "facts": rc_facts, "evidence": [f"recon:{exc['recon']}:{eid}"] + [e.get("import_id") or e.get("invoice_no") or e.get("bank_id") or "" for e in exc.get("evidence", []) if isinstance(e, dict)][:4]}
+    q1 = {"kind": exc["kind"], "root_cause": rc["text"], "root_cause_model": rc["model"], "facts": rc_facts, "evidence": [f"recon:{exc['recon']}:{eid}"] + [r for r in (e.get("import_id") or e.get("invoice_no") or e.get("bank_id") for e in exc.get("evidence", []) if isinstance(e, dict)) if r][:4]}
     q2 = {"trusted": (exc.get("trust") or {}).get("trusted"), "over": (exc.get("trust") or {}).get("over"), "why": (exc.get("trust") or {}).get("why"), "system_of_record": exc.get("system_of_record"),
           "evidence": [f"source:{exc.get('system_of_record')}"]}
     q3 = {**cls, "evidence": kn["evidence"], "fact": kn["fact"]}

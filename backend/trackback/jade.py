@@ -146,7 +146,7 @@ def apply(ev: dict, findings: list[dict]) -> dict:
                 out["q7_fix"] = {"entries": [], "treatment": "no_action", "posting_period": None, "why": "change in estimate, already booked when the invoice arrived", "documents_to_reissue": [],
                                  "compensations": [], "approvers": {}, "evidence": ["ap_invoices", "accruals"]}
         elif k == "q5_matters":
-            out["q5_matters"].update(f["corrected"])
+            out["q5_matters"].update({**f["corrected"], "why": f["why"]})   # the conclusion and its reason change together
         elif k.startswith("q7_fix.approvers."):
             out["q7_fix"]["approvers"][k.split(".")[-1]] = f["corrected"]["approver"]
         elif k == "q4_size":

@@ -35,6 +35,7 @@ export const api = {
   timemap: (s: string) => j(`/api/memento/timemap/${s}`),
   timegate: (s: string, at: string) => j(`/api/memento/timegate/${s}?at=${encodeURIComponent(at)}`),
   attempt: (source: string, pin: string, version_id?: string) => post('/api/replay/attempt', { source, pin, version_id }),
+  asof: (w: World, at: string) => j(`/api/asof?world=${w}&at=${encodeURIComponent(at)}`),
   pings: (w: World) => j(`/api/pings?world=${w}`),
   built: (w: World, id: string) => j(`/api/built/${encodeURIComponent(id)}?world=${w}`),
   decision: (id: string) => j(`/api/decision/${encodeURIComponent(id)}`),
@@ -67,13 +68,18 @@ export function fig(v: Any, unit?: string | null, id = ''): string {
   if (Math.abs(v) < 1 && v !== 0) return v.toFixed(2)
   return money(v)
 }
+// an exception's size: dollars, or basis points when the mismatched figure is a bps metric (Lyft's 500 vs 50)
+export function amount(e: Any): string {
+  if ((e?.evidence || []).some((x: Any) => String(x?.metric || '').endsWith('_bps')) || e?.implied_ebitda_overstated != null) return `${(e.amount ?? 0).toLocaleString()} bps`
+  return money(e?.amount, { cents: Math.abs(e?.amount || 0) < 1000 })
+}
 export const lev = (v: number | null | undefined) => (v == null ? '—' : `${v.toFixed(2)}x`)
 export const pct = (v: number | null | undefined) => (v == null ? '—' : `${Math.round(v * 100)}%`)
-export function when(ts?: string | null, withTime = true): string {
+export function when(ts?: string | null, withTime = true, zone?: 'ET' | 'PT'): string {
   if (!ts) return '—'
   const d = new Date(ts)
   if (Number.isNaN(d.getTime())) return ts
-  const tz = ts.includes('-05:00') ? 'America/New_York' : 'America/Los_Angeles'
+  const tz = zone ? (zone === 'ET' ? 'America/New_York' : 'America/Los_Angeles') : ts.includes('-05:00') ? 'America/New_York' : 'America/Los_Angeles'
   const date = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: d.getFullYear() !== 2026 ? 'numeric' : undefined, timeZone: tz })
   if (!withTime) return date
   return `${date}, ${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: tz })} ${tz === 'America/New_York' ? 'ET' : 'PT'}`

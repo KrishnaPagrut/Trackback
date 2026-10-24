@@ -530,6 +530,29 @@ def ledger(as_of: str | None = None, world: str = "tidewall"):
     return {"as_of": as_of, "entries": len(ents), "trial_balance": tb}
 
 
+ASOF_METRICS = {"tidewall": [("ttm_adj_ebitda@2026Q1", "TTM Adjusted EBITDA (Q1)"), ("leverage@2026Q1", "Net leverage (Q1)"), ("covenant_status@2026Q1", "Covenant status (Q1)"),
+                             ("revenue@2026Q1", "Revenue, Q1 2026"), ("cash@2026Q1", "Cash, March 31"), ("acct.4010@2026Q1", "Annual-plan revenue (4010), Q1")],
+                "lyft": [("release.margin_expansion_bps", "Margin expansion in the public release", "bps"), ("lyft.margin_expansion_bps", "Margin expansion in the guidance model", "bps"),
+                         ("street.implied_fy24_adj_ebitda", "Sell-side implied FY24 Adjusted EBITDA")]}
+
+
+@router.get("/asof")
+def asof(at: str, world: str = "tidewall"):
+    """The books as the system held them at a moment (posted_at at or before it), for the time-travel scrubber."""
+    from .engine.books import Books
+    t = db.norm_ts(at)
+    if world == "lyft":
+        from .world import lyft as LY
+        ents = [e for e in LY.entries() if db.norm_ts(e["posted_at"]) <= t]
+        vals = LY.library().evaluate(Books(ents))
+    else:
+        from . import review
+        cx = review.ctx(at)
+        vals = cx.lib.evaluate(Books(cx.entries))
+        ents = cx.entries
+    return {"at": at, "entries": len(ents), "metrics": [{"id": m[0], "label": m[1], "unit": m[2] if len(m) > 2 else None, "value": vals.get(m[0])} for m in ASOF_METRICS[world]]}
+
+
 @router.get("/decision/{action_id}")
 def decision_replay(action_id: str):
     """Door 2: 'Why did you do this on that date?' The action's inputs exactly as of its pin."""

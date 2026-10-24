@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useState } from 'react'
 import { X, Check, AlertCircle, RefreshCw, MinusCircle, Mail, Lock } from 'lucide-react'
-import { api, money, lev, when, who, type Any, type World } from './api'
+import { api, money, lev, when, who, amount, type Any, type World } from './api'
 import { RippleLanes } from './Lanes'
 
 export const TIDEWALL_BEATS = ['Title', 'Reconcile', 'Evidence', 'Ripple', 'Jade', 'Approvals', 'Dana says no', 'Replay', 'Scorecard', 'Memo']
@@ -108,7 +108,7 @@ function ReconBeat({ d }: { d: Any }) {
       {lit && <div className="bcard recall fly-in" style={{ display: 'flex', alignItems: 'center', gap: '1.2vw' }}>
         <Icon s="invalidated" size={34} />
         <div><div className="big" style={{ fontWeight: 600 }}>{hero.title}</div>
-          <div className="sub">{money(hero.amount)} · {Object.entries(hero.by_region || {}).map(([r, v]) => `${r} ${money(v as number, { k: true })}`).join(' · ')}</div></div>
+          <div className="sub">{amount(hero)} · {Object.entries(hero.by_region || {}).map(([r, v]) => `${r} ${money(v as number, { k: true })}`).join(' · ')}</div></div>
       </div>}
       <div className="sub big muted">{d.exceptions.length} exceptions in all, each with a reason; the rest cleared: deposits in transit, outstanding checks, a one-cent FX difference, a bundled wire, a known short-pay, an alias, and Priya's half-finished handoff confirmed and finished.</div>
     </div>

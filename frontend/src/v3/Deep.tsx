@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useState } from 'react'
 import { ReactFlow, Background, Controls, type Node, type Edge } from '@xyflow/react'
-import { api, money, fig, lev, when, reason, who, type Any, type World } from './api'
+import { api, money, fig, lev, when, reason, who, amount, type Any, type World } from './api'
 import { Icon } from './Stage'
 import { RippleLanes } from './Lanes'
 
@@ -21,7 +21,7 @@ export function Deep({ world, tab, setTab, tick, bump }: { world: World; tab: Ta
           <button key={e.exception_id} className={`row ${e.exception_id === sel ? 'on' : ''}`} onClick={() => setSel(e.exception_id)}>
             <Icon s={e.material ? 'invalidated' : e.classification === 'estimate_change' ? 'cleared' : 'caution'} size={18} />
             <div><div style={{ fontWeight: 600 }}>{e.exception_id} · {e.kind.replace(/_/g, ' ')}</div><div className="muted t14">{e.title}</div>
-              <div className="t14">{money(e.amount, { cents: e.amount < 1000 })} · {e.classification?.replace('_', ' ')} · {e.material ? 'material' : 'not material'}</div></div>
+              <div className="t14">{amount(e)} · {e.classification?.replace('_', ' ')} · {e.material ? 'material' : 'not material'}</div></div>
           </button>
         ))}
       </div>
@@ -193,7 +193,7 @@ function Evaluate({ world, id }: { world: World; id: string }) {
     if (q === 'q1_what') return c.root_cause
     if (q === 'q2_trust') return `${c.trusted} over ${c.over}. ${c.why || ''}`
     if (q === 'q3_classification') return `${(c.value || '').replace('_', ' ')}: ${c.rule || ''}`
-    if (q === 'q4_size') return `${money(c.amount, { cents: c.amount < 1000 })}; rollover ${money(c.rollover)}, iron curtain ${money(c.iron_curtain)}`
+    if (q === 'q4_size') return c.implied_ebitda_overstated != null ? `${amount(c)} (${c.stated} stated, ${c.true} true); implied FY24 Adjusted EBITDA overstated by ${money(c.implied_ebitda_overstated)}` : `${amount(c)}; rollover ${money(c.rollover)}, iron curtain ${money(c.iron_curtain)}`
     if (q === 'q5_matters') return `${c.material ? 'Material' : 'Immaterial'}. ${c.why || ''}`
     if (q === 'q6_touched') return c.counts ? `${c.counts.invalidated} invalidated, ${c.counts.still_valid} still valid, ${c.counts.compensations} compensations; agent work: ${Object.entries(c.agent_work || {}).map(([k, v]) => `${k} ${v}`).join(', ')}` : ''
     if (q === 'q7_fix') return `${(c.treatment || '').replace(/_/g, ' ')}${c.posting_period ? `, posting ${c.posting_period}` : ''}${c.orig_period && c.orig_period !== c.posting_period ? ` tagged ${c.orig_period}` : ''}; approvers ${Object.entries(c.approvers || {}).map(([k, v]) => `${k.replace('_', ' ')}: ${who(v as string)}`).join(', ')}`
@@ -295,6 +295,11 @@ function Memo({ world, id }: { world: World; id: string }) {
 }
 
 const SOURCES: Record<World, string[]> = { tidewall: ['billing_release_lines', 'gl_import_log', 'ap_invoices', 'bank_statement_2026_06', 'covenant_workbook', 'compliance_certificate'], lyft: ['lyft_release', 'lyft_fpa_model', 'lyft_close_pack'] }
+const MARKS: Record<World, [string, string][]> = {
+  tidewall: [['2026-04-02T08:41', 'invoice arrives'], ['2026-04-06T22:14', 'duplicate import'], ['2026-04-09T18:00', 'draft TB'], ['2026-04-10T17:00', 'Q1 close'], ['2026-04-24T15:00', 'board deck'],
+             ['2026-05-15T10:00', 'certificate'], ['2026-05-31T09:00', 'bonuses'], ['2026-06-15T10:00', 'tax'], ['2026-07-08T09:00', 'now']],
+  lyft: [['2024-02-09T18:00', 'model'], ['2024-02-12T15:00', 'draft'], ['2024-02-13T16:06', 'filed'], ['2024-02-13T16:30', 'call'], ['2024-02-13T17:00', 'correction'], ['2024-02-13T17:05', 'review']],
+}
 
 function TimeTravel({ world }: { world: World }) {
   const [src, setSrc] = useState(SOURCES[world][0])
@@ -302,10 +307,24 @@ function TimeTravel({ world }: { world: World }) {
   const [pin, setPin] = useState(world === 'lyft' ? '2024-02-13T16:20' : '2026-04-09T18:00')
   const [gate, setGate] = useState<Any>(null)
   const [peek, setPeek] = useState<Any>(null)
-  useEffect(() => { setSrc(SOURCES[world][0]); setPin(world === 'lyft' ? '2024-02-13T16:20' : '2026-04-09T18:00') }, [world])
-  useEffect(() => { api.timemap(src).then(setTm); setPeek(null); setGate(null) }, [src])
+  const [books, setBooks] = useState<Any>(null)
   const tz = world === 'lyft' ? '-05:00' : '-07:00'
-  const check = async () => setGate(await api.timegate(src, `${pin}:00${tz}`))
+  const zone = world === 'lyft' ? 'ET' : 'PT'
+  useEffect(() => { setSrc(SOURCES[world][0]); setPin(world === 'lyft' ? '2024-02-13T16:20' : '2026-04-09T18:00') }, [world])
+  useEffect(() => { api.timemap(src).then(setTm); setPeek(null) }, [src])
+  useEffect(() => { const at = `${pin}:00${tz}`; api.timegate(src, at).then(setGate); api.asof(world, at).then(setBooks) }, [src, pin, world, tz])
+  const marks = MARKS[world]
+  // marks are evenly spaced and time is interpolated between neighbours, so a busy week and a quiet quarter both stay readable
+  const ts = marks.map(m => new Date(`${m[0]}:00${tz}`).getTime()), n = ts.length
+  const x = (iso: string) => {
+    const t = new Date(iso).getTime()
+    if (t <= ts[0]) return 0
+    if (t >= ts[n - 1]) return 100
+    const i = ts.findIndex((v, k) => k < n - 1 && t < ts[k + 1])
+    return ((i + (t - ts[i]) / (ts[i + 1] - ts[i])) / (n - 1)) * 100
+  }
+  const fromX = (p: number) => { const f = (p / 100) * (n - 1), i = Math.min(Math.floor(f), n - 2); return ts[i] + (f - i) * (ts[i + 1] - ts[i]) }
+  const pinX = x(`${pin}:00${tz}`)
   return (
     <div>
       <h3>Time travel (Replay)</h3>
@@ -313,14 +332,27 @@ function TimeTravel({ world }: { world: World }) {
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
         {SOURCES[world].map(s => <button key={s} className={`btn ${s === src ? 'primary' : ''}`} onClick={() => setSrc(s)}>{s.replace(/_/g, ' ')}</button>)}
       </div>
-      {tm && <div className="panel"><b>{tm.title}</b>{tm.versions.map((v: Any) => <div key={v.version_id} className="t14">{v.version_id} · captured {when(v.captured_at)} {v.note ? `· ${v.note}` : ''}</div>)}</div>}
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <input className="field" type="datetime-local" value={pin} onChange={e => setPin(e.target.value)} />
-        <button className="btn primary" onClick={check}>Read as of this time</button>
-        <button className="btn recall" onClick={async () => setPeek(await api.attempt(src, `${pin}:00${tz}`))}>Try to make it peek</button>
+      <div className="panel" style={{ paddingBottom: 30 }}>
+        <div style={{ position: 'relative', height: 92, margin: '6px 56px 0' }}>
+          <div style={{ position: 'absolute', left: 0, right: 0, top: 44, borderTop: '2px solid var(--ink)' }} />
+          <div style={{ position: 'absolute', left: `${pinX}%`, right: 0, top: 0, bottom: 0, background: 'var(--hatch-red)', borderLeft: '3px solid var(--recall)' }} title="not knowable after the pin" />
+          <div className="t14 red" style={{ position: 'absolute', ...(pinX > 65 ? { right: `calc(${100 - pinX}% + 8px)` } : { left: `calc(${pinX}% + 6px)` }), top: 0, fontWeight: 600, whiteSpace: 'nowrap' }}>not knowable after {when(`${pin}:00${tz}`)}</div>
+          {marks.map(([iso, lab]) => <div key={iso} style={{ position: 'absolute', left: `${x(`${iso}:00${tz}`)}%`, top: 38, transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }} onClick={() => setPin(iso)}>
+            <div style={{ width: 10, height: 10, borderRadius: 5, background: 'var(--ink)', margin: '0 auto' }} /><div className="t14" style={{ whiteSpace: 'nowrap' }}>{lab}</div></div>)}
+          {(tm?.versions || []).map((v: Any) => <div key={v.version_id} title={`${v.version_id} captured ${when(v.captured_at, true, zone)}`} style={{ position: 'absolute', left: `${x(v.captured_at)}%`, top: 22, transform: 'translateX(-50%)' }}>
+            <span className={`chip ${new Date(v.captured_at).getTime() > new Date(`${pin}:00${tz}`).getTime() ? 'recall' : 'cleared'}`}>{v.version_id.split('@')[1]}</span></div>)}
+        </div>
+        <input type="range" min={0} max={1000} value={Math.round(pinX * 10)} style={{ width: 'calc(100% - 112px)', margin: '0 56px' }} onChange={e => { const ms = fromX(Number(e.target.value) / 10); const d = new Date(ms + (world === 'lyft' ? -5 : -7) * 3600e3); setPin(d.toISOString().slice(0, 16)) }} />
       </div>
-      {gate && <div className={`panel ${gate.status >= 400 ? 'recall' : 'cleared'}`} style={{ marginTop: 10 }}>{gate.version ? <>Served <b>{gate.version.version_id}</b>, captured {when(gate.version.captured_at)}.</> : <><b>{gate.status} {gate.title}</b>: {gate.detail}</>}</div>}
-      {peek && (peek.refused ? <div style={{ marginTop: 14 }}><span className="stamp stamp-in">REFUSED · {peek.status} · captured {when(peek.problem.requested)} · pinned {when(peek.problem.pinned_at)}</span></div> : <div className="panel cleared">Served: the latest version was already captured at that time.</div>)}
+      <div className="grid-cards">
+        <div className={`panel ${gate?.version ? 'cleared' : 'recall'}`}><b>{src.replace(/_/g, ' ')} as of the pin</b>
+          <div className="t14" style={{ marginTop: 6 }}>{gate?.version ? <>Serves <b>{gate.version.version_id}</b>, captured {when(gate.version.captured_at, true, zone)}.</> : gate ? <><b>{gate.status}</b>: {gate.detail}</> : '…'}</div>
+          <div style={{ marginTop: 8, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}><input className="field" type="datetime-local" value={pin} onChange={e => setPin(e.target.value)} />
+            <button className="btn recall" onClick={async () => setPeek(await api.attempt(src, `${pin}:00${tz}`))}>Try to make it peek</button></div></div>
+        <div className="panel"><b>The books as of the pin</b> <span className="t14 muted">({books?.entries?.toLocaleString()} entries posted by then)</span>
+          {(books?.metrics || []).map((m: Any) => <div key={m.id} className="t14" style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}><span>{m.label}</span><b className="num" style={{ whiteSpace: 'nowrap' }}>{fig(m.value, m.unit, m.id)}</b></div>)}</div>
+      </div>
+      {peek && (peek.refused ? <div style={{ marginTop: 14 }}><span className="stamp stamp-in">REFUSED · {peek.status} · captured {when(peek.problem.requested, true, zone)} · pinned {when(peek.problem.pinned_at, true, zone)}</span></div> : <div className="panel cleared">Served: the latest version was already captured at that time.</div>)}
     </div>
   )
 }
