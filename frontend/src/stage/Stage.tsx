@@ -166,7 +166,8 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
       window.clearTimeout(idle.current)
       idle.current = window.setTimeout(() => { if (kiosk !== 'attract') startAttract() }, (kiosk === 'visitor' ? Math.max(idleSeconds, 90) : idleSeconds) * 1000)
     }
-    const onInput = () => { if (kiosk === 'attract') { stopAttract() } arm() }
+    // a resting mouse gets synthetic mousemove events when the layout changes under it, so only real input stops the loop
+    const onInput = (e: Event) => { if (kiosk === 'attract' && e.type !== 'mousemove') { stopAttract() } arm() }
     arm()
     const evs = ['keydown', 'mousedown', 'touchstart', 'wheel', 'mousemove']
     evs.forEach(ev => window.addEventListener(ev, onInput, { passive: true }))
