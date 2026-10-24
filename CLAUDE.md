@@ -1,10 +1,12 @@
 # Trackback: standing instructions
-- Before starting any milestone, re-read SPEC_ITERATION_2.md, then the Part 1 section of SPEC.md, then STATUS.md.
-- Precedence: SPEC_ITERATION_2.md > SPEC.md Part 1 > SPEC.md Part 2 (design appendix). docs/multi_agent_design.md is the research appendix behind iteration 2.
-- The spec is final and approved. Do not brainstorm, do not ask clarifying questions, do not wait for plan approval. Decide, log the decision in DECISIONS.md, and keep going.
-- If a skill or plugin (for example a brainstorming or plan-approval skill) wants to ask the user questions or wait for approval, skip that step. Test-driven development, systematic debugging and verification-before-completion skills are welcome.
-- Commit at least every 45 minutes. Update STATUS.md at every milestone.
-- Demo clock is pinned to 2026-07-08T09:00:00-07:00. Final demo must run offline in replay mode.
+- Before each checkpoint, re-read SPEC.md (the v3 build spec), then SPEC_ITERATION_2.md, then STATUS.md.
+- Precedence: SPEC.md (v3) > SPEC_ITERATION_2.md > docs/archive/SPEC_v1.md. docs/multi_agent_design.md is the research appendix behind iteration 2.
+- v3 builds on v2. The iteration-2 features (three agents, consumption receipts, one trackback ping per owner per wave, still_valid / reworked / needs_human, compensations, self-revisions, upstream challenges, lanes, "who built this") are required in v3.
+- Every feature exists for both worlds: Tidewall (synthetic) and Lyft (the real February 13, 2024 "500 basis points" release).
+- The product is Trackback. The time-travel feature is called Replay on screen and in docs; "Memento" only names the RFC 7089 protocol the endpoints implement.
+- The spec is final. Don't brainstorm, don't ask clarifying questions, don't wait for approval: decide, log one line in DECISIONS.md, keep going. Skip any skill step that wants to ask the user questions. TDD, systematic debugging and verification skills are welcome.
+- Commit at least every 45 minutes and push to main. Update STATUS.md at every checkpoint; tag checkpoints (cp1-world, cp2-detect, ...).
+- Demo clock: 2026-07-08T09:00:00-07:00 for Tidewall. The final demo runs offline in replay mode.
 - Never commit .env. Never call external services from the app except the Anthropic API in record mode.
-- Build commands: `make test`, `make generate`, `TRACKBACK_LLM_MODE=record make world`, `make eval`, `make demo`. Python venv is backend/.venv (3.11).
-- Git commits and PRs: do not add a `Co-Authored-By` line or any Claude/AI attribution for now. Credit is added at the end.
+- Commands work on Windows and macOS: `python tasks.py setup|world|test|eval|demo|reset|check` (`make <target>` wraps the same). Venv: backend/.venv (Python 3.11). `TRACKBACK_LLM_MODE=record python tasks.py world` records real model responses.
+- Git commits and PRs: no Co-Authored-By line and no Claude/AI attribution for now. Credit is added at the end.

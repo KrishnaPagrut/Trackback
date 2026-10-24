@@ -1,5 +1,29 @@
 # STATUS.md
 
+## v3 (current): building to SPEC.md, keeping every iteration-2 feature, for Tidewall and Lyft
+
+Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
+
+| Checkpoint | State | Proof |
+|---|---|---|
+| CP0 housekeeping | done | SPEC.md is v3; CLAUDE.md; tasks.py; v2 tests pass on Windows (27) |
+| CP1 world | next | |
+| CP2 detect | | |
+| CP3 trace | | |
+| CP4 judge | | |
+| CP5 act (+ pings) | | |
+| CP6 prove | | |
+| CP7 learn | | |
+| Lyft parity | | |
+| CP8 UI | | |
+| CP9 polish | | |
+
+Next three tasks: v3 config and generator; refcalc and the answer key; calibration tests.
+
+---
+
+# v2 status (frozen at commit 06bbbc9)
+
 ## Current phase
 Built to SPEC.md Part 1, amended by SPEC_ITERATION_2.md, with the frontend following DESIGN.md. The canonical world is built in scripted mode with 193 recorded Claude responses reused where their cache keys match; a full record-mode rebuild is blocked on API credits (see "Needs Krishna"). The demo runs offline in replay mode from `data/snapshots/canonical.sqlite`.
 
