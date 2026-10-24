@@ -40,3 +40,52 @@ from trackback.main import app  # noqa: E402,F401
 _api.UNDO_DIR = Path("/tmp/trackback/undo")
 if (db.q1("SELECT COUNT(*) n FROM artifacts") or {"n": 0})["n"] == 0:   # belt and braces: never serve an empty world
     _restore()
+
+
+# ------------------------------------------------------------------ cross-instance consistency
+# Serverless hosts run several copies of this function, each with its own /tmp database. The browser sends the journal of every
+# state-changing call it made (header x-tb-journal); a copy that is behind replays the missing calls through the app before
+# answering, and a copy that holds work the browser has since undone or reset restores the snapshot first. Replays are
+# deterministic: the world is rebuilt from the snapshot and the same calls in the same order.
+import json  # noqa: E402
+import threading  # noqa: E402
+
+import httpx  # noqa: E402
+from starlette.requests import Request  # noqa: E402
+
+APPLIED: set[str] = set()
+_LOCK = threading.Lock()
+
+
+async def _replay(entries: list[dict]) -> None:
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://replay", timeout=120) as c:
+        for e in entries:
+            try:
+                await c.post(e["path"], json=e.get("body"), headers={"x-tb-replaying": "1"})
+            except Exception:  # noqa: BLE001  (an already-applied correction answers 4xx; the state is what matters)
+                pass
+            APPLIED.add(e["id"])
+
+
+@app.middleware("http")
+async def journal_sync(request: Request, call_next):
+    if request.headers.get("x-tb-replaying"):
+        return await call_next(request)
+    raw = request.headers.get("x-tb-journal")
+    try:
+        entries = json.loads(raw) if raw else []
+    except ValueError:
+        entries = []
+    ids = {e.get("id") for e in entries}
+    if APPLIED - ids:                      # this copy is ahead of the browser (reset or undo happened elsewhere): start over
+        with _LOCK:
+            _restore()
+            APPLIED.clear()
+    missing = [e for e in entries if e.get("id") and e["id"] not in APPLIED]
+    if missing:
+        await _replay(missing)
+    response = await call_next(request)
+    op = request.headers.get("x-tb-op")
+    if op and request.method == "POST" and response.status_code < 400:
+        APPLIED.add(op)
+    return response

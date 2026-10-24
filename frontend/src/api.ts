@@ -14,13 +14,29 @@ export type GraphNode = {
 }
 export type GraphEdge = { id: string; source: string; target: string; dep: string; claim_changed?: boolean }
 
+/* Session journal: every state-changing call this tab made, in order. It rides on every request as a header so that a server
+   instance that has not seen those calls (serverless hosts run several) replays them before answering, and one that has seen
+   calls the tab has since undone or reset restores first. Harmless for the single-process local server, which ignores it. */
+const JOURNAL_KEY = 'tb_journal'
+const readJournal = (): any[] => { try { return JSON.parse(sessionStorage.getItem(JOURNAL_KEY) || '[]') } catch { return [] } }
+const writeJournal = (j: any[]) => { try { sessionStorage.setItem(JOURNAL_KEY, JSON.stringify(j)) } catch { /* private window: the server then treats each request as fresh */ } }
+const isMutation = (url: string, init?: RequestInit) => (init?.method || 'GET') === 'POST' && !/\/parse$|\/dry-run$/.test(url.split('?')[0])
+
 async function j<T>(url: string, init?: RequestInit): Promise<T> {
-  const r = await fetch(url, { headers: { 'content-type': 'application/json' }, ...init })
+  const path = url.split('?')[0]
+  const mutating = isMutation(url, init)
+  if (mutating && path === '/api/reset') writeJournal([])
+  const op = mutating ? `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}` : null
+  const headers: Record<string, string> = { 'content-type': 'application/json', 'x-tb-journal': JSON.stringify(readJournal()) }
+  if (op) headers['x-tb-op'] = op
+  const r = await fetch(url, { ...init, headers: { ...headers, ...(init?.headers as Record<string, string> | undefined) } })
   if (!r.ok) {
     let msg = r.statusText
     try { const b = await r.json(); msg = b.detail || JSON.stringify(b) } catch { /* ignore */ }
     throw new Error(`${r.status} ${msg}`)
   }
+  if (op && path === '/api/undo') writeJournal(readJournal().slice(0, -1))
+  else if (op && path !== '/api/reset') writeJournal([...readJournal(), { id: op, path: url, body: init?.body ? JSON.parse(String(init.body)) : null }])
   return r.json()
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
