@@ -2,7 +2,7 @@
 plus the deterministic step list the scripted provider replays. Artifact names are the catalog the answer key references."""
 from __future__ import annotations
 
-from .. import claims as CL, world as W
+from .. import claims as CL, v2world as W
 
 GY = W.GYMS
 

@@ -22,14 +22,16 @@ def _connect(path: Path | None = None) -> sqlite3.Connection:
     conn = sqlite3.connect(str(p), check_same_thread=False, timeout=30, isolation_level=None)  # autocommit; explicit BEGIN in db.tx()
     conn.row_factory = sqlite3.Row
     _migrate(conn)
-    conn.executescript(SCHEMA_PATH.read_text())
+    conn.executescript(SCHEMA_PATH.read_text(encoding="utf-8"))
+    _migrate(conn)          # fresh databases: tables now exist, add the later columns
     return conn
 
 
 # Columns added in iteration 2. Existing databases (snapshots recorded earlier) get them via ALTER TABLE; new ones via CREATE TABLE.
 _ADDED_COLUMNS = {
-    "artifacts": ["agent_id TEXT", "node_kind TEXT", "origin TEXT", "supersedes_version INT", "content_hash TEXT", "reason TEXT", "approved_by TEXT", "metric TEXT", "fields_json TEXT"],
     "runs": ["trigger TEXT", "ping_id TEXT", "goal TEXT", "deliverables_json TEXT", "model TEXT", "prompt_version TEXT"],
+    "artifacts": ["agent_id TEXT", "node_kind TEXT", "origin TEXT", "supersedes_version INT", "content_hash TEXT", "reason TEXT", "approved_by TEXT", "metric TEXT", "fields_json TEXT", "world TEXT"],
+    "actions": ["world TEXT", "assignee TEXT", "exception_id TEXT", "draft_no INT", "due_at TEXT", "reminded_at TEXT", "escalated_to TEXT", "summary TEXT"],
 }
 
 

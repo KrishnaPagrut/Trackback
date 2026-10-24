@@ -1,0 +1,3247 @@
+{
+ "world": "tidewall",
+ "synthetic": true,
+ "frozen_at": "2026-07-08T09:00:00-07:00",
+ "calibration": {
+  "ttm_adj_ebitda_close": 32000000.0,
+  "ttm_adj_ebitda_draft": 32600000.0,
+  "cash_q1": 10600000.0,
+  "term_loan_q1": 105000000.0,
+  "net_debt_q1": 94400000.0,
+  "leverage_q1": 2.95,
+  "ttm_after_x1": 31250000.0,
+  "leverage_after_x1": 3.0208,
+  "leverage_after_all": 3.0681,
+  "leverage_after_x2_only": 2.963,
+  "bonus_overpaid": {
+   "R1": 8400.0,
+   "R2": 7200.0,
+   "R3": 0.0,
+   "R4": 4800.0,
+   "R5": 0.0,
+   "R6": 0.0
+  },
+  "tax_overpaid_x1": 195000.0,
+  "headroom_close": 533333.33,
+  "headroom_after_x1": -216666.67,
+  "q1_close_accruals": {
+   "route_setting_6300": 410000.0,
+   "utilities_6200": 190000.0
+  },
+  "membership_growth_close": 2.8,
+  "membership_growth_after_x1": 0.344
+ },
+ "exceptions": [
+  {
+   "id": "X1",
+   "recon": "billing_to_gl",
+   "kind": "duplicate_import",
+   "classification": "error",
+   "knowable_at": "2026-04-09T18:00:00-07:00",
+   "original_made_at": "2026-04-10T17:00:00-07:00",
+   "amount": 750000.0,
+   "rollover": 750000.0,
+   "iron_curtain": 750000.0,
+   "by_region": {
+    "R1": 210000.0,
+    "R2": 180000.0,
+    "R3": 150000.0,
+    "R4": 120000.0,
+    "R5": 90000.0
+   },
+   "material": true,
+   "triggers": [
+    "covenant_flip",
+    "compensation",
+    "lender_document",
+    "aggregate_iron_curtain"
+   ],
+   "treatment": "correct_in_open_period",
+   "posting_period": "2026-06",
+   "orig_period": "2026-03",
+   "approver": "dana",
+   "lender_documents_to": "sam",
+   "documents_to_reissue": [
+    "Compliance_Certificate_Q1-26_signed.pdf",
+    "Board_Deck_Q1-26.pptx",
+    "Covenant_Q1-26_PN.xlsx"
+   ],
+   "system_of_record": "billing_release_lines"
+  },
+  {
+   "id": "X2",
+   "recon": "ap_review",
+   "kind": "unaccrued_invoice",
+   "classification": "error",
+   "knowable_at": "2026-04-02T08:41:00-07:00",
+   "original_made_at": "2026-04-10T17:00:00-07:00",
+   "amount": 140000.0,
+   "rollover": 140000.0,
+   "iron_curtain": 140000.0,
+   "material": true,
+   "material_alone": false,
+   "treatment": "correct_in_open_period",
+   "posting_period": "2026-06",
+   "orig_period": "2026-03",
+   "approver": "dana",
+   "assigned_to": "priya",
+   "delegate": "marco",
+   "system_of_record": "ap_invoices"
+  },
+  {
+   "id": "X3",
+   "recon": "ap_review",
+   "kind": "accrual_true_up",
+   "classification": "estimate_change",
+   "knowable_at": "2026-05-20T11:00:00-07:00",
+   "original_made_at": "2026-04-10T17:00:00-07:00",
+   "amount": 58000.0,
+   "rollover": 0.0,
+   "iron_curtain": 0.0,
+   "material": false,
+   "treatment": "no_action",
+   "already_booked": "2026-05",
+   "approver": null,
+   "system_of_record": "ap_invoices"
+  },
+  {
+   "id": "X4",
+   "recon": "ap_review",
+   "kind": "duplicate_vendor_invoice",
+   "classification": "error",
+   "knowable_at": "2026-06-03T16:40:00-07:00",
+   "amount": 18750.0,
+   "rollover": -18750.0,
+   "iron_curtain": -18750.0,
+   "trivial": true,
+   "material": false,
+   "treatment": "vendor_credit_and_hold",
+   "approver": "marco",
+   "system_of_record": "ap_invoices"
+  },
+  {
+   "id": "X5",
+   "recon": "bank_to_book",
+   "kind": "ach_return",
+   "classification": "fact_update",
+   "knowable_at": "2026-06-03T00:00:00-07:00",
+   "amount": 2310.0,
+   "trivial": true,
+   "material": false,
+   "treatment": "reverse_receipt_reinstate_ar",
+   "re_present": "once (R01, company policy)",
+   "approver": "dana",
+   "system_of_record": "bank_statement"
+  },
+  {
+   "id": "X6",
+   "recon": "bank_to_book",
+   "kind": "unbooked_bank_fee",
+   "classification": "fact_update",
+   "knowable_at": "2026-06-30T00:00:00-07:00",
+   "amount": 312.4,
+   "trivial": true,
+   "material": false,
+   "treatment": "draft_entry",
+   "approver": "dana",
+   "system_of_record": "bank_statement"
+  }
+ ],
+ "known_items": [
+  {
+   "id": "P1",
+   "recon": "billing_to_gl",
+   "batch": "B09",
+   "months": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06"
+   ],
+   "rollover": -228000.0,
+   "iron_curtain": 228000.0,
+   "ttm_ebitda_effect": 342000.0
+  }
+ ],
+ "noise": {
+  "deposit_in_transit": 12,
+  "outstanding_check": 3,
+  "fx_rounding": 1,
+  "subset_sum": {
+   "customer": "Northgate Biotech Inc.",
+   "invoices": [
+    62000.0,
+    74400.0,
+    50000.0
+   ],
+   "wire": 186400.0
+  },
+  "known_short_pay": {
+   "customer": "Pacific Lumen Labs",
+   "short": 25.0,
+   "habit": "11 of 12 wires short by $15 to $35"
+  },
+  "alias": {
+   "customer": "Sierra State University",
+   "payer": "SSU FOUNDATION ACCTS PAYABLE",
+   "suggest_alias": true
+  },
+  "rounding": 0
+ },
+ "materiality": {
+  "overall": 800000.0,
+  "performance": 250000.0,
+  "clearly_trivial": 25000.0,
+  "aggregate_rollover": 662000.0,
+  "aggregate_iron_curtain": 1118000.0,
+  "aggregate_items": [
+   "X1",
+   "X2",
+   "P1"
+  ],
+  "excluded_trivial": [
+   "X4",
+   "X5",
+   "X6"
+  ],
+  "rollover_passes": true,
+  "iron_curtain_fails": true,
+  "x1_pct_budgeted_pretax": 4.69,
+  "leverage_x1": 3.0208,
+  "leverage_all": 3.0681
+ },
+ "lineage": [
+  {
+   "id": "WB.Covenant.B6",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B6",
+   "label": "Revenue, trailing four quarters",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ttm_revenue@2026Q1",
+   "value": 186023530.92,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B7",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B7",
+   "label": "Adjusted EBITDA, trailing four quarters",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ttm_adj_ebitda@2026Q1",
+   "value": 32000000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B9",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B9",
+   "label": "Term loan outstanding, March 31",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "term_loan@2026Q1",
+   "value": 105000000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B10",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B10",
+   "label": "Cash, March 31",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "cash@2026Q1",
+   "value": 10600000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B11",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B11",
+   "label": "Net debt",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "net_debt@2026Q1",
+   "value": 94400000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B12",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B12",
+   "label": "Net leverage",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "leverage@2026Q1",
+   "value": 2.95,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B13",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B13",
+   "label": "Maximum leverage (Section 7.1)",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.max_leverage",
+   "value": 3.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B14",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B14",
+   "label": "Covenant status",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "covenant_status@2026Q1",
+   "value": "Compliant",
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Covenant.B15",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Covenant!B15",
+   "label": "Headroom (EBITDA cushion)",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "covenant_headroom@2026Q1",
+   "value": 533333.33,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.B2",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!B2",
+   "label": "Bay Area (R1) Q1 EBITDA",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ebitda.R1@2026Q1",
+   "value": 1507404.03,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.C2",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!C2",
+   "label": "Bay Area (R1) Target",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.bonus_target.R1",
+   "value": 1107000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.D2",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!D2",
+   "label": "Bay Area (R1) Excess",
+   "kind": "formula",
+   "link": "derived",
+   "metric": null,
+   "value": 400404.03,
+   "stale": false,
+   "owner": "priya",
+   "refs": [
+    "WB.Bonus.B2",
+    "WB.Bonus.C2"
+   ],
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.E2",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!E2",
+   "label": "Bay Area (R1) Bonus",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "bonus.R1@2026Q1",
+   "value": 16016.16,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.B3",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!B3",
+   "label": "Southern California (R2) Q1 EBITDA",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ebitda.R2@2026Q1",
+   "value": 1368731.01,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.C3",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!C3",
+   "label": "Southern California (R2) Target",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.bonus_target.R2",
+   "value": 1069000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.D3",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!D3",
+   "label": "Southern California (R2) Excess",
+   "kind": "formula",
+   "link": "derived",
+   "metric": null,
+   "value": 299731.01,
+   "stale": false,
+   "owner": "priya",
+   "refs": [
+    "WB.Bonus.B3",
+    "WB.Bonus.C3"
+   ],
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.E3",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!E3",
+   "label": "Southern California (R2) Bonus",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "bonus.R2@2026Q1",
+   "value": 11989.24,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.B4",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!B4",
+   "label": "Pacific Northwest (R3) Q1 EBITDA",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ebitda.R3@2026Q1",
+   "value": 1250660.67,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.C4",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!C4",
+   "label": "Pacific Northwest (R3) Target",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.bonus_target.R3",
+   "value": 1451000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.D4",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!D4",
+   "label": "Pacific Northwest (R3) Excess",
+   "kind": "formula",
+   "link": "derived",
+   "metric": null,
+   "value": 0.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": [
+    "WB.Bonus.B4",
+    "WB.Bonus.C4"
+   ],
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.E4",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!E4",
+   "label": "Pacific Northwest (R3) Bonus",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "bonus.R3@2026Q1",
+   "value": 0.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.B5",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!B5",
+   "label": "Rockies (R4) Q1 EBITDA",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ebitda.R4@2026Q1",
+   "value": 1128495.44,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.C5",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!C5",
+   "label": "Rockies (R4) Target",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.bonus_target.R4",
+   "value": 878000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.D5",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!D5",
+   "label": "Rockies (R4) Excess",
+   "kind": "formula",
+   "link": "derived",
+   "metric": null,
+   "value": 250495.44,
+   "stale": false,
+   "owner": "priya",
+   "refs": [
+    "WB.Bonus.B5",
+    "WB.Bonus.C5"
+   ],
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.E5",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!E5",
+   "label": "Rockies (R4) Bonus",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "bonus.R4@2026Q1",
+   "value": 10019.82,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.B6",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!B6",
+   "label": "Central Valley (R5) Q1 EBITDA",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ebitda.R5@2026Q1",
+   "value": 1023459.86,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.C6",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!C6",
+   "label": "Central Valley (R5) Target",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.bonus_target.R5",
+   "value": 1123000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.D6",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!D6",
+   "label": "Central Valley (R5) Excess",
+   "kind": "formula",
+   "link": "derived",
+   "metric": null,
+   "value": 0.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": [
+    "WB.Bonus.B6",
+    "WB.Bonus.C6"
+   ],
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.E6",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!E6",
+   "label": "Central Valley (R5) Bonus",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "bonus.R5@2026Q1",
+   "value": 0.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.B7",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!B7",
+   "label": "Desert Southwest (R6) Q1 EBITDA",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "ebitda.R6@2026Q1",
+   "value": 670155.53,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.C7",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!C7",
+   "label": "Desert Southwest (R6) Target",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.bonus_target.R6",
+   "value": 520000.0,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.D7",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!D7",
+   "label": "Desert Southwest (R6) Excess",
+   "kind": "formula",
+   "link": "derived",
+   "metric": null,
+   "value": 150155.53,
+   "stale": false,
+   "owner": "priya",
+   "refs": [
+    "WB.Bonus.B7",
+    "WB.Bonus.C7"
+   ],
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Bonus.E7",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Bonus!E7",
+   "label": "Desert Southwest (R6) Bonus",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "bonus.R6@2026Q1",
+   "value": 6006.22,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Tax.B1",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Tax!B1",
+   "label": "Q1 2026 pretax income",
+   "kind": "hardcode",
+   "link": "metric",
+   "metric": "pretax@2026Q1",
+   "value": 4589094.77,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Tax.B2",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Tax!B2",
+   "label": "Estimated tax rate",
+   "kind": "hardcode",
+   "link": "policy",
+   "metric": "policy.tax_rate",
+   "value": 0.26,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "WB.Tax.B3",
+   "file": "Covenant_Q1-26_PN.xlsx",
+   "locator": "Tax!B3",
+   "label": "Q2 estimated payment",
+   "kind": "formula",
+   "link": "metric",
+   "metric": "tax_installment@2026Q2",
+   "value": 1193164.64,
+   "stale": false,
+   "owner": "priya",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "DECK.s2.l1",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 1",
+   "label": "Revenue (Q1)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "revenue@2026Q1",
+   "value": 47524374.9,
+   "stale": false,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$47.5M"
+  },
+  {
+   "id": "DECK.s2.l2",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 2",
+   "label": "Adj. EBITDA (TTM)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ttm_adj_ebitda@2026Q1",
+   "value": 32600000.0,
+   "stale": true,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "draft",
+   "display": "$32.6M"
+  },
+  {
+   "id": "DECK.s2.l3.a",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 3",
+   "label": "Membership revenue (Q1)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "membership_revenue@2026Q1",
+   "value": 31389329.12,
+   "stale": false,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$31.4M"
+  },
+  {
+   "id": "DECK.s2.l3.b",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 3",
+   "label": "Membership revenue growth vs Q4",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "membership_growth@2026Q1",
+   "value": 2.799999994105007,
+   "stale": false,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "close",
+   "display": "2.8%"
+  },
+  {
+   "id": "DECK.s2.l4.a",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 4",
+   "label": "Net leverage",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "leverage@2026Q1",
+   "value": 2.95,
+   "stale": false,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "close",
+   "display": "2.95x"
+  },
+  {
+   "id": "DECK.s2.l4.b",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 4",
+   "label": "Covenant max leverage",
+   "kind": "typed",
+   "link": "policy",
+   "metric": "policy.max_leverage",
+   "value": 3.0,
+   "stale": false,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "close",
+   "display": "3.00x"
+  },
+  {
+   "id": "DECK.s2.l5",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 2, line 5",
+   "label": "Gym revenue (Q1, dues plus day passes)",
+   "kind": "typed",
+   "link": "sum",
+   "metric": "sum:acct.4000@2026Q1+acct.4010@2026Q1+acct.4100@2026Q1",
+   "value": 38968262.61,
+   "stale": false,
+   "owner": "sam",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$39.0M"
+  },
+  {
+   "id": "DECK.s3.l1",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 3, line 1",
+   "label": "Covenant compliance statement",
+   "kind": "status",
+   "link": "metric",
+   "metric": "covenant_status@2026Q1",
+   "value": "Compliant",
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "DECK.s4.l1",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 4, line 1",
+   "label": "Q1 EBITDA, Bay Area (R1)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ebitda.R1@2026Q1",
+   "value": 1507404.03,
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$1,507K"
+  },
+  {
+   "id": "DECK.s4.l2",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 4, line 2",
+   "label": "Q1 EBITDA, Southern California (R2)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ebitda.R2@2026Q1",
+   "value": 1368731.01,
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$1,369K"
+  },
+  {
+   "id": "DECK.s4.l3",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 4, line 3",
+   "label": "Q1 EBITDA, Pacific Northwest (R3)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ebitda.R3@2026Q1",
+   "value": 1250660.67,
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$1,251K"
+  },
+  {
+   "id": "DECK.s4.l4",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 4, line 4",
+   "label": "Q1 EBITDA, Rockies (R4)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ebitda.R4@2026Q1",
+   "value": 1128495.44,
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$1,128K"
+  },
+  {
+   "id": "DECK.s4.l5",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 4, line 5",
+   "label": "Q1 EBITDA, Central Valley (R5)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ebitda.R5@2026Q1",
+   "value": 1023459.86,
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$1,023K"
+  },
+  {
+   "id": "DECK.s4.l6",
+   "file": "Board_Deck_Q1-26.pptx",
+   "locator": "slide 4, line 6",
+   "label": "Q1 EBITDA, Desert Southwest (R6)",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ebitda.R6@2026Q1",
+   "value": 670155.53,
+   "stale": false,
+   "owner": "reporting_analyst",
+   "refs": null,
+   "snapshot": "close",
+   "display": "$670K"
+  },
+  {
+   "id": "CERT.l1",
+   "file": "Compliance_Certificate_Q1-26_signed.pdf",
+   "locator": "line 1",
+   "label": "Adjusted EBITDA, four quarters ended March 31, 2026",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "ttm_adj_ebitda@2026Q1",
+   "value": 32000000,
+   "stale": false,
+   "owner": "covenant_comp",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "CERT.l2",
+   "file": "Compliance_Certificate_Q1-26_signed.pdf",
+   "locator": "line 2",
+   "label": "Net Debt as of March 31, 2026",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "net_debt@2026Q1",
+   "value": 94400000,
+   "stale": false,
+   "owner": "covenant_comp",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "CERT.l3",
+   "file": "Compliance_Certificate_Q1-26_signed.pdf",
+   "locator": "line 3",
+   "label": "Net Leverage Ratio",
+   "kind": "typed",
+   "link": "metric",
+   "metric": "leverage@2026Q1",
+   "value": 2.95,
+   "stale": false,
+   "owner": "covenant_comp",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "CERT.l4",
+   "file": "Compliance_Certificate_Q1-26_signed.pdf",
+   "locator": "line 4",
+   "label": "Maximum permitted Net Leverage Ratio",
+   "kind": "typed",
+   "link": "policy",
+   "metric": "policy.max_leverage",
+   "value": 3.0,
+   "stale": false,
+   "owner": "covenant_comp",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  },
+  {
+   "id": "CERT.l5",
+   "file": "Compliance_Certificate_Q1-26_signed.pdf",
+   "locator": "line 5",
+   "label": "Compliance statement",
+   "kind": "status",
+   "link": "metric",
+   "metric": "covenant_status@2026Q1",
+   "value": "Compliant",
+   "stale": false,
+   "owner": "covenant_comp",
+   "refs": null,
+   "snapshot": "close",
+   "display": null
+  }
+ ],
+ "impact": {
+  "X1": {
+   "items": {
+    "WB.Covenant.B6": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 186023530.92,
+     "new": 185273530.92,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B7": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 32000000.0,
+     "new": 31250000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B9": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 105000000.0,
+     "new": 105000000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B10": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 10600000.0,
+     "new": 10600000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B11": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B12": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": 2.95,
+     "new": 3.0208,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B13": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B14": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": "Compliant",
+     "new": "BREACH",
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B15": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": 533333.3333333321,
+     "new": -216666.6666666679,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B2": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1507404.03,
+     "new": 1297404.03,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E2": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 16016.16,
+     "new": 7616.16,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B3": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1368731.01,
+     "new": 1188731.01,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C3": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E3": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 11989.24,
+     "new": 4789.24,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B4": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1250660.67,
+     "new": 1100660.67,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E4": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B5": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1128495.44,
+     "new": 1008495.44,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C5": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E5": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 10019.82,
+     "new": 5219.82,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B6": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1023459.86,
+     "new": 933459.86,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C6": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E6": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C7": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 4589094.77,
+     "new": 3839094.77,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B3": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1193164.64,
+     "new": 998164.64,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "DECK.s2.l1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 47524374.9,
+     "new": 46774374.9,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l2": {
+     "verdict": "invalidated",
+     "reason": "stale_and_value_changed",
+     "old": 32600000.0,
+     "new": 31850000.0,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.a": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 31389329.12,
+     "new": 30639329.12,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.b": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 2.799999994105007,
+     "new": 0.34375125744583457,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.a": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": 2.95,
+     "new": 3.0208,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.b": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l5": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 38968262.61,
+     "new": 38218262.61,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s3.l1": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": "Compliant",
+     "new": "BREACH",
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1507404.03,
+     "new": 1297404.03,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l2": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1368731.01,
+     "new": 1188731.01,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l3": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1250660.67,
+     "new": 1100660.67,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l4": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1128495.44,
+     "new": 1008495.44,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l5": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1023459.86,
+     "new": 933459.86,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "CERT.l1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 32000000.0,
+     "new": 31250000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l2": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l3": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": 2.95,
+     "new": 3.0208,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l5": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": "Compliant",
+     "new": "BREACH",
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "WB.Bonus.D2": {
+     "verdict": "invalidated",
+     "reason": "input_changed",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D3": {
+     "verdict": "invalidated",
+     "reason": "input_changed",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D4": {
+     "verdict": "invalidated",
+     "reason": "input_changed",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D5": {
+     "verdict": "invalidated",
+     "reason": "input_changed",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D6": {
+     "verdict": "invalidated",
+     "reason": "input_changed",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D7": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    }
+   },
+   "actions": {
+    "ACT-cert-q1": {
+     "verdict": "invalidated",
+     "reason": "conclusion_flipped",
+     "old": "Compliant",
+     "new": "BREACH",
+     "compensation": "corrected_certificate_and_lender_notice",
+     "approver": "sam",
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 16016.16,
+     "new": 7616.16,
+     "compensation": "offset_next_bonus",
+     "approver": "lena",
+     "amount": 8400.0,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R2": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 11989.24,
+     "new": 4789.24,
+     "compensation": "offset_next_bonus",
+     "approver": "lena",
+     "amount": 7200.0,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R3": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R4": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 10019.82,
+     "new": 5219.82,
+     "compensation": "offset_next_bonus",
+     "approver": "lena",
+     "amount": 4800.0,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R5": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-tax-q2": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1193164.64,
+     "new": 998164.64,
+     "compensation": "reduce_next_installment",
+     "approver": "dana",
+     "amount": 195000.0,
+     "owner": "covenant_comp"
+    }
+   },
+   "counts": {
+    "invalidated": 40,
+    "still_valid": 23,
+    "compensations": 5
+   }
+  },
+  "X2": {
+   "items": {
+    "WB.Covenant.B6": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 186023530.92,
+     "new": 186023530.92,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B7": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 32000000.0,
+     "new": 31860000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B9": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 105000000.0,
+     "new": 105000000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B10": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 10600000.0,
+     "new": 10600000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B11": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B12": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 2.95,
+     "new": 2.962962962962963,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B13": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B14": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B15": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 533333.3333333321,
+     "new": 393333.3333333321,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1507404.03,
+     "new": 1507404.03,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 16016.16,
+     "new": 16016.16,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1368731.01,
+     "new": 1368731.01,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C3": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 11989.24,
+     "new": 11989.24,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1250660.67,
+     "new": 1250660.67,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1128495.44,
+     "new": 1128495.44,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C5": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 10019.82,
+     "new": 10019.82,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1023459.86,
+     "new": 1023459.86,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C6": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C7": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 4589094.77,
+     "new": 4449094.77,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B3": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1193164.64,
+     "new": 1156764.64,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "DECK.s2.l1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 47524374.9,
+     "new": 47524374.9,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l2": {
+     "verdict": "invalidated",
+     "reason": "stale_and_value_changed",
+     "old": 32600000.0,
+     "new": 32460000.0,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.a": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 31389329.12,
+     "new": 31389329.12,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.b": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.799999994105007,
+     "new": 2.799999994105007,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.a": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 2.95,
+     "new": 2.962962962962963,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.b": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l5": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 38968262.61,
+     "new": 38968262.61,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s3.l1": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l1": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1507404.03,
+     "new": 1507404.03,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1368731.01,
+     "new": 1368731.01,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1250660.67,
+     "new": 1250660.67,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1128495.44,
+     "new": 1128495.44,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1023459.86,
+     "new": 1023459.86,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "CERT.l1": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 32000000.0,
+     "new": 31860000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l2": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l3": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 2.95,
+     "new": 2.962962962962963,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l5": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "WB.Bonus.D2": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D3": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D4": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D5": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D6": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D7": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    }
+   },
+   "actions": {
+    "ACT-cert-q1": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R1": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 16016.16,
+     "new": 16016.16,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 11989.24,
+     "new": 11989.24,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 10019.82,
+     "new": 10019.82,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-tax-q2": {
+     "verdict": "invalidated",
+     "reason": "value_changed",
+     "old": 1193164.64,
+     "new": 1156764.64,
+     "compensation": "reduce_next_installment",
+     "approver": "dana",
+     "amount": 36400.0,
+     "owner": "covenant_comp"
+    }
+   },
+   "counts": {
+    "invalidated": 10,
+    "still_valid": 53,
+    "compensations": 1
+   }
+  },
+  "X4": {
+   "items": {
+    "WB.Covenant.B6": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 186023530.92,
+     "new": 186023530.92,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B7": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 32000000.0,
+     "new": 32000000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B9": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 105000000.0,
+     "new": 105000000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B10": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 10600000.0,
+     "new": 10600000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B11": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B12": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.95,
+     "new": 2.95,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B13": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B14": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B15": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 533333.3333333321,
+     "new": 533333.3333333321,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1507404.03,
+     "new": 1507404.03,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 16016.16,
+     "new": 16016.16,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1368731.01,
+     "new": 1368731.01,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C3": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 11989.24,
+     "new": 11989.24,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1250660.67,
+     "new": 1250660.67,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1128495.44,
+     "new": 1128495.44,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C5": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 10019.82,
+     "new": 10019.82,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1023459.86,
+     "new": 1023459.86,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C6": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C7": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 4589094.77,
+     "new": 4589094.77,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B3": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 1193164.64,
+     "new": 1193164.64,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "DECK.s2.l1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 47524374.9,
+     "new": 47524374.9,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l2": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 32600000.0,
+     "new": 32600000.0,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.a": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 31389329.12,
+     "new": 31389329.12,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.b": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.799999994105007,
+     "new": 2.799999994105007,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.a": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.95,
+     "new": 2.95,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.b": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l5": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 38968262.61,
+     "new": 38968262.61,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s3.l1": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l1": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1507404.03,
+     "new": 1507404.03,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1368731.01,
+     "new": 1368731.01,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1250660.67,
+     "new": 1250660.67,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1128495.44,
+     "new": 1128495.44,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1023459.86,
+     "new": 1023459.86,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "CERT.l1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 32000000.0,
+     "new": 32000000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l2": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l3": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.95,
+     "new": 2.95,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l5": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "WB.Bonus.D2": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D3": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D4": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D5": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D6": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D7": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    }
+   },
+   "actions": {
+    "ACT-cert-q1": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R1": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 16016.16,
+     "new": 16016.16,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 11989.24,
+     "new": 11989.24,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 10019.82,
+     "new": 10019.82,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-tax-q2": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 1193164.64,
+     "new": 1193164.64,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    }
+   },
+   "counts": {
+    "invalidated": 0,
+    "still_valid": 63,
+    "compensations": 0
+   }
+  },
+  "X6": {
+   "items": {
+    "WB.Covenant.B6": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 186023530.92,
+     "new": 186023530.92,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B7": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 32000000.0,
+     "new": 32000000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B9": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 105000000.0,
+     "new": 105000000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B10": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 10600000.0,
+     "new": 10600000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B11": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B12": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.95,
+     "new": 2.95,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B13": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B14": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Covenant.B15": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 533333.3333333321,
+     "new": 533333.3333333321,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1507404.03,
+     "new": 1507404.03,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 16016.16,
+     "new": 16016.16,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1368731.01,
+     "new": 1368731.01,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C3": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 11989.24,
+     "new": 11989.24,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1250660.67,
+     "new": 1250660.67,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1128495.44,
+     "new": 1128495.44,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C5": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 10019.82,
+     "new": 10019.82,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1023459.86,
+     "new": 1023459.86,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C6": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.B7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.C7": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.E7": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 4589094.77,
+     "new": 4589094.77,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B2": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Tax.B3": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 1193164.64,
+     "new": 1193164.64,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "DECK.s2.l1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 47524374.9,
+     "new": 47524374.9,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l2": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 32600000.0,
+     "new": 32600000.0,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.a": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 31389329.12,
+     "new": 31389329.12,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l3.b": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.799999994105007,
+     "new": 2.799999994105007,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.a": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.95,
+     "new": 2.95,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l4.b": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s2.l5": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 38968262.61,
+     "new": 38968262.61,
+     "owner": "sam",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s3.l1": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l1": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1507404.03,
+     "new": 1507404.03,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1368731.01,
+     "new": 1368731.01,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1250660.67,
+     "new": 1250660.67,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1128495.44,
+     "new": 1128495.44,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 1023459.86,
+     "new": 1023459.86,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "DECK.s4.l6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 670155.53,
+     "new": 670155.53,
+     "owner": "reporting_analyst",
+     "file": "Board_Deck_Q1-26.pptx"
+    },
+    "CERT.l1": {
+     "verdict": "still_valid",
+     "reason": "value_unchanged",
+     "old": 32000000.0,
+     "new": 32000000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l2": {
+     "verdict": "still_valid",
+     "reason": "different_line_item",
+     "old": 94400000.0,
+     "new": 94400000.0,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l3": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 2.95,
+     "new": 2.95,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l4": {
+     "verdict": "still_valid",
+     "reason": "policy",
+     "old": null,
+     "new": null,
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "CERT.l5": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "owner": "covenant_comp",
+     "file": "Compliance_Certificate_Q1-26_signed.pdf"
+    },
+    "WB.Bonus.D2": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D3": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D4": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D5": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D6": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    },
+    "WB.Bonus.D7": {
+     "verdict": "still_valid",
+     "reason": "inputs_unchanged",
+     "old": null,
+     "new": null,
+     "owner": "priya",
+     "file": "Covenant_Q1-26_PN.xlsx"
+    }
+   },
+   "actions": {
+    "ACT-cert-q1": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": "Compliant",
+     "new": "Compliant",
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R1": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 16016.16,
+     "new": 16016.16,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R2": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 11989.24,
+     "new": 11989.24,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R3": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R4": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 10019.82,
+     "new": 10019.82,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R5": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 0.0,
+     "new": 0.0,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-bonus-R6": {
+     "verdict": "still_valid",
+     "reason": "not_consumed",
+     "old": 6006.22,
+     "new": 6006.22,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    },
+    "ACT-tax-q2": {
+     "verdict": "still_valid",
+     "reason": "conclusion_unchanged",
+     "old": 1193164.64,
+     "new": 1193164.64,
+     "compensation": null,
+     "approver": null,
+     "amount": null,
+     "owner": "covenant_comp"
+    }
+   },
+   "counts": {
+    "invalidated": 0,
+    "still_valid": 63,
+    "compensations": 0
+   }
+  }
+ },
+ "h1": {
+  "item": "DECK.s2.l2",
+  "finding": "stale",
+  "typed": 32600000.0,
+  "books_when_made": 32000000.0,
+  "typed_from": "draft"
+ },
+ "agent_mistakes": {
+  "X1": [
+   "materiality_immaterial",
+   "lender_routing_controller"
+  ],
+  "X3": [
+   "classification_error_should_be_estimate"
+  ],
+  "X1_posting": [
+   "locked_period"
+  ]
+ },
+ "iteration2": {
+  "X1_pings": {
+   "close_accountant": "reworked",
+   "covenant_comp": "needs_human",
+   "reporting_analyst": "reworked"
+  },
+  "X1_notices": {
+   "priya": "marco",
+   "sam": "sam"
+  },
+  "X1_still_valid_agent_answers": [
+   "RA.commentary.membership_growth",
+   "RA.commentary.regions_profitable"
+  ],
+  "X1_skipped": "RA.cash_forecast",
+  "S1": {
+   "revises": "CA.june_accrual.utilities",
+   "pings": [
+    "reporting_analyst"
+   ],
+   "not_pinged": [
+    "covenant_comp"
+   ],
+   "reason": "different_period"
+  },
+  "S2": {
+   "coalesced": [
+    "X5",
+    "X6"
+   ],
+   "pings": [
+    "reporting_analyst"
+   ],
+   "x6_pings": 0
+  },
+  "S3": {
+   "from": "reporting_analyst",
+   "target": "CA.q1_close_memo",
+   "to": "dana",
+   "wave_started": false
+  }
+ }
+}

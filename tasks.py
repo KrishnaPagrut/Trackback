@@ -26,7 +26,7 @@ DEPS = ["-r", str(BACKEND / "requirements.txt"), "pytest", "playwright"]
 
 
 def run(cmd: list[str], env: dict | None = None, cwd: Path = ROOT) -> None:
-    e = {**os.environ, "PYTHONPATH": str(BACKEND), **(env or {})}
+    e = {**os.environ, "PYTHONPATH": str(BACKEND), "PYTHONUTF8": "1", **(env or {})}
     print("+", " ".join(str(c) for c in cmd), flush=True)
     r = subprocess.run([str(c) for c in cmd], env=e, cwd=str(cwd))
     if r.returncode:

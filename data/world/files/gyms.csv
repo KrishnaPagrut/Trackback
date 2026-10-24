@@ -1,0 +1,49 @@
+gym_id,name,city,region,region_name,size_factor
+G01,Tidewall Oakland,Oakland,R1,Bay Area,0.8934
+G02,Tidewall Berkeley,Berkeley,R1,Bay Area,1.0007
+G03,Tidewall San Jose,San Jose,R1,Bay Area,1.0033
+G04,Tidewall Santa Clara,Santa Clara,R1,Bay Area,1.1008
+G05,Tidewall Fremont,Fremont,R1,Bay Area,0.8887
+G06,Tidewall Walnut Creek,Walnut Creek,R1,Bay Area,0.9225
+G07,Tidewall San Mateo,San Mateo,R1,Bay Area,1.0283
+G08,Tidewall Santa Rosa,Santa Rosa,R1,Bay Area,1.0158
+G09,Tidewall Pasadena,Pasadena,R2,Southern California,1.0793
+G10,Tidewall Irvine,Irvine,R2,Southern California,1.0134
+G11,Tidewall Long Beach,Long Beach,R2,Southern California,1.0646
+G12,Tidewall Santa Monica,Santa Monica,R2,Southern California,1.0751
+G13,Tidewall San Diego,San Diego,R2,Southern California,1.0703
+G14,Tidewall Riverside,Riverside,R2,Southern California,1.0242
+G15,Tidewall Burbank,Burbank,R2,Southern California,0.9272
+G16,Tidewall Torrance,Torrance,R2,Southern California,1.032
+G17,Tidewall Portland,Portland,R3,Pacific Northwest,0.891
+G18,Tidewall Seattle,Seattle,R3,Pacific Northwest,1.0887
+G19,Tidewall Tacoma,Tacoma,R3,Pacific Northwest,0.9859
+G20,Tidewall Bellevue,Bellevue,R3,Pacific Northwest,1.0881
+G21,Tidewall Eugene,Eugene,R3,Pacific Northwest,1.0518
+G22,Tidewall Salem,Salem,R3,Pacific Northwest,1.0502
+G23,Tidewall Spokane,Spokane,R3,Pacific Northwest,0.9189
+G24,Tidewall Bend,Bend,R3,Pacific Northwest,0.9304
+G25,Tidewall Denver,Denver,R4,Rockies,1.1344
+G26,Tidewall Boulder,Boulder,R4,Rockies,1.1202
+G27,Tidewall Fort Collins,Fort Collins,R4,Rockies,1.0854
+G28,Tidewall Colorado Springs,Colorado Springs,R4,Rockies,1.1399
+G29,Tidewall Salt Lake City,Salt Lake City,R4,Rockies,1.0038
+G30,Tidewall Provo,Provo,R4,Rockies,0.8814
+G31,Tidewall Boise,Boise,R4,Rockies,0.9553
+G32,Tidewall Golden,Golden,R4,Rockies,1.0161
+G33,Tidewall Sacramento,Sacramento,R5,Central Valley,0.9418
+G34,Tidewall Fresno,Fresno,R5,Central Valley,0.9881
+G35,Tidewall Modesto,Modesto,R5,Central Valley,1.1054
+G36,Tidewall Stockton,Stockton,R5,Central Valley,1.0571
+G37,Tidewall Bakersfield,Bakersfield,R5,Central Valley,1.0217
+G38,Tidewall Visalia,Visalia,R5,Central Valley,0.8669
+G39,Tidewall Merced,Merced,R5,Central Valley,1.059
+G40,Tidewall Chico,Chico,R5,Central Valley,0.9618
+G41,Tidewall Phoenix,Phoenix,R6,Desert Southwest,0.9782
+G42,Tidewall Tempe,Tempe,R6,Desert Southwest,0.9717
+G43,Tidewall Tucson,Tucson,R6,Desert Southwest,1.024
+G44,Tidewall Scottsdale,Scottsdale,R6,Desert Southwest,0.9996
+G45,Tidewall Mesa,Mesa,R6,Desert Southwest,0.8926
+G46,Tidewall Las Vegas,Las Vegas,R6,Desert Southwest,1.0018
+G47,Tidewall Henderson,Henderson,R6,Desert Southwest,1.07
+G48,Tidewall Albuquerque,Albuquerque,R6,Desert Southwest,1.028

@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.mp3 binary
+*.ogg binary
+*.wav binary
+*.mp4 binary
+*.sqlite binary
+*.xlsx binary
+*.pptx binary
+*.pdf binary
+*.woff2 binary
+*.woff binary

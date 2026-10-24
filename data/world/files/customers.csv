@@ -1,0 +1,11 @@
+customer_id,legal_name,aliases,currency
+C001,Northgate Biotech Inc.,NORTHGATE BIOTECH;NORTHGATE BIO,USD
+C002,Pacific Lumen Labs,PAC LUMEN LABS;PACIFIC LUMEN,USD
+C003,Sierra State University,SIERRA STATE UNIV,USD
+C004,Alpenfels Klettern AG,ALPENFELS KLETTERN,EUR
+C005,Bayshore Health Partners,BAYSHORE HEALTH,USD
+C006,Granite Peak Software,GRANITE PEAK SW,USD
+C007,Mission Ridge Credit Union,MISSION RIDGE CU,USD
+C008,Cascade Outfitters Co.,CASCADE OUTFITTERS,USD
+C009,Redline Logistics LLC,REDLINE LOGISTICS,USD
+C010,Harbor and Vine Hotels,HARBOR VINE HOTELS,USD

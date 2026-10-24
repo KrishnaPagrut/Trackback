@@ -1,0 +1,14 @@
+{
+  "title": "Term Loan Credit Agreement (synthetic)",
+  "lender": "Redwood Commercial Bank",
+  "borrower": "Tidewall Climbing Co.",
+  "date": "2025-04-01",
+  "facility": 105000000,
+  "section_7_1": "Net Leverage Ratio as of the last day of any fiscal quarter shall not exceed 3.00 to 1.00.",
+  "definitions": {
+    "Net Debt": "Funded debt less unrestricted cash.",
+    "Adjusted EBITDA": "Net income before interest, taxes, depreciation and amortization, and foreign exchange gains and losses, for the four fiscal quarters then ended."
+  },
+  "correction_clause": "If any financial statements delivered are materially misstated, the Borrower shall promptly deliver corrected financial statements and a corrected Compliance Certificate.",
+  "signatory": "Chief Financial Officer"
+}

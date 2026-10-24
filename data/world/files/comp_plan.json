@@ -1,0 +1,16 @@
+{
+  "title": "FY2026 GM bonus plan",
+  "date": "2026-01-05",
+  "rate": 0.04,
+  "basis": "4% of regional Q1 EBITDA above target, paid May 31",
+  "targets": {
+    "R1": 1107000.0,
+    "R2": 1069000.0,
+    "R3": 1451000.0,
+    "R4": 878000.0,
+    "R5": 1123000.0,
+    "R6": 520000.0
+  },
+  "overpayments": "Overpayments are offset against the next bonus. No ad-hoc payroll deductions.",
+  "approver": "HR (Lena Park), Controller informed"
+}

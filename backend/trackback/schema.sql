@@ -125,3 +125,31 @@ CREATE TRIGGER IF NOT EXISTS no_del_pings BEFORE DELETE ON pings BEGIN SELECT RA
 CREATE TRIGGER IF NOT EXISTS no_del_ping_responses BEFORE DELETE ON ping_responses BEGIN SELECT RAISE(ABORT,'append-only'); END;
 CREATE TRIGGER IF NOT EXISTS upd_receipts BEFORE UPDATE ON consumption_receipts BEGIN SELECT RAISE(ABORT,'append-only'); END;
 CREATE TRIGGER IF NOT EXISTS upd_ping_responses BEFORE UPDATE ON ping_responses BEGIN SELECT RAISE(ABORT,'append-only'); END;
+
+-- ---------------------------------------------------------------- v3: the error review (SPEC.md v3). Same conventions: append-only.
+CREATE TABLE IF NOT EXISTS gl_entries(entry_id TEXT PRIMARY KEY, txn_id TEXT, posted_at TEXT, eff_date TEXT, period TEXT, orig_period TEXT, entity TEXT,
+  account TEXT, amount_cents INTEGER, memo TEXT, source_ref TEXT, import_id TEXT, correction_id TEXT, approval_id TEXT, world TEXT DEFAULT 'tidewall');
+CREATE INDEX IF NOT EXISTS idx_gl_posted ON gl_entries(posted_at);
+CREATE INDEX IF NOT EXISTS idx_gl_acct ON gl_entries(account, period);
+CREATE TRIGGER IF NOT EXISTS no_del_gl BEFORE DELETE ON gl_entries BEGIN SELECT RAISE(ABORT,'append-only: corrections are new entries'); END;
+CREATE TRIGGER IF NOT EXISTS no_upd_gl BEFORE UPDATE ON gl_entries BEGIN SELECT RAISE(ABORT,'append-only: corrections are new entries'); END;
+
+CREATE TABLE IF NOT EXISTS kv(key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS review_runs(run_id TEXT PRIMARY KEY, world TEXT, pinned_at TEXT, playbook_version TEXT, status TEXT, started_at TEXT, finished_at TEXT, summary_json TEXT);
+CREATE TABLE IF NOT EXISTS recon_items(run_id TEXT, world TEXT, recon TEXT, outcome TEXT CHECK(outcome IN ('matched','cleared','exception')), reason TEXT,
+  amount REAL, detail_json TEXT, exception_id TEXT);
+CREATE TABLE IF NOT EXISTS exceptions(exception_id TEXT, run_id TEXT, world TEXT, recon TEXT, kind TEXT, title TEXT, amount REAL, system_of_record TEXT, trust_why TEXT,
+  knowable_at TEXT, evidence_json TEXT, correction_json TEXT, detail_json TEXT, PRIMARY KEY(exception_id, run_id));
+CREATE TABLE IF NOT EXISTS trace_items(item_id TEXT, run_id TEXT, world TEXT, file TEXT, locator TEXT, label TEXT, kind TEXT, value_num REAL, value_text TEXT, unit TEXT,
+  tolerance REAL, display TEXT, owner TEXT, refs_json TEXT, PRIMARY KEY(item_id, run_id));
+CREATE TABLE IF NOT EXISTS trace_links(item_id TEXT, run_id TEXT, status TEXT, metric_id TEXT, snapshot TEXT, method TEXT, confidence REAL, explanation TEXT,
+  candidates_json TEXT, confirmed_by TEXT, confirmed_at TEXT, PRIMARY KEY(item_id, run_id));
+CREATE TABLE IF NOT EXISTS ripples(ripple_id TEXT PRIMARY KEY, run_id TEXT, world TEXT, exception_id TEXT, created_at TEXT, counts_json TEXT, result_json TEXT);
+CREATE TABLE IF NOT EXISTS evaluations(eval_id TEXT PRIMARY KEY, run_id TEXT, world TEXT, exception_id TEXT, playbook_version TEXT, claims_json TEXT, created_at TEXT, superseded_by TEXT);
+CREATE TABLE IF NOT EXISTS jade_reviews(review_id TEXT PRIMARY KEY, eval_id TEXT, claim_key TEXT, verdict TEXT CHECK(verdict IN ('approve','overrule','escalate','flag')),
+  agent_value_json TEXT, corrected_json TEXT, why TEXT, method TEXT, created_at TEXT);
+CREATE TABLE IF NOT EXISTS lessons(lesson_id TEXT PRIMARY KEY, world TEXT, mistake_kind TEXT, source TEXT, rule TEXT, evidence_json TEXT, enforcement TEXT,
+  status TEXT, gate_json TEXT, proposed_at TEXT, decided_by TEXT, decided_at TEXT, playbook_version TEXT);
+CREATE TABLE IF NOT EXISTS holds(hold_id TEXT PRIMARY KEY, world TEXT, target TEXT, reason TEXT, depends_on TEXT, state TEXT, created_at TEXT, released_at TEXT);
+CREATE TABLE IF NOT EXISTS memos(memo_id TEXT, version INT, world TEXT, exception_id TEXT, markdown TEXT, created_at TEXT, PRIMARY KEY(memo_id, version));
+CREATE VIEW IF NOT EXISTS audit_log AS SELECT event_id, ts, kind, actor, summary, detail_json, correction_id, run_id FROM events;

@@ -7,8 +7,8 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | Checkpoint | State | Proof |
 |---|---|---|
 | CP0 housekeeping | done | SPEC.md is v3; CLAUDE.md; tasks.py; v2 tests pass on Windows (27) |
-| CP1 world | next | |
-| CP2 detect | | |
+| CP1 world | done | `python tasks.py world` in 2.4 s; `python tasks.py test`: 11 v3 calibration tests (TTM $32.0M close / $32.6M draft, cash $10.6M, 2.95x → 3.0208x / 3.0681x, overpaid bonuses $8,400/$7,200/$4,800, tax $195,000, $662k / $1.118M, Appendix A 40/23/5) |
+| CP2 detect | next | |
 | CP3 trace | | |
 | CP4 judge | | |
 | CP5 act (+ pings) | | |
@@ -18,7 +18,7 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | CP8 UI | | |
 | CP9 polish | | |
 
-Next three tasks: v3 config and generator; refcalc and the answer key; calibration tests.
+Next three tasks: the four reconciliations; Priya's handoff; exactly six exceptions with P1 known.
 
 ---
 

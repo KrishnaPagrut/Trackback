@@ -1,0 +1,15 @@
+{
+  "title": "FY2026 materiality memo",
+  "author": "Dana Ortiz, Controller",
+  "date": "2026-01-15",
+  "synthetic": true,
+  "overall": 800000.0,
+  "performance": 250000.0,
+  "clearly_trivial": 25000.0,
+  "flux": {
+    "pct": 0.1,
+    "abs": 250000
+  },
+  "basis": "5% of budgeted FY2026 pretax income ($16.0M)",
+  "text": "Overall materiality $800,000 (5% of $16.0M budgeted pretax). Performance materiality $250,000. Misstatements below $25,000 are clearly trivial and are not accumulated. Evaluate under both SAB 108 methods and consider qualitative factors (SAB 99), including covenant compliance and management compensation."
+}

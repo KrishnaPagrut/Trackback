@@ -1,0 +1,2 @@
+entry_id,logged_by,logged_at,item,description,period,billing_batch,rollover,iron_curtain,ttm_ebitda_effect,status
+ML-2026-01,Dana Ortiz,2026-04-10T17:30:00-07:00,P1,"380 December 2025 promo annual plans ($1,200 each, $456,000) recognized at sale instead of over 2026 ($38,000 a month). Billing batch B09.",2025-12,B09,-228000.00,228000.00,342000.00,uncorrected (passed as immaterial at the Q1 close)

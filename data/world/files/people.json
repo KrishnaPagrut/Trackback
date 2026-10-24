@@ -1,0 +1,50 @@
+{
+  "dana": {
+    "name": "Dana Ortiz",
+    "role": "controller",
+    "title": "Controller",
+    "approves": [
+      "journal_entry",
+      "misstatement_log",
+      "lesson",
+      "tax_offset",
+      "fact_update"
+    ]
+  },
+  "sam": {
+    "name": "Sam Whitfield",
+    "role": "cfo",
+    "title": "CFO",
+    "approves": [
+      "lender_document",
+      "escalation"
+    ]
+  },
+  "priya": {
+    "name": "Priya Nair",
+    "role": "assistant_controller",
+    "title": "Assistant Controller",
+    "ooo": [
+      "2026-06-20",
+      "2026-07-13"
+    ],
+    "delegate": "marco"
+  },
+  "marco": {
+    "name": "Marco Bell",
+    "role": "ap",
+    "title": "Senior Accountant, AP",
+    "approves": [
+      "vendor_credit",
+      "vendor_hold"
+    ]
+  },
+  "lena": {
+    "name": "Lena Park",
+    "role": "hr",
+    "title": "HR",
+    "approves": [
+      "comp_offset"
+    ]
+  }
+}
