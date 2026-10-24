@@ -21,7 +21,7 @@ From SPEC.md Part 1 section 14, SPEC_ITERATION_2 section 17 and the goal brief. 
 - [x] V3: Jade reviews every correction and overrules the agent's "immaterial" call on E11 with the real numbers; the overrule and the Controller's rejection propose lessons; the regression gate passes the narrow lessons and rejects the broad one; only the Controller can approve (an agent gets 403); the playbook reaches v2. Proof: `make check` (nine Jade/lessons checks) and `backend/tests/test_v3_jade_lessons.py`.
 - [x] V3: `make eval` writes the `learning` block (Jade catch rate and false-overrule rate; held-out v1 vs v2; lessons approved and rejected) and the proof page reads it. Proof: `backend/scripts/eval_learning.py`.
 - [x] V3: hover on any card in Stage or Deep mode shows what happened to it in words (`explain()` in `frontend/src/model.ts`); Stage mode shows the Jade card and the lesson card between the replies and the payoff; step dots in the caption. Proof: `docs/screenshots/round-5`.
-- [x] Design: `/styleguide` exists; Stage mode is the default and runs title card → layered reveal → recall notice → ripple → replies → payoff from keypresses alone, with the payoff numbers read from the run; `D` toggles to Deep mode and back without losing state; the kiosk attract loop starts after 60 s idle and hands control to a visitor on any input; the 40-cent preset shows zero pings. Proof: `backend/scripts/kiosk_check.py` (all checks pass).
+- [x] Design: `/styleguide` exists; Stage mode is the default and runs title card → layered reveal → recall notice → ripple → replies → payoff from keypresses alone, with the payoff numbers read from the run; `D` toggles to Deep mode and back without losing state; the kiosk attract loop (opt in with `?kiosk=on` or `K`, off by default after Krishna saw it reset the stage mid-demo) starts after 60 s idle and hands control to a visitor on any input; the 40-cent preset shows zero pings. Proof: `backend/scripts/kiosk_check.py` (all checks pass).
 - [x] Screenshots of DESIGN.md's nine states at 1280x720 and 1920x1080 in `docs/screenshots/round-1` to `round-4`, with 25% copies of the Stage shots; written critique and fixes per round in `docs/design-review.md`. Proof: `backend/scripts/design_shots.py N`.
 - [x] Nothing under 13 px anywhere, measured after the canvas zoom. Proof: `backend/scripts/type_floor_check.py` (smallest rendered text 13.0 px in every state at both sizes).
 - [x] STATUS.md, README.md, PITCH.md and DEVPOST.md are current.
@@ -55,7 +55,7 @@ From SPEC.md Part 1 section 14, SPEC_ITERATION_2 section 17 and the goal brief. 
 
 ## Needs Krishna
 1. Top up the API balance, then `TRACKBACK_LLM_MODE=record make world && make eval && make check`. Only new turns are paid for.
-2. Rehearse from PITCH.md in Stage mode with Wi-Fi off; leave the laptop in kiosk mode at the table.
+2. Rehearse from PITCH.md in Stage mode with Wi-Fi off; at the table open `/?kiosk=on` so it loops and hands over to judges.
 3. Optional: `make docker-build` once Docker is installed; `fly deploy` per `deploy/DEPLOY.md`.
 
 ## Iteration 2 checklist

@@ -18,9 +18,9 @@ export function CounterStrip({ company, correction, graph, pings, waves, approva
         : <div className="serif" style={{ fontSize: 24, fontStyle: 'italic', color: 'var(--ink-muted)' }}>Nothing's been recalled. Yet.</div>}
       {!correction && onRecall && <button className="btn primary" style={{ marginLeft: 'auto' }} onClick={onRecall}>A recall notice arrived</button>}
       {correction && <div className="mono t14" style={{ display: 'flex', gap: 24, color: 'var(--ink)' }}>
-        <span><span className="muted">nodes inspected</span> {inspected} of {total}</span>
-        <span><span className="muted">LLM calls</span> {st?.llm_calls ?? 0} vs {headline?.llm_calls_rerun_all ?? '…'} rerun-all</span>
-        <span><span className="muted">compensations pending</span> {approvalsPending}</span>
+        <span title="How many pieces of work Trackback had to look at; the rest were cleared structurally (different period, different line, never read the changed rows)"><span className="muted">looked at</span> {inspected} of {total} pieces of work</span>
+        <span title="Model calls spent on this correction, against what rerunning every agent from scratch would cost"><span className="muted">LLM calls</span> {st?.llm_calls ?? 0} <span className="muted">(rerunning every agent: {headline?.llm_calls_rerun_all ?? '…'})</span></span>
+        <span title="Fixes for actions that already happened (a sent certificate, a paid bonus), waiting for the right person to approve"><span className="muted">fixes waiting for a person</span> {approvalsPending}</span>
       </div>}
       {correction && evaluation && <button className={`chip ${evaluation.jade?.summary?.overruled ? 'recall' : 'cleared'}`} style={{ marginLeft: 'auto', height: 28, cursor: 'pointer', fontSize: 14 }} onClick={onJade} title="J">
         Jade · {evaluation.jade?.summary?.overruled ? `overruled ${evaluation.jade.summary.overruled_claims.join(', ')}` : 'every claim approved'} · playbook {evaluation.playbook_version}</button>}
@@ -283,37 +283,68 @@ export function Lessons({ refreshKey, onChanged, people }: { refreshKey: number;
   </div>
 }
 
-/* ---------------------------------------------------------------- the time scrubber, a slim film strip */
+/* ---------------------------------------------------------------- time travel: what could the agents see on a given date? Collapsed until asked. */
 const START = Date.parse('2026-01-01T00:00:00-08:00')
-export function Scrubber({ doc, setDoc, pin, setPin, now, sources, refreshKey, attempt, setAttempt }: { doc: string; setDoc: (d: string) => void; pin: string; setPin: (p: string) => void; now: string; sources: { source_id: string; title: string }[]
-  refreshKey: number; attempt: any; setAttempt: (a: any) => void }) {
+export function Scrubber({ doc, setDoc, pin, setPin, now, sources, refreshKey, attempt, setAttempt, open, setOpen }: { doc: string; setDoc: (d: string) => void; pin: string; setPin: (p: string) => void; now: string; sources: { source_id: string; title: string }[]
+  refreshKey: number; attempt: any; setAttempt: (a: any) => void; open: boolean; setOpen: (o: boolean) => void }) {
   const [tm, setTm] = useState<any>(null)
   const END = Date.parse(now)
   useEffect(() => { api.timemap(doc).then(setTm).catch(() => setTm(null)) }, [doc, refreshKey])
   const pct = (iso: string) => Math.min(100, Math.max(0, ((Date.parse(iso) - START) / (END - START)) * 100))
   const cursor = pct(pin)
-  const future = (tm?.versions || []).filter((v: any) => Date.parse(v.tx_from) > Date.parse(pin))
-  return (
-    <div style={{ height: 52, flex: 'none', borderTop: '1px solid var(--rule)', background: 'var(--surface)', display: 'flex', alignItems: 'center', gap: 14, padding: '0 16px', position: 'relative' }}>
-      <select className="field" value={doc} onChange={e => { setDoc(e.target.value); setAttempt(null) }} style={{ width: 220 }} aria-label="Document">{sources.map(s => <option key={s.source_id} value={s.source_id}>{s.title.replace(/^(REAL|RECONSTRUCTION):\s*/, '')}</option>)}</select>
-      <div className="mono t14" style={{ width: 150 }}>as of {dayLabel(pin).replace(/, 2026/, '')}</div>
-      <div style={{ position: 'relative', flex: 1, height: 32, border: '1px solid var(--rule)', borderRadius: 4, background: 'var(--paper)' }}>
-        <div className="hatch" style={{ position: 'absolute', top: 0, bottom: 0, left: `${cursor}%`, right: 0 }} />
-        {cursor < 72 && <div className="t14 muted" style={{ position: 'absolute', top: 6, left: `calc(${cursor}% + 10px)`, whiteSpace: 'nowrap' }}>Not knowable on {dayLabel(pin)}</div>}
-        {(tm?.versions || []).map((v: any) => <div key={v.version_id} title={`${v.version_id} · ${dateLabel(v.tx_from)}`} style={{ position: 'absolute', left: `${pct(v.tx_from)}%`, top: 0, bottom: 0, width: 2, background: v.correction_id ? 'var(--recall)' : 'var(--ink)', opacity: Date.parse(v.tx_from) > Date.parse(pin) ? 0.35 : 1 }} />)}
-        <input type="range" aria-label="As-of date" min={0} max={1000} value={Math.round(cursor * 10)} onChange={e => { setAttempt(null); setPin(new Date(START + (Number(e.target.value) / 1000) * (END - START)).toISOString()) }} style={{ position: 'absolute', inset: 0, width: '100%', opacity: 0, cursor: 'ew-resize' }} />
-        <div style={{ position: 'absolute', top: -4, bottom: -4, left: `calc(${cursor}% - 1px)`, width: 3, background: 'var(--ink)', pointerEvents: 'none' }} />
-      </div>
-      {future.length > 0 && <button className="btn" onClick={async () => setAttempt(await api.cheat(doc, pin, future[future.length - 1].version_id))}>Read the {dayLabel(future[future.length - 1].tx_from).replace(/, 2026/, '')} version</button>}
-      {attempt?.refused && <div style={{ position: 'absolute', left: '50%', bottom: 66, zIndex: 35, transform: 'translateX(-50%) scale(0.9)', transformOrigin: 'center bottom', pointerEvents: 'none' }}><RefusalStamp published={dayLabel(attempt.memento_datetime).replace(/, 2026/, '')} decision={dayLabel(attempt.pin).replace(/, 2026/, '')} /></div>}
+  const versions: any[] = tm?.versions || []
+  const future = versions.filter((v: any) => Date.parse(v.tx_from) > Date.parse(pin))
+  const visible = versions.length - future.length
+  const docTitle = (sources.find(s => s.source_id === doc)?.title || doc).replace(/^(REAL|RECONSTRUCTION):\s*/, '')
+  if (!open) return (
+    <div style={{ height: 40, flex: 'none', borderTop: '1px solid var(--rule)', background: 'var(--surface)', display: 'flex', alignItems: 'center', gap: 14, padding: '0 16px' }}>
+      <button className="btn" style={{ height: 28 }} onClick={() => setOpen(true)}>Time travel <span className="kbd" style={{ marginLeft: 4 }}>T</span></button>
+      <span className="t14 muted">See exactly what the agents could see on any past date. Trackback refuses to show anything published after that date, so a replay can never cheat with hindsight.</span>
     </div>
   )
+  return (
+    <div style={{ flex: 'none', borderTop: '1px solid var(--rule)', background: 'var(--surface)', padding: '8px 16px 10px', position: 'relative' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+        <span className="t14" style={{ fontWeight: 600 }}>Time travel</span>
+        <span className="t14 muted">Pick a document, drag the slider. Left of the line: what the agents could see. Hatched: published later, refused.</span>
+        <button className="btn ghost" style={{ height: 26, marginLeft: 'auto' }} onClick={() => { setOpen(false); setAttempt(null) }} aria-label="Collapse time travel"><Close size={16} strokeWidth={1.5} /></button>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <label className="t14 muted" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>Document
+          <select className="field" value={doc} onChange={e => { setDoc(e.target.value); setAttempt(null) }} style={{ width: 220 }} aria-label="Document">{sources.map(s => <option key={s.source_id} value={s.source_id}>{s.title.replace(/^(REAL|RECONSTRUCTION):\s*/, '')}</option>)}</select></label>
+        <div className="mono t14" style={{ width: 190 }}><span className="muted">as of</span> {dayLabel(pin).replace(/, 2026/, '')}</div>
+        <div style={{ position: 'relative', flex: 1, height: 32, border: '1px solid var(--rule)', borderRadius: 4, background: 'var(--paper)' }} title="Drag to change the date">
+          <div className="hatch" style={{ position: 'absolute', top: 0, bottom: 0, left: `${cursor}%`, right: 0 }} />
+          {cursor < 60 && <div className="t14 muted" style={{ position: 'absolute', top: 6, left: `calc(${cursor}% + 10px)`, whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: `calc(${100 - cursor}% - 16px)` }}>not knowable yet</div>}
+          {versions.map((v: any) => <div key={v.version_id} title={`${v.version_id} · ${dateLabel(v.tx_from)}`} style={{ position: 'absolute', left: `${pct(v.tx_from)}%`, top: 0, bottom: 0, width: 2, background: v.correction_id ? 'var(--recall)' : 'var(--ink)', opacity: Date.parse(v.tx_from) > Date.parse(pin) ? 0.35 : 1 }} />)}
+          <input type="range" aria-label="As-of date" min={0} max={1000} value={Math.round(cursor * 10)} onChange={e => { setAttempt(null); setPin(new Date(START + (Number(e.target.value) / 1000) * (END - START)).toISOString()) }} style={{ position: 'absolute', inset: 0, width: '100%', opacity: 0, cursor: 'ew-resize' }} />
+          <div style={{ position: 'absolute', top: -4, bottom: -4, left: `calc(${cursor}% - 1px)`, width: 3, background: 'var(--ink)', pointerEvents: 'none' }} />
+        </div>
+        {future.length > 0 && <button className="btn" onClick={async () => setAttempt(await api.cheat(doc, pin, future[future.length - 1].version_id))} title="Ask for a version published after the pinned date; Trackback answers 403 with both timestamps">Try to peek at the {dayLabel(future[future.length - 1].tx_from).replace(/, 2026/, '')} version</button>}
+      </div>
+      <div className="t14 muted" style={{ marginTop: 6 }}>{docTitle}: {visible} of {versions.length} version{versions.length === 1 ? '' : 's'} visible on {dayLabel(pin).replace(/, 2026/, '')}{future.length ? `; ${future.length} published later` : ''}</div>
+      {attempt?.refused && <div style={{ position: 'absolute', right: 24, bottom: 118, zIndex: 35, transform: 'scale(0.9)', transformOrigin: 'right bottom', pointerEvents: 'none' }}><RefusalStamp published={dayLabel(attempt.memento_datetime).replace(/, 2026/, '')} decision={dayLabel(attempt.pin).replace(/, 2026/, '')} /></div>}
+    </div>
+  )
+}
+
+/* ---------------------------------------------------------------- first visit: how to read this screen */
+export function Legend({ company, onClose }: { company: string; onClose: () => void }) {
+  const states: [State, string][] = [['invalidated', 'wrong now: a number or sentence that no longer holds'], ['cleared', 'still valid: checked, with the reason'], ['caution', 'needs a person: it already went out, a fix is proposed'], ['reworked', 'reworked by its owner'], ['skipped', 'skipped: not worth a look']]
+  return <div className="card" style={{ position: 'absolute', left: 16, bottom: 16, width: 420, zIndex: 24, padding: '14px 16px', boxShadow: 'var(--shadow)', borderColor: 'var(--ink)' }} role="note" aria-label="How to read this">
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span className="serif t22" style={{ fontWeight: 600 }}>How to read this</span><button className="btn ghost" style={{ height: 28, padding: '0 6px' }} onClick={onClose} aria-label="Close"><Close size={16} strokeWidth={1.5} /></button></div>
+    <div className="t14" style={{ marginTop: 6 }}>Each row is one {company === 'lyft' ? 'seat' : 'agent'}; each card is a piece of work it made (a number, a sentence, a forecast cell, an action that already happened). A line means "rests on". Hover a card for what happened to it; click it for who built it, on top of whom.</div>
+    <div style={{ display: 'grid', gridTemplateColumns: '24px 1fr', gap: '4px 6px', marginTop: 8, alignItems: 'center' }} className="t14">
+      {states.map(([st, w]) => <><StatusIcon key={st + 'i'} state={st} size={16} /><span key={st + 't'}>{w}</span></>)}
+    </div>
+    <div className="t14 muted" style={{ marginTop: 8 }}><span className="kbd">Space</span> drops the recall notice · <span className="kbd">J</span> Jade's review · <span className="kbd">E</span> lessons · <span className="kbd">T</span> time travel · <span className="kbd">?</span> all keys</div>
+  </div>
 }
 
 /* ---------------------------------------------------------------- footer status bar */
 export function Footer({ state, pings }: { state: any; pings: any[] }) {
   return <footer style={{ height: 30, flex: 'none', borderTop: '1px solid var(--rule)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', fontSize: 13, background: 'var(--paper)' }}>
-    <span className="mono">{state?.artifacts ?? '…'} artifacts · {state?.receipts ?? '…'} receipts · {pings.length} pings this wave</span>
+    <span className="mono" title="Pieces of work the agents made; receipts record exactly what each one read; pings are the notices sent to agents for this correction">{state?.artifacts ?? '…'} pieces of work · {state?.receipts ?? '…'} receipts of who read what · {pings.length} ping{pings.length === 1 ? '' : 's'} sent</span>
     <span className="muted" style={{ display: 'flex', gap: 14 }}><span><span className="kbd">Space</span> next</span><span><span className="kbd">D</span> deep mode</span><span><span className="kbd">⌘K</span> search</span><span><span className="kbd">T</span> time travel</span><span><span className="kbd">J</span> Jade</span><span><span className="kbd">E</span> lessons</span><span><span className="kbd">R</span> reset</span><span><span className="kbd">?</span> help</span></span>
   </footer>
 }

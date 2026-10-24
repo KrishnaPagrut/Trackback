@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { api, dayLabel } from './api'
 import Canvas from './deep/Canvas'
-import { CounterStrip, Sidebar, Drawer, Scrubber, Footer, Palette, LedgerTable, type DrawerTab } from './deep/Panels'
+import { CounterStrip, Sidebar, Drawer, Scrubber, Footer, Palette, LedgerTable, Legend, type DrawerTab } from './deep/Panels'
 import Stage from './stage/Stage'
 import ProofPage from './pages/Proof'
 import RealWorld from './pages/RealWorld'
@@ -40,7 +40,10 @@ export default function App() {
   const [pending, setPending] = useState(0)
   const [laneFilter, setLaneFilter] = useState<string | null>(null)
   const [sound, setSound] = useState(false)
-  const [kioskOn, setKioskOn] = useState(qs.get('kiosk') !== 'off')
+  const [travelOpen, setTravelOpen] = useState(false)
+  const [legend, setLegend] = useState(() => { try { return localStorage.getItem('tb_legend_seen') !== '1' } catch { return true } })
+  const closeLegend = () => { setLegend(false); try { localStorage.setItem('tb_legend_seen', '1') } catch { /* private window */ } }
+  const [kioskOn, setKioskOn] = useState(['on', '1', 'true'].includes(qs.get('kiosk') || ''))   // opt in: the table loop, never during a live pitch
   const idleSeconds = Number(qs.get('idle') || 60)
   const now = state?.now || '2026-07-08T09:00:00-07:00'
 
@@ -63,10 +66,10 @@ export default function App() {
   const resetWorld = useCallback(async () => { await api.reset(); setCorrection(null); setSelected(null); setDrawer(null); setAttempt(null); setPin(now); setNotice(false); refresh() }, [now, refresh])
   const dropE11 = useCallback(async () => {
     setBusy(true)
-    try { await api.liveE11(); setNotice(false); setWorld('tidewall'); setCorrection('E11'); setRippleKey(k => k + 1); refresh() } finally { setBusy(false) }
+    try { await api.liveE11(); setNotice(false); closeLegend(); setWorld('tidewall'); setCorrection('E11'); setRippleKey(k => k + 1); refresh() } finally { setBusy(false) }
   }, [refresh])
   const travel = useCallback(async () => {
-    setDoc('billing_export_2026_03'); const p = '2026-04-10T17:00:00-07:00'; setPin(p)
+    setTravelOpen(true); setDoc('billing_export_2026_03'); const p = '2026-04-10T17:00:00-07:00'; setPin(p)
     const tm = await api.timemap('billing_export_2026_03'); const later = tm.versions.filter((v: any) => v.tx_from > '2026-07-01')
     if (later.length) setAttempt(await api.cheat('billing_export_2026_03', p, later[later.length - 1].version_id))
   }, [])
@@ -86,9 +89,10 @@ export default function App() {
       const k = e.key.toLowerCase()
       if (k === 'd' && !e.metaKey && !e.ctrlKey) { setMode(m => m === 'stage' ? 'deep' : 'stage'); return }
       if (k === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setMode('deep'); setPalette(p => !p); return }
+      if (k === 'k' && !e.metaKey && !e.ctrlKey) { setKioskOn(x => !x); return }
       if (mode === 'stage') return
-      if (k === '?') setHelp(x => !x)
-      else if (k === 'escape') { setDrawer(null); setPalette(false); setHelp(false); setNotice(false); setSelected(null) }
+      if (k === '?') { setHelp(x => !x); setLegend(false) }
+      else if (k === 'escape') { setDrawer(null); setPalette(false); setHelp(false); setNotice(false); setSelected(null); closeLegend() }
       else if (k === 'r') resetWorld()
       else if (k === 't') travel()
       else if (k === ' ' && !correction && world === 'tidewall') { e.preventDefault(); if (notice) dropE11(); else setNotice(true) }
@@ -138,21 +142,23 @@ export default function App() {
               {view === 'ledger' ? <LedgerTable company={world} graph={graph} pings={pings} onSelect={id => { setSelected(id); setDrawer('who') }} laneFilter={laneFilter} />
                 : <Canvas company={world} correction={correction} data={graph} pings={pings} selected={selected} onSelect={id => { setSelected(id); if (id) setDrawer(d => d || 'who') }} trace={selected ? traceSet : null} rippleKey={rippleKey} sound={sound}
                   onLaneMore={l => { setLaneFilter(l); setView('ledger') }} />}
+              {legend && view === 'graph' && <Legend company={world} onClose={closeLegend} />}
               {notice && <div style={{ position: 'absolute', left: 24, top: 16, zIndex: 25 }}><RecallNotice id="E11" lot="7F3A" headline="March billing export: annual-plan revenue was released twice" reason="$118,000 counted twice across five gyms" issuer="Membership billing vendor" ts="Jul 8, 2026 · 9:05 AM" onDrop={dropE11} busy={busy} /></div>}
               {drawer && <Drawer tab={drawer} setTab={setDrawer} onClose={() => setDrawer(null)} selected={selected} company={world} refreshKey={refreshKey} onChanged={refresh} people={state?.people || {}} pings={pings} waves={waves} challenges={challenges} correction={correction} />}
               {palette && <Palette company={world} artifacts={artifacts} corrections={state?.corrections || []} onClose={() => setPalette(false)} onPick={p => {
                 setPalette(false)
                 if (p.kind === 'artifact') { setSelected(p.id); setDrawer('who'); setView('graph') }
                 else if (p.kind === 'correction') { setCorrection(p.id); setRippleKey(k => k + 1); setView('graph') }
-                else if (p.kind === 'date') { setPin(p.id); setDoc('billing_export_2026_03') }
+                else if (p.kind === 'date') { setTravelOpen(true); setPin(p.id); setDoc('billing_export_2026_03') }
                 else if (p.kind === 'agent') { setLaneFilter(p.id); setView('ledger') }
               }} />}
               {help && <div className="drawer" style={{ width: 380 }}><div style={{ padding: 20 }}><div className="serif t32" style={{ marginBottom: 12 }}>Keys</div>
-                {[['D', 'Stage mode or Deep mode'], ['Space', 'drop the recall notice'], ['⌘K', 'search anything'], ['T', 'time travel to April 10'], ['A', 'approvals'], ['S', 'ping log'], ['B', 'who built this'], ['J', "Jade's review"], ['E', 'lessons learned'], ['G / L', 'graph or ledger'], ['P', 'proof'], ['M', `sound ${sound ? 'on' : 'off'}`], ['R', 'reset'], ['Esc', 'close']].map(([k, v]) => <div key={k} style={{ display: 'flex', gap: 12, padding: '6px 0' }}><span className="kbd" style={{ minWidth: 56, textAlign: 'center' }}>{k}</span><span>{v}</span></div>)}
+                <div className="t14 muted" style={{ marginBottom: 10 }}>Rows are agents, cards are their work, lines mean "rests on". Hover for what happened; click for who built it.</div>
+                {[['D', 'Stage mode or Deep mode'], ['Space', 'drop the recall notice'], ['⌘K', 'search anything'], ['T', 'time travel to April 10'], ['A', 'approvals'], ['S', 'ping log'], ['B', 'who built this'], ['J', "Jade's review"], ['E', 'lessons learned'], ['G / L', 'graph or ledger'], ['P', 'proof'], ['M', `sound ${sound ? 'on' : 'off'}`], ['K', `kiosk loop ${kioskOn ? 'on' : 'off'}`], ['R', 'reset'], ['Esc', 'close']].map(([k, v]) => <div key={k} style={{ display: 'flex', gap: 12, padding: '6px 0' }}><span className="kbd" style={{ minWidth: 56, textAlign: 'center' }}>{k}</span><span>{v}</span></div>)}
                 <button className="btn" style={{ marginTop: 12 }} onClick={() => setKioskOn(k => !k)}>Kiosk loop in Stage mode: {kioskOn ? 'on' : 'off'}</button></div></div>}
             </main>
           </div>
-          <Scrubber doc={doc} setDoc={setDoc} pin={pin} setPin={setPin} now={now} sources={sources} refreshKey={refreshKey} attempt={attempt} setAttempt={setAttempt} />
+          <Scrubber doc={doc} setDoc={setDoc} pin={pin} setPin={setPin} now={now} sources={sources} refreshKey={refreshKey} attempt={attempt} setAttempt={setAttempt} open={travelOpen} setOpen={setTravelOpen} />
           <Footer state={state} pings={pings} />
         </>)}
     </div>

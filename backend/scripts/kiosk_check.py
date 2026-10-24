@@ -1,6 +1,6 @@
 """Kiosk and mode checks for Stage mode, against the running server (make demo). Waits out the real 60-second idle timer.
 
-1. After 60 s with no input Stage mode resets and plays the attract loop with captions.
+1. With ?kiosk=on (off by default), after 60 s with no input Stage mode resets and plays the attract loop with captions.
 2. Any key stops it and offers the visitor card with three presets and "Paste your own".
 3. Each preset runs: the trivial 40-cent bank fee ends with 0 agents pinged; the utilities invoice and the billing duplicate ping agents.
 4. D switches to Deep mode and back without losing the Stage step or the correction.
@@ -66,7 +66,7 @@ with sync_playwright() as p:
 
     # ---------------- kiosk: attract after 60 s idle
     reset(); page = b.new_page(viewport={"width": 1280, "height": 720}); page.on("pageerror", lambda e: errors.append(str(e)))
-    page.goto(f"{BASE}/"); page.wait_for_timeout(2000)
+    page.goto(f"{BASE}/?kiosk=on"); page.wait_for_timeout(2000)
     t0 = time.time(); page.wait_for_timeout(58_000)
     ok("Three AI agents built on one number" not in caption(page), "no attract loop before 60 s idle", f"{time.time() - t0:.0f} s")
     page.wait_for_timeout(5_000)
@@ -84,7 +84,7 @@ with sync_playwright() as p:
     # ---------------- presets
     for name, expect in (("A 40-cent bank fee", 0), ("A utilities invoice", None), ("The billing duplicate", 3)):
         if not page.get_by_role("button", name=name).count():
-            page.keyboard.press("Escape"); reset(); page.goto(f"{BASE}/"); page.wait_for_timeout(1500)
+            page.keyboard.press("Escape"); reset(); page.goto(f"{BASE}/?kiosk=on"); page.wait_for_timeout(1500)
             page.evaluate("window.dispatchEvent(new KeyboardEvent('keydown', {key: 'x'}))")
         page.get_by_role("button", name=name).click(); page.wait_for_timeout(1500)
         ok(page.locator(".recall-notice").count() == 1, f"preset '{name}': its recall notice appears")
@@ -97,11 +97,11 @@ with sync_playwright() as p:
         # back to the card for the next preset
         reset()
         if name == "A 40-cent bank fee":
-            page.goto(f"{BASE}/"); page.wait_for_timeout(64_000)
+            page.goto(f"{BASE}/?kiosk=on"); page.wait_for_timeout(64_000)
             ok("Three AI agents built on one number" in caption(page), "after idling, the kiosk returns to the attract loop")
             page.keyboard.press("x"); page.wait_for_timeout(1200)
         else:
-            page.goto(f"{BASE}/?visitor=1"); page.wait_for_timeout(1500)
+            page.goto(f"{BASE}/?visitor=1&kiosk=on"); page.wait_for_timeout(1500)
     ok(not errors, "no page errors", "; ".join(errors[:2]))
     b.close()
 reset()

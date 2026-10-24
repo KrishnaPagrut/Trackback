@@ -22,7 +22,7 @@ Run it in Stage mode (the app opens there). Every beat is one press of `Space`; 
 | 2:45–2:55 | `T`: April 10 and the refusal stamp. | "Was the agent negligent? Here is what it saw on April 10: the duplicate rows were right there. And it can't read July 8 to look smart." |
 | 2:55–3:00 | `D` for a few seconds of Deep mode, then the tagline. | "And here's the full instrument. Trackback traces any correction forward." |
 
-If the slot is shorter: cut the Deep mode coda first, then the April 10 beat, then the lesson card. Never cut Jade's overrule. Never cut the bubbles, the skipped cash forecast, or the payoff. If judging is at a table, leave the laptop in Stage mode: after 60 seconds it loops on its own with captions, and a judge who presses a key gets three presets to try. The 40-cent bank fee is the precision demo: zero pings, everything cleared, five seconds.
+If the slot is shorter: cut the Deep mode coda first, then the April 10 beat, then the lesson card. Never cut Jade's overrule. Never cut the bubbles, the skipped cash forecast, or the payoff. If judging is at a table, open `/?kiosk=on`: after 60 seconds it loops on its own with captions, and a judge who presses a key gets three presets to try. The 40-cent bank fee is the precision demo: zero pings, everything cleared, five seconds.
 
 The Lyft story (Real world tab, or a 20-second opener on a stage): "February 13, 2024: Lyft's release said 500 basis points. The model it came from said 50. Shares jumped 67% after hours. With Trackback the release is blocked before it goes out: the sentence says 500, the number it cites is 50."
 

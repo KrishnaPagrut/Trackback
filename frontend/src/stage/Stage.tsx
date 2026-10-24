@@ -166,7 +166,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
       window.clearTimeout(idle.current)
       idle.current = window.setTimeout(() => { if (kiosk !== 'attract') startAttract() }, (kiosk === 'visitor' ? Math.max(idleSeconds, 90) : idleSeconds) * 1000)
     }
-    const onInput = (e: Event) => { if (kiosk === 'attract' && e.type !== 'mousemove') { stopAttract() } arm() }
+    const onInput = () => { if (kiosk === 'attract') { stopAttract() } arm() }
     arm()
     const evs = ['keydown', 'mousedown', 'touchstart', 'wheel', 'mousemove']
     evs.forEach(ev => window.addEventListener(ev, onInput, { passive: true }))
@@ -249,7 +249,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   }
   const caption = (() => {
     if (kiosk === 'attract') return { left: 'Three AI agents built on one number. Watch what happens when it is corrected.', right: 'Press any key to try it' }
-    const hint = 'Space next · Backspace back · T time travel · R reset · D deep mode'
+    const hint = `Space next · Backspace back · T time travel · R reset · D deep mode${kioskEnabled ? ' · K loop on' : ''}`
     const m: Record<string, string> = { title: 'Press Space to begin.', reveal: 'Each agent builds on what the one before it made.', recall: 'The source admits it was wrong.', calc: 'Trackback recomputes every number itself. No agent is asked about arithmetic.',
       review: 'A second AI reviews the first. Jade recomputes every judgment call from the engines, and overrules.', learn: 'The mistake becomes a lesson: re-run against every past case, approved by the Controller, applied from now on.', payoff: '' }
     if (cur.startsWith('ping:')) return { left: `Trackback pings the ${LANES.tidewall.find(x => x.id === cur.slice(5))?.name}, once, about only what it used.`, right: hint }
