@@ -97,7 +97,8 @@ def ripple(*, correction: dict, lib: MetricLibrary, entries: list[dict], snapsho
     lines = correction["lines"]
     seeds = {mid for mid, m in lib.metrics.items() if m.slices and any(m.touches(l["account"], l.get("orig_period") or l["period"], _region(l["entity"]), l["entity"]) for l in lines)}
     reached = lib.downstream(seeds)
-    used_snaps = {l.get("snapshot") or "close" for l in links} | {"close"} | {n.get("snapshot", "close") for n in (agent_nodes or [])}
+    latest = max(snapshots, key=lambda k: snapshots[k])
+    used_snaps = {l.get("snapshot") or "close" for l in links} | {"close", latest} | {n.get("snapshot", "close") for n in (agent_nodes or [])}
     before = {s: lib.evaluate(Books(entries, snapshots[s])) for s in used_snaps}
     after = {s: lib.evaluate(Books(entries, snapshots[s], lines)) for s in used_snaps}
     depth = lib.depth()
@@ -111,8 +112,8 @@ def ripple(*, correction: dict, lib: MetricLibrary, entries: list[dict], snapsho
     metrics_out = {}
     for mid in sorted(reached, key=lambda x: (depth[x], x)):
         m = lib.metrics[mid]
-        b, a = before["close"].get(mid), after["close"].get(mid)
-        ch = moved(mid, "close")
+        b, a = before[latest].get(mid), after[latest].get(mid)
+        ch = moved(mid, latest)
         cb, ca = conclusion_state(m, b), conclusion_state(m, a)
         metrics_out[mid] = {"label": m.label, "unit": m.unit, "old": b, "new": a, "changed": ch, "seed": mid in seeds, "depth": depth[mid],
                             "conclusion_old": cb, "conclusion_new": ca, "reason": ("conclusion_flipped" if cb != ca else "value_changed") if ch else "early_cutoff"}

@@ -137,6 +137,35 @@ def ripple_for(exc: dict, links: list[dict], pin: str, run_id: str | None = None
     return res
 
 
+def judge(excs: list[dict], ripples: dict, pin: str, run_id: str | None, pb: dict | None = None, store: bool = True) -> dict:
+    """Steps 4 and 5: the agent's Error Evaluations under its playbook, then Jade's review of every claim."""
+    from . import jade
+    from .agent import agent as AG, playbook as PB
+    from .engine import materiality as MAT
+    pb = pb or PB.current()
+    classified = [{**e, "classification": AG.classify(e, PB.apply(PB.V1, ["classify_by_knowable_at"]), AG.knowable(e))["value"]} for e in excs]
+    mlog = R.rows("misstatement_log", pin, run_id)
+    mat = MAT.evaluate(classified, mlog, ripples)
+    out = {"materiality": mat, "evaluations": {}, "jade": {}, "final": {}, "playbook": pb}
+    for e in excs:
+        ev = AG.evaluate(e, ripples.get(e["exception_id"]), mat, pb, pin)
+        jf = jade.review(ev, e, mat, pin)
+        fin = jade.apply(ev, jf)
+        out["evaluations"][e["exception_id"]] = ev
+        out["jade"][e["exception_id"]] = jf
+        out["final"][e["exception_id"]] = fin
+        if store and run_id:
+            eid = f"EV-{run_id}-{e['exception_id']}"
+            db.insert("evaluations", {"eval_id": eid, "run_id": run_id, "world": "tidewall", "exception_id": e["exception_id"], "playbook_version": pb["version"],
+                                      "claims_json": json.dumps(ev, default=str), "created_at": db.norm_ts(pin), "superseded_by": None})
+            db.insert("evaluations", {"eval_id": eid + "-J", "run_id": run_id, "world": "tidewall", "exception_id": e["exception_id"], "playbook_version": pb["version"] + "+jade",
+                                      "claims_json": json.dumps(fin, default=str), "created_at": db.norm_ts(pin), "superseded_by": None})
+            jade.store(eid, jf, pin)
+    if store and run_id:
+        db.insert("kv", {"key": f"materiality.{run_id}", "value": json.dumps(mat, default=str)})
+    return out
+
+
 def new_run(pin: str, playbook: str = "v1") -> str:
     rid = f"RV-{uuid.uuid4().hex[:8]}"
     db.insert("review_runs", {"run_id": rid, "world": "tidewall", "pinned_at": db.norm_ts(pin), "playbook_version": playbook, "status": "running", "started_at": db.norm_ts(pin), "finished_at": None, "summary_json": None})
@@ -159,12 +188,15 @@ def run_all(pin: str | None = None, playbook: str = "v1") -> dict:
         from .world import history
         agent_nodes = history.agent_nodes()
     ripples = {e["exception_id"]: ripple_for(e, links, pin, rid, agent_nodes) for e in excs if (e.get("correction") or {}).get("lines")}
-    summary = {"exceptions": len(excs), "links": len(links), "ripples": {k: v["counts"] for k, v in ripples.items()}, "seconds": round(time.time() - t0, 2)}
+    j = judge(excs, ripples, pin, rid)
+    overrules = {eid: [f["claim_key"] for f in fs if f["verdict"] in ("overrule", "flag")] for eid, fs in j["jade"].items()}
+    summary = {"exceptions": len(excs), "links": len(links), "ripples": {k: v["counts"] for k, v in ripples.items()}, "jade": overrules,
+               "aggregate": j["materiality"]["aggregate"], "seconds": round(time.time() - t0, 2)}
     db.get_conn().execute("UPDATE review_runs SET status='done', finished_at=?, summary_json=? WHERE run_id=?", (db.norm_ts(pin), json.dumps(summary), rid))
     db.insert("kv", {"key": "review.latest.tidewall", "value": rid}) if db.q1("SELECT 1 FROM kv WHERE key='review.latest.tidewall'") is None else \
         db.get_conn().execute("UPDATE kv SET value=? WHERE key='review.latest.tidewall'", (rid,))
     print(f"review {rid}: {len(excs)} exceptions, {len(links)} traced items, ripples {summary['ripples']} ({summary['seconds']}s)")
-    return {"run_id": rid, "detect": res, "links": links, "ripples": ripples, "summary": summary}
+    return {"run_id": rid, "detect": res, "links": links, "ripples": ripples, "judge": j, "summary": summary}
 
 
 def latest_run() -> str | None:

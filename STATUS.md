@@ -9,16 +9,16 @@ Freeze: Sunday 2026-10-25 04:00 PT. Submission: 09:00 PT.
 | CP0 housekeeping | done | SPEC.md is v3; CLAUDE.md; tasks.py; v2 tests pass on Windows (27) |
 | CP1 world | done | `python tasks.py world` in 2.4 s; `python tasks.py test`: 11 v3 calibration tests (TTM $32.0M close / $32.6M draft, cash $10.6M, 2.95x → 3.0208x / 3.0681x, overpaid bonuses $8,400/$7,200/$4,800, tax $195,000, $662k / $1.118M, Appendix A 40/23/5) |
 | CP2 detect | done | `tests/test_v3_cp2_detect.py`: exactly six exceptions (X1 $750,000 duplicate import, X2 $140,000 unaccrued, X3 $58,000 true-up, X4 $18,750 duplicate invoice, X5 $2,310 R01, X6 $312.40 fee); P1 known x6; 12 in transit, 3 outstanding checks, 1 FX rounding, subset-sum, known short-pay, SSU alias; Priya's handoff confirmed 1-6, finished 7-9 |
-| CP3 trace | next | |
-| CP4 judge | | |
-| CP5 act (+ pings) | | |
+| CP3 trace | done | `tests/test_v3_cp3_trace.py`: 49/49 lineage truths + 6 derived cells; H1 stale; X1 ripple 40 invalidated / 23 still valid / 5 compensations in 0.2 s (30 of 191 metrics recomputed; naive 43); X2/X4/X6 match the key; Replay refuses the Jul 8 export at an Apr 10 pin (403) |
+| CP4 judge | done | `tests/test_v3_cp4_judge.py`: aggregate $662,000 (passes) / $1,118,000 (fails); v1 calls X1 immaterial (4.69%), Jade overrules (covenant 3.0208x, compensation); Jade overrules X3 to a change in estimate; flags lender routing to the CFO; escalates the locked March posting to Dana |
+| CP5 act (+ pings) | next | |
 | CP6 prove | | |
 | CP7 learn | | |
 | Lyft parity | | |
 | CP8 UI | | |
 | CP9 polish | | |
 
-Next three tasks: lineage tracer (xlsx/pptx/pdf); Replay refusals; the ripple matching Appendix A.
+Next three tasks: agents' history with receipts; the workflow (approvals, Dana's rejection and re-draft, holds, reminders); pings to owners.
 
 ---
 
