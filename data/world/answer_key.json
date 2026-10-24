@@ -1593,7 +1593,7 @@
    "items": {
     "WB.Covenant.B6": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 186023530.92,
      "new": 186023530.92,
      "owner": "priya",
@@ -1833,7 +1833,7 @@
     },
     "DECK.s2.l1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 47524374.9,
      "new": 47524374.9,
      "owner": "sam",
@@ -1849,7 +1849,7 @@
     },
     "DECK.s2.l3.a": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 31389329.12,
      "new": 31389329.12,
      "owner": "sam",
@@ -1857,7 +1857,7 @@
     },
     "DECK.s2.l3.b": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_line_item",
      "old": 2.799999994105007,
      "new": 2.799999994105007,
      "owner": "sam",
@@ -1881,7 +1881,7 @@
     },
     "DECK.s2.l5": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 38968262.61,
      "new": 38968262.61,
      "owner": "sam",
@@ -2124,7 +2124,7 @@
    "items": {
     "WB.Covenant.B6": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 186023530.92,
      "new": 186023530.92,
      "owner": "priya",
@@ -2132,7 +2132,7 @@
     },
     "WB.Covenant.B7": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 32000000.0,
      "new": 32000000.0,
      "owner": "priya",
@@ -2164,7 +2164,7 @@
     },
     "WB.Covenant.B12": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 2.95,
      "new": 2.95,
      "owner": "priya",
@@ -2180,7 +2180,7 @@
     },
     "WB.Covenant.B14": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "owner": "priya",
@@ -2188,7 +2188,7 @@
     },
     "WB.Covenant.B15": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 533333.3333333321,
      "new": 533333.3333333321,
      "owner": "priya",
@@ -2196,7 +2196,7 @@
     },
     "WB.Bonus.B2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1507404.03,
      "new": 1507404.03,
      "owner": "priya",
@@ -2212,7 +2212,7 @@
     },
     "WB.Bonus.E2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 16016.16,
      "new": 16016.16,
      "owner": "priya",
@@ -2220,7 +2220,7 @@
     },
     "WB.Bonus.B3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1368731.01,
      "new": 1368731.01,
      "owner": "priya",
@@ -2236,7 +2236,7 @@
     },
     "WB.Bonus.E3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 11989.24,
      "new": 11989.24,
      "owner": "priya",
@@ -2244,7 +2244,7 @@
     },
     "WB.Bonus.B4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1250660.67,
      "new": 1250660.67,
      "owner": "priya",
@@ -2260,7 +2260,7 @@
     },
     "WB.Bonus.E4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "owner": "priya",
@@ -2268,7 +2268,7 @@
     },
     "WB.Bonus.B5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1128495.44,
      "new": 1128495.44,
      "owner": "priya",
@@ -2284,7 +2284,7 @@
     },
     "WB.Bonus.E5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 10019.82,
      "new": 10019.82,
      "owner": "priya",
@@ -2292,7 +2292,7 @@
     },
     "WB.Bonus.B6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1023459.86,
      "new": 1023459.86,
      "owner": "priya",
@@ -2308,7 +2308,7 @@
     },
     "WB.Bonus.E6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "owner": "priya",
@@ -2316,7 +2316,7 @@
     },
     "WB.Bonus.B7": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 670155.53,
      "new": 670155.53,
      "owner": "priya",
@@ -2332,7 +2332,7 @@
     },
     "WB.Bonus.E7": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 6006.22,
      "new": 6006.22,
      "owner": "priya",
@@ -2340,7 +2340,7 @@
     },
     "WB.Tax.B1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 4589094.77,
      "new": 4589094.77,
      "owner": "priya",
@@ -2356,7 +2356,7 @@
     },
     "WB.Tax.B3": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 1193164.64,
      "new": 1193164.64,
      "owner": "priya",
@@ -2364,7 +2364,7 @@
     },
     "DECK.s2.l1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 47524374.9,
      "new": 47524374.9,
      "owner": "sam",
@@ -2372,7 +2372,7 @@
     },
     "DECK.s2.l2": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 32600000.0,
      "new": 32600000.0,
      "owner": "sam",
@@ -2380,7 +2380,7 @@
     },
     "DECK.s2.l3.a": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 31389329.12,
      "new": 31389329.12,
      "owner": "sam",
@@ -2388,7 +2388,7 @@
     },
     "DECK.s2.l3.b": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_line_item",
      "old": 2.799999994105007,
      "new": 2.799999994105007,
      "owner": "sam",
@@ -2396,7 +2396,7 @@
     },
     "DECK.s2.l4.a": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 2.95,
      "new": 2.95,
      "owner": "sam",
@@ -2412,7 +2412,7 @@
     },
     "DECK.s2.l5": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 38968262.61,
      "new": 38968262.61,
      "owner": "sam",
@@ -2420,7 +2420,7 @@
     },
     "DECK.s3.l1": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "owner": "reporting_analyst",
@@ -2428,7 +2428,7 @@
     },
     "DECK.s4.l1": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1507404.03,
      "new": 1507404.03,
      "owner": "reporting_analyst",
@@ -2436,7 +2436,7 @@
     },
     "DECK.s4.l2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1368731.01,
      "new": 1368731.01,
      "owner": "reporting_analyst",
@@ -2444,7 +2444,7 @@
     },
     "DECK.s4.l3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1250660.67,
      "new": 1250660.67,
      "owner": "reporting_analyst",
@@ -2452,7 +2452,7 @@
     },
     "DECK.s4.l4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1128495.44,
      "new": 1128495.44,
      "owner": "reporting_analyst",
@@ -2460,7 +2460,7 @@
     },
     "DECK.s4.l5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1023459.86,
      "new": 1023459.86,
      "owner": "reporting_analyst",
@@ -2468,7 +2468,7 @@
     },
     "DECK.s4.l6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 670155.53,
      "new": 670155.53,
      "owner": "reporting_analyst",
@@ -2476,7 +2476,7 @@
     },
     "CERT.l1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 32000000.0,
      "new": 32000000.0,
      "owner": "covenant_comp",
@@ -2492,7 +2492,7 @@
     },
     "CERT.l3": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 2.95,
      "new": 2.95,
      "owner": "covenant_comp",
@@ -2508,7 +2508,7 @@
     },
     "CERT.l5": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "owner": "covenant_comp",
@@ -2566,7 +2566,7 @@
    "actions": {
     "ACT-cert-q1": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "compensation": null,
@@ -2576,7 +2576,7 @@
     },
     "ACT-bonus-R1": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 16016.16,
      "new": 16016.16,
      "compensation": null,
@@ -2586,7 +2586,7 @@
     },
     "ACT-bonus-R2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 11989.24,
      "new": 11989.24,
      "compensation": null,
@@ -2596,7 +2596,7 @@
     },
     "ACT-bonus-R3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "compensation": null,
@@ -2606,7 +2606,7 @@
     },
     "ACT-bonus-R4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 10019.82,
      "new": 10019.82,
      "compensation": null,
@@ -2616,7 +2616,7 @@
     },
     "ACT-bonus-R5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "compensation": null,
@@ -2626,7 +2626,7 @@
     },
     "ACT-bonus-R6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 6006.22,
      "new": 6006.22,
      "compensation": null,
@@ -2636,7 +2636,7 @@
     },
     "ACT-tax-q2": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 1193164.64,
      "new": 1193164.64,
      "compensation": null,
@@ -2655,7 +2655,7 @@
    "items": {
     "WB.Covenant.B6": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 186023530.92,
      "new": 186023530.92,
      "owner": "priya",
@@ -2663,7 +2663,7 @@
     },
     "WB.Covenant.B7": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 32000000.0,
      "new": 32000000.0,
      "owner": "priya",
@@ -2679,7 +2679,7 @@
     },
     "WB.Covenant.B10": {
      "verdict": "still_valid",
-     "reason": "different_line_item",
+     "reason": "different_period",
      "old": 10600000.0,
      "new": 10600000.0,
      "owner": "priya",
@@ -2687,7 +2687,7 @@
     },
     "WB.Covenant.B11": {
      "verdict": "still_valid",
-     "reason": "different_line_item",
+     "reason": "different_period",
      "old": 94400000.0,
      "new": 94400000.0,
      "owner": "priya",
@@ -2695,7 +2695,7 @@
     },
     "WB.Covenant.B12": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 2.95,
      "new": 2.95,
      "owner": "priya",
@@ -2711,7 +2711,7 @@
     },
     "WB.Covenant.B14": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "owner": "priya",
@@ -2719,7 +2719,7 @@
     },
     "WB.Covenant.B15": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 533333.3333333321,
      "new": 533333.3333333321,
      "owner": "priya",
@@ -2727,7 +2727,7 @@
     },
     "WB.Bonus.B2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1507404.03,
      "new": 1507404.03,
      "owner": "priya",
@@ -2743,7 +2743,7 @@
     },
     "WB.Bonus.E2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 16016.16,
      "new": 16016.16,
      "owner": "priya",
@@ -2751,7 +2751,7 @@
     },
     "WB.Bonus.B3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1368731.01,
      "new": 1368731.01,
      "owner": "priya",
@@ -2767,7 +2767,7 @@
     },
     "WB.Bonus.E3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 11989.24,
      "new": 11989.24,
      "owner": "priya",
@@ -2775,7 +2775,7 @@
     },
     "WB.Bonus.B4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1250660.67,
      "new": 1250660.67,
      "owner": "priya",
@@ -2791,7 +2791,7 @@
     },
     "WB.Bonus.E4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "owner": "priya",
@@ -2799,7 +2799,7 @@
     },
     "WB.Bonus.B5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1128495.44,
      "new": 1128495.44,
      "owner": "priya",
@@ -2815,7 +2815,7 @@
     },
     "WB.Bonus.E5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 10019.82,
      "new": 10019.82,
      "owner": "priya",
@@ -2823,7 +2823,7 @@
     },
     "WB.Bonus.B6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1023459.86,
      "new": 1023459.86,
      "owner": "priya",
@@ -2839,7 +2839,7 @@
     },
     "WB.Bonus.E6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "owner": "priya",
@@ -2847,7 +2847,7 @@
     },
     "WB.Bonus.B7": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 670155.53,
      "new": 670155.53,
      "owner": "priya",
@@ -2863,7 +2863,7 @@
     },
     "WB.Bonus.E7": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 6006.22,
      "new": 6006.22,
      "owner": "priya",
@@ -2871,7 +2871,7 @@
     },
     "WB.Tax.B1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 4589094.77,
      "new": 4589094.77,
      "owner": "priya",
@@ -2887,7 +2887,7 @@
     },
     "WB.Tax.B3": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 1193164.64,
      "new": 1193164.64,
      "owner": "priya",
@@ -2895,7 +2895,7 @@
     },
     "DECK.s2.l1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 47524374.9,
      "new": 47524374.9,
      "owner": "sam",
@@ -2903,7 +2903,7 @@
     },
     "DECK.s2.l2": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 32600000.0,
      "new": 32600000.0,
      "owner": "sam",
@@ -2911,7 +2911,7 @@
     },
     "DECK.s2.l3.a": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 31389329.12,
      "new": 31389329.12,
      "owner": "sam",
@@ -2919,7 +2919,7 @@
     },
     "DECK.s2.l3.b": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_line_item",
      "old": 2.799999994105007,
      "new": 2.799999994105007,
      "owner": "sam",
@@ -2927,7 +2927,7 @@
     },
     "DECK.s2.l4.a": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 2.95,
      "new": 2.95,
      "owner": "sam",
@@ -2943,7 +2943,7 @@
     },
     "DECK.s2.l5": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_line_item",
      "old": 38968262.61,
      "new": 38968262.61,
      "owner": "sam",
@@ -2951,7 +2951,7 @@
     },
     "DECK.s3.l1": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "owner": "reporting_analyst",
@@ -2959,7 +2959,7 @@
     },
     "DECK.s4.l1": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1507404.03,
      "new": 1507404.03,
      "owner": "reporting_analyst",
@@ -2967,7 +2967,7 @@
     },
     "DECK.s4.l2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1368731.01,
      "new": 1368731.01,
      "owner": "reporting_analyst",
@@ -2975,7 +2975,7 @@
     },
     "DECK.s4.l3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1250660.67,
      "new": 1250660.67,
      "owner": "reporting_analyst",
@@ -2983,7 +2983,7 @@
     },
     "DECK.s4.l4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1128495.44,
      "new": 1128495.44,
      "owner": "reporting_analyst",
@@ -2991,7 +2991,7 @@
     },
     "DECK.s4.l5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 1023459.86,
      "new": 1023459.86,
      "owner": "reporting_analyst",
@@ -2999,7 +2999,7 @@
     },
     "DECK.s4.l6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 670155.53,
      "new": 670155.53,
      "owner": "reporting_analyst",
@@ -3007,7 +3007,7 @@
     },
     "CERT.l1": {
      "verdict": "still_valid",
-     "reason": "value_unchanged",
+     "reason": "different_period",
      "old": 32000000.0,
      "new": 32000000.0,
      "owner": "covenant_comp",
@@ -3015,7 +3015,7 @@
     },
     "CERT.l2": {
      "verdict": "still_valid",
-     "reason": "different_line_item",
+     "reason": "different_period",
      "old": 94400000.0,
      "new": 94400000.0,
      "owner": "covenant_comp",
@@ -3023,7 +3023,7 @@
     },
     "CERT.l3": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 2.95,
      "new": 2.95,
      "owner": "covenant_comp",
@@ -3039,7 +3039,7 @@
     },
     "CERT.l5": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "owner": "covenant_comp",
@@ -3097,7 +3097,7 @@
    "actions": {
     "ACT-cert-q1": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": "Compliant",
      "new": "Compliant",
      "compensation": null,
@@ -3107,7 +3107,7 @@
     },
     "ACT-bonus-R1": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 16016.16,
      "new": 16016.16,
      "compensation": null,
@@ -3117,7 +3117,7 @@
     },
     "ACT-bonus-R2": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 11989.24,
      "new": 11989.24,
      "compensation": null,
@@ -3127,7 +3127,7 @@
     },
     "ACT-bonus-R3": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "compensation": null,
@@ -3137,7 +3137,7 @@
     },
     "ACT-bonus-R4": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 10019.82,
      "new": 10019.82,
      "compensation": null,
@@ -3147,7 +3147,7 @@
     },
     "ACT-bonus-R5": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 0.0,
      "new": 0.0,
      "compensation": null,
@@ -3157,7 +3157,7 @@
     },
     "ACT-bonus-R6": {
      "verdict": "still_valid",
-     "reason": "not_consumed",
+     "reason": "different_period",
      "old": 6006.22,
      "new": 6006.22,
      "compensation": null,
@@ -3167,7 +3167,7 @@
     },
     "ACT-tax-q2": {
      "verdict": "still_valid",
-     "reason": "conclusion_unchanged",
+     "reason": "different_period",
      "old": 1193164.64,
      "new": 1193164.64,
      "compensation": null,

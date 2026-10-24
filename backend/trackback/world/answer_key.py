@@ -10,7 +10,7 @@ import json
 
 from .. import config as C
 from .human_files import ACTIONS
-from .refcalc import Ref, item_verdict, metric_value
+from .refcalc import Ref, item_verdict, metric_value, reach
 
 
 def correction_lines(kind: str, facts: dict) -> list[dict]:
@@ -48,7 +48,7 @@ def impact(entries: list[dict], items: list[dict], targets: dict, lines: list[di
         mids = [it["metric"]] if it.get("metric") and it["link"] != "policy" else []
         b = {m: metric_value(before[snap], m, targets) for m in mids}
         a = {m: metric_value(after[snap], m, targets) for m in mids}
-        v, reason = item_verdict(it, b, a, touched_regions, invalid)
+        v, reason = item_verdict(it, b, a, lines, invalid)
         if v == "invalidated":
             invalid.add(it["id"])
         out_items[it["id"]] = {"verdict": v, "reason": reason, "old": b.get(it.get("metric")), "new": a.get(it.get("metric")), "owner": it["owner"], "file": it["file"]}
@@ -56,16 +56,16 @@ def impact(entries: list[dict], items: list[dict], targets: dict, lines: list[di
     for ac in ACTIONS:
         m = ac["metric"]
         b, a = metric_value(before["close"], m, targets), metric_value(after["close"], m, targets)
-        reg = ac.get("region")
-        if isinstance(b, str):
+        reached, why = reach(m, lines)
+        if not reached:
+            v, reason, amount = "still_valid", why, None
+        elif isinstance(b, str):
             v, reason = ("invalidated", "conclusion_flipped") if b != a else ("still_valid", "conclusion_unchanged")
             amount = None
         elif abs(a - b) > 0.005:
             v, reason, amount = "invalidated", "value_changed", round(b - a, 2)
         else:
-            v = "still_valid"
-            reason = "not_consumed" if (reg and reg not in touched_regions) else "conclusion_unchanged"
-            amount = None
+            v, reason, amount = "still_valid", "conclusion_unchanged", None
         out_actions[ac["id"]] = {"verdict": v, "reason": reason, "old": b, "new": a, "compensation": ac["compensation"] if v == "invalidated" else None,
                                  "approver": ac["comp_approver"] if v == "invalidated" else None, "amount": amount, "owner": ac["owner"]}
     return {"items": out_items, "actions": out_actions,

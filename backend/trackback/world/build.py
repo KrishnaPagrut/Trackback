@@ -67,7 +67,7 @@ def generate() -> dict:
         if name.endswith(".csv"):
             _write_csv(p, data)
         else:
-            p.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8")
+            p.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8", newline="\n")
     items, _ = H.build_items(w.entries, w.targets)
     H.write_workbook(C.HUMAN_DIR / "Covenant_Q1-26_PN.xlsx", items, w.targets)
     H.write_deck(C.HUMAN_DIR / "Board_Deck_Q1-26.pptx", items)
@@ -75,7 +75,7 @@ def generate() -> dict:
     H.write_incomplete_rec(C.HUMAN_DIR / "Billing_to_GL_rec_Mar26_PN_INCOMPLETE.xlsx", files["_batch_totals_mar"])
     key = AK.build(w, items, files)
     C.WORLD_DIR.mkdir(parents=True, exist_ok=True)
-    C.ANSWER_KEY_V3.write_text(json.dumps(key, indent=1, default=str), encoding="utf-8")
+    C.ANSWER_KEY_V3.write_text(json.dumps(key, indent=1, default=str), encoding="utf-8", newline="\n")
     print(f"generated Tidewall: {len(w.entries)} ledger lines, {len(w.members)} annual-plan members, {len(items)} lineage truths, key {AK.key_hash(key)[:12]} ({time.time() - t0:.1f}s)")
     return {"world": w, "files": files, "items": items, "key": key}
 
