@@ -20,3 +20,8 @@ data/snapshots/undo/
 .vercel
 .env*
 .tmp/
+brag-output-*/composition/.hyperframes/
+brag-output-*/composition/node_modules/
+brag-output-*/composition/assets/audio/raw-*.wav
+brag-output-*/composition/assets/audio/transcript.json
+brag-output-*/trackback-demo.mp4

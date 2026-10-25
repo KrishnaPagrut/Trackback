@@ -26,6 +26,9 @@ From SPEC.md Part 1 section 14, SPEC_ITERATION_2 section 17 and the goal brief. 
 - [x] Nothing under 13 px anywhere, measured after the canvas zoom. Proof: `backend/scripts/type_floor_check.py` (smallest rendered text 13.0 px in every state at both sizes).
 - [x] STATUS.md, README.md, PITCH.md and DEVPOST.md are current.
 
+## Film
+- `brag-output-2026-10-24-film/trackback-demo.mp4`: the demo portion (~2:27, 1080p, narrated, captioned); the black-and-white skit is cut in front by the team. Script: `docs/VIDEO_SCRIPT.md`; rebuild notes: `brag-output-2026-10-24-film/README.md`.
+
 ## Live
 - https://trackback-gamma.vercel.app (Vercel, project `trackback`, production). Opens in Deep mode with the nine-step guided tour; `D` or `?mode=stage` for Stage mode. Verified end to end from a headless browser twice in a row (tour, the E11 drop, 3 of 3 agents pinged, Jade's overrule, Stage payoff 10 of 174 with 4 fixes waiting), see DECISIONS.md for the serverless consistency design.
 

@@ -8,7 +8,7 @@ def reset(): urllib.request.urlopen(urllib.request.Request(f"{B}/api/reset", met
 def press(pg, k, w=800): pg.keyboard.press(k); pg.wait_for_timeout(w)
 with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page(viewport={"width": 1920, "height": 1080})
-    reset(); pg.goto(f"{B}/?kiosk=off"); pg.wait_for_timeout(2500); pg.screenshot(path=OUT / "s-title.png")
+    reset(); pg.goto(f"{B}/?kiosk=off&tour=0"); pg.wait_for_timeout(2500); pg.screenshot(path=OUT / "s-title.png")
     press(pg, "Space", 2200); pg.screenshot(path=OUT / "s-reveal-1.png")          # layer 1 only
     pg.wait_for_timeout(2400); pg.screenshot(path=OUT / "s-reveal-2.png")          # layer 2
     pg.wait_for_timeout(2600); pg.screenshot(path=OUT / "s-reveal-3.png")          # all layers
