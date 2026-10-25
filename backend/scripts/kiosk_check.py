@@ -48,12 +48,12 @@ with sync_playwright() as p:
     reset(); page.goto(f"{BASE}/?kiosk=off"); page.wait_for_timeout(2000)
     ok("told its lender leverage was" in page.locator(".stage .title-card").inner_text(), "Stage mode opens on the title card")
     payoff = run_to_payoff(page, 20)
-    m = re.search(r"(\d+) of (\d+)\s+pieces of work.*?(\d) of 3 agents needed to act · (\d+) actions? waiting for a human · (\d+) things left stale", payoff, re.S)
+    m = re.search(r"(\d+) of (\d+)\s+pieces of work.*?(\d) of 2 agents and (\d) of 1 person needed to act · (\d+) actions? waiting for a human · (\d+) things left stale", payoff, re.S)
     ok(bool(m), "Space alone runs title → layered reveal → recall → ripple → replies → payoff", payoff.replace("\n", " | ")[:160])
     import json
     pl = json.loads(urllib.request.urlopen(f"{BASE}/pings?correction=E11").read())["pings"]
     agents_api = len({x["target_agent_id"] for x in pl}); items_api = sum(x["n_items"] for x in pl)
-    ok(bool(m) and int(m.group(3)) == agents_api and int(m.group(1)) == items_api, "payoff numbers come from the run",
+    ok(bool(m) and int(m.group(3)) + int(m.group(4)) == agents_api and int(m.group(1)) == items_api, "payoff numbers come from the run",
        f"page: {m.group(1) if m else '?'} items, {m.group(3) if m else '?'} of 3 agents; /pings: {items_api} items to {agents_api} agents")
     page.screenshot(path=f"{OUT}/presenter-payoff.png")
     # ---------------- D keeps state
@@ -68,10 +68,10 @@ with sync_playwright() as p:
     reset(); page = b.new_page(viewport={"width": 1280, "height": 720}); page.on("pageerror", lambda e: errors.append(str(e)))
     page.goto(f"{BASE}/?kiosk=on"); page.wait_for_timeout(2000)
     t0 = time.time(); page.wait_for_timeout(58_000)
-    ok("Three AI agents built on one number" not in caption(page), "no attract loop before 60 s idle", f"{time.time() - t0:.0f} s")
+    ok("built on one number" not in caption(page), "no attract loop before 60 s idle", f"{time.time() - t0:.0f} s")
     page.wait_for_timeout(5_000)
     cap = caption(page)
-    ok("Three AI agents built on one number" in cap, "attract loop starts after 60 s idle, with a caption", f"{time.time() - t0:.0f} s: {cap[:70]}")
+    ok("built on one number" in cap, "attract loop starts after 60 s idle, with a caption", f"{time.time() - t0:.0f} s: {cap[:70]}")
     page.wait_for_timeout(9_000)
     page.screenshot(path=f"{OUT}/attract-loop.png")
     advancing = page.locator(".stage .layer-label").count() > 0 or page.locator(".stage .snode").count() > 0
@@ -89,16 +89,16 @@ with sync_playwright() as p:
         page.get_by_role("button", name=name).click(); page.wait_for_timeout(1500)
         ok(page.locator(".recall-notice").count() == 1, f"preset '{name}': its recall notice appears")
         out = run_to_payoff(page, 20)
-        mm = re.search(r"(\d) of 3 agents needed to act", out)
-        n = int(mm.group(1)) if mm else -1
+        mm = re.search(r"(\d) of 2 agents and (\d) of 1 person needed to act", out)
+        n = int(mm.group(1)) + int(mm.group(2)) if mm else -1
         good = (n == expect) if expect is not None else (n >= 1)
-        ok(good, f"preset '{name}': payoff shows {n} of 3 agents needed to act", "zero pings, everything cleared" if expect == 0 and n == 0 else out.replace('\n', ' | ')[:120])
+        ok(good, f"preset '{name}': payoff shows {n} of 3 agents and people needed to act", "zero pings, everything cleared" if expect == 0 and n == 0 else out.replace('\n', ' | ')[:120])
         page.screenshot(path=f"{OUT}/preset-{name.split()[-1]}.png")
         # back to the card for the next preset
         reset()
         if name == "A 40-cent bank fee":
             page.goto(f"{BASE}/?kiosk=on"); page.wait_for_timeout(64_000)
-            ok("Three AI agents built on one number" in caption(page), "after idling, the kiosk returns to the attract loop")
+            ok("built on one number" in caption(page), "after idling, the kiosk returns to the attract loop")
             page.keyboard.press("x"); page.wait_for_timeout(1200)
         else:
             page.goto(f"{BASE}/?visitor=1&kiosk=on"); page.wait_for_timeout(1500)

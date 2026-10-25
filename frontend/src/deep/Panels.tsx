@@ -2,19 +2,18 @@ import { useEffect, useMemo, useState } from 'react'
 import { X as Close, Search } from 'lucide-react'
 import { api, dateLabel, dayLabel, fmt } from '../api'
 import { title } from '../labels'
-import { LANES, laneOf, stateOf, reasonText, STATE_WORD, compText, agentLane, pingStory, type State } from '../model'
+import { LANES, laneOf, stateOf, reasonText, STATE_WORD, compText, agentLane, pingStory, pingSplit, type State } from '../model'
 import { StatusIcon, Lot, Seg, Envelope, RefusalStamp, Empty } from '../ui/primitives'
 
 /* ---------------------------------------------------------------- counter strip */
 export function CounterStrip({ company, correction, graph, pings, waves, approvalsPending, headline, onRecall, evaluation, onJade }: { company: string; correction: string | null; graph: any; pings: any[]; waves: any[]; approvalsPending: number; headline: any; onRecall?: () => void; evaluation?: any; onJade?: () => void }) {
-  const agents = LANES[company].filter(l => !['sources', 'trackback', 'humans'].includes(l.id)).length
-  const pinged = new Set(pings.map(p => p.target_agent_id)).size
+  const sp = pingSplit(company, pings)
   const inspected = graph ? graph.nodes.filter((n: any) => n.verdict && !['different_period', 'different_line_item', 'claim_unchanged'].includes(n.reason || '')).length : 0
   const total = graph ? graph.nodes.filter((n: any) => n.type === 'artifact').length : 0
   const st = waves[0]?.stats_json ? JSON.parse(waves[0].stats_json) : null
   return (
     <div style={{ height: 52, flex: 'none', display: 'flex', alignItems: 'center', gap: 32, padding: '0 20px', borderBottom: '1px solid var(--rule)', background: 'var(--paper)' }}>
-      {correction ? <div className="serif" style={{ fontSize: 30, lineHeight: 1 }}><span className="num" style={{ fontFamily: 'var(--serif)' }}>{pinged} of {agents}</span> agents pinged</div>
+      {correction ? <div className="serif" style={{ fontSize: 30, lineHeight: 1 }}><span className="num" style={{ fontFamily: 'var(--serif)' }}>{sp.agents} of {sp.agentsTotal}</span> agents pinged{sp.peopleTotal ? <span style={{ fontSize: 22 }}> · {sp.people} of {sp.peopleTotal} person notified</span> : null}</div>
         : <div className="serif" style={{ fontSize: 24, fontStyle: 'italic', color: 'var(--ink-muted)' }}>Nothing's been corrected. Yet.</div>}
       {!correction && onRecall && <button className="btn primary" style={{ marginLeft: 'auto' }} data-tour="recall" onClick={onRecall}>A correction arrived</button>}
       {correction && <div className="mono t14" style={{ display: 'flex', gap: 24, color: 'var(--ink)' }}>

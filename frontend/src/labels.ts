@@ -2,7 +2,7 @@
 export const GYM: Record<string, string> = { G1: 'Oakland', G2: 'San Jose', G3: 'Sacramento', G4: 'Fresno', G5: 'Santa Cruz', G6: 'Berkeley' }
 
 export const AGENT: Record<string, string> = {
-  close_accountant: 'Close Accountant', reporting_analyst: 'Reporting Analyst', covenant_comp: 'Covenant & Comp', trackback: 'Trackback',
+  close_accountant: 'Close Accountant', reporting_analyst: 'Maya Chen (FP&A)', covenant_comp: 'Covenant & Comp', trackback: 'Trackback',
   lyft_fpa: 'FP&A', lyft_ir: 'Reporting / IR', lyft_disclosure: 'Disclosure', street_analyst: 'Street analyst', newsroom: 'Newsroom', humans: 'People',
 }
 export const agentName = (id?: string | null) => (id && AGENT[id]) || (id || '').replace(/_/g, ' ') || 'unknown'

@@ -10,7 +10,7 @@ Run it in Stage mode (the app opens there). Every beat is one press of `Space`; 
 
 | Time | On screen (key) | Say |
 |---|---|---|
-| 0:00–0:15 | Title card: "May 15: Tidewall's CFO told its lender leverage was 2.95x." | "Three AI agents run Tidewall's close. On May 15 the CFO told the lender leverage was 2.95 times. Three agents built on that number." |
+| 0:00–0:15 | Title card: "May 15: Tidewall's CFO told its lender leverage was 2.95x." | "Two AI agents and an FP&A analyst, Maya, run Tidewall's close. On May 15 the CFO told the lender leverage was 2.95 times. Three agents built on that number." |
 | 0:15–0:30 | `Space`: the layered reveal. Sources, then the Close Accountant's work, then Covenant and Comp, then the Reporting Analyst, with thin lines for who built on whom. | "The Close Accountant's revenue fed the Covenant agent's certificate, and the Reporting Analyst's deck rests on both. Every line is a receipt." |
 | 0:30–0:40 | `Space`: the recall notice. `Space`: drop it. | "July 8. The billing system admits it counted $118,000 of March revenue twice." |
 | 0:40–1:00 | `Space`: the calc line "Leverage recomputed: 2.95x → 3.03x, crosses 3.00x". | "Trackback recomputes every number itself. No agent is asked about arithmetic. The certificate is now a breach." |

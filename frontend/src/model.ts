@@ -2,13 +2,13 @@ import { fmt, type GraphNode, type GraphEdge } from './api'
 import { title, GYM } from './labels'
 
 /* ---------------------------------------------------------------- lanes */
-export type Lane = { id: string; name: string; seat: string; mono: string }
+export type Lane = { id: string; name: string; seat: string; mono: string; human?: boolean }
 export const LANES: Record<string, Lane[]> = {
   tidewall: [
     { id: 'sources', name: 'Sources', seat: 'What the agents read', mono: 'S' },
     { id: 'close_accountant', name: 'Close Accountant', seat: 'Senior Accountant, Close', mono: 'CA' },
     { id: 'trackback', name: 'Trackback', seat: 'Recomputes every number', mono: 'T' },
-    { id: 'reporting_analyst', name: 'Reporting Analyst', seat: 'FP&A, deck and cash', mono: 'RA' },
+    { id: 'reporting_analyst', name: 'Maya Chen', seat: 'FP&A analyst · a person, same tools', mono: 'MC', human: true },
     { id: 'covenant_comp', name: 'Covenant and Comp', seat: 'Certificate, bonuses, tax', mono: 'CC' },
     { id: 'humans', name: 'Humans', seat: 'Controller, CFO, HR', mono: 'H' },
   ],
@@ -24,6 +24,9 @@ export const LANES: Record<string, Lane[]> = {
   ],
 }
 export const AGENT_LANES = (company: string) => LANES[company].filter(l => !['sources', 'trackback', 'humans'].includes(l.id))
+export const isHuman = (company: string, id: string) => !!LANES[company].find(l => l.id === id)?.human
+/* how many of the pinged lanes are agents and how many are people, for the strip and the payoff */
+export const pingSplit = (company: string, pings: any[]) => { const ids = new Set(pings.map((p: any) => p.target_agent_id)); const lanes = AGENT_LANES(company); return { agents: lanes.filter(l => !l.human && ids.has(l.id)).length, agentsTotal: lanes.filter(l => !l.human).length, people: lanes.filter(l => l.human && ids.has(l.id)).length, peopleTotal: lanes.filter(l => l.human).length } }
 export const agentLane = (company: string, id: string) => LANES[company].find(l => l.id === id)
 
 export function laneOf(n: GraphNode & any): string {
@@ -162,7 +165,9 @@ const LONG: Record<string, string> = {
 export type Explain = { head: string; tone: State; lines: string[] }
 export function explain(n: any, st: State, comp?: any): Explain {
   const t = title(n, 90)
-  const who = n.type === 'source' ? (n.system || 'source').replace(/_/g, ' ') : n.agent_id ? (agentLane('tidewall', n.agent_id) || agentLane('lyft', n.agent_id))?.name || n.agent_id : 'Trackback'
+  const laneRef = n.agent_id ? (agentLane('tidewall', n.agent_id) || agentLane('lyft', n.agent_id)) : undefined
+  const who = n.type === 'source' ? (n.system || 'source').replace(/_/g, ' ') : n.agent_id ? laneRef?.name || n.agent_id : 'Trackback'
+  const whoP = laneRef?.human || !n.agent_id ? who : `the ${who}`
   const lines: string[] = []
   if (n.type === 'source') {
     if (n.corrected) return { head: 'Source corrected', tone: 'invalidated', lines: [`${t}: the trackback notice replaced the version the agents read with a corrected one.`, `${n.versions ?? 1} stored version${n.versions === 1 ? '' : 's'} · ${who}`] }
@@ -171,7 +176,7 @@ export function explain(n: any, st: State, comp?: any): Explain {
   const moved = n.old_value != null && n.new_value != null && n.old_value !== n.new_value
   const what = n.kind === 'sentence' ? 'This sentence' : n.kind === 'action' ? 'This action' : n.kind === 'forecast_cell' ? 'This forecast cell' : 'This number'
   if (st === 'idle' || !n.verdict) {
-    lines.push(`${what} was built by the ${who}${n.period ? ` for ${n.period}` : ''}${n.kind !== 'sentence' && n.value != null ? `: ${fmt(n.value, n.line_item)}` : ''}.`)
+    lines.push(`${what} was built by ${whoP}${n.period ? ` for ${n.period}` : ''}${n.kind !== 'sentence' && n.value != null ? `: ${fmt(n.value, n.line_item)}` : ''}.`)
     if (n.kind === 'sentence' && n.content) lines.push(`“${n.content.replace(/\s*\(corrected[^)]*\)/g, '').slice(0, 140)}”`)
     lines.push('Not touched by the current correction.' + (n.verdict === null && n.kind !== 'action' ? ' Click for who built it, on top of whom.' : ''))
     return { head: t, tone: 'idle', lines }

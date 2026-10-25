@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { api, fmt, dayLabel } from '../api'
 import { title } from '../labels'
-import { LANES, stateOf, pingStory, reduceEdges, explain, STATE_WORD, type State } from '../model'
+import { LANES, stateOf, pingStory, reduceEdges, explain, pingSplit, STATE_WORD, type State } from '../model'
 import { StatusIcon, RecallNotice, RefusalStamp, Envelope, HoverCard } from '../ui/primitives'
 
 /* Stage mode: four lanes, about ten cards, one thing moves at a time, every step on a keypress.
@@ -13,7 +13,7 @@ const HERO: Record<string, string[]> = {
   reporting_analyst: ['deck_s_covenant', 'cf_2026_weekly_dues'],
   covenant_comp: ['leverage_2026_q1', 'cert_send_q1_2026'],
 }
-const LAYER: Record<string, string> = { sources: 'Layer 0 · sources', close_accountant: 'Layer 1 · Close Accountant', covenant_comp: 'Layer 2 · Covenant and Comp', reporting_analyst: 'Layer 3 · Reporting Analyst' }
+const LAYER: Record<string, string> = { sources: 'Layer 0 · sources', close_accountant: 'Layer 1 · Close Accountant', covenant_comp: 'Layer 2 · Covenant and Comp', reporting_analyst: 'Layer 3 · Maya Chen, FP&A' }
 const LAYER_ORDER = ['sources', 'close_accountant', 'covenant_comp', 'reporting_analyst']
 
 type Preset = { key: string; label: string; notice: { id: string; lot: string; headline: string; reason: string; issuer: string; ts: string }; apply: () => Promise<string> }
@@ -242,19 +242,19 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
   const cleared = (l: string) => data ? data.graph.nodes.filter((x: any) => x.type === 'artifact' && x.agent_id === l && x.verdict === 'unaffected').length : 0
   const live = (l: string): string => {
     if (l === 'sources') return ''
-    if (!corr || !after('calc')) return cur === 'title' ? '' : 'Finished its work'
+    if (!corr || !after('calc')) return cur === 'title' ? '' : (LANES.tidewall.find(x => x.id === l)?.human ? 'Finished her work' : 'Finished its work')
     if (!pingAgents.includes(l)) return `Not pinged · ${cleared(l)} checked, all fine`
     if (after(`reply:${l}`)) { const s = story(l); return `${s?.replyTone === 'caution' ? 'Waiting for a human' : s?.replyTone === 'reworked' ? 'Reworked' : 'Still valid'} · ${cleared(l)} cleared` }
     if (after(`ping:${l}`)) { const s = story(l); return `Re-checking ${s?.items ?? ''} item${s?.items === 1 ? '' : 's'}` }
     return 'Watching'
   }
   const caption = (() => {
-    if (kiosk === 'attract') return { left: 'Three AI agents built on one number. Watch what happens when it is corrected.', right: 'Press any key to try it' }
+    if (kiosk === 'attract') return { left: 'Two AI agents and an analyst built on one number. Watch what happens when it is corrected.', right: 'Press any key to try it' }
     const hint = `Space next · Backspace back · T time travel · R reset · D deep mode${kioskEnabled ? ' · K loop on' : ''}`
     const m: Record<string, string> = { title: 'Press Space to begin.', reveal: 'Each agent builds on what the one before it made.', recall: 'The source admits it was wrong.', calc: 'Trackback recomputes every number itself. No agent is asked about arithmetic.',
       review: 'A second AI reviews the first. Jade recomputes every judgment call from the engines, and overrules.', learn: 'The mistake becomes a lesson: re-run against every past case, approved by the Controller, applied from now on.', payoff: '' }
-    if (cur.startsWith('ping:')) return { left: `Trackback pings the ${LANES.tidewall.find(x => x.id === cur.slice(5))?.name}, once, about only what it used.`, right: hint }
-    if (cur.startsWith('reply:')) return { left: `The ${LANES.tidewall.find(x => x.id === cur.slice(6))?.name} answers in its own words.`, right: hint }
+    if (cur.startsWith('ping:')) { const ln = LANES.tidewall.find(x => x.id === cur.slice(5)); return { left: ln?.human ? `Trackback sends ${ln.name} a notice, about only what she used. People get the same message as agents.` : `Trackback pings the ${ln?.name}, once, about only what it used.`, right: hint } }
+    if (cur.startsWith('reply:')) { const ln = LANES.tidewall.find(x => x.id === cur.slice(6)); return { left: ln?.human ? `${ln.name} answers in her own words.` : `The ${ln?.name} answers in its own words.`, right: hint } }
     return { left: m[cur] ?? '', right: hint }
   })()
   const cert = node('cert_send_q1_2026')
@@ -264,7 +264,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
       {/* title card */}
       {cur === 'title' && <div className="title-card">
         <h1>May 15: Tidewall's CFO told its lender leverage was {cert ? fmt(cert.old_value ?? cert.value, 'leverage') : '2.95x'}.</h1>
-        <p>Three AI agents built on that number.</p>
+        <p>Two AI agents and an analyst built on that number.</p>
         <p style={{ fontSize: 'clamp(16px, 1.2vw, 24px)', marginTop: '2vh' }}><span className="kbd" style={{ fontSize: '0.9em' }}>Space</span> steps through the story · hover any card to see what happened to it · <span className="kbd" style={{ fontSize: '0.9em' }}>D</span> for the full ledger</p>
       </div>}
 
@@ -383,7 +383,7 @@ export default function Stage({ world, onReset, kioskEnabled, idleSeconds, initi
       {cur === 'payoff' && data && <div className="payoff">
         <div className="big num" style={{ fontFamily: 'var(--serif)' }}>{data.pings.reduce((a: number, p: any) => a + (p.n_items || 0), 0)} of {data.total}</div>
         <div className="bigsub">pieces of work needed an agent to look. Trackback checked the rest itself.</div>
-        <div className="line">{pingAgents.length} of 3 agents needed to act · {data.compsWaiting} action{data.compsWaiting === 1 ? '' : 's'} waiting for a human · {data.stale} things left stale</div>
+        <div className="line">{(() => { const s = pingSplit('tidewall', data.pings); return `${s.agents} of ${s.agentsTotal} agents and ${s.people} of ${s.peopleTotal} person needed to act` })()} · {data.compsWaiting} action{data.compsWaiting === 1 ? '' : 's'} waiting for a human · {data.stale} things left stale</div>
         {data.evaluation && <div className="line" style={{ marginTop: '1.2vh' }}>Jade overruled {data.evaluation.jade?.summary?.overruled || 0} of 4 calls · {(learned?.lessons || []).filter((l: any) => l.status === 'active').length} lesson{(learned?.lessons || []).filter((l: any) => l.status === 'active').length === 1 ? '' : 's'} learned · playbook {learned?.playbook?.version || data.evaluation.playbook_version}</div>}
         <div className="tag">Trackback traces any correction forward.</div>
       </div>}
