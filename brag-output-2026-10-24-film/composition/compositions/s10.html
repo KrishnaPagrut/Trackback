@@ -31,19 +31,19 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s10" data-width="1920" data-height="1080">
-        <div id="s10-f0" class="clip frame" data-start="0.0" data-duration="15.06" style="z-index:1"><img id="s10-f0-img" src="assets/frames/s-jade.png" alt=""></div>
-    <div id="s10-bt" class="clip band-top" data-start="0" data-duration="15.06" data-layout-ignore style="z-index:15"></div>
-    <div id="s10-bb" class="clip band-bottom" data-start="0" data-duration="15.06" data-layout-ignore style="z-index:15"></div>
-    <div id="s10-ch" class="clip chapter" data-start="0" data-duration="15.06" style="z-index:20"><div id="s10-ch-in" class="chapter-in">10 · It learns</div></div>
-    <div id="s10-c0" class="clip chip" data-start="4.56" data-duration="6.89" style="z-index:21"><div id="s10-c0-in" class="chip-in">Regression gate: 71 of 72 past claims pass · 0 newly failing</div></div>
-    <div id="s10-c1" class="clip chip" data-start="11.45" data-duration="3.61" style="z-index:21"><div id="s10-c1-in" class="chip-in">Held-out cases: v1 80% → v2 100%</div></div>
+        <div id="s10-f0" class="clip frame" data-start="0.0" data-duration="19.05" style="z-index:1"><img id="s10-f0-img" src="assets/frames/s-jade.png" alt=""></div>
+    <div id="s10-bt" class="clip band-top" data-start="0" data-duration="19.05" data-layout-ignore style="z-index:15"></div>
+    <div id="s10-bb" class="clip band-bottom" data-start="0" data-duration="19.05" data-layout-ignore style="z-index:15"></div>
+    <div id="s10-ch" class="clip chapter" data-start="0" data-duration="19.05" style="z-index:20"><div id="s10-ch-in" class="chapter-in">10 · It learns</div></div>
+    <div id="s10-c0" class="clip chip" data-start="5.77" data-duration="8.77" style="z-index:21"><div id="s10-c0-in" class="chip-in">Regression gate: 71 of 72 past claims pass · 0 newly failing</div></div>
+    <div id="s10-c1" class="clip chip" data-start="14.54" data-duration="4.51" style="z-index:21"><div id="s10-c1-in" class="chip-in">Held-out cases: v1 80% → v2 100%</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s10-f0-img", { scale: 1 }, { scale: 1.035, duration: 15.06, ease: "none" }, 0);
+        tl.fromTo("#s10-f0-img", { scale: 1 }, { scale: 1.035, duration: 19.05, ease: "none" }, 0);
     tl.fromTo("#s10-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s10-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 4.56);
-    tl.fromTo("#s10-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 11.45);
+    tl.fromTo("#s10-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 5.77);
+    tl.fromTo("#s10-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 14.54);
     window.__timelines["s10"] = tl;
   </script>
 </template>

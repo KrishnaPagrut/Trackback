@@ -31,24 +31,24 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s5" data-width="1920" data-height="1080">
-        <div id="s5-f0" class="clip frame" data-start="0.0" data-duration="9.8" style="z-index:1"><img id="s5-f0-img" src="assets/frames/s-notice2.png" alt=""></div>
-    <div id="s5-f1" class="clip frame" data-start="5.25" data-duration="4.55" style="z-index:2"><img id="s5-f1-img" src="assets/frames/s-notice.png" alt=""></div>
-    <div id="s5-bt" class="clip band-top" data-start="0" data-duration="9.8" data-layout-ignore style="z-index:15"></div>
-    <div id="s5-bb" class="clip band-bottom" data-start="0" data-duration="9.8" data-layout-ignore style="z-index:15"></div>
-    <div id="s5-ch" class="clip chapter" data-start="0" data-duration="9.8" style="z-index:20"><div id="s5-ch-in" class="chapter-in">5 · July 8: Trackback is switched on</div></div>
-    <div id="s5-c0" class="clip chip" data-start="4.34" data-duration="2.1" style="z-index:21"><div id="s5-c0-in" class="chip-in">$118,000 counted twice across five gyms</div></div>
-    <div id="s5-c1" class="clip chip" data-start="6.44" data-duration="3.36" style="z-index:21"><div id="s5-c1-in" class="chip-in">Leverage 2.95x → 3.03x, crosses 3.00x</div></div>
-    <div id="s5-sp0" class="clip spot" data-start="5.89" data-duration="3.91" data-layout-ignore style="z-index:19; left:805px; top:166px; width:788px; height:74px"><div id="s5-sp0-in" class="spot-in"></div></div>
+        <div id="s5-f0" class="clip frame" data-start="0.0" data-duration="12.44" style="z-index:1"><img id="s5-f0-img" src="assets/frames/s-notice2.png" alt=""></div>
+    <div id="s5-f1" class="clip frame" data-start="6.7" data-duration="5.74" style="z-index:2"><img id="s5-f1-img" src="assets/frames/s-notice.png" alt=""></div>
+    <div id="s5-bt" class="clip band-top" data-start="0" data-duration="12.44" data-layout-ignore style="z-index:15"></div>
+    <div id="s5-bb" class="clip band-bottom" data-start="0" data-duration="12.44" data-layout-ignore style="z-index:15"></div>
+    <div id="s5-ch" class="clip chapter" data-start="0" data-duration="12.44" style="z-index:20"><div id="s5-ch-in" class="chapter-in">5 · July 8: Trackback is switched on</div></div>
+    <div id="s5-c0" class="clip chip" data-start="5.54" data-duration="2.68" style="z-index:21"><div id="s5-c0-in" class="chip-in">$118,000 counted twice across five gyms</div></div>
+    <div id="s5-c1" class="clip chip" data-start="8.22" data-duration="4.22" style="z-index:21"><div id="s5-c1-in" class="chip-in">Leverage 2.95x → 3.03x, crosses 3.00x</div></div>
+    <div id="s5-sp0" class="clip spot" data-start="7.52" data-duration="4.92" data-layout-ignore style="z-index:19; left:805px; top:166px; width:788px; height:74px"><div id="s5-sp0-in" class="spot-in"></div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s5-f0-img", { scale: 1 }, { scale: 1.035, duration: 9.8, ease: "none" }, 0);
-    tl.fromTo("#s5-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 5.25);
-    tl.fromTo("#s5-f1-img", { scale: 1 }, { scale: 1.03, duration: 4.55, ease: "none" }, 5.25);
+        tl.fromTo("#s5-f0-img", { scale: 1 }, { scale: 1.035, duration: 12.44, ease: "none" }, 0);
+    tl.fromTo("#s5-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 6.7);
+    tl.fromTo("#s5-f1-img", { scale: 1 }, { scale: 1.03, duration: 5.74, ease: "none" }, 6.7);
     tl.fromTo("#s5-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s5-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 4.34);
-    tl.fromTo("#s5-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 6.44);
-    tl.fromTo("#s5-sp0-in", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" }, 5.89);
+    tl.fromTo("#s5-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 5.54);
+    tl.fromTo("#s5-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 8.22);
+    tl.fromTo("#s5-sp0-in", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" }, 7.52);
     window.__timelines["s5"] = tl;
   </script>
 </template>

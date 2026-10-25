@@ -31,21 +31,21 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s3" data-width="1920" data-height="1080">
-        <div id="s3-f0" class="clip frame" data-start="0.0" data-duration="10.67" style="z-index:1"><img id="s3-f0-img" src="assets/frames/s-reveal-1.png" alt=""></div>
-    <div id="s3-bt" class="clip band-top" data-start="0" data-duration="10.67" data-layout-ignore style="z-index:15"></div>
-    <div id="s3-bb" class="clip band-bottom" data-start="0" data-duration="10.67" data-layout-ignore style="z-index:15"></div>
-    <div id="s3-ch" class="clip chapter" data-start="0" data-duration="10.67" style="z-index:20"><div id="s3-ch-in" class="chapter-in">3 · Layer one</div></div>
-    <div id="s3-c0" class="clip chip" data-start="0.75" data-duration="2.49" style="z-index:21"><div id="s3-c0-in" class="chip-in">Close Accountant closes Q1</div></div>
-    <div id="s3-c1" class="clip chip" data-start="3.24" data-duration="3.99" style="z-index:21"><div id="s3-c1-in" class="chip-in">$236,000 released · Q1 revenue $10.4M · TTM EBITDA $5.6M</div></div>
-    <div id="s3-c2" class="clip chip" data-start="7.23" data-duration="3.44" style="z-index:21"><div id="s3-c2-in" class="chip-in">51 pieces of work, each with a read receipt</div></div>
+        <div id="s3-f0" class="clip frame" data-start="0.0" data-duration="12.21" style="z-index:1"><img id="s3-f0-img" src="assets/frames/s-reveal-1.png" alt=""></div>
+    <div id="s3-bt" class="clip band-top" data-start="0" data-duration="12.21" data-layout-ignore style="z-index:15"></div>
+    <div id="s3-bb" class="clip band-bottom" data-start="0" data-duration="12.21" data-layout-ignore style="z-index:15"></div>
+    <div id="s3-ch" class="clip chapter" data-start="0" data-duration="12.21" style="z-index:20"><div id="s3-ch-in" class="chapter-in">3 · Layer one</div></div>
+    <div id="s3-c0" class="clip chip" data-start="0.87" data-duration="2.85" style="z-index:21"><div id="s3-c0-in" class="chip-in">Close Accountant closes Q1</div></div>
+    <div id="s3-c1" class="clip chip" data-start="3.72" data-duration="4.57" style="z-index:21"><div id="s3-c1-in" class="chip-in">$236,000 released · Q1 revenue $10.4M · TTM EBITDA $5.6M</div></div>
+    <div id="s3-c2" class="clip chip" data-start="8.29" data-duration="3.92" style="z-index:21"><div id="s3-c2-in" class="chip-in">51 pieces of work, each with a read receipt</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s3-f0-img", { scale: 1 }, { scale: 1.035, duration: 10.67, ease: "none" }, 0);
+        tl.fromTo("#s3-f0-img", { scale: 1 }, { scale: 1.035, duration: 12.21, ease: "none" }, 0);
     tl.fromTo("#s3-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s3-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 0.75);
-    tl.fromTo("#s3-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 3.24);
-    tl.fromTo("#s3-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 7.23);
+    tl.fromTo("#s3-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 0.87);
+    tl.fromTo("#s3-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 3.72);
+    tl.fromTo("#s3-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 8.29);
     window.__timelines["s3"] = tl;
   </script>
 </template>

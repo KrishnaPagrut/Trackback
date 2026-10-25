@@ -31,11 +31,11 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s12" data-width="1920" data-height="1080">
-        <div id="s12-f0" class="clip frame" data-start="0.0" data-duration="8.15" style="z-index:1"><img id="s12-f0-img" src="assets/frames/d-idle-tour.png" alt=""></div>
-    <div id="s12-bt" class="clip band-top" data-start="0" data-duration="8.15" data-layout-ignore style="z-index:15"></div>
-    <div id="s12-bb" class="clip band-bottom" data-start="0" data-duration="8.15" data-layout-ignore style="z-index:15"></div>
-    <div id="s12-ch" class="clip chapter" data-start="0" data-duration="8.15" style="z-index:20"><div id="s12-ch-in" class="chapter-in">12 · Go look</div></div>
-    <div id="s12-end" class="clip endcard" data-start="0.75" data-duration="7.4" style="z-index:30"><div id="s12-end-in" class="endcard-in">
+        <div id="s12-f0" class="clip frame" data-start="0.0" data-duration="11.16" style="z-index:1"><img id="s12-f0-img" src="assets/frames/d-idle-tour.png" alt=""></div>
+    <div id="s12-bt" class="clip band-top" data-start="0" data-duration="11.16" data-layout-ignore style="z-index:15"></div>
+    <div id="s12-bb" class="clip band-bottom" data-start="0" data-duration="11.16" data-layout-ignore style="z-index:15"></div>
+    <div id="s12-ch" class="clip chapter" data-start="0" data-duration="11.16" style="z-index:20"><div id="s12-ch-in" class="chapter-in">12 · Go look</div></div>
+    <div id="s12-end" class="clip endcard" data-start="1.05" data-duration="10.11" style="z-index:30"><div id="s12-end-in" class="endcard-in">
           <div class="end-kicker">LIVE · OPENS IN DEEP MODE WITH A TOUR</div>
           <div class="end-url">trackback-gamma.vercel.app</div>
           <div class="end-tag">Trackback traces any correction forward.</div>
@@ -44,9 +44,9 @@
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s12-f0-img", { scale: 1 }, { scale: 1.035, duration: 8.15, ease: "none" }, 0);
+        tl.fromTo("#s12-f0-img", { scale: 1 }, { scale: 1.035, duration: 11.16, ease: "none" }, 0);
     tl.fromTo("#s12-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s12-end-in", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.75);
+    tl.fromTo("#s12-end-in", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.05);
     window.__timelines["s12"] = tl;
   </script>
 </template>

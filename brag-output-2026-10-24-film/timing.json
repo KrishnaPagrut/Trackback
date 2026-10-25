@@ -1,78 +1,78 @@
 {
- "total": 147.34,
+ "total": 171.26,
  "scenes": [
   {
    "id": "s1",
    "start": 0.0,
-   "dur": 13.47,
-   "voice": 12.77
+   "dur": 12.92,
+   "voice": 12.12
   },
   {
    "id": "s2",
-   "start": 13.47,
-   "dur": 6.04,
-   "voice": 5.34
+   "start": 12.92,
+   "dur": 7.86,
+   "voice": 7.06
   },
   {
    "id": "s3",
-   "start": 19.51,
-   "dur": 10.67,
-   "voice": 9.97
+   "start": 20.78,
+   "dur": 12.21,
+   "voice": 11.41
   },
   {
    "id": "s4",
-   "start": 30.18,
-   "dur": 12.44,
-   "voice": 11.74
+   "start": 32.99,
+   "dur": 13.73,
+   "voice": 12.93
   },
   {
    "id": "s5",
-   "start": 42.62,
-   "dur": 9.8,
-   "voice": 9.1
+   "start": 46.72,
+   "dur": 12.44,
+   "voice": 11.64
   },
   {
    "id": "s6",
-   "start": 52.42,
-   "dur": 17.33,
-   "voice": 16.63
+   "start": 59.16,
+   "dur": 19.91,
+   "voice": 19.11
   },
   {
    "id": "s7",
-   "start": 69.75,
-   "dur": 17.66,
-   "voice": 16.96
+   "start": 79.07,
+   "dur": 20.79,
+   "voice": 19.99
   },
   {
    "id": "s8",
-   "start": 87.41,
-   "dur": 13.76,
-   "voice": 13.06
+   "start": 99.86,
+   "dur": 15.82,
+   "voice": 15.02
   },
   {
    "id": "s9",
-   "start": 101.17,
-   "dur": 14.65,
-   "voice": 13.95
+   "start": 115.68,
+   "dur": 15.61,
+   "voice": 14.81
   },
   {
    "id": "s10",
-   "start": 115.82,
-   "dur": 15.06,
-   "voice": 14.36
+   "start": 131.29,
+   "dur": 19.05,
+   "voice": 18.25
   },
   {
    "id": "s11",
-   "start": 130.88,
-   "dur": 8.31,
-   "voice": 7.61
+   "start": 150.34,
+   "dur": 9.76,
+   "voice": 8.96
   },
   {
    "id": "s12",
-   "start": 139.19,
-   "dur": 8.15,
-   "voice": 6.3
+   "start": 160.1,
+   "dur": 11.16,
+   "voice": 9.36
   }
  ],
- "captions": 83
+ "captions": 91
 }

@@ -67,8 +67,8 @@ def layout() -> list[dict]:
     for sc in SB:
         k = sc["id"][1:]
         v = voice_len(k)
-        lead = 0.25                      # the picture lands a beat before the voice
-        tail = 0.45 if not sc.get("end") else 1.6
+        lead = 0.3                       # the picture lands a beat before the voice
+        tail = 0.5 if not sc.get("end") else 1.5
         d = round(lead + v + tail, 2)
         out.append({**sc, "k": k, "start": round(t, 2), "dur": d, "voice": v, "lead": lead})
         t += d

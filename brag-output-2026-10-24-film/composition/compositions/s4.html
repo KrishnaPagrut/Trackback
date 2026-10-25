@@ -31,24 +31,24 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
-        <div id="s4-f0" class="clip frame" data-start="0.0" data-duration="12.44" style="z-index:1"><img id="s4-f0-img" src="assets/frames/s-reveal-2.png" alt=""></div>
-    <div id="s4-f1" class="clip frame" data-start="6.12" data-duration="6.32" style="z-index:2"><img id="s4-f1-img" src="assets/frames/s-reveal-3.png" alt=""></div>
-    <div id="s4-bt" class="clip band-top" data-start="0" data-duration="12.44" data-layout-ignore style="z-index:15"></div>
-    <div id="s4-bb" class="clip band-bottom" data-start="0" data-duration="12.44" data-layout-ignore style="z-index:15"></div>
-    <div id="s4-ch" class="clip chapter" data-start="0" data-duration="12.44" style="z-index:20"><div id="s4-ch-in" class="chapter-in">4 · Layers two and three</div></div>
-    <div id="s4-c0" class="clip chip" data-start="1.19" data-duration="5.52" style="z-index:21"><div id="s4-c0-in" class="chip-in">Leverage 2.95x · certificate sent May 15 · bonuses · tax</div></div>
-    <div id="s4-c1" class="clip chip" data-start="6.71" data-duration="3.52" style="z-index:21"><div id="s4-c1-in" class="chip-in">Maya's board deck, same tools, same receipts</div></div>
-    <div id="s4-c2" class="clip chip" data-start="10.23" data-duration="2.21" style="z-index:21"><div id="s4-c2-in" class="chip-in">188 pieces of work · 305 receipts</div></div>
+        <div id="s4-f0" class="clip frame" data-start="0.0" data-duration="13.73" style="z-index:1"><img id="s4-f0-img" src="assets/frames/s-reveal-2.png" alt=""></div>
+    <div id="s4-f1" class="clip frame" data-start="6.76" data-duration="6.97" style="z-index:2"><img id="s4-f1-img" src="assets/frames/s-reveal-3.png" alt=""></div>
+    <div id="s4-bt" class="clip band-top" data-start="0" data-duration="13.73" data-layout-ignore style="z-index:15"></div>
+    <div id="s4-bb" class="clip band-bottom" data-start="0" data-duration="13.73" data-layout-ignore style="z-index:15"></div>
+    <div id="s4-ch" class="clip chapter" data-start="0" data-duration="13.73" style="z-index:20"><div id="s4-ch-in" class="chapter-in">4 · Layers two and three</div></div>
+    <div id="s4-c0" class="clip chip" data-start="1.33" data-duration="6.08" style="z-index:21"><div id="s4-c0-in" class="chip-in">Leverage 2.95x · certificate sent May 15 · bonuses · tax</div></div>
+    <div id="s4-c1" class="clip chip" data-start="7.41" data-duration="3.88" style="z-index:21"><div id="s4-c1-in" class="chip-in">Maya's board deck, same tools, same receipts</div></div>
+    <div id="s4-c2" class="clip chip" data-start="11.29" data-duration="2.44" style="z-index:21"><div id="s4-c2-in" class="chip-in">188 pieces of work · 305 receipts</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s4-f0-img", { scale: 1 }, { scale: 1.035, duration: 12.44, ease: "none" }, 0);
-    tl.fromTo("#s4-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 6.12);
-    tl.fromTo("#s4-f1-img", { scale: 1 }, { scale: 1.03, duration: 6.32, ease: "none" }, 6.12);
+        tl.fromTo("#s4-f0-img", { scale: 1 }, { scale: 1.035, duration: 13.73, ease: "none" }, 0);
+    tl.fromTo("#s4-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 6.76);
+    tl.fromTo("#s4-f1-img", { scale: 1 }, { scale: 1.03, duration: 6.97, ease: "none" }, 6.76);
     tl.fromTo("#s4-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s4-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 1.19);
-    tl.fromTo("#s4-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 6.71);
-    tl.fromTo("#s4-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 10.23);
+    tl.fromTo("#s4-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 1.33);
+    tl.fromTo("#s4-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 7.41);
+    tl.fromTo("#s4-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 11.29);
     window.__timelines["s4"] = tl;
   </script>
 </template>

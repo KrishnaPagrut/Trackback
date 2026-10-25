@@ -31,27 +31,27 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s7" data-width="1920" data-height="1080">
-        <div id="s7-f0" class="clip frame" data-start="0.0" data-duration="17.66" style="z-index:1"><img id="s7-f0-img" src="assets/frames/s-ping-ca.png" alt=""></div>
-    <div id="s7-f1" class="clip frame" data-start="8.73" data-duration="8.93" style="z-index:2"><img id="s7-f1-img" src="assets/frames/s-reply-cc2.png" alt=""></div>
-    <div id="s7-f2" class="clip frame" data-start="13.82" data-duration="3.84" style="z-index:3"><img id="s7-f2-img" src="assets/frames/s-reply-cc.png" alt=""></div>
-    <div id="s7-bt" class="clip band-top" data-start="0" data-duration="17.66" data-layout-ignore style="z-index:15"></div>
-    <div id="s7-bb" class="clip band-bottom" data-start="0" data-duration="17.66" data-layout-ignore style="z-index:15"></div>
-    <div id="s7-ch" class="clip chapter" data-start="0" data-duration="17.66" style="z-index:20"><div id="s7-ch-in" class="chapter-in">7 · One message per agent</div></div>
-    <div id="s7-c0" class="clip chip" data-start="2.29" data-duration="8.14" style="z-index:21"><div id="s7-c0-in" class="chip-in">Maya gets the same message as a notice</div></div>
-    <div id="s7-c1" class="clip chip" data-start="10.43" data-duration="5.08" style="z-index:21"><div id="s7-c1-in" class="chip-in">Corrected certificate drafted for the CFO</div></div>
-    <div id="s7-c2" class="clip chip" data-start="15.51" data-duration="2.15" style="z-index:21"><div id="s7-c2-in" class="chip-in">Cash forecast: skipped</div></div>
+        <div id="s7-f0" class="clip frame" data-start="0.0" data-duration="20.79" style="z-index:1"><img id="s7-f0-img" src="assets/frames/s-ping-ca.png" alt=""></div>
+    <div id="s7-f1" class="clip frame" data-start="10.29" data-duration="10.5" style="z-index:2"><img id="s7-f1-img" src="assets/frames/s-reply-cc2.png" alt=""></div>
+    <div id="s7-f2" class="clip frame" data-start="16.29" data-duration="4.5" style="z-index:3"><img id="s7-f2-img" src="assets/frames/s-reply-cc.png" alt=""></div>
+    <div id="s7-bt" class="clip band-top" data-start="0" data-duration="20.79" data-layout-ignore style="z-index:15"></div>
+    <div id="s7-bb" class="clip band-bottom" data-start="0" data-duration="20.79" data-layout-ignore style="z-index:15"></div>
+    <div id="s7-ch" class="clip chapter" data-start="0" data-duration="20.79" style="z-index:20"><div id="s7-ch-in" class="chapter-in">7 · One message per agent</div></div>
+    <div id="s7-c0" class="clip chip" data-start="2.7" data-duration="9.59" style="z-index:21"><div id="s7-c0-in" class="chip-in">Maya gets the same message as a notice</div></div>
+    <div id="s7-c1" class="clip chip" data-start="12.29" data-duration="6.0" style="z-index:21"><div id="s7-c1-in" class="chip-in">Corrected certificate drafted for the CFO</div></div>
+    <div id="s7-c2" class="clip chip" data-start="18.29" data-duration="2.5" style="z-index:21"><div id="s7-c2-in" class="chip-in">Cash forecast: skipped</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s7-f0-img", { scale: 1 }, { scale: 1.035, duration: 17.66, ease: "none" }, 0);
-    tl.fromTo("#s7-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 8.73);
-    tl.fromTo("#s7-f1-img", { scale: 1 }, { scale: 1.03, duration: 8.93, ease: "none" }, 8.73);
-    tl.fromTo("#s7-f2-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 13.82);
-    tl.fromTo("#s7-f2-img", { scale: 1 }, { scale: 1.03, duration: 3.84, ease: "none" }, 13.82);
+        tl.fromTo("#s7-f0-img", { scale: 1 }, { scale: 1.035, duration: 20.79, ease: "none" }, 0);
+    tl.fromTo("#s7-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 10.29);
+    tl.fromTo("#s7-f1-img", { scale: 1 }, { scale: 1.03, duration: 10.5, ease: "none" }, 10.29);
+    tl.fromTo("#s7-f2-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 16.29);
+    tl.fromTo("#s7-f2-img", { scale: 1 }, { scale: 1.03, duration: 4.5, ease: "none" }, 16.29);
     tl.fromTo("#s7-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s7-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 2.29);
-    tl.fromTo("#s7-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 10.43);
-    tl.fromTo("#s7-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 15.51);
+    tl.fromTo("#s7-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 2.7);
+    tl.fromTo("#s7-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 12.29);
+    tl.fromTo("#s7-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 18.29);
     window.__timelines["s7"] = tl;
   </script>
 </template>

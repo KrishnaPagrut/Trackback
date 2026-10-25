@@ -31,23 +31,23 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
-        <div id="s1-f0" class="clip frame" data-start="0.0" data-duration="13.47" style="z-index:1"><img id="s1-f0-img" src="assets/frames/d-idle.png" alt=""></div>
-    <div id="s1-bt" class="clip band-top" data-start="0" data-duration="13.47" data-layout-ignore style="z-index:15"></div>
-    <div id="s1-bb" class="clip band-bottom" data-start="0" data-duration="13.47" data-layout-ignore style="z-index:15"></div>
-    <div id="s1-ch" class="clip chapter" data-start="0" data-duration="13.47" style="z-index:20"><div id="s1-ch-in" class="chapter-in">1 · Meet Tidewall</div></div>
-    <div id="s1-c0" class="clip chip" data-start="0.89" data-duration="2.17" style="z-index:21"><div id="s1-c0-in" class="chip-in">6 gyms · California</div></div>
-    <div id="s1-c1" class="clip chip" data-start="3.06" data-duration="2.55" style="z-index:21"><div id="s1-c1-in" class="chip-in">~$40M a year</div></div>
-    <div id="s1-c2" class="clip chip" data-start="5.61" data-duration="3.83" style="z-index:21"><div id="s1-c2-in" class="chip-in">Net leverage must stay under 3.00x</div></div>
-    <div id="s1-c3" class="clip chip" data-start="9.44" data-duration="4.03" style="z-index:21"><div id="s1-c3-in" class="chip-in">2 AI agents · Maya (FP&amp;A) · Dana (Controller)</div></div>
+        <div id="s1-f0" class="clip frame" data-start="0.0" data-duration="12.92" style="z-index:1"><img id="s1-f0-img" src="assets/frames/d-idle.png" alt=""></div>
+    <div id="s1-bt" class="clip band-top" data-start="0" data-duration="12.92" data-layout-ignore style="z-index:15"></div>
+    <div id="s1-bb" class="clip band-bottom" data-start="0" data-duration="12.92" data-layout-ignore style="z-index:15"></div>
+    <div id="s1-ch" class="clip chapter" data-start="0" data-duration="12.92" style="z-index:20"><div id="s1-ch-in" class="chapter-in">1 · Meet Tidewall</div></div>
+    <div id="s1-c0" class="clip chip" data-start="0.91" data-duration="2.06" style="z-index:21"><div id="s1-c0-in" class="chip-in">6 gyms · California</div></div>
+    <div id="s1-c1" class="clip chip" data-start="2.97" data-duration="2.42" style="z-index:21"><div id="s1-c1-in" class="chip-in">~$40M a year</div></div>
+    <div id="s1-c2" class="clip chip" data-start="5.39" data-duration="3.64" style="z-index:21"><div id="s1-c2-in" class="chip-in">Net leverage must stay under 3.00x</div></div>
+    <div id="s1-c3" class="clip chip" data-start="9.03" data-duration="3.89" style="z-index:21"><div id="s1-c3-in" class="chip-in">2 AI agents · Maya (FP&amp;A) · Dana (Controller)</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s1-f0-img", { scale: 1 }, { scale: 1.035, duration: 13.47, ease: "none" }, 0);
+        tl.fromTo("#s1-f0-img", { scale: 1 }, { scale: 1.035, duration: 12.92, ease: "none" }, 0);
     tl.fromTo("#s1-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s1-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 0.89);
-    tl.fromTo("#s1-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 3.06);
-    tl.fromTo("#s1-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 5.61);
-    tl.fromTo("#s1-c3-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 9.44);
+    tl.fromTo("#s1-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 0.91);
+    tl.fromTo("#s1-c1-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 2.97);
+    tl.fromTo("#s1-c2-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 5.39);
+    tl.fromTo("#s1-c3-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 9.03);
     window.__timelines["s1"] = tl;
   </script>
 </template>

@@ -28,7 +28,7 @@ if len(sys.argv) > 1 and sys.argv[1] == "list":
 VOICE = (sys.argv[1] if len(sys.argv) > 1 else None) or os.environ.get("CARTESIA_VOICE")
 if not VOICE:
     sys.exit("voice id needed: voice.py <voice_id>  (voice.py list to see them)")
-MODEL = os.environ.get("CARTESIA_MODEL", "sonic-2")
+MODEL = os.environ.get("CARTESIA_MODEL", "sonic-3")
 scenes = json.loads((ROOT / "narration.json").read_text())
 out = ROOT / "composition" / "assets" / "audio"; out.mkdir(parents=True, exist_ok=True)
 durs = {}

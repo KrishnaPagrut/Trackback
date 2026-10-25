@@ -31,18 +31,18 @@
     .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s2" data-width="1920" data-height="1080">
-        <div id="s2-f0" class="clip frame" data-start="0.0" data-duration="6.04" style="z-index:1"><img id="s2-f0-img" src="assets/frames/d-source-hover.png" alt=""></div>
-    <div id="s2-bt" class="clip band-top" data-start="0" data-duration="6.04" data-layout-ignore style="z-index:15"></div>
-    <div id="s2-bb" class="clip band-bottom" data-start="0" data-duration="6.04" data-layout-ignore style="z-index:15"></div>
-    <div id="s2-ch" class="clip chapter" data-start="0" data-duration="6.04" style="z-index:20"><div id="s2-ch-in" class="chapter-in">2 · The source</div></div>
-    <div id="s2-c0" class="clip chip" data-start="2.12" data-duration="3.92" style="z-index:21"><div id="s2-c0-in" class="chip-in">Billing export, March · captured April 9 · version 1</div></div>
+        <div id="s2-f0" class="clip frame" data-start="0.0" data-duration="7.86" style="z-index:1"><img id="s2-f0-img" src="assets/frames/d-source-hover.png" alt=""></div>
+    <div id="s2-bt" class="clip band-top" data-start="0" data-duration="7.86" data-layout-ignore style="z-index:15"></div>
+    <div id="s2-bb" class="clip band-bottom" data-start="0" data-duration="7.86" data-layout-ignore style="z-index:15"></div>
+    <div id="s2-ch" class="clip chapter" data-start="0" data-duration="7.86" style="z-index:20"><div id="s2-ch-in" class="chapter-in">2 · The source</div></div>
+    <div id="s2-c0" class="clip chip" data-start="2.77" data-duration="5.09" style="z-index:21"><div id="s2-c0-in" class="chip-in">Billing export, March · captured April 9 · version 1</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
         tl.set("#s2-f0-img", { transformOrigin: "29.2% 13.9%" }, 0);
-    tl.fromTo("#s2-f0-img", { scale: 1 }, { scale: 1.6, duration: 1.4, ease: "power2.inOut" }, 0.78);
+    tl.fromTo("#s2-f0-img", { scale: 1 }, { scale: 1.6, duration: 1.4, ease: "power2.inOut" }, 1.01);
     tl.fromTo("#s2-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
-    tl.fromTo("#s2-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 2.12);
+    tl.fromTo("#s2-c0-in", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 2.77);
     window.__timelines["s2"] = tl;
   </script>
 </template>
