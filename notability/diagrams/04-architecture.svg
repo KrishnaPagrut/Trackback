@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+<title>Technical architecture — Trackback</title>
+<rect x="0" y="0" width="900" height="1200" rx="0" fill="#FAF8F2" stroke="none" stroke-width="1"/>
+<text x="52.00" y="50.79" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="bold" font-style="normal" fill="#192D38">TRACKBACK</text>
+<text x="160.00" y="50.72" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="normal" font-style="normal" fill="#54646C">PROJECT IDEATION &amp; ENGINEERING NOTEBOOK</text>
+<text x="709.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">1</text>
+<text x="738.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">2</text>
+<text x="767.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">3</text>
+<circle cx="800" cy="48" r="12" fill="#192D38" stroke="#192D38"/>
+<text x="796.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#FFFFFF">4</text>
+<text x="825.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">5</text>
+<polyline points="52,75 848,75" fill="none" stroke="#D9DFDC" stroke-width="1" stroke-linejoin="round"/>
+<text x="52.00" y="105.55" font-family="Arial, DejaVu Sans, sans-serif" font-size="11.5" font-weight="bold" font-style="normal" fill="#166B60">04  /  TECHNICAL ARCHITECTURE</text>
+<text x="52.00" y="151.88" font-family="Georgia, DejaVu Serif, serif" font-size="36" font-weight="normal" font-style="normal" fill="#192D38">A graph with memory and guardrails.</text>
+<text x="52.00" y="186.87" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">One Python service hosts the demo API, time-pinned documents and built frontend.</text>
+<text x="52.00" y="207.87" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">Replay uses cached or local responses; external model calls require record mode.</text>
+<rect x="52" y="234" width="796" height="73" rx="12" fill="#EAF0F6" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="62" y="244" width="3" height="20" rx="1" fill="#365C84" stroke="none" stroke-width="1"/>
+<text x="74.00" y="261.43" font-family="Arial, DejaVu Sans, sans-serif" font-size="21" font-weight="bold" font-style="normal" fill="#192D38">Browser · React 19 / TypeScript / Vite 8</text>
+<text x="62.00" y="283.55" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Tailwind CSS 4 · React Flow + Dagre · Stage / Deep / Scorecard / Lyft reconstruction</text>
+<polyline points="245,307 245,348" fill="none" stroke="#365C84" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="245,348 242.018423744538,341.66673835746025 247.981576255462,341.66673835746025" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<text x="262.00" y="328.71" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="bold" font-style="normal" fill="#365C84">HTTP JSON</text>
+<rect x="52" y="348" width="386" height="85" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="62" y="358" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="74.00" y="374.60" font-family="Arial, DejaVu Sans, sans-serif" font-size="20" font-weight="bold" font-style="normal" fill="#192D38">FastAPI + Uvicorn</text>
+<text x="62.00" y="395.20" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">API: corrections, graph, approvals, lessons, snapshots.</text>
+<text x="62.00" y="412.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Protocol routes: pings, challenges and SSE events.</text>
+<rect x="462" y="348" width="386" height="85" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="472" y="358" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="484.00" y="374.60" font-family="Arial, DejaVu Sans, sans-serif" font-size="20" font-weight="bold" font-style="normal" fill="#192D38">Time-pinned evidence service</text>
+<text x="472.00" y="395.20" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Memento routes /r · /tg · /m · /tm. Reads bind to the run’s</text>
+<text x="472.00" y="412.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">pin; later evidence returns 403 / 404.</text>
+<polyline points="245,433 245,454 312,454 312,510" fill="none" stroke="#166B60" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="312,510 309.018423744538,503.66673835746025 314.981576255462,503.66673835746025" fill="#166B60" stroke="#166B60" stroke-width="1.3"/>
+<polyline points="730,486 730,433" fill="none" stroke="#365C84" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="730,433 732.981576255462,439.33326164253975 727.018423744538,439.33326164253975" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<text x="742.00" y="459.72" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.3" font-weight="bold" font-style="normal" fill="#365C84">PINNED TOOL READS</text>
+<rect x="52" y="470" width="520" height="312" rx="14" fill="none" stroke="#D9DFDC" stroke-width="1"/>
+<text x="71.00" y="491.71" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="bold" font-style="normal" fill="#166B60">CORRECTION + CONTROL MODULES</text>
+<rect x="72" y="510" width="480" height="73" rx="12" fill="#E7F1EB" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="82" y="520" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="94.00" y="534.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">Core: diff → propagate → waves → pings</text>
+<text x="82.00" y="554.59" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Formula evaluation · version graph · verified receipts · bounded rework</text>
+<polyline points="552,547 610,547" fill="none" stroke="#365C84" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="610,547 603.6667383574603,549.981576255462 603.6667383574603,544.018423744538" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<text x="571.00" y="537.47" font-family="Arial, DejaVu Sans, sans-serif" font-size="9" font-weight="bold" font-style="normal" fill="#365C84">PING</text>
+<polyline points="610,568 552,568" fill="none" stroke="#365C84" stroke-width="1.4" stroke-linejoin="round"/>
+<polygon points="552,568 558.3332616425397,565.018423744538 558.3332616425397,570.981576255462" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<text x="569.00" y="582.47" font-family="Arial, DejaVu Sans, sans-serif" font-size="9" font-weight="bold" font-style="normal" fill="#365C84">REPLY</text>
+<polyline points="183,583 183,609" fill="none" stroke="#166B60" stroke-width="1.4" stroke-linejoin="round"/>
+<polygon points="183,609 180.018423744538,602.6667383574603 185.981576255462,602.6667383574603" fill="#166B60" stroke="#166B60" stroke-width="1.3"/>
+<polyline points="431,583 431,609" fill="none" stroke="#166B60" stroke-width="1.4" stroke-linejoin="round"/>
+<polygon points="431,609 428.018423744538,602.6667383574603 433.981576255462,602.6667383574603" fill="#166B60" stroke="#166B60" stroke-width="1.3"/>
+<rect x="72" y="609" width="230" height="94" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="82" y="619" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="94.00" y="632.70" font-family="Arial, DejaVu Sans, sans-serif" font-size="16.5" font-weight="bold" font-style="normal" fill="#192D38">Finance domain pack</text>
+<text x="82.00" y="651.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Materiality, periods, ledger, tie-outs,</text>
+<text x="82.00" y="668.19" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">compensation catalog.</text>
+<rect x="322" y="609" width="230" height="94" rx="12" fill="#F5EEDC" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="332" y="619" width="3" height="20" rx="1" fill="#85632D" stroke="none" stroke-width="1"/>
+<text x="344.00" y="632.70" font-family="Arial, DejaVu Sans, sans-serif" font-size="16.5" font-weight="bold" font-style="normal" fill="#192D38">Jade + lessons</text>
+<text x="332.00" y="651.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Rule-based judgment review; recall,</text>
+<text x="332.00" y="668.19" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">regression gate, prospective</text>
+<text x="332.00" y="684.44" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">checks.</text>
+<rect x="72" y="720" width="480" height="44" rx="8" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<text x="124.11" y="745.36" font-family="Arial, DejaVu Sans, sans-serif" font-size="14" font-weight="bold" font-style="normal" fill="#192D38">Approvals → freshness / figure fence → simulated effect</text>
+<polyline points="183,703 183,720" fill="none" stroke="#166B60" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="183,720 180.018423744538,713.6667383574603 185.981576255462,713.6667383574603" fill="#166B60" stroke="#166B60" stroke-width="1.3"/>
+<polyline points="431,703 431,720" fill="none" stroke="#85632D" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="431,720 428.018423744538,713.6667383574603 433.981576255462,713.6667383574603" fill="#85632D" stroke="#85632D" stroke-width="1.3"/>
+<rect x="610" y="486" width="238" height="104" rx="12" fill="#EAF0F6" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="626" y="502" width="3" height="20" rx="1" fill="#365C84" stroke="none" stroke-width="1"/>
+<text x="638.00" y="517.77" font-family="Arial, DejaVu Sans, sans-serif" font-size="19" font-weight="bold" font-style="normal" fill="#192D38">Agent runtime</text>
+<text x="626.00" y="543.11" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Close Accountant</text>
+<text x="626.00" y="559.98" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Reporting Analyst</text>
+<text x="626.00" y="576.86" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Covenant &amp; Compensation</text>
+<polyline points="729,590 729,621" fill="none" stroke="#365C84" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="729,621 726.018423744538,614.6667383574603 731.981576255462,614.6667383574603" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<rect x="610" y="621" width="238" height="81" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="620" y="631" width="3" height="20" rx="1" fill="#365C84" stroke="none" stroke-width="1"/>
+<text x="632.00" y="645.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">LLM gateway</text>
+<text x="620.00" y="665.17" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">record / replay / scripted</text>
+<text x="620.00" y="680.80" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Cache keys include the pinned corpus.</text>
+<polyline points="729,702 729,731" fill="none" stroke="#365C84" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="729,731 726.018423744538,724.6667383574603 731.981576255462,724.6667383574603" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<text x="752.00" y="717.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="bold" font-style="normal" fill="#365C84">RECORD ONLY</text>
+<rect x="610" y="731" width="238" height="51" rx="8" fill="#EAF0F6" stroke="none" stroke-width="1"/>
+<text x="661.80" y="751.95" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#365C84">External: Anthropic API</text>
+<text x="654.21" y="767.29" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#365C84">Agent / prose / judge calls</text>
+<polyline points="312,782 312,841" fill="none" stroke="#166B60" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="312,841 309.018423744538,834.6667383574603 314.981576255462,834.6667383574603" fill="#166B60" stroke="#166B60" stroke-width="1.3"/>
+<text x="328.00" y="816.30" font-family="Arial, DejaVu Sans, sans-serif" font-size="10" font-weight="bold" font-style="normal" fill="#166B60">READ / WRITE</text>
+<polyline points="848,659 865,659 865,815 730,815 730,841" fill="none" stroke="#365C84" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="730,841 727.018423744538,834.6667383574603 732.981576255462,834.6667383574603" fill="#365C84" stroke="#365C84" stroke-width="1.3"/>
+<text x="791.00" y="829.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="bold" font-style="normal" fill="#365C84">CACHE</text>
+<polyline points="848,390 879,390 879,826 835,826 835,841" fill="none" stroke="#166B60" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="835,841 832.018423744538,834.6667383574603 837.981576255462,834.6667383574603" fill="#166B60" stroke="#166B60" stroke-width="1.3"/>
+<rect x="52" y="841" width="796" height="98" rx="12" fill="#192D38" stroke="none" stroke-width="1"/>
+<text x="74.00" y="868.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="bold" font-style="normal" fill="#B6D9CE">SHARED SQLITE · VERSIONED EVIDENCE + EVENT HISTORY</text>
+<text x="74.00" y="900.03" font-family="Arial, DejaVu Sans, sans-serif" font-size="14.5" font-weight="normal" font-style="normal" fill="#FFFFFF">Sources / claim versions · artifacts / justifications · consumption receipts</text>
+<text x="74.00" y="922.03" font-family="Arial, DejaVu Sans, sans-serif" font-size="14.5" font-weight="normal" font-style="normal" fill="#FFFFFF">Runs / reads · waves / pings / outbox · approvals / ledger / effects · lessons · LLM cache</text>
+<text x="52.00" y="972.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Offline builders restore the canonical snapshot; evaluation scripts compare against YAML answer keys.</text>
+<text x="52.00" y="992.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Also implemented: stdio MCP read tools, Docker/Fly configuration and a Vercel entry with a /tmp database.</text>
+<text x="52.00" y="1012.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">MCP/A2A notification adapters and a second domain pack remain future work.</text>
+<rect x="52" y="1040" width="796" height="85" rx="8" fill="none" stroke="#D9DFDC" stroke-width="1"/>
+<text x="68.00" y="1061.71" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="bold" font-style="normal" fill="#166B60">YOUR REVIEW</text>
+<text x="168.00" y="1061.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="normal" font-style="normal" fill="#54646C">Mark the first boundary to change for multiple concurrent customer sessions.</text>
+<circle cx="69" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="69" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<polyline points="52,1142 848,1142" fill="none" stroke="#D9DFDC" stroke-width="1" stroke-linejoin="round"/>
+<text x="52.00" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="bold" font-style="normal" fill="#54646C">EVIDENCE</text>
+<text x="113.00" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Service entry</text>
+<text x="185.44" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Core / pack boundary</text>
+<text x="293.27" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">MCP read tools</text>
+<text x="375.74" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Vercel entry</text>
+<text x="52.00" y="1179.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">RETROSPECTIVE  ·  SOURCE e452169  ·  CAL HACKS 13.0</text>
+<text x="817.42" y="1180.30" font-family="Arial, DejaVu Sans, sans-serif" font-size="10" font-weight="bold" font-style="normal" fill="#192D38">04 / 05</text>
+</svg>

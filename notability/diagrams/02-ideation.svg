@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+<title>Ideation &amp; exploration — Trackback</title>
+<rect x="0" y="0" width="900" height="1200" rx="0" fill="#FAF8F2" stroke="none" stroke-width="1"/>
+<text x="52.00" y="50.79" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="bold" font-style="normal" fill="#192D38">TRACKBACK</text>
+<text x="160.00" y="50.72" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="normal" font-style="normal" fill="#54646C">PROJECT IDEATION &amp; ENGINEERING NOTEBOOK</text>
+<text x="709.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">1</text>
+<circle cx="742" cy="48" r="12" fill="#192D38" stroke="#192D38"/>
+<text x="738.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#FFFFFF">2</text>
+<text x="767.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">3</text>
+<text x="796.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">4</text>
+<text x="825.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">5</text>
+<polyline points="52,75 848,75" fill="none" stroke="#D9DFDC" stroke-width="1" stroke-linejoin="round"/>
+<text x="52.00" y="105.55" font-family="Arial, DejaVu Sans, sans-serif" font-size="11.5" font-weight="bold" font-style="normal" fill="#166B60">02  /  IDEATION &amp; EXPLORATION</text>
+<text x="52.00" y="151.88" font-family="Georgia, DejaVu Serif, serif" font-size="36" font-weight="normal" font-style="normal" fill="#192D38">Why selective repair?</text>
+<text x="52.00" y="186.87" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">Retrospective map: reconstructed from the implementation and decision log.</text>
+<text x="52.00" y="207.87" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">This records the reasoning visible in the repository, not an earlier brainstorming session.</text>
+<polyline points="330,502 306,502 306,334 292,334" fill="none" stroke="#AF4938" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="570,502 594,502 594,334 608,334" fill="none" stroke="#166B60" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="330,524 292,524" fill="none" stroke="#85632D" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="570,524 608,524" fill="none" stroke="#166B60" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="330,548 306,548 306,739 292,739" fill="none" stroke="#365C84" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="570,548 594,548 594,739 608,739" fill="none" stroke="#365C84" stroke-width="2" stroke-linejoin="round"/>
+<rect x="52" y="258" width="240" height="155" rx="12" fill="#F8EAE3" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="68" y="274" width="3" height="20" rx="1" fill="#AF4938" stroke="none" stroke-width="1"/>
+<text x="80.00" y="288.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">01 Problem</text>
+<text x="68.00" y="316.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="normal" font-style="normal" fill="#54646C">Late corrections</text>
+<text x="68.00" y="336.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="normal" font-style="normal" fill="#54646C">Cross-agent dependencies</text>
+<text x="68.00" y="356.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="normal" font-style="normal" fill="#54646C">Actions already executed</text>
+<rect x="608" y="258" width="240" height="155" rx="12" fill="#E7F1EB" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="624" y="274" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="636.00" y="288.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">02 Trust</text>
+<text x="624.00" y="316.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="normal" font-style="normal" fill="#54646C">Exact versions consumed</text>
+<text x="624.00" y="336.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="normal" font-style="normal" fill="#54646C">No future-data leakage</text>
+<text x="624.00" y="356.08" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="normal" font-style="normal" fill="#54646C">Human approval for fixes</text>
+<rect x="52" y="455" width="240" height="170" rx="12" fill="#F5EEDC" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="68" y="471" width="3" height="20" rx="1" fill="#85632D" stroke="none" stroke-width="1"/>
+<text x="80.00" y="485.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">03 Alternatives</text>
+<text x="68.00" y="512.66" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">Rerun every agent:</text>
+<text x="68.00" y="532.04" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">expensive.</text>
+<text x="68.00" y="551.41" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">Flag every descendant: noisy.</text>
+<text x="68.00" y="570.79" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">Both exist as evaluation</text>
+<text x="68.00" y="590.16" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">baselines.</text>
+<rect x="608" y="455" width="240" height="170" rx="12" fill="#E7F1EB" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="624" y="471" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="636.00" y="485.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">04 Implemented</text>
+<text x="624.00" y="512.25" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Recompute first.</text>
+<text x="624.00" y="531.00" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Check relevance and</text>
+<text x="624.00" y="549.75" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">materiality.</text>
+<text x="624.00" y="568.50" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Bundle suspect work into one</text>
+<text x="624.00" y="587.25" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">ping per agent per wave.</text>
+<rect x="52" y="667" width="240" height="155" rx="12" fill="#EAF0F6" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="68" y="683" width="3" height="20" rx="1" fill="#365C84" stroke="none" stroke-width="1"/>
+<text x="80.00" y="697.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">05 Evidence</text>
+<text x="68.00" y="724.25" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Two clocks: effective time and</text>
+<text x="68.00" y="743.00" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">known time.</text>
+<text x="68.00" y="761.75" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Pinned reads preserve what an</text>
+<text x="68.00" y="780.50" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">agent could know.</text>
+<rect x="608" y="667" width="240" height="155" rx="12" fill="#EAF0F6" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="624" y="683" width="3" height="20" rx="1" fill="#365C84" stroke="none" stroke-width="1"/>
+<text x="636.00" y="697.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">06 Control</text>
+<text x="624.00" y="724.25" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Receipts verify dependencies.</text>
+<text x="624.00" y="743.00" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Caps bound rework.</text>
+<text x="624.00" y="761.75" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">Compensations repair actions</text>
+<text x="624.00" y="780.50" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="normal" font-style="normal" fill="#54646C">that already happened.</text>
+<rect x="330" y="465" width="240" height="123" rx="16" fill="#192D38" stroke="none" stroke-width="1"/>
+<text x="389.04" y="494.71" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="bold" font-style="normal" fill="#B6D9CE">THE DESIGN QUESTION</text>
+<text x="379.91" y="533.95" font-family="Georgia, DejaVu Serif, serif" font-size="23" font-weight="normal" font-style="normal" fill="#FFFFFF">What actually</text>
+<text x="363.37" y="561.09" font-family="Georgia, DejaVu Serif, serif" font-size="23" font-weight="normal" font-style="normal" fill="#FFFFFF">needs to change?</text>
+<text x="52.00" y="872.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">THREE CHOICES THAT SHAPE THE BUILD</text>
+<text x="52.00" y="902.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="bold" font-style="normal" fill="#166B60">01</text>
+<text x="82.00" y="904.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="bold" font-style="normal" fill="#192D38">Precision over blanket reruns</text>
+<text x="365.00" y="903.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Identical values stop the walk; below-threshold changes still flow to children, preserving</text>
+<text x="365.00" y="919.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">aggregate effects.</text>
+<text x="52.00" y="945.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="bold" font-style="normal" fill="#166B60">02</text>
+<text x="82.00" y="947.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="bold" font-style="normal" fill="#192D38">Reproducibility over live dependence</text>
+<text x="365.00" y="946.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Record, replay and scripted modes keep the demo usable offline; the snapshot</text>
+<text x="365.00" y="962.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">contains mixed response origins.</text>
+<text x="52.00" y="988.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="bold" font-style="normal" fill="#166B60">03</text>
+<text x="82.00" y="990.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="bold" font-style="normal" fill="#192D38">Verified scope over a rewrite</text>
+<text x="365.00" y="989.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">The Oct 24 decision kept the six-gym world and added Jade + lessons instead of</text>
+<text x="365.00" y="1005.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">replacing it with the 48-gym proposal.</text>
+<rect x="52" y="1035" width="796" height="90" rx="8" fill="none" stroke="#D9DFDC" stroke-width="1"/>
+<text x="68.00" y="1056.71" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="bold" font-style="normal" fill="#166B60">YOUR REVIEW</text>
+<text x="168.00" y="1056.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="normal" font-style="normal" fill="#54646C">Highlight one tradeoff to revisit. Add the alternative and the evidence needed.</text>
+<circle cx="69" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1078" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="69" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1096" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="69" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1114" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<polyline points="52,1142 848,1142" fill="none" stroke="#D9DFDC" stroke-width="1" stroke-linejoin="round"/>
+<text x="52.00" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="bold" font-style="normal" fill="#54646C">EVIDENCE</text>
+<text x="113.00" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">DECISIONS · tradeoffs</text>
+<text x="227.67" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Propagation semantics</text>
+<text x="341.30" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Evaluation baselines</text>
+<text x="52.00" y="1179.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">RETROSPECTIVE  ·  SOURCE e452169  ·  CAL HACKS 13.0</text>
+<text x="817.42" y="1180.30" font-family="Arial, DejaVu Sans, sans-serif" font-size="10" font-weight="bold" font-style="normal" fill="#192D38">02 / 05</text>
+</svg>

@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+<title>Development journey &amp; lessons — Trackback</title>
+<rect x="0" y="0" width="900" height="1200" rx="0" fill="#FAF8F2" stroke="none" stroke-width="1"/>
+<text x="52.00" y="50.79" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="bold" font-style="normal" fill="#192D38">TRACKBACK</text>
+<text x="160.00" y="50.72" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="normal" font-style="normal" fill="#54646C">PROJECT IDEATION &amp; ENGINEERING NOTEBOOK</text>
+<text x="709.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">1</text>
+<text x="738.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">2</text>
+<text x="767.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">3</text>
+<text x="796.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#54646C">4</text>
+<circle cx="829" cy="48" r="12" fill="#192D38" stroke="#192D38"/>
+<text x="825.94" y="51.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#FFFFFF">5</text>
+<polyline points="52,75 848,75" fill="none" stroke="#D9DFDC" stroke-width="1" stroke-linejoin="round"/>
+<text x="52.00" y="105.55" font-family="Arial, DejaVu Sans, sans-serif" font-size="11.5" font-weight="bold" font-style="normal" fill="#166B60">05  /  DEVELOPMENT JOURNEY &amp; LESSONS</text>
+<text x="52.00" y="151.88" font-family="Georgia, DejaVu Serif, serif" font-size="36" font-weight="normal" font-style="normal" fill="#192D38">From a working graph to a usable demo.</text>
+<text x="52.00" y="186.87" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">Actual Git milestones, shown in Pacific time. Engineering lessons below come from</text>
+<text x="52.00" y="207.87" font-family="Arial, DejaVu Sans, sans-serif" font-size="15.5" font-weight="normal" font-style="normal" fill="#54646C">the decision log and source tests; they are not a reconstructed hour-by-hour diary.</text>
+<text x="52.00" y="247.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">THE BUILD RECORD</text>
+<text x="610.00" y="247.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">STORED EVALUATION EVIDENCE</text>
+<polyline points="66,284 66,714" fill="none" stroke="#166B60" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="66" cy="283" r="7" fill="#166B60" stroke="#166B60"/>
+<text x="89.00" y="279.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">23 OCT · 22:57</text>
+<text x="507.79" y="279.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="normal" font-style="normal" fill="#54646C">06bbbc9</text>
+<text x="89.00" y="306.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">Offline demo + runtime fixes</text>
+<text x="89.00" y="330.20" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Snapshot restore via SQLite backup; proxies and verification tools arrive in</text>
+<text x="89.00" y="348.20" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">the working demo.</text>
+<circle cx="66" cy="388" r="7" fill="#166B60" stroke="#166B60"/>
+<text x="89.00" y="384.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">24 OCT · 11:27</text>
+<text x="507.79" y="384.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="normal" font-style="normal" fill="#54646C">4b6031c</text>
+<text x="89.00" y="411.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">Jade, lessons and explanations</text>
+<text x="89.00" y="435.20" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Add judgment review, lesson gating and recall; expose the learning</text>
+<text x="89.00" y="453.20" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">sequence and hover explanations.</text>
+<circle cx="66" cy="493" r="7" fill="#166B60" stroke="#166B60"/>
+<text x="89.00" y="489.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">24 OCT · 11:46</text>
+<text x="512.09" y="489.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="normal" font-style="normal" fill="#54646C">fcc8cb3</text>
+<text x="89.00" y="516.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">Make the interface teach itself</text>
+<text x="89.00" y="540.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Opt-in kiosk, plain-language counters and a first-visit guide explain the Deep</text>
+<text x="89.00" y="558.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">workspace.</text>
+<circle cx="66" cy="598" r="7" fill="#166B60" stroke="#166B60"/>
+<text x="89.00" y="594.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">24 OCT · 12:11</text>
+<text x="507.18" y="594.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="normal" font-style="normal" fill="#54646C">48964da</text>
+<text x="89.00" y="621.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">Keep the kiosk loop running</text>
+<text x="89.00" y="645.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Synthetic mouse movement no longer interrupts the attract loop; later</text>
+<text x="89.00" y="663.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">screenshots document the check.</text>
+<circle cx="66" cy="703" r="7" fill="#166B60" stroke="#166B60"/>
+<text x="89.00" y="699.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">24 OCT · 15:34</text>
+<text x="507.18" y="699.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="normal" font-style="normal" fill="#54646C">e452169</text>
+<text x="89.00" y="726.94" font-family="Arial, DejaVu Sans, sans-serif" font-size="18" font-weight="bold" font-style="normal" fill="#192D38">Simplify the story; package hosting</text>
+<text x="89.00" y="750.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Scorecard naming, clearer dependency lines and a Vercel entry with</text>
+<text x="89.00" y="768.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">committed frontend assets.</text>
+<rect x="610" y="270" width="238" height="115" rx="12" fill="#E7F1EB" stroke="none" stroke-width="1"/>
+<text x="630.00" y="310.90" font-family="Georgia, DejaVu Serif, serif" font-size="30" font-weight="normal" font-style="normal" fill="#166B60">0 / 288</text>
+<text x="630.00" y="336.62" font-family="Arial, DejaVu Sans, sans-serif" font-size="14" font-weight="bold" font-style="normal" fill="#192D38">future-data leaks</text>
+<text x="630.00" y="358.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Adversarial pinned fetches.</text>
+<rect x="610" y="401" width="238" height="115" rx="12" fill="#E7F1EB" stroke="none" stroke-width="1"/>
+<text x="630.00" y="441.90" font-family="Georgia, DejaVu Serif, serif" font-size="30" font-weight="normal" font-style="normal" fill="#166B60">162 / 162</text>
+<text x="630.00" y="467.62" font-family="Arial, DejaVu Sans, sans-serif" font-size="14" font-weight="bold" font-style="normal" fill="#192D38">identical replay artifacts</text>
+<text x="630.00" y="489.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Byte-for-byte reconstruction.</text>
+<rect x="610" y="532" width="238" height="115" rx="12" fill="#E7F1EB" stroke="none" stroke-width="1"/>
+<text x="630.00" y="572.90" font-family="Georgia, DejaVu Serif, serif" font-size="30" font-weight="normal" font-style="normal" fill="#166B60">13 / 13</text>
+<text x="630.00" y="598.62" font-family="Arial, DejaVu Sans, sans-serif" font-size="14" font-weight="bold" font-style="normal" fill="#192D38">planted mistakes caught</text>
+<text x="630.00" y="620.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Jade: 0 false overrules</text>
+<text x="630.00" y="636.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">on 63 correct claims.</text>
+<text x="610.00" y="683.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">Reported by committed replay evaluations,</text>
+<text x="610.00" y="701.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">not rerun for this notebook. These</text>
+<text x="610.00" y="719.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">measure the seeded demo cases, not</text>
+<text x="610.00" y="737.38" font-family="Arial, DejaVu Sans, sans-serif" font-size="12.5" font-weight="normal" font-style="normal" fill="#54646C">production reliability.</text>
+<text x="52.00" y="793.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">WHAT THE ENGINEERING TAUGHT US</text>
+<rect x="52" y="811" width="252" height="116" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="68" y="827" width="3" height="20" rx="1" fill="#166B60" stroke="none" stroke-width="1"/>
+<text x="80.00" y="840.28" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="bold" font-style="normal" fill="#192D38">Reset without stale reads</text>
+<text x="68.00" y="864.39" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Replacing a live DB left stale handles.</text>
+<text x="68.00" y="880.64" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">SQLite backup preserves readers;</text>
+<text x="68.00" y="896.89" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">concurrent-reset tests cover it.</text>
+<rect x="324" y="811" width="252" height="116" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="340" y="827" width="3" height="20" rx="1" fill="#365C84" stroke="none" stroke-width="1"/>
+<text x="352.00" y="840.28" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="bold" font-style="normal" fill="#192D38">Match build and replay</text>
+<text x="340.00" y="864.39" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Scripted and replay prose diverged.</text>
+<text x="340.00" y="880.64" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Both now reuse the same recorded</text>
+<text x="340.00" y="896.89" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">response when the cache key</text>
+<text x="340.00" y="913.14" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">matches.</text>
+<rect x="596" y="811" width="252" height="116" rx="12" fill="#FFFFFF" stroke="#D9DFDC" stroke-width="1"/>
+<rect x="612" y="827" width="3" height="20" rx="1" fill="#85632D" stroke="none" stroke-width="1"/>
+<text x="624.00" y="840.28" font-family="Arial, DejaVu Sans, sans-serif" font-size="16" font-weight="bold" font-style="normal" fill="#192D38">Explain the graph</text>
+<text x="612.00" y="864.39" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Stage shows one beat at a time;</text>
+<text x="612.00" y="880.64" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">Deep exposes the evidence. Layout</text>
+<text x="612.00" y="896.89" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">sizes and a type-floor check improved</text>
+<text x="612.00" y="913.14" font-family="Arial, DejaVu Sans, sans-serif" font-size="13" font-weight="normal" font-style="normal" fill="#54646C">legibility.</text>
+<text x="52.00" y="956.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#166B60">NOW</text>
+<text x="110.00" y="954.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Correction tracing, agent replies, approvals, time travel, Jade and gated lessons work in the offline demo.</text>
+<text x="52.00" y="997.13" font-family="Arial, DejaVu Sans, sans-serif" font-size="11" font-weight="bold" font-style="normal" fill="#85632D">NEXT</text>
+<text x="110.00" y="995.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">Record the remaining scripted rework; wire prose critique; isolate sessions; add notification adapters. Current limits: mixed</text>
+<text x="110.00" y="1014.21" font-family="Arial, DejaVu Sans, sans-serif" font-size="13.5" font-weight="normal" font-style="normal" fill="#54646C">cache origins, code-based Jade, one shared world per instance.</text>
+<rect x="52" y="1040" width="796" height="85" rx="8" fill="none" stroke="#D9DFDC" stroke-width="1"/>
+<text x="68.00" y="1061.71" font-family="Arial, DejaVu Sans, sans-serif" font-size="10.5" font-weight="bold" font-style="normal" fill="#166B60">YOUR REVIEW</text>
+<text x="168.00" y="1061.96" font-family="Arial, DejaVu Sans, sans-serif" font-size="12" font-weight="normal" font-style="normal" fill="#54646C">Team reflection: next experiment / owner / evidence of success / review date.</text>
+<circle cx="69" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1083" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="69" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="87" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="105" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="123" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="141" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="159" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="177" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="195" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="213" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="231" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="249" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="267" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="285" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="303" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="321" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="339" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="357" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="375" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="393" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="411" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="429" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="447" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="465" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="483" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="501" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="519" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="537" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="555" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="573" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="591" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="609" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="627" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="645" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="663" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="681" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="699" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="717" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="735" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="753" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="771" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="789" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="807" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<circle cx="825" cy="1101" r="0.65" fill="#D1D9D4" stroke="#D1D9D4"/>
+<polyline points="52,1142 848,1142" fill="none" stroke="#D9DFDC" stroke-width="1" stroke-linejoin="round"/>
+<text x="52.00" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="bold" font-style="normal" fill="#54646C">EVIDENCE</text>
+<text x="113.00" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">STATUS · scope</text>
+<text x="201.27" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Engineering decisions</text>
+<text x="311.22" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Evaluation JSON</text>
+<text x="400.56" y="1159.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">Reset regression tests</text>
+<text x="52.00" y="1179.88" font-family="Arial, DejaVu Sans, sans-serif" font-size="9.5" font-weight="normal" font-style="normal" fill="#54646C">RETROSPECTIVE  ·  SOURCE e452169  ·  CAL HACKS 13.0</text>
+<text x="817.42" y="1180.30" font-family="Arial, DejaVu Sans, sans-serif" font-size="10" font-weight="bold" font-style="normal" fill="#192D38">05 / 05</text>
+</svg>
