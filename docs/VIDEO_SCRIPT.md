@@ -1,5 +1,7 @@
 # Trackback: the demo film (the part after the skit)
 
+**Current cut (Oct 24, late): silent, subtitled.** Krishna reads the subtitles aloud; no voice track, no music. The read-aloud script with scene start times is `brag-output-2026-10-24-film/TELEPROMPTER.md`, and `brag-output-2026-10-24-film/build.py` is the storyboard of record (frames, focus windows, chips). The narrated plan below is kept for reference.
+
 A walkthrough of one context graph, in the order it was built: the company, the source document, the work piled on top of it layer by layer, the problem found in the source, and what Trackback does about it (the reconciliation, the pings, Jade, the people, the learning, the replay). It ends by sending the viewer to the live link, which opens in Deep mode on this same company with a tour.
 
 Demo portion: 12 scenes, 148 seconds. Scenes 1 to 5 are told as a story (the company, the source, the work built on it, the day Trackback is switched on); scenes 6 to 12 are plain technical narration, short sentences, no flourishes. The black-and-white skit (about 22 s) is cut in front of scene 1 and is not part of this brief. Every figure in the narration is on screen in its scene and comes from the canonical world (`data/snapshots/canonical.sqlite`), not invented.

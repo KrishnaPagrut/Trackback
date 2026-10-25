@@ -1,6 +1,6 @@
 # Demo film (the part after the skit)
 
-`trackback-demo.mp4`: 1920x1080, ~2:27, twelve scenes built from real frames of the running app, narrated (Cartesia, voice "Daniel"), word-timed captions in the bottom band, music bed at 0.14 under the voice. The storyboard and narration are in `../docs/VIDEO_SCRIPT.md` (scenes 1–5 as a story, 6–12 plain technical).
+`trackback-demo.mp4`: 1920x1080, ~2:41, silent. A title card (Trackback, the 2002 protocol revived) and twelve scenes built from real frames of the running app; each scene blurs and dims everything except the thing being talked about, and moves that focus as the subtitle advances. The subtitles are the script: the presenter reads them aloud (`TELEPROMPTER.md`). Earlier narrated cuts (Cartesia) were dropped as too robotic; `voice.py` and `words.py` remain if a voice track is wanted again. The storyboard and narration are in `../docs/VIDEO_SCRIPT.md` (scenes 1–5 as a story, 6–12 plain technical).
 
 Rebuild:
 

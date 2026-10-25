@@ -1,78 +1,165 @@
 {
- "total": 171.26,
+ "total": 160.97,
  "scenes": [
   {
-   "id": "s1",
+   "id": "s0",
    "start": 0.0,
-   "dur": 12.92,
-   "voice": 12.12
+   "dur": 8.91,
+   "subtitles": [
+    "This is Trackback.",
+    "In 2002, TrackBack pinged your page when someone built on it.",
+    "We're reviving it for the numbers inside a company."
+   ]
+  },
+  {
+   "id": "s1",
+   "start": 8.91,
+   "dur": 12.93,
+   "subtitles": [
+    "Meet Tidewall:",
+    "six climbing gyms, forty million a year,",
+    "and one promise to their bank:",
+    "keep leverage under three times EBITDA.",
+    "Finance is two AI agents, an analyst, Maya,",
+    "and Dana, the controller."
+   ]
   },
   {
    "id": "s2",
-   "start": 12.92,
-   "dur": 7.86,
-   "voice": 7.06
+   "start": 21.84,
+   "dur": 4.45,
+   "subtitles": [
+    "April ninth:",
+    "the billing system publishes its March export."
+   ]
   },
   {
    "id": "s3",
-   "start": 20.78,
-   "dur": 12.21,
-   "voice": 11.41
+   "start": 26.29,
+   "dur": 10.39,
+   "subtitles": [
+    "The Close Accountant closes the quarter on top of it:",
+    "revenue by gym, EBITDA, trailing EBITDA of 5.6 million.",
+    "Every piece of work records which rows it read."
+   ]
   },
   {
    "id": "s4",
-   "start": 32.99,
-   "dur": 13.73,
-   "voice": 12.93
+   "start": 36.68,
+   "dur": 12.63,
+   "subtitles": [
+    "The Covenant agent builds on those:",
+    "leverage 2.95, the certificate for the bank, bonuses, tax.",
+    "Maya builds the board deck on top, same tools,",
+    "so her reads are logged too.",
+    "That's the context graph."
+   ]
   },
   {
    "id": "s5",
-   "start": 46.72,
-   "dur": 12.44,
-   "voice": 11.64
+   "start": 49.31,
+   "dur": 10.63,
+   "subtitles": [
+    "July eighth.",
+    "Tidewall switches on Trackback.",
+    "First job:",
+    "compare today's export with the version everyone read.",
+    "$118,000, counted twice.",
+    "So what else is wrong?"
+   ]
   },
   {
    "id": "s6",
-   "start": 59.16,
-   "dur": 19.91,
-   "voice": 19.11
+   "start": 59.94,
+   "dur": 20.0,
+   "subtitles": [
+    "Trackback diffs the two versions, then follows the read receipts to",
+    "the work that used those rows.",
+    "It recomputes each number from its formula and checks",
+    "it against Dana's materiality memo.",
+    "Sentences get a fresh figure if the claim holds;",
+    "otherwise, back to the author.",
+    "Forty-four got a look;",
+    "the rest were cleared, with reasons."
+   ]
   },
   {
    "id": "s7",
-   "start": 79.07,
-   "dur": 20.79,
-   "voice": 19.99
+   "start": 79.94,
+   "dur": 17.36,
+   "subtitles": [
+    "Each affected agent gets one message,",
+    "about only what it used;",
+    "Maya gets the same, as a notice.",
+    "“Your certificate rests on net leverage, now 3.03,",
+    "over your covenant.",
+    "Still valid?”",
+    "It can't un-send a certificate,",
+    "so it drafts a corrected one for the CFO."
+   ]
   },
   {
    "id": "s8",
-   "start": 99.86,
-   "dur": 15.82,
-   "voice": 15.02
+   "start": 97.3,
+   "dur": 13.58,
+   "subtitles": [
+    "The agent called this immaterial,",
+    "under the five percent rule.",
+    "Jade, the reviewer, re-ran every call:",
+    "over performance materiality, covenant breached, bonuses already paid.",
+    "Overruled.",
+    "Jade never writes a number;",
+    "she checks them."
+   ]
   },
   {
    "id": "s9",
-   "start": 115.68,
-   "dur": 15.61,
-   "voice": 14.81
+   "start": 110.88,
+   "dur": 15.81,
+   "subtitles": [
+    "Every fix goes to the person who can sign it:",
+    "CFO, HR, controller.",
+    "Dana says no to the first entry, dated into a locked quarter,",
+    "so the agent re-drafts it in June.",
+    "If it tries to approve itself, the database rejects the row."
+   ]
   },
   {
    "id": "s10",
-   "start": 131.29,
-   "dur": 19.05,
-   "voice": 18.25
+   "start": 126.69,
+   "dur": 14.72,
+   "subtitles": [
+    "Both mistakes become proposed lessons.",
+    "Before one goes live, it's re-run against every past case.",
+    "The broad version fails:",
+    "three old cases would flip.",
+    "The rest pass, Dana approves, playbook v2.",
+    "Held out:",
+    "eighty to one hundred percent."
+   ]
   },
   {
    "id": "s11",
-   "start": 150.34,
-   "dur": 9.76,
-   "voice": 8.96
+   "start": 141.41,
+   "dur": 9.21,
+   "subtitles": [
+    "What did the agent know on April tenth?",
+    "This.",
+    "Ask for the July version from that date: refused,",
+    "with both timestamps."
+   ]
   },
   {
    "id": "s12",
-   "start": 160.1,
-   "dur": 11.16,
-   "voice": 9.36
+   "start": 150.62,
+   "dur": 10.35,
+   "subtitles": [
+    "All of this is live.",
+    "The link opens in Deep mode,",
+    "with a tour.",
+    "Drop the correction yourself.",
+    "Trackback traces any correction forward."
+   ]
   }
- ],
- "captions": 91
+ ]
 }

@@ -12,8 +12,11 @@
     #root { position: absolute; inset: 0; background: #F7F4EE; overflow: hidden; font-family: "IBM Plex Sans", sans-serif; color: #1C1B19; }
     .frame { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
     .frame img { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: contain; display: block; }
+    .frame .blur { filter: blur(7px); }
+    .frame .dim { position: absolute; inset: 0; background: rgba(247, 244, 238, 0.58); }
+    .frame .sharp { clip-path: inset(0 0 0 0); }
     .band-top { position: absolute; left: 0; top: 0; width: 1920px; height: 64px; background: #F7F4EE; border-bottom: 1px solid #E3DED4; }
-    .band-bottom { position: absolute; left: 0; top: 1004px; width: 1920px; height: 76px; background: #F7F4EE; border-top: 1px solid #E3DED4; }
+    .band-bottom { position: absolute; left: 0; top: 980px; width: 1920px; height: 100px; background: #F7F4EE; border-top: 1px solid #E3DED4; }
     .chapter { position: absolute; left: 48px; top: 0; height: 64px; display: flex; align-items: center; }
     .chapter-in { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #1C1B19; }
     .chip { position: absolute; right: 48px; top: 0; height: 64px; display: flex; align-items: center; }
@@ -21,38 +24,47 @@
     .steps { position: absolute; right: 48px; top: 0; height: 64px; display: flex; align-items: center; }
     .steps-in { display: flex; gap: 10px; }
     .pill { font-family: "IBM Plex Mono", monospace; font-size: 21px; padding: 6px 14px; border: 1px solid #E3DED4; border-radius: 999px; background: #FFFFFF; color: #6B675F; }
-    .spot { position: absolute; }
-    .spot-in { position: absolute; inset: 0; border: 3px solid #1F5FBF; border-radius: 8px; box-shadow: 0 0 0 6px rgba(31,95,191,0.14); }
-    .endcard { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .endcard { position: absolute; inset: 0 0 100px 0; display: flex; align-items: center; justify-content: center; }
     .endcard-in { width: 1240px; background: rgba(255,255,255,0.97); border: 1px solid #1C1B19; border-radius: 10px; padding: 56px 64px; text-align: center; box-shadow: 0 24px 64px rgba(28,27,25,0.18); }
     .end-kicker { font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.1em; color: #6B675F; }
     .end-url { font-family: "Newsreader", serif; font-weight: 600; font-size: 74px; white-space: nowrap; line-height: 1.05; margin: 14px 0 10px; color: #1C1B19; }
     .end-tag { font-family: "Newsreader", serif; font-style: italic; font-weight: 500; font-size: 40px; color: #6B675F; }
-    .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s6" data-width="1920" data-height="1080">
-        <div id="s6-f0" class="clip frame" data-start="0.0" data-duration="19.91" style="z-index:1"><img id="s6-f0-img" src="assets/frames/d-ripple.png" alt=""></div>
-    <div id="s6-f1" class="clip frame" data-start="12.15" data-duration="7.76" style="z-index:2"><img id="s6-f1-img" src="assets/frames/d-cert-path.png" alt=""></div>
-    <div id="s6-bt" class="clip band-top" data-start="0" data-duration="19.91" data-layout-ignore style="z-index:15"></div>
-    <div id="s6-bb" class="clip band-bottom" data-start="0" data-duration="19.91" data-layout-ignore style="z-index:15"></div>
-    <div id="s6-ch" class="clip chapter" data-start="0" data-duration="19.91" style="z-index:20"><div id="s6-ch-in" class="chapter-in">6 · The reconciliation</div></div>
-    <div id="s6-steps" class="clip steps" data-start="0" data-duration="19.91" style="z-index:22"><div id="s6-steps-in" class="steps-in"><span id="s6-st0" class="pill">diff</span><span id="s6-st1" class="pill">reach</span><span id="s6-st2" class="pill">recompute</span><span id="s6-st3" class="pill">materiality</span><span id="s6-st4" class="pill">prose</span><span id="s6-st5" class="pill">verdicts</span></div></div>
-    <div id="s6-sp0" class="clip spot" data-start="14.44" data-duration="5.47" data-layout-ignore style="z-index:19; left:510px; top:56px; width:320px; height:56px"><div id="s6-sp0-in" class="spot-in"></div></div>
+        <div id="s6-f0" class="clip frame" data-start="0.0" data-duration="20.0" style="z-index:1">
+      <img id="s6-f0-blur" class="blur" src="assets/frames/d-ripple.png" alt="">
+      <div class="dim"></div>
+      <img id="s6-f0-img" class="sharp" src="assets/frames/d-ripple.png" alt="">
+    </div>
+    <div id="s6-f1" class="clip frame" data-start="13.81" data-duration="6.19" style="z-index:2">
+      <img id="s6-f1-blur" class="blur" src="assets/frames/d-cert-path.png" alt="">
+      <div class="dim"></div>
+      <img id="s6-f1-img" class="sharp" src="assets/frames/d-cert-path.png" alt="">
+    </div>
+    <div id="s6-bt" class="clip band-top" data-start="0" data-duration="20.0" data-layout-ignore style="z-index:15"></div>
+    <div id="s6-bb" class="clip band-bottom" data-start="0" data-duration="20.0" data-layout-ignore style="z-index:15"></div>
+    <div id="s6-ch" class="clip chapter" data-start="0" data-duration="20.0" style="z-index:20"><div id="s6-ch-in" class="chapter-in">6 · The reconciliation</div></div>
+    <div id="s6-steps" class="clip steps" data-start="0" data-duration="20.0" style="z-index:22"><div id="s6-steps-in" class="steps-in"><span id="s6-st0" class="pill">diff</span><span id="s6-st1" class="pill">reach</span><span id="s6-st2" class="pill">recompute</span><span id="s6-st3" class="pill">materiality</span><span id="s6-st4" class="pill">prose</span><span id="s6-st5" class="pill">verdicts</span></div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s6-f0-img", { scale: 1 }, { scale: 1.035, duration: 19.91, ease: "none" }, 0);
-    tl.fromTo("#s6-f1-img", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 12.15);
-    tl.fromTo("#s6-f1-img", { scale: 1 }, { scale: 1.03, duration: 7.76, ease: "none" }, 12.15);
+        tl.set("#s6-f0-img", { clipPath: "inset(0px 0px 0px 0px round 10px)" }, 0);
+    tl.to("#s6-f0-img", { clipPath: "inset(0px 0px 0px 0px round 10px)", duration: 0.7, ease: "power2.inOut" }, 0.3);
+    tl.to("#s6-f0-img", { clipPath: "inset(380px 80px 580px 360px round 10px)", duration: 0.7, ease: "power2.inOut" }, 2.62);
+    tl.to("#s6-f0-img", { clipPath: "inset(56px 420px 974px 0px round 10px)", duration: 0.7, ease: "power2.inOut" }, 6.09);
+    tl.to("#s6-f0-img", { clipPath: "inset(380px 380px 360px 900px round 10px)", duration: 0.7, ease: "power2.inOut" }, 13.81);
+    tl.fromTo("#s6-f0-img, #s6-f0-blur", { scale: 1 }, { scale: 1.025, duration: 20.0, ease: "none" }, 0.0);
+    tl.fromTo("#s6-f1", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 13.81);
+    tl.set("#s6-f1-img", { clipPath: "inset(380px 380px 360px 900px round 10px)" }, 0);
+    tl.fromTo("#s6-f1-img, #s6-f1-blur", { scale: 1 }, { scale: 1.025, duration: 6.19, ease: "none" }, 13.81);
     tl.fromTo("#s6-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
     tl.fromTo("#s6-steps-in", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.3);
     tl.to("#s6-st0", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 0.3);
-    tl.to("#s6-st1", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 2.21);
-    tl.to("#s6-st2", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 5.08);
-    tl.to("#s6-st3", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 7.18);
-    tl.to("#s6-st4", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 11.0);
-    tl.to("#s6-st5", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 14.44);
-    tl.fromTo("#s6-sp0-in", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" }, 14.44);
+    tl.to("#s6-st1", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 1.84);
+    tl.to("#s6-st2", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 5.7);
+    tl.to("#s6-st3", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 8.02);
+    tl.to("#s6-st4", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 10.92);
+    tl.to("#s6-st5", { backgroundColor: "#1C1B19", color: "#fff", borderColor: "#1C1B19", duration: 0.2 }, 14.97);
     window.__timelines["s6"] = tl;
   </script>
 </template>

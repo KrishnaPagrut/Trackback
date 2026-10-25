@@ -12,8 +12,11 @@
     #root { position: absolute; inset: 0; background: #F7F4EE; overflow: hidden; font-family: "IBM Plex Sans", sans-serif; color: #1C1B19; }
     .frame { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
     .frame img { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: contain; display: block; }
+    .frame .blur { filter: blur(7px); }
+    .frame .dim { position: absolute; inset: 0; background: rgba(247, 244, 238, 0.58); }
+    .frame .sharp { clip-path: inset(0 0 0 0); }
     .band-top { position: absolute; left: 0; top: 0; width: 1920px; height: 64px; background: #F7F4EE; border-bottom: 1px solid #E3DED4; }
-    .band-bottom { position: absolute; left: 0; top: 1004px; width: 1920px; height: 76px; background: #F7F4EE; border-top: 1px solid #E3DED4; }
+    .band-bottom { position: absolute; left: 0; top: 980px; width: 1920px; height: 100px; background: #F7F4EE; border-top: 1px solid #E3DED4; }
     .chapter { position: absolute; left: 48px; top: 0; height: 64px; display: flex; align-items: center; }
     .chapter-in { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #1C1B19; }
     .chip { position: absolute; right: 48px; top: 0; height: 64px; display: flex; align-items: center; }
@@ -21,24 +24,27 @@
     .steps { position: absolute; right: 48px; top: 0; height: 64px; display: flex; align-items: center; }
     .steps-in { display: flex; gap: 10px; }
     .pill { font-family: "IBM Plex Mono", monospace; font-size: 21px; padding: 6px 14px; border: 1px solid #E3DED4; border-radius: 999px; background: #FFFFFF; color: #6B675F; }
-    .spot { position: absolute; }
-    .spot-in { position: absolute; inset: 0; border: 3px solid #1F5FBF; border-radius: 8px; box-shadow: 0 0 0 6px rgba(31,95,191,0.14); }
-    .endcard { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .endcard { position: absolute; inset: 0 0 100px 0; display: flex; align-items: center; justify-content: center; }
     .endcard-in { width: 1240px; background: rgba(255,255,255,0.97); border: 1px solid #1C1B19; border-radius: 10px; padding: 56px 64px; text-align: center; box-shadow: 0 24px 64px rgba(28,27,25,0.18); }
     .end-kicker { font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.1em; color: #6B675F; }
     .end-url { font-family: "Newsreader", serif; font-weight: 600; font-size: 74px; white-space: nowrap; line-height: 1.05; margin: 14px 0 10px; color: #1C1B19; }
     .end-tag { font-family: "Newsreader", serif; font-style: italic; font-weight: 500; font-size: 40px; color: #6B675F; }
-    .end-seat { font-size: 24px; line-height: 1.4; margin-top: 26px; color: #1C1B19; }
     </style>
   <div id="root" data-composition-id="s8" data-width="1920" data-height="1080">
-        <div id="s8-f0" class="clip frame" data-start="0.0" data-duration="15.82" style="z-index:1"><img id="s8-f0-img" src="assets/frames/s-reply-ra.png" alt=""></div>
-    <div id="s8-bt" class="clip band-top" data-start="0" data-duration="15.82" data-layout-ignore style="z-index:15"></div>
-    <div id="s8-bb" class="clip band-bottom" data-start="0" data-duration="15.82" data-layout-ignore style="z-index:15"></div>
-    <div id="s8-ch" class="clip chapter" data-start="0" data-duration="15.82" style="z-index:20"><div id="s8-ch-in" class="chapter-in">8 · Jade, the reviewer</div></div>
+        <div id="s8-f0" class="clip frame" data-start="0.0" data-duration="13.58" style="z-index:1">
+      <img id="s8-f0-blur" class="blur" src="assets/frames/s-reply-ra.png" alt="">
+      <div class="dim"></div>
+      <img id="s8-f0-img" class="sharp" src="assets/frames/s-reply-ra.png" alt="">
+    </div>
+    <div id="s8-bt" class="clip band-top" data-start="0" data-duration="13.58" data-layout-ignore style="z-index:15"></div>
+    <div id="s8-bb" class="clip band-bottom" data-start="0" data-duration="13.58" data-layout-ignore style="z-index:15"></div>
+    <div id="s8-ch" class="clip chapter" data-start="0" data-duration="13.58" style="z-index:20"><div id="s8-ch-in" class="chapter-in">8 · Jade, the reviewer</div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-        tl.fromTo("#s8-f0-img", { scale: 1 }, { scale: 1.035, duration: 15.82, ease: "none" }, 0);
+        tl.set("#s8-f0-img", { clipPath: "inset(275px 360px 280px 360px round 10px)" }, 0);
+    tl.to("#s8-f0-img", { clipPath: "inset(275px 360px 280px 360px round 10px)", duration: 0.7, ease: "power2.inOut" }, 0.3);
+    tl.fromTo("#s8-f0-img, #s8-f0-blur", { scale: 1 }, { scale: 1.025, duration: 13.58, ease: "none" }, 0.0);
     tl.fromTo("#s8-ch-in", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.25);
     window.__timelines["s8"] = tl;
   </script>

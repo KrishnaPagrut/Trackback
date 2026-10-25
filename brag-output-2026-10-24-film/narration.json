@@ -1,14 +1,15 @@
 {
- "1": "Meet Tidewall: six climbing gyms, about forty million a year, and one promise to their bank: keep leverage under three times EBITDA. Finance here is two AI agents, an analyst named Maya, and Dana, the controller.",
- "2": "On April ninth, the billing system publishes its March export: every member, every dollar released into revenue.",
- "3": "The next day, the Close Accountant closes the quarter on top of it: revenue by gym, EBITDA, trailing EBITDA of five point six million. Every piece of work records which rows it read.",
- "4": "Then the Covenant agent builds on those: leverage at two point nine five, the certificate for the bank, bonuses, tax. And Maya builds the board deck on top, with the same tools, so her reads are logged too. That's the context graph.",
- "5": "July eighth. Tidewall switches on Trackback, and the first thing it does is compare today's export with the version everyone actually read. A hundred and eighteen thousand dollars, counted twice. So, what else is wrong?",
- "6": "Trackback diffs the two versions and follows the read receipts to every piece of work that used those rows. It recomputes each number from its formula and checks it against Dana's materiality memo. Sentences get a refreshed figure when the claim still holds, and go back to their author when it might not. Forty-four pieces of work got a look; the rest were cleared, with reasons.",
- "7": "Each affected agent gets one message, about only what it used; Maya gets the same as a notice. Your certificate rests on net leverage, now three point oh three, over your covenant. Still valid? It can't un-send a certificate, so it drafts a corrected one for the CFO. The cash forecast never moved, so nobody was asked.",
- "8": "Now the part we're proud of. The agent called this immaterial, under the five percent rule. Jade, the reviewer, re-ran every call: over performance materiality, covenant breached, bonuses already paid. Overruled. Jade never writes a number; she checks them.",
- "9": "Every fix goes to the person who can sign it: the CFO, HR, the controller. Dana says no to the first entry, dated into a locked quarter, so the agent re-drafts it in June, tagged back to March. If it tries to approve itself, the database rejects the row.",
- "10": "Both mistakes become proposed lessons. Before one goes live, it's re-run against every past case. The broad version fails that gate: three old cases would flip. The rest pass, Dana approves, and the playbook moves to version two. On cases it had never seen: eighty percent to a hundred.",
- "11": "And if anyone asks what the agent knew on April tenth, here it is, duplicate rows and all. Ask for the July version from that date, and it refuses, with both timestamps.",
- "12": "All of this is live. The link opens in Deep mode, on this company, with a tour. Go drop the correction yourself. Trackback traces any correction forward."
+ "0": "This is Trackback. In 2002, TrackBack pinged your page when someone built on it. We're reviving it for the numbers inside a company.",
+ "1": "Meet Tidewall: six climbing gyms, forty million a year, and one promise to their bank: keep leverage under three times EBITDA. Finance is two AI agents, an analyst, Maya, and Dana, the controller.",
+ "2": "April ninth: the billing system publishes its March export.",
+ "3": "The Close Accountant closes the quarter on top of it: revenue by gym, EBITDA, trailing EBITDA of 5.6 million. Every piece of work records which rows it read.",
+ "4": "The Covenant agent builds on those: leverage 2.95, the certificate for the bank, bonuses, tax. Maya builds the board deck on top, same tools, so her reads are logged too. That's the context graph.",
+ "5": "July eighth. Tidewall switches on Trackback. First job: compare today's export with the version everyone read. $118,000, counted twice. So what else is wrong?",
+ "6": "Trackback diffs the two versions, then follows the read receipts to the work that used those rows. It recomputes each number from its formula and checks it against Dana's materiality memo. Sentences get a fresh figure if the claim holds; otherwise, back to the author. Forty-four got a look; the rest were cleared, with reasons.",
+ "7": "Each affected agent gets one message, about only what it used; Maya gets the same, as a notice. “Your certificate rests on net leverage, now 3.03, over your covenant. Still valid?” It can't un-send a certificate, so it drafts a corrected one for the CFO.",
+ "8": "The agent called this immaterial, under the five percent rule. Jade, the reviewer, re-ran every call: over performance materiality, covenant breached, bonuses already paid. Overruled. Jade never writes a number; she checks them.",
+ "9": "Every fix goes to the person who can sign it: CFO, HR, controller. Dana says no to the first entry, dated into a locked quarter, so the agent re-drafts it in June. If it tries to approve itself, the database rejects the row.",
+ "10": "Both mistakes become proposed lessons. Before one goes live, it's re-run against every past case. The broad version fails: three old cases would flip. The rest pass, Dana approves, playbook v2. Held out: eighty to one hundred percent.",
+ "11": "What did the agent know on April tenth? This. Ask for the July version from that date: refused, with both timestamps.",
+ "12": "All of this is live. The link opens in Deep mode, with a tour. Drop the correction yourself. Trackback traces any correction forward."
 }
